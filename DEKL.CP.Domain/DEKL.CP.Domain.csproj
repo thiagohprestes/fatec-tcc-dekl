@@ -53,10 +53,11 @@
     <Compile Include="Entities\PessoaJuridica.cs" />
     <Compile Include="Entities\SimulaConta.cs" />
     <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Contracts\" />
+    <Folder Include="Contracts\Repositories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

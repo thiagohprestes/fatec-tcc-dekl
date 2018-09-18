@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/all.min.css" rel="stylesheet" />
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+    <title>DEKL - Contas a Pagar | @ViewBag.Title</title>
+</head>
+<body>
+    @Html.Partial("_menu")
+    <div class="container mt-3">
+        @RenderBody()
+    </div>
+    <footer class="footer bg-info footer-custom">
+        <div class="container">
+            <span class="text-muted">&copy;@DateTime.Now.Year DEKL Corporation</span>
+        </div>
+    </footer>
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

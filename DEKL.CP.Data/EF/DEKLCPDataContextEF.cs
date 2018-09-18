@@ -21,7 +21,17 @@ namespace DEKL.CP.Data.EF
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new Maps.AgenciaMap());
+            modelBuilder.Configurations.Add(new Maps.BancoMap());
+            modelBuilder.Configurations.Add(new Maps.ContaMap());
+            modelBuilder.Configurations.Add(new Maps.ContaBancariaMap());
+            modelBuilder.Configurations.Add(new Maps.CredorMap());
+            modelBuilder.Configurations.Add(new Maps.EmpresaMap());
             modelBuilder.Configurations.Add(new Maps.EnderecoMap());
+            modelBuilder.Configurations.Add(new Maps.PessoaFisicaMap());
+            modelBuilder.Configurations.Add(new Maps.PessoaJuridicaMap());
+            modelBuilder.Configurations.Add(new Maps.SimulaContaMap());
+
         }
     }
 }
