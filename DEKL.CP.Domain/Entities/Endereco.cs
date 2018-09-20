@@ -1,6 +1,6 @@
 ﻿namespace DEKL.CP.Domain.Entities
-{
-    public abstract class Endereco : EntityBase
+{ 
+    public class Endereco : EntityBase
     {
         public string Logradouro { get; set; }
         public string CEP { get; set; }

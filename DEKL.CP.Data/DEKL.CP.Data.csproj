@@ -61,15 +61,15 @@
     <Compile Include="EF\Maps\PessoaJuridicaMap.cs" />
     <Compile Include="EF\Maps\SimulaContaMap.cs" />
     <Compile Include="EF\Maps\UsuarioMap.cs" />
+    <Compile Include="EF\Repositories\RepositoryEF.cs" />
+    <Compile Include="EF\Repositories\UsuarioRepositoryEF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EF\Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DEKL.CP.Domain\DEKL.CP.Domain.csproj">
       <Project>{177E5066-AB90-4A3E-950E-7757616E5749}</Project>

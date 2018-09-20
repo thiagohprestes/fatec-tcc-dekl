@@ -41,6 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\Repositories\IAgenciaRepository.cs" />
+    <Compile Include="Contracts\Repositories\IBancoRepository.cs" />
+    <Compile Include="Contracts\Repositories\IContaBancariaRepository.cs" />
+    <Compile Include="Contracts\Repositories\IContaRepository.cs" />
+    <Compile Include="Contracts\Repositories\ICredorRepository.cs" />
+    <Compile Include="Contracts\Repositories\IEmpresaRepository.cs" />
+    <Compile Include="Contracts\Repositories\IEnderecoRepository.cs" />
+    <Compile Include="Contracts\Repositories\IPessoaFisicaRepository.cs" />
+    <Compile Include="Contracts\Repositories\IPessoaJuridicaRepository.cs" />
+    <Compile Include="Contracts\Repositories\IRepository.cs" />
+    <Compile Include="Contracts\Repositories\ISimulaContaRepository.cs" />
+    <Compile Include="Contracts\Repositories\IUsuarioRepository.cs" />
     <Compile Include="Entities\Agencia.cs" />
     <Compile Include="Entities\Banco.cs" />
     <Compile Include="Entities\Conta.cs" />
@@ -56,8 +68,6 @@
     <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contracts\Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,17 +12,21 @@ namespace DEKL.CP.Data.EF.Maps
             ToTable(nameof(Banco));
 
             //PK
-            HasKey(pk => pk.Id);
+            HasKey(e => e.Id);
 
             //Columns
             Property(e => e.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-
+       
 
             Property(e => e.DataCadastro);
 
             Property(e => e.DataAlteracao);
+
+            //Relationship
+            HasRequired(e => e.Endereco)
+                .WithRequiredPrincipal();
         }
     }
 }

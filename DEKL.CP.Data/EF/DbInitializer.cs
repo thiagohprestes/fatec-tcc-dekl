@@ -1,4 +1,5 @@
 ﻿using DEKL.CP.Domain.Entities;
+using DEKL.CP.Domain.Helpers;
 using System.Collections.Generic;
 using System.Data.Entity;
 
@@ -9,12 +10,13 @@ namespace DEKL.CP.Data.EF
         protected override void Seed(DEKLCPDataContextEF context)
         {
             var usuarios = new List<Usuario>
-            {
-                new Usuario { Nome = "Thiago", Nivel = "Master", Senha = "12345" },
-                new Usuario { Nome = "Lucio", Nivel = "Master", Senha = "54321"},
-                new Usuario { Nome = "Diego", Nivel = "Master", Senha = "65432"}
+            {      
+                new Usuario { Nome = "Thiago", Email = "thiago.prestes@fatec.sp.gov.br", Senha = StringHelpers.Encrypt("12345"), NivelAcesso = 1 },
+                new Usuario { Nome = "Lucio", Email = "luciorosa@hotmail.com" , Senha = StringHelpers.Encrypt("54321"), NivelAcesso = 1},
+                new Usuario { Nome = "Diego", Email = "diego@gmail.com", Senha = StringHelpers.Encrypt("65432"), NivelAcesso = 1}
             };
 
+            context.Usuarios.AddRange(usuarios);
             context.SaveChanges();
         }
     }
