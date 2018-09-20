@@ -5,8 +5,7 @@ namespace DEKL.CP.UI.ViewModels.Conta.Login
 {
     public class LoginVM
     {
-        [Required(ErrorMessage = "O {0} é obrigatório")]
-        [StringLength(50, ErrorMessage = "O Limite do {0} é de {1} caracteres")]
+        [StringLength(50)]
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "O {0} é obrigatório")]
