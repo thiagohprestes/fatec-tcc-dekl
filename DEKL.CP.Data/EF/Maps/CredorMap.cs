@@ -23,6 +23,11 @@ namespace DEKL.CP.Data.EF.Maps
             Property(e => e.DataCadastro);
 
             Property(e => e.DataAlteracao);
+
+            //Relationship
+            HasOptional(e => e.Endereco)
+                .WithMany()
+                .HasForeignKey(e => e.EnderecoId);
         }
     }
 }

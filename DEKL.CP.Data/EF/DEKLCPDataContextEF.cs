@@ -13,7 +13,7 @@ namespace DEKL.CP.Data.EF
         //public DbSet<Conta> Contas { get; set; }
         //public DbSet<ContaBancaria> ContasBancarias { get; set; }
         //public DbSet<Credor> Credores { get; set; }
-        //public DbSet<Empresa> Empresa { get; set; }
+        public DbSet<Empresa> Empresa { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
         //public DbSet<PessoaFisica> PessoasFisicas { get; set; }
         //public DbSet<PessoaJuridica> PessoasJuridicas { get; set; }
@@ -27,7 +27,7 @@ namespace DEKL.CP.Data.EF
             //modelBuilder.Configurations.Add(new Maps.ContaMap());
             //modelBuilder.Configurations.Add(new Maps.ContaBancariaMap());
             //modelBuilder.Configurations.Add(new Maps.CredorMap());
-            //modelBuilder.Configurations.Add(new Maps.EmpresaMap());
+            modelBuilder.Configurations.Add(new Maps.EmpresaMap());
             modelBuilder.Configurations.Add(new Maps.EnderecoMap());
             //modelBuilder.Configurations.Add(new Maps.PessoaFisicaMap());
             //modelBuilder.Configurations.Add(new Maps.PessoaJuridicaMap());

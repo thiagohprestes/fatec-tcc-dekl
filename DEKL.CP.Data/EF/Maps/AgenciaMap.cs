@@ -18,7 +18,14 @@ namespace DEKL.CP.Data.EF.Maps
             Property(e => e.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
+            Property(e => e.Conta)
+                .HasColumnType("varchar")
+                .HasMaxLength(10)
+                .IsRequired();
 
+            Property(e => e.Saldo)
+                .HasColumnType("money")
+                .IsRequired();
 
             Property(e => e.DataCadastro);
 

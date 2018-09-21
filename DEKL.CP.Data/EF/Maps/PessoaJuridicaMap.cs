@@ -18,7 +18,14 @@ namespace DEKL.CP.Data.EF.Maps
             Property(e => e.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
+            Property(e => e.RazaoSocial)
+                .HasColumnType("varchar")
+                .HasMaxLength(100)
+                .IsRequired();
 
+            Property(e => e.NomeFantasia)
+                .HasColumnType("varchar")
+                .HasMaxLength(100);
 
             Property(e => e.DataCadastro);
 

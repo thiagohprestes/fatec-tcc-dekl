@@ -18,11 +18,23 @@ namespace DEKL.CP.Data.EF.Maps
             Property(e => e.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
+            Property(e => e.Nome)
+                .HasColumnType("varchar")
+                .HasMaxLength(100)
+                .IsRequired();
 
+            Property(e => e.Telefone)
+                .HasColumnType("varchar")
+                .HasMaxLength(14);             
 
             Property(e => e.DataCadastro);
 
             Property(e => e.DataAlteracao);
+
+            //Relationship
+            HasOptional(e => e.Endereco)
+                .WithMany()
+                .HasForeignKey(e => e.EnderecoId);
         }
     }
 }
