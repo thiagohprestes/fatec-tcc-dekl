@@ -1,0 +1,10 @@
+CREATE TRIGGER [dbo].[TGR_DELETE_ENDERECO]
+   ON [dbo].[Banco]
+   AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON
+
+    DELETE FROM Endereco WHERE Id = DELETED.EnderecoId;
+	
+END;

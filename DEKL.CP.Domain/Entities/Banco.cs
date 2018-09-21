@@ -8,7 +8,7 @@
         public double TaxaChequeEspecial { get; set; }
         public double TaxaEmprestimo { get; set; }
         public double EncargResp { get; set; }
-        public int EnderecoId { get; set; }
+        public int? EnderecoId { get; set; }
         public virtual Endereco Endereco { get; set; }
     }
 }

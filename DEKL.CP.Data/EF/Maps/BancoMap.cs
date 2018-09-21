@@ -18,15 +18,16 @@ namespace DEKL.CP.Data.EF.Maps
             Property(e => e.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-       
+
 
             Property(e => e.DataCadastro);
 
             Property(e => e.DataAlteracao);
 
             //Relationship
-            HasRequired(e => e.Endereco)
-                .WithRequiredPrincipal();
+            HasOptional(e => e.Endereco)
+                .WithMany()
+                .HasForeignKey(e => e.EnderecoId);
         }
     }
 }

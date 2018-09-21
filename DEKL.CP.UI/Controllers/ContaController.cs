@@ -44,6 +44,7 @@ namespace DEKL.CP.UI.Controllers
                     return Redirect(model.ReturnURL);
                 }
 
+                TempData["NomeUsuario"] = usuario.Nome;
                 return RedirectToAction("Index", "Home");
             }
 
