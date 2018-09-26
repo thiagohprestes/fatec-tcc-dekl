@@ -43,15 +43,18 @@ namespace DEKL.CP.UI.Controllers
                 {
                     return Redirect(model.ReturnURL);
                 }
-
-                TempData["NomeUsuario"] = usuario.Nome;
+                
                 return RedirectToAction("Index", "Home");
             }
 
             return View(model);
         }
 
-        [HttpGet]
+        public ActionResult TrocarSenha()
+        {
+            return View();
+        }
+
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();

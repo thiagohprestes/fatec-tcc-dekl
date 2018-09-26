@@ -10,7 +10,7 @@ namespace DEKL.CP.Domain.Entities
         public short Nivel { get; set; }
         public string Pagamento { get; set; }
         public short Prioridade { get; set; }
-        public int Parcelas { get; set; }
+        public int? Parcelas { get; set; }
         public DateTime? DataLancamento { get; set; }
         public DateTime DataVencimento { get; set; }
         public int Periodo { get; set; }
