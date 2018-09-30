@@ -20,10 +20,10 @@
             {
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @TempData["NomeUsuario"]
+                        @User.Identity.Name
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Trocar Senha</a>
+                        <a class="dropdown-item" href="@Url.Action("TrocarSenha", "Conta")">Trocar Senha</a>
                         <a class="dropdown-item" href="#">Meu Perfil</a>
                         <div class="dropdown-divider" href="#"></div>
                         <a class="dropdown-item" href="@Url.Action("LogOut", "Conta")">LogOut</a>

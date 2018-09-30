@@ -8,6 +8,7 @@ namespace DEKL.CP.Domain.Entities
 {
     public class Fornecedor
     {
-        
+        public string Nome { get; set; }
+
     }
 }
