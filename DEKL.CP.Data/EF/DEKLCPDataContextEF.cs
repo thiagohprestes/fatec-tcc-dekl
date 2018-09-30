@@ -8,11 +8,11 @@ namespace DEKL.CP.Data.EF
         public DEKLCPDataContextEF() : base("DEKLCPConn") 
             => Database.SetInitializer(new DbInitializer());
 
-        //public DbSet<Agencia> Agencias { get; set; }
+        public DbSet<Agencia> Agencias { get; set; }
         public DbSet<Banco> Bancos { get; set; }
         //public DbSet<Conta> Contas { get; set; }
         //public DbSet<ContaBancaria> ContasBancarias { get; set; }
-        //public DbSet<Credor> Credores { get; set; }
+        public DbSet<Credor> Credores { get; set; }
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
         //public DbSet<PessoaFisica> PessoasFisicas { get; set; }
@@ -22,7 +22,7 @@ namespace DEKL.CP.Data.EF
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Configurations.Add(new Maps.AgenciaMap());
+            modelBuilder.Configurations.Add(new Maps.AgenciaMap());
             modelBuilder.Configurations.Add(new Maps.BancoMap());
             //modelBuilder.Configurations.Add(new Maps.ContaMap());
             //modelBuilder.Configurations.Add(new Maps.ContaBancariaMap());

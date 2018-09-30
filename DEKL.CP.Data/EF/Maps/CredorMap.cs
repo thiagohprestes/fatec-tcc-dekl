@@ -18,7 +18,8 @@ namespace DEKL.CP.Data.EF.Maps
             Property(e => e.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-
+            Property(e => e.Tipo)
+                .IsRequired();
 
             Property(e => e.DataCadastro);
 

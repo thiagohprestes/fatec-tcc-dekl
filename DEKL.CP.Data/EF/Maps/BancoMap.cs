@@ -18,7 +18,26 @@ namespace DEKL.CP.Data.EF.Maps
             Property(e => e.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
+            Property(e => e.Nome)
+                .HasColumnType("varchar")
+                .HasMaxLength(100)
+                .IsRequired();
 
+            Property(e => e.Telefone)
+               .HasColumnType("varchar")
+               .HasMaxLength(14);
+
+            Property(c => c.Email)
+              .HasColumnType("varchar")
+              .HasMaxLength(80);
+
+            Property(c => c.TaxaChequeEspecial)
+              .HasColumnType("money")
+              .IsRequired();
+
+            Property(c => c.TaxaEmprestimo)
+              .HasColumnType("money")
+              .IsRequired();
 
             Property(e => e.DataCadastro);
 

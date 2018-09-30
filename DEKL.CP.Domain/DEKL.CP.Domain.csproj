@@ -62,6 +62,7 @@
     <Compile Include="Entities\Endereco.cs" />
     <Compile Include="Entities\EntityBase.cs" />
     <Compile Include="Entities\Fornecedor.cs" />
+    <Compile Include="Entities\Funcionario.cs" />
     <Compile Include="Entities\PessoaFisica.cs" />
     <Compile Include="Entities\PessoaJuridica.cs" />
     <Compile Include="Entities\SimulaConta.cs" />
