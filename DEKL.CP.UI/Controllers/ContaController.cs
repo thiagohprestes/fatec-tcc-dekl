@@ -1,6 +1,9 @@
-﻿using DEKL.CP.Domain.Contracts.Repositories;
+﻿using AutoMapper;
+using DEKL.CP.Domain.Contracts.Repositories;
+using DEKL.CP.Domain.Entities;
 using DEKL.CP.Domain.Helpers;
-using DEKL.CP.UI.ViewModels.Conta.Login;
+using DEKL.CP.UI.ViewModels;
+using System;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -53,6 +56,33 @@ namespace DEKL.CP.UI.Controllers
         public ActionResult TrocarSenha()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult TrocarSenha(TrocaSenhaVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var usuario = _usuarioRepository.Get(model.Email);
+                    var senhaCriptografada = StringHelpers.Encrypt(model.Senha);
+
+                    usuario.Senha = senhaCriptografada;
+                    _usuarioRepository.Edit(usuario);
+
+                    TempData["Mensagem"] = "Senha alterada com sucesso :-)";
+                    TempData["Sucesso"] = true;
+                }
+                catch(Exception ex)
+                {
+                    TempData["Mensagem"] = ex.Message;
+                    TempData["Sucesso"] = false;
+                }
+            }
+
+            TempData["Titulo"] = "Troca de Senha";
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult LogOut()

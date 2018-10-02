@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using DEKL.CP.UI.Mappers;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -11,6 +12,7 @@ namespace DEKL.CP.UI
             AreaRegistration.RegisterAllAreas();
             UnityConfig.RegisterComponents();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            AutoMapperConfig.RegisterMappings();
         }
     }
 }

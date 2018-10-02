@@ -3,6 +3,6 @@
     public class Agencia : EntityBase
     {
         public string Conta { get; set; }
-        public double Saldo { get; set; }
+        public decimal Saldo { get; set; }
     }
 }
