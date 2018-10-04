@@ -11,7 +11,7 @@ namespace DEKL.CP.Data.EF
         {
             var usuarios = new List<Usuario>
             {      
-                new Usuario { Nome = "Thiago", Email = "thiago.prestes@fatec.sp.gov.br", Senha = StringHelpers.Encrypt("12345"), NivelAcesso = 1 },
+                new Usuario { Nome = "Thiago", Sobrenome = "Prestes", Email = "thiago.prestes@fatec.sp.gov.br", Senha = StringHelpers.Encrypt("12345678"), NivelAcesso = 1 },
                 new Usuario { Nome = "Lucio", Email = "luciorosa@hotmail.com" , Senha = StringHelpers.Encrypt("54321"), NivelAcesso = 1},
                 new Usuario { Nome = "Diego", Email = "diego@gmail.com", Senha = StringHelpers.Encrypt("65432"), NivelAcesso = 1}
             };

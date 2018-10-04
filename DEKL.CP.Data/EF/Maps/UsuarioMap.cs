@@ -24,6 +24,10 @@ namespace DEKL.CP.Data.EF.Maps
             .HasMaxLength(50)
             .IsRequired();
 
+            Property(c => c.Sobrenome)
+           .HasColumnType("varchar")
+           .HasMaxLength(50);
+
             Property(c => c.Email)
                 .HasColumnType("varchar")
                 .HasMaxLength(80)

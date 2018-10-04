@@ -8,5 +8,10 @@ namespace DEKL.CP.UI.Controllers
         {
             return View();
         }
+
+        public ViewResult Sobre()
+        {
+            return View();
+        }
     }
 }

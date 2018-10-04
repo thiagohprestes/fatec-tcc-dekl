@@ -157,6 +157,7 @@
     <Content Include="Content\fontawesome.min.css" />
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
+    <Content Include="Content\sidebar-navbar.css" />
     <Content Include="Content\site.css" />
     <Content Include="Content\solid.css" />
     <Content Include="Content\solid.min.css" />
@@ -258,6 +259,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\ContaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -266,6 +268,7 @@
     <Compile Include="Mappers\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Conta\Login\LoginVM.cs" />
+    <Compile Include="ViewModels\Conta\MeuPerfil\MeuPerfil.cs" />
     <Compile Include="ViewModels\Conta\TrocarSenha\TrocaSenha.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -277,11 +280,14 @@
     </None>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_menu.cshtml" />
+    <Content Include="Views\Shared\_sidebar.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Conta\TrocarSenha.cshtml" />
     <Content Include="Views\Conta\MeuPerfil.cshtml" />
+    <Content Include="Views\Home\Sobre.cshtml" />
+    <Content Include="Views\Shared\_navbar.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

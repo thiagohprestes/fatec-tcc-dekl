@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DEKL.CP.Domain.Contracts.Repositories;
-using DEKL.CP.Domain.Entities;
 using DEKL.CP.Domain.Helpers;
 using DEKL.CP.UI.ViewModels;
 using System;
@@ -12,6 +11,7 @@ namespace DEKL.CP.UI.Controllers
     public class ContaController : Controller
     {
         private readonly IUsuarioRepository _usuarioRepository;
+        private string _email { get => HttpContext.User.Identity.Name; }
 
         public ContaController(IUsuarioRepository usuarioRepository)
         {
@@ -31,11 +31,15 @@ namespace DEKL.CP.UI.Controllers
             var usuario = _usuarioRepository.Get(model.Email);
 
             if (usuario == null)
+            {
                 ModelState.AddModelError("Email", "O e-mail não localizado");
+            }
             else
             {
                 if (usuario.Senha != model.Senha.Encrypt())
+                {
                     ModelState.AddModelError("Senha", "Senha inválida");
+                }
             }
 
             if (ModelState.IsValid)
@@ -46,7 +50,7 @@ namespace DEKL.CP.UI.Controllers
                 {
                     return Redirect(model.ReturnURL);
                 }
-                
+
                 return RedirectToAction("Index", "Home");
             }
 
@@ -65,7 +69,7 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
-                    var usuario = _usuarioRepository.Get(model.Email);
+                    var usuario = _usuarioRepository.Get(_email);
                     var senhaCriptografada = StringHelpers.Encrypt(model.Senha);
 
                     usuario.Senha = senhaCriptografada;
@@ -74,7 +78,7 @@ namespace DEKL.CP.UI.Controllers
                     TempData["Mensagem"] = "Senha alterada com sucesso :-)";
                     TempData["Sucesso"] = true;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     TempData["Mensagem"] = ex.Message;
                     TempData["Sucesso"] = false;
@@ -83,6 +87,38 @@ namespace DEKL.CP.UI.Controllers
 
             TempData["Titulo"] = "Troca de Senha";
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult MeuPerfil()
+        {
+            var usuario = _usuarioRepository.Get(_email);      
+
+            return View(Mapper.Map<MeuPerfil>(usuario));
+        }
+
+        [HttpPost]
+        public ActionResult MeuPerfil(MeuPerfil model)
+        {
+            var usuario = _usuarioRepository.Get(_email);
+
+            try
+            {
+                usuario.Nome = model.Nome;
+                usuario.Sobrenome = model.Sobrenome;
+                _usuarioRepository.Edit(usuario);
+
+                TempData["Mensagem"] = "Usuário alterado com sucesso :-)";
+                TempData["Sucesso"] = true;
+            }
+            catch (Exception ex)
+            {
+                TempData["Mensagem"] = ex.Message;
+                TempData["Sucesso"] = false;
+            }
+
+            TempData["Titulo"] = "Alteração de Usuário";
+            return RedirectToAction("Index", "Home");
+
         }
 
         public ActionResult LogOut()

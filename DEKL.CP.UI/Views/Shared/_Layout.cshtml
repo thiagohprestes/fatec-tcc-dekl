@@ -7,21 +7,36 @@
     <link href="~/Content/all.min.css" rel="stylesheet" />
     <link href="~/Content/toastr.min.css" rel="stylesheet" />
     <link href="~/Content/site.css" rel="stylesheet" />
+    <link href="~/Content/sidebar-navbar.css" rel="stylesheet" />
     <title>DEKL - Contas a Pagar | @ViewBag.Title</title>
 </head>
 <body>
-    @Html.Partial("_menu")
-    <div class="container mt-3">
-        @RenderBody()
-    </div>
-    <footer class="footer bg-info footer-custom">
-        <div class="container">
-            <span class="text-muted">&copy;@DateTime.Now.Year DEKL Corporation</span>
+    <div class="wrapper">
+        @Html.Partial("_sidebar")
+        <div id="content">
+            @Html.Partial("_navbar")
+            <div class="container mt-3">
+                <div id="content">
+                    @RenderBody()
+                </div>
+                <footer class="footer bg-info footer-custom">
+                    <div class="container">
+                        <span class="text-muted">&copy;@DateTime.Now.Year DEKL Corporation</span>
+                    </div>
+                </footer>
+            </div>
         </div>
-    </footer>
+    </div>
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/toastr.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
     @RenderSection("scripts", false)
 </body>
 </html>
