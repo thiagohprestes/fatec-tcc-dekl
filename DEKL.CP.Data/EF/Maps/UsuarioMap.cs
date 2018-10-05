@@ -19,16 +19,16 @@ namespace DEKL.CP.Data.EF.Maps
             Property(e => e.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            Property(c => c.Nome)
+            Property(e => e.Nome)
             .HasColumnType("varchar")
             .HasMaxLength(50)
             .IsRequired();
 
-            Property(c => c.Sobrenome)
+            Property(e => e.Sobrenome)
            .HasColumnType("varchar")
            .HasMaxLength(50);
 
-            Property(c => c.Email)
+            Property(e => e.Email)
                 .HasColumnType("varchar")
                 .HasMaxLength(80)
                 .IsRequired()
@@ -37,10 +37,14 @@ namespace DEKL.CP.Data.EF.Maps
                     new IndexAnnotation(new IndexAttribute("UQ_dbo.Usuario.Email") { IsUnique = true })
                     );
 
-            Property(c => c.Senha)
+            Property(e => e.Senha)
                 .HasColumnType("char")
                 .HasMaxLength(88)
                 .IsRequired();
+
+            Property(e => e.Administrador);
+
+            Property(e => e.Ativo);
 
             Property(e => e.DataCadastro);
 

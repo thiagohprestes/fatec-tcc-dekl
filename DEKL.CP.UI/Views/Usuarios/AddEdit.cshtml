@@ -1,0 +1,72 @@
+﻿@model DEKL.CP.UI.ViewModels.UsuarioVM
+
+@{
+    var usuarioNovo = Model.Id == 0;
+    ViewBag.Title = $"{(usuarioNovo ? "Adicionar" : "Editar")} Usuário";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form method="post" action=@(usuarioNovo ? "Add" : "Edit")>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nome)
+        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", autofocus = "" })
+        <small>
+            @Html.ValidationMessageFor(model => model.Nome, null, new { @class = "text-danger" })
+        </small>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Sobrenome)
+        @Html.TextBoxFor(model => model.Sobrenome, new { @class = "form-control", autofocus = "" })
+        <small>
+            @Html.ValidationMessageFor(model => model.Sobrenome, null, new { @class = "text-danger" })
+        </small>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email)
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", autofocus = "" })
+        <small>
+            @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
+        </small>
+    </div>
+
+    @if (usuarioNovo)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Senha)
+            @Html.PasswordFor(model => model.Senha, new { @class = "form-control", autofocus = "" })
+            <small>
+                @Html.ValidationMessageFor(model => model.Senha, null, new { @class = "text-danger" })
+            </small>
+        </div>
+    }
+
+    <div class="form-group form-check">
+        <div class="col-md-6">
+            @Html.CheckBoxFor(model => model.Administrador, new { @class = "form-check-input" })
+            @Html.LabelFor(model => model.Administrador)
+        </div>
+        <div class="col-md-6">
+            @Html.CheckBoxFor(model => model.Ativo, new { @class = "form-check-input" })
+            @Html.LabelFor(model => model.Ativo)
+        </div>
+    </div>
+
+    <div>
+        @Html.ValidationSummary(true)
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-outline-secondary">Salvar</button>
+        <a class="btn btn-outline-info" href="@Url.Action("Index")">Cancelar</a>
+    </div>
+</form>
+
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.validate.js"></script>
+}

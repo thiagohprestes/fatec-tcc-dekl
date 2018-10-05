@@ -6,6 +6,7 @@
         public string Sobrenome { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
-        public short NivelAcesso { get; set; }
+        public bool Administrador { get; set; } = false;
+        public bool Ativo { get; set; } = true;
     }
 }

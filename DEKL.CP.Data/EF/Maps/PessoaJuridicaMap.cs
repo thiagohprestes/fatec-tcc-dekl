@@ -12,7 +12,7 @@ namespace DEKL.CP.Data.EF.Maps
             ToTable(nameof(PessoaJuridica));
 
             //PK
-            HasKey(pk => pk.Id);
+            HasKey(e => e.Id);
 
             //Columns
             Property(e => e.Id)

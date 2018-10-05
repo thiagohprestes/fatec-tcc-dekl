@@ -27,15 +27,15 @@ namespace DEKL.CP.Data.EF.Maps
                .HasColumnType("varchar")
                .HasMaxLength(14);
 
-            Property(c => c.Email)
+            Property(e => e.Email)
               .HasColumnType("varchar")
               .HasMaxLength(80);
 
-            Property(c => c.TaxaChequeEspecial)
+            Property(e => e.TaxaChequeEspecial)
               .HasColumnType("money")
               .IsRequired();
 
-            Property(c => c.TaxaEmprestimo)
+            Property(e => e.TaxaEmprestimo)
               .HasColumnType("money")
               .IsRequired();
 
