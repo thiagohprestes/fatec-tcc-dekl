@@ -32,6 +32,15 @@ namespace DEKL.CP.Data.EF.Repositories
             Save();
         }
 
+        public void EditPartial(T entity)
+        {
+            typeof(T).GetProperties().ToList().ForEach(p =>
+            {
+                    if (p.GetValue(T) == null)
+                        _ctx.Entry(entity).Property(p.Name).IsModified = false;
+            });
+        }
+
         public void Delete(T entity)
         {
             _ctx.Set<T>().Remove(entity);
@@ -44,6 +53,8 @@ namespace DEKL.CP.Data.EF.Repositories
         }
 
         public void Dispose()
-        { }
+        {
+            _ctx.Dispose();
+        }
     }
 }

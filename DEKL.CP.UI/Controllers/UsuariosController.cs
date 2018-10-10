@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace DEKL.CP.UI.Controllers
 {
+    [Authorize]
     public class UsuariosController : Controller
     {
         private readonly IUsuarioRepository _usuarioRepository;
@@ -38,14 +39,16 @@ namespace DEKL.CP.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(UsuarioVM model)
+        public ActionResult AddEdit(UsuarioVM model)
         {
-            if (ModelState.IsValid)
+            var usuario = Mapper.Map<Usuario>(model);
+
+            if (model.Id == 0)
             {
+
                 try
                 {
-                    _usuarioRepository.Add(Mapper.Map<Usuario>(model));
-
+                    _usuarioRepository.Add(usuario);
                     this.AddToastMessage("Adição de Usuário", "Usuário adicionado com sucesso :-)", ToastType.Success);
                 }
                 catch (Exception ex)
@@ -53,26 +56,16 @@ namespace DEKL.CP.UI.Controllers
                     this.AddToastMessage("Adição de Usuário", ex.Message, ToastType.Error);
                 }
             }
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult Edit(UsuarioVM model)
-        {
-            if (ModelState.IsValid)
+            else
             {
                 try
                 {
-                    var usuario = Mapper.Map<Usuario>(model);
-
                     _usuarioRepository.Edit(usuario);
-
                     this.AddToastMessage("Edição de Usuário", "Usuário editado com sucesso :-)", ToastType.Success);
                 }
                 catch (Exception ex)
                 {
-                    this.AddToastMessage("Edição de Usuário", ex.Message, ToastType.Error);
+                    this.AddToastMessage("Adição de Usuário", ex.Message, ToastType.Error);
                 }
             }
 
