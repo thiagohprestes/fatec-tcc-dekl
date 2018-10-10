@@ -21,6 +21,7 @@ namespace DEKL.CP.Data.EF.Repositories
 
         public void Add(T entity)
         {
+            entity.DataCadastro = DateTime.Now;
             _ctx.Set<T>().Add(entity);
             Save();
         }

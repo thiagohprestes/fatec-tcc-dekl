@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Helpers;
+using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels;
 using System;
 using System.Web.Mvc;
@@ -70,22 +71,20 @@ namespace DEKL.CP.UI.Controllers
                 try
                 {
                     var usuario = _usuarioRepository.Get(_email);
-                    var senhaCriptografada = StringHelpers.Encrypt(model.Senha);
+                    var senhaCriptografada = model.Senha.Encrypt();
 
                     usuario.Senha = senhaCriptografada;
                     _usuarioRepository.Edit(usuario);
 
-                    TempData["Mensagem"] = "Senha alterada com sucesso :-)";
-                    TempData["Sucesso"] = true;
+                    this.AddToastMessage("Troca de Senha", "Senha alterada com sucesso :-)", ToastType.Success);
+
                 }
                 catch (Exception ex)
                 {
-                    TempData["Mensagem"] = ex.Message;
-                    TempData["Sucesso"] = false;
+                    this.AddToastMessage("Troca de Senha", ex.Message, ToastType.Success);
                 }
             }
 
-            TempData["Titulo"] = "Troca de Senha";
             return RedirectToAction("Index", "Home");
         }
 
@@ -107,16 +106,13 @@ namespace DEKL.CP.UI.Controllers
                 usuario.Sobrenome = model.Sobrenome;
                 _usuarioRepository.Edit(usuario);
 
-                TempData["Mensagem"] = "Usuário alterado com sucesso :-)";
-                TempData["Sucesso"] = true;
+                this.AddToastMessage("Alteração de Usuário", "Usuário alterado com sucesso :-)", ToastType.Success);
             }
             catch (Exception ex)
             {
-                TempData["Mensagem"] = ex.Message;
-                TempData["Sucesso"] = false;
+                this.AddToastMessage("Alteração de Usuário", ex.Message, ToastType.Success);
             }
 
-            TempData["Titulo"] = "Alteração de Usuário";
             return RedirectToAction("Index", "Home");
 
         }
@@ -124,6 +120,7 @@ namespace DEKL.CP.UI.Controllers
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
+
             return RedirectToAction("Login");
         }
     }

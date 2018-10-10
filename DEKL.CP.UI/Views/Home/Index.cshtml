@@ -6,18 +6,3 @@
 <p>
     Bem vindo
 </p>
-
-@section scripts{
-    <script>
-        $(function () {
-            var sucesso = '@(TempData["Sucesso"])';
-        if (sucesso != '') {       
-            var titulo = "@(TempData["Titulo"])";
-            var msg = "@(TempData["Mensagem"])";
-            toastr.options = { "positionClass": "toast-bottom-right" };
-
-            sucesso == "True" ? toastr.success(msg, titulo) : toastr.error(msg, titulo);
-        }
-    });
-    </script>
-}

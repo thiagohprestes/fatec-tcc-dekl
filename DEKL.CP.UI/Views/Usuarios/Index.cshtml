@@ -34,24 +34,8 @@
             <td>@Html.DisplayFor(modelItem => usuario.DataCadastro)</td>
             <td class="btn-group">
                 <a class="btn btn-sm btn-outline-success" href="@Url.Action("AddEdit",new { id=usuario.Id})"><i class="fas fa-edit"></i> Editar</a>
-                <button class="btn btn-sm btn-outline-danger" onclick="DelProd(@usuario.Id, '@usuario.Nome')"><i class="fas fa-trash"></i> Excluir</button>
             </td>
         </tr>
         }
     </tbody>
 </table>
-
-@section scripts{
-    <script>
-        $(function () {
-            var sucesso = '@(TempData["Sucesso"])';
-        if (sucesso != '') {
-            var titulo = "@(TempData["Titulo"])";
-            var msg = "@(TempData["Mensagem"])";
-            toastr.options = { "positionClass": "toast-bottom-right" };
-
-            sucesso == "True" ? toastr.success(msg, titulo) : toastr.error(msg, titulo);
-        }
-    });
-    </script>
-}

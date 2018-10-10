@@ -10,6 +10,7 @@ namespace DEKL.CP.UI.Mappers
         {
             CreateMap<Usuario, LoginVM>();
             CreateMap<Usuario, TrocaSenhaVM>();
+            CreateMap<Usuario, UsuarioVM>();
         }
     }
 }

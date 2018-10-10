@@ -11,9 +11,9 @@ namespace DEKL.CP.Data.EF
         {
             var usuarios = new List<Usuario>
             {      
-                new Usuario { Nome = "Thiago", Sobrenome = "Prestes", Email = "thiago.prestes@fatec.sp.gov.br", Senha = StringHelpers.Encrypt("12345678"), Administrador = true },
-                new Usuario { Nome = "Lucio", Email = "luciorosa@hotmail.com" , Senha = StringHelpers.Encrypt("54321")},
-                new Usuario { Nome = "Diego", Email = "diego@gmail.com", Senha = StringHelpers.Encrypt("65432")}
+                new Usuario { Nome = "Thiago", Sobrenome = "Prestes", Email = "thiago.prestes@fatec.sp.gov.br", Senha = "12345678".Encrypt(), Administrador = true },
+                new Usuario { Nome = "Lucio", Email = "luciorosa@hotmail.com" , Senha = "54321".Encrypt()},
+                new Usuario { Nome = "Diego", Email = "diego@gmail.com", Senha = "65432".Encrypt()}
             };
 
             context.Usuarios.AddRange(usuarios);

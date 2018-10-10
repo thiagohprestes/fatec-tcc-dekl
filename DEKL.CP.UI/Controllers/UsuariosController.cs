@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
+using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace DEKL.CP.UI.Controllers
@@ -46,17 +46,14 @@ namespace DEKL.CP.UI.Controllers
                 {
                     _usuarioRepository.Add(Mapper.Map<Usuario>(model));
 
-                    TempData["Mensagem"] = "Usuário adicionado com sucesso :-)";
-                    TempData["Sucesso"] = true;
+                    this.AddToastMessage("Adição de Usuário", "Usuário adicionado com sucesso :-)", ToastType.Success);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    TempData["Mensagem"] = "Erro ao adicionar usuário :-(";
-                    TempData["Sucesso"] = false;
-                }              
+                    this.AddToastMessage("Adição de Usuário", ex.Message, ToastType.Error);
+                }
             }
 
-            TempData["Titulo"] = "Adição de Usuário";
             return RedirectToAction("Index");
         }
 
@@ -71,17 +68,14 @@ namespace DEKL.CP.UI.Controllers
 
                     _usuarioRepository.Edit(usuario);
 
-                    TempData["Mensagem"] = "Usuário alterado com sucesso :-)";
-                    TempData["Sucesso"] = true;
+                    this.AddToastMessage("Edição de Usuário", "Usuário editado com sucesso :-)", ToastType.Success);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    TempData["Mensagem"] = "Erro ao editar usuário :-(";
-                    TempData["Sucesso"] = false;
+                    this.AddToastMessage("Edição de Usuário", ex.Message, ToastType.Error);
                 }
             }
 
-            TempData["Titulo"] = "Edição de Usuário";
             return RedirectToAction("Index");
         }
     }

@@ -196,6 +196,7 @@
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="App_Code\ToastrBuilder.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\fontawesome.min.js" />
@@ -267,6 +268,10 @@
     <Compile Include="Mappers\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Mappers\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\Toastr\ControllerExtensions.cs" />
+    <Compile Include="Scripts\Toastr\ToastMessage.cs" />
+    <Compile Include="Scripts\Toastr\Toastr.cs" />
+    <Compile Include="Scripts\Toastr\ToastType.cs" />
     <Compile Include="ViewModels\Conta\Login\LoginVM.cs" />
     <Compile Include="ViewModels\Conta\MeuPerfil\MeuPerfil.cs" />
     <Compile Include="ViewModels\Conta\TrocarSenha\TrocaSenha.cs" />
@@ -290,6 +295,7 @@
     <Content Include="Views\Shared\_navbar.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Usuarios\AddEdit.cshtml" />
+    <Content Include="Views\Shared\_Toastr.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
