@@ -41,14 +41,11 @@ namespace DEKL.CP.UI.Controllers
         [HttpPost]
         public ActionResult AddEdit(UsuarioVM model)
         {
-            var usuario = Mapper.Map<Usuario>(model);
-
             if (model.Id == 0)
             {
-
                 try
                 {
-                    _usuarioRepository.Add(usuario);
+                    _usuarioRepository.Add(Mapper.Map<Usuario>(model));
                     this.AddToastMessage("Adição de Usuário", "Usuário adicionado com sucesso :-)", ToastType.Success);
                 }
                 catch (Exception ex)
@@ -60,6 +57,11 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
+                    var usuario = _usuarioRepository.Get(model.Id);
+                    usuario.Nome = model.Nome;
+                    usuario.Sobrenome = model.Sobrenome;
+                    usuario.Email = model.Email;
+
                     _usuarioRepository.Edit(usuario);
                     this.AddToastMessage("Edição de Usuário", "Usuário editado com sucesso :-)", ToastType.Success);
                 }

@@ -13,6 +13,7 @@ namespace DEKL.CP.UI.ViewModels
 
         [Required(ErrorMessage = "A {0} é obrigatória")]
         [StringLength(40, ErrorMessage = "A {0} contem entre {2} e {1} caracteres", MinimumLength = 8)]
+        [DataType(DataType.Password)]
         public string Senha { get; set; }
 
         [DisplayName("Permanecer Logado")]

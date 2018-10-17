@@ -28,17 +28,9 @@ namespace DEKL.CP.Data.EF.Repositories
 
         public void Edit(T entity)
         {
+            entity.DataAlteracao = DateTime.Now;
             _ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
             Save();
-        }
-
-        public void EditPartial(T entity)
-        {
-            typeof(T).GetProperties().ToList().ForEach(p =>
-            {
-                    if (p.GetValue(T) == null)
-                        _ctx.Entry(entity).Property(p.Name).IsModified = false;
-            });
         }
 
         public void Delete(T entity)
