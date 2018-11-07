@@ -12,66 +12,66 @@ namespace DEKL.CP.UI.Controllers
     [Authorize]
     public class UsuariosController : Controller
     {
-        private readonly IUsuarioRepository _usuarioRepository;
+        //private readonly int _usuarioRepository;
 
-        public UsuariosController(IUsuarioRepository usuarioRepository)
-        {
-            _usuarioRepository = usuarioRepository;
-        }
+        //public UsuariosController(int usuarioRepository)
+        //{
+        //    _usuarioRepository = usuarioRepository;
+        //}
 
-        public ActionResult Index()
-        {
-            var usuarios = _usuarioRepository.Get();
-            return View(Mapper.Map<IEnumerable<UsuarioVM>>(usuarios));
-        }
+        //public ActionResult Index()
+        //{
+        //    var usuarios = _usuarioRepository.Get();
+        //    return View(Mapper.Map<IEnumerable<UsuarioVM>>(usuarios));
+        //}
 
-        [HttpGet]
-        public ViewResult AddEdit(int? id)
-        {
-            var usuario = new Usuario();
+        //[HttpGet]
+        //public ViewResult AddEdit(int? id)
+        //{
+        //    var usuario = new Usuario();
 
-            if (id != null)
-            {
-                usuario = _usuarioRepository.Get(id.Value);
-            }
+        //    if (id != null)
+        //    {
+        //        usuario = _usuarioRepository.Get(id.ToString());
+        //    }
 
-            return View(Mapper.Map<UsuarioVM>(usuario));
-        }
+        //    return View(Mapper.Map<UsuarioVM>(usuario));
+        //}
 
-        [HttpPost]
-        public ActionResult AddEdit(UsuarioVM model)
-        {
-            if (model.Id == 0)
-            {
-                try
-                {
-                    _usuarioRepository.Add(Mapper.Map<Usuario>(model));
-                    this.AddToastMessage("Adição de Usuário", "Usuário adicionado com sucesso :-)", ToastType.Success);
-                }
-                catch (Exception ex)
-                {
-                    this.AddToastMessage("Adição de Usuário", ex.Message, ToastType.Error);
-                }
-            }
-            else
-            {
-                try
-                {
-                    var usuario = _usuarioRepository.Get(model.Id);
-                    usuario.Nome = model.Nome;
-                    usuario.Sobrenome = model.Sobrenome;
-                    usuario.Email = model.Email;
+        //[HttpPost]
+        //public ActionResult AddEdit(UsuarioVM model)
+        //{
+        //    if (model.Id == 0)
+        //    {
+        //        try
+        //        {
+        //            _usuarioRepository.Add(Mapper.Map<Usuario>(model));
+        //            this.AddToastMessage("Adição de Usuário", "Usuário adicionado com sucesso :-)", ToastType.Success);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            this.AddToastMessage("Adição de Usuário", ex.Message, ToastType.Error);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        try
+        //        {
+        //            var usuario = _usuarioRepository.Get(model.Id.ToString());
+        //            usuario.NomeCompleto = model.Nome;
+        //            usuario.NomeCompleto = model.Sobrenome;
+        //            usuario.Email = model.Email;
 
-                    _usuarioRepository.Edit(usuario);
-                    this.AddToastMessage("Edição de Usuário", "Usuário editado com sucesso :-)", ToastType.Success);
-                }
-                catch (Exception ex)
-                {
-                    this.AddToastMessage("Adição de Usuário", ex.Message, ToastType.Error);
-                }
-            }
+        //            _usuarioRepository.Edit(usuario);
+        //            this.AddToastMessage("Edição de Usuário", "Usuário editado com sucesso :-)", ToastType.Success);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            this.AddToastMessage("Adição de Usuário", ex.Message, ToastType.Error);
+        //        }
+        //    }
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
     }
 }

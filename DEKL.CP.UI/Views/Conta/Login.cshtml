@@ -14,15 +14,15 @@
             </small>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Senha)
-            @Html.PasswordFor(model => model.Senha, new { @class = "form-control" })
+            @Html.LabelFor(model => model.Password)
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
             <small>
-                @Html.ValidationMessageFor(model => model.Senha, null, new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })
             </small>
         </div>
         <div class="form-group form-check">
-            @Html.CheckBoxFor(model => model.PermanecerLogado, new { @class = "form-check-input" })
-            @Html.LabelFor(model => model.PermanecerLogado)
+            @Html.CheckBoxFor(model => model.RememberMe, new { @class = "form-check-input" })
+            @Html.LabelFor(model => model.RememberMe)
         </div>
         <div class="form-group">
             <button class="btn btn-outline-secondary">

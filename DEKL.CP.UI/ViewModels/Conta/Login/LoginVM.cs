@@ -11,13 +11,14 @@ namespace DEKL.CP.UI.ViewModels
         [DisplayName("E-mail")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "A {0} é obrigatória")]
-        [StringLength(40, ErrorMessage = "A {0} contem entre {2} e {1} caracteres", MinimumLength = 8)]
+        [Required(ErrorMessage = "A senha é obrigatória")]
+        [StringLength(40, ErrorMessage = "A senha contem entre {2} e {1} caracteres", MinimumLength = 8)]
         [DataType(DataType.Password)]
-        public string Senha { get; set; }
+        [DisplayName("Senha")]
+        public string Password { get; set; }
 
         [DisplayName("Permanecer Logado")]
-        public bool PermanecerLogado { get; set; }
+        public bool RememberMe { get; set; }
 
         public string ReturnURL { get; set; }
 
