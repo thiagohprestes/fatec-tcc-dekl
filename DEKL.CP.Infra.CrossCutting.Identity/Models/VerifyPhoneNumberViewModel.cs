@@ -5,12 +5,12 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Models
     public class VerifyPhoneNumberViewModel
     {
         [Required]
-        [Display(Name = "Code")]
+        [Display(Name = "Código")]
         public string Code { get; set; }
 
         [Required]
         [Phone]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Número de telefone")]
         public string PhoneNumber { get; set; }
     }
 }

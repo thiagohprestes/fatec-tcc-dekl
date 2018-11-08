@@ -6,7 +6,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Models
     {
         [Required]
         [Phone]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Número de Telefone")]
         public string Number { get; set; }
     }
 }

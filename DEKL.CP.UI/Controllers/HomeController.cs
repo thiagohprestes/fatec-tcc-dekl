@@ -9,7 +9,12 @@ namespace DEKL.CP.UI.Controllers
             return View();
         }
 
-        public ViewResult Sobre()
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        public ActionResult Contact()
         {
             return View();
         }
