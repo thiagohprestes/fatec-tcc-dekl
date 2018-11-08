@@ -16,28 +16,6 @@
                 <a class="nav-link" href="@Url.Action("Sobre","Home")">Sobre</a>
             </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @User.Identity.Name
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="@Url.Action("TrocarSenha", "Conta")">Trocar Senha</a>
-                        <a class="dropdown-item" href="@Url.Action("MeuPerfil", "Conta")">Meu Perfil</a>
-                        <div class="dropdown-divider" href="#"></div>
-                        <a class="dropdown-item" href="@Url.Action("LogOut", "Conta")">LogOut</a>
-                    </div>
-                </li>
-            }
-            else
-            {
-                <li class="nav-item active">
-                    <a class="nav-link" href="@Url.Action("Login","Conta")">Efetuar Login</a>
-                </li>
-            }
-        </ul>
-
+        @Html.Partial("_LoginPartial")
     </div>
 </nav>

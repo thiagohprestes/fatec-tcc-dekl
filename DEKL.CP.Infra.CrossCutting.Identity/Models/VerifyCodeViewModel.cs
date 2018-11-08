@@ -8,11 +8,11 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Models
         public string Provider { get; set; }
 
         [Required]
-        [Display(Name = "Code")]
+        [Display(Name = "Código")]
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Remember this browser?")]
+        [Display(Name = "Lembrar esse Browser?")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
