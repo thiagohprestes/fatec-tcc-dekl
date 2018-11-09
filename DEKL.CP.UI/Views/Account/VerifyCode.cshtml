@@ -11,11 +11,13 @@
     @Html.Hidden("rememberMe", @Model.RememberMe)
     <h4>@ViewBag.Status <a href="#" title="@ViewBag.CodigoAcesso">Passe o Mouse :)</a></h4>
     <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.Code, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
+            <small>
+                @Html.ValidationMessageFor(m => m.Code, null, new { @class = "text-danger" })
+            </small>
         </div>
     </div>
     <div class="form-group">
@@ -23,6 +25,9 @@
             <div class="checkbox">
                 @Html.CheckBoxFor(m => m.RememberBrowser)
                 @Html.LabelFor(m => m.RememberBrowser)
+                <small>
+                    @Html.ValidationMessageFor(m => m.RememberBrowser, null, new { @class = "text-danger" })
+                </small>
             </div>
         </div>
     </div>
