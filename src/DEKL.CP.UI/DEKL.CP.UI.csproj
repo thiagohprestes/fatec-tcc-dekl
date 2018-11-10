@@ -136,6 +136,10 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datatables\dataTables.bootstrap4.css" />
+    <Content Include="Content\datatables\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\datatables\datatables.css" />
+    <Content Include="Content\datatables\datatables.min.css" />
     <Content Include="Content\fontawesome\all.css" />
     <Content Include="Content\fontawesome\all.min.css" />
     <Content Include="Content\fontawesome\brands.css" />
@@ -172,6 +176,12 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\datatables\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\datatables\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\datatables\datatables.js" />
+    <Content Include="Scripts\datatables\datatables.min.js" />
+    <Content Include="Scripts\datatables\jquery.dataTables.js" />
+    <Content Include="Scripts\datatables\jquery.dataTables.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -250,8 +260,11 @@
     <Compile Include="App_Start\SimpleInjectorInitializer.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -312,6 +325,11 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\RolesAdmin\Create.cshtml" />
+    <Content Include="Views\RolesAdmin\Delete.cshtml" />
+    <Content Include="Views\RolesAdmin\Details.cshtml" />
+    <Content Include="Views\RolesAdmin\Edit.cshtml" />
+    <Content Include="Views\RolesAdmin\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

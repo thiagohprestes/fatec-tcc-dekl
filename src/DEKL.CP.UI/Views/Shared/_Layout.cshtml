@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles", false)
     <title>DEKL - Contas a Pagar | @ViewBag.Title</title>
 </head>
 <body>
@@ -12,7 +13,7 @@
         @Html.Partial("_sidebar")
         <div id="content" class="full-content">
             @Html.Partial("_navbar")
-            <div class="container body-content">
+            <div class="body-content">
                 @RenderBody()
             </div>
             <footer class="footer bg-info footer-custom">
@@ -22,9 +23,7 @@
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script src="~/Scripts/toastr.min.js"></script>
-    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
-    @RenderSection("scripts", false)
+    @Scripts.Render("~/bundles/toastr")
     <script type="text/javascript">
         $(() => {
             $('#sidebarCollapse').on('click', () => {
@@ -32,6 +31,7 @@
             });
         });
     </script>
+    @RenderSection("scripts", false)
     @Html.Partial("_Toastr")
 </body>
 </html>

@@ -11,7 +11,7 @@ using System.Web.Mvc;
 namespace DEKL.CP.UI.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -72,11 +72,7 @@ namespace DEKL.CP.UI.Controllers
                 return View("Error");
             }
             var user = await _userManager.FindByIdAsync(await _signInManager.GetVerifiedUserIdAsync());
-            if (user != null)
-            {
-                ViewBag.Status = "DEMO: Caso o código não chegue via " + provider + " o código é: ";
-                ViewBag.CodigoAcesso = await _userManager.GenerateTwoFactorTokenAsync(user.Id, provider);
-            }
+
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
@@ -108,38 +104,9 @@ namespace DEKL.CP.UI.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
-        }
-
-        //
-        // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, protocol: Request.Url.Scheme);
-                    await _userManager.SendEmailAsync(user.Id, "Confirme sua Conta", "Por favor confirme sua conta clicando neste link: <a href='" + callbackUrl + "'></a>");
-                    ViewBag.Link = callbackUrl;
-                    return View("DisplayEmail");
-                }
-                AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
         }
 
         //
@@ -183,7 +150,7 @@ namespace DEKL.CP.UI.Controllers
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 await _userManager.SendEmailAsync(user.Id, "Esqueci minha senha", "Por favor altere sua senha clicando aqui: <a href='" + callbackUrl + "'></a>");
                 ViewBag.Link = callbackUrl;
-                ViewBag.Status = "DEMO: Caso o link não chegue: ";
+                ViewBag.Status = "Caso o link não chegue: ";
                 ViewBag.LinkAcesso = callbackUrl;
                 return View("ForgotPasswordConfirmation");
             }
@@ -399,14 +366,6 @@ namespace DEKL.CP.UI.Controllers
         private const string XsrfKey = "XsrfId";
 
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
 
         private ActionResult RedirectToLocal(string returnUrl)
         {

@@ -16,7 +16,7 @@
         Por favor, insira um nome de usuário abaixo e clique no botão Registrar para concluir o login.
     </p>
     <div class="form-group">
-        @Html.LabelFor(m => m.Email)
+        @Html.LabelFor(m => m.Email, new { @class = "label-control" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
             <small>

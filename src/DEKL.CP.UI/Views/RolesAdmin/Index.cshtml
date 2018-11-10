@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DEKL.CP.Infra.CrossCutting.Identity.Models.CustomRole>
+@{
+    ViewBag.Title = "Index";
+}
+
+@section styles{
+    @Styles.Render("~/Content/datatables")
+}
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="col-md-6">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>
+                        <a href='@(Url.Action("Edit", new { id = item.Id }))'><i class="fas fa-pen"></i></a>
+                        <a href='@(Url.Action("Details", new { id = item.Id }))'><i class="fas fa-info-circle"></i></a>
+                        <a href='@(Url.Action("Delete", new { id = item.Id }))'><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/datatables")
+    <script type="text/javascript">
+        $(() => {
+            $('.table').DataTable({
+                "tabIndex": -1,
+                "scrollY": "280px",
+                "scrollCollapse": true,
+                "responsive": true,
+                "columnDefs": [
+                    { "className": "text-left", "targets": [0, 1] },
+                    { "width": "20%", "targets": 1 },
+                    { "orderable": false, "targets": 1 }
+                ],
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "Sem dados disponíveis na tabela",
+                    "info": "Página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Sem registros disponíveis",
+                    "infoFiltered": "(filtrados do total de _MAX_ registros)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Exibir _MENU_ linhas por página",
+                    "loadingRecords": "Carregando...",
+                    "processing": "Processando...",
+                    "search": "Filtrar:",
+                    "zeroRecords": "Não encontrado",
+                    "paginate": {
+                        "first": "Primeiro",
+                        "last": "Último",
+                        "next": "Avançar",
+                        "previous": "Voltar"
+                    },
+                    "aria": {
+                        "sortAscending": ":ativado para ordenação ascendente",
+                        "sortDescending": ":ativado para ordenação descendente"
+                    }
+                }
+            });
+        });
+    </script>
+}

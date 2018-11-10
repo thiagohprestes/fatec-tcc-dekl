@@ -1,4 +1,4 @@
-﻿<nav id="sidebar">
+﻿<nav id="sidebar" class="active">
     <div class="sidebar-header">
         <h3>DEKL - CP</h3>
     </div>
@@ -9,10 +9,10 @@
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cadastro</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li>
-                    <a href="@Url.Action("Index","Usuarios")">Usuário</a>
+                    @Html.ActionLink("Usuário", "Index", "UsersAdmin", null, htmlAttributes: new { id = "registerLink" })
                 </li>
                 <li>
-                    <a href="#">Home 2</a>
+                    @Html.ActionLink("Grupo", "Index", "RolesAdmin", null, htmlAttributes: new { id = "registerLink" })
                 </li>
                 <li>
                     <a href="#">Home 3</a>

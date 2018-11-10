@@ -17,7 +17,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirmação da nova senha")]
+        [Display(Name = "Confirmação da senha")]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
     }

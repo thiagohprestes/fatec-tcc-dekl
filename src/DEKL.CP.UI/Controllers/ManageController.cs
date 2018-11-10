@@ -152,7 +152,7 @@ namespace DEKL.CP.UI.Controllers
             // For production use please register a SMS provider in IdentityConfig and generate a code here.
             var code = await _userManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId<int>(), phoneNumber);
 
-            ViewBag.Status = "DEMO: Caso o código não chegue via SMS o código é: ";
+            ViewBag.Status = "Caso o código não chegue via SMS o código é: ";
             ViewBag.CodigoAcesso = code;
 
             return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
@@ -336,7 +336,7 @@ namespace DEKL.CP.UI.Controllers
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error);
+                ModelState.AddModelError("Error", error);
             }
         }
 

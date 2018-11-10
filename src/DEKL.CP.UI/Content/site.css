@@ -19,9 +19,9 @@ body {
     width: calc(100% - 40px);
 }
 
-.footer span {
-    padding: 0.5rem 1rem;
-}
+    .footer span {
+        padding: 0.5rem 1rem;
+    }
 
 label.is-invalid {
     font-weight: bold;
@@ -32,8 +32,22 @@ label.is-invalid {
     color: #fff !important;
 }
 
+.fas {
+    padding: 6px 9px;
+}
+
 /*Daqui pra baixo tem que tirar*/
 
 .full-content {
     position: relative;
+}
+
+.body-content {
+    overflow: auto;
+    padding: 40px 20px;
+    max-height: calc(100vh - 200px);
+}
+
+.table-hover tbody tr:hover {
+    background-color: #e3f4f6;
 }
