@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <title>DEKL - Contas a Pagar | @ViewBag.Title</title>
+</head>
+<body>
+    <div class="wrapper">
+        @Html.Partial("_sidebar")
+        <div id="content" class="full-content">
+            @Html.Partial("_navbar")
+            <div class="container body-content">
+                @RenderBody()
+            </div>
+            <footer class="footer bg-info footer-custom">
+                <span class="text-muted">&copy;@DateTime.Now.Year DEKL Corporation</span>
+            </footer>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @RenderSection("scripts", false)
+    <script type="text/javascript">
+        $(() => {
+            $('#sidebarCollapse').on('click', () => {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+    @Html.Partial("_Toastr")
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Registrar nova conta";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal col-md-6 col-sm-12", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Preencha os dados</h4>
+    <hr />
+    @Html.ValidationMessage("Error", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        <small>
+            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+        </small>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        <small>
+            @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
+        </small>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword)
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        <small>
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, null, new { @class = "text-danger" })
+        </small>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-info" value="Registrar" />
+    </div>
+}

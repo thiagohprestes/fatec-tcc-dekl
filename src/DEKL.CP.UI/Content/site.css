@@ -1,0 +1,39 @@
+﻿/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px; /* Margin bottom by footer height */
+    overflow: hidden;
+    font-family: sans-serif;
+}
+
+.footer {
+    position: absolute;
+    display: flex;
+    padding: 15px 10px;
+    bottom: 20px;
+    width: calc(100% - 40px);
+}
+
+.footer span {
+    padding: 0.5rem 1rem;
+}
+
+label.is-invalid {
+    font-weight: bold;
+    color: #dc3545;
+}
+
+.footer-custom span {
+    color: #fff !important;
+}
+
+/*Daqui pra baixo tem que tirar*/
+
+.full-content {
+    position: relative;
+}
