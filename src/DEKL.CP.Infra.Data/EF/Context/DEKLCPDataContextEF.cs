@@ -3,12 +3,14 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Diagnostics;
 
-namespace DEKL.CP.Infra.Data.EF
+namespace DEKL.CP.Infra.Data.EF.Context
 {
     public class DEKLCPDataContextEF : DbContext
     {
-        public DEKLCPDataContextEF() : base("DEKLCPConn") 
-            => Database.SetInitializer(new DbInitializer());
+        public DEKLCPDataContextEF() : base("DEKLCPConn")
+        {
+            Database.SetInitializer(new DbInitializer());
+        }
 
         //public DbSet<Agencia> Agencias { get; set; }
         //public DbSet<Banco> Bancos { get; set; }
@@ -26,6 +28,12 @@ namespace DEKL.CP.Infra.Data.EF
         {
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Properties<string>()
+                .Configure(e => e.HasColumnType("varchar"));
+
+            modelBuilder.Properties<string>()
+                .Configure(p => p.HasMaxLength(100));
 
             //modelBuilder.Configurations.Add(new Maps.AgenciaMap());
             //modelBuilder.Configurations.Add(new Maps.BancoMap());

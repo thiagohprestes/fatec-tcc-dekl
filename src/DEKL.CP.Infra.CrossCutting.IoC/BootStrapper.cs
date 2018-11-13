@@ -2,7 +2,7 @@
 using DEKL.CP.Infra.CrossCutting.Identity.Configuration;
 using DEKL.CP.Infra.CrossCutting.Identity.Context;
 using DEKL.CP.Infra.CrossCutting.Identity.Models;
-using DEKL.CP.Infra.Data.EF;
+using DEKL.CP.Infra.Data.EF.Context;
 using DEKL.CP.Infra.Data.EF.Repositories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;

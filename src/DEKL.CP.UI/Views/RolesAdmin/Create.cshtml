@@ -1,4 +1,4 @@
-﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.RoleViewModel
+﻿@model DEKL.CP.Infra.CrossCutting.Identity.ViewModels.RoleViewModel
 @{
     ViewBag.Title = "Cadastrar novo Grupo";
 }
@@ -20,10 +20,8 @@
                         @Html.ValidationMessageFor(model => model.Name)
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-info" />
-                    </div>
-                    <div class="form-group">
-                        @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-info" } )
+                        <input type="submit" class="btn btn-outline-info" value="Criar"/>
+                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-outline-info" })
                     </div>
                 </div>
             }

@@ -1,7 +1,14 @@
-﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.IndexViewModel
+﻿@model DEKL.CP.Infra.CrossCutting.Identity.ViewModels.IndexViewModel
 @{
     ViewBag.Title = "Gerencie sua conta";
 }
+
+<style>
+    .btn-link {
+        color: #17a2b8;
+    }
+</style>
+
 <h2>@ViewBag.Title.</h2>
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
@@ -13,11 +20,11 @@
             [
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Trocar de Senha", "ChangePassword")
+                @Html.ActionLink("Trocar de Senha", "ChangePassword", null, new { @class = "btn-link" })
             }
             else
             {
-                @Html.ActionLink("Definir senha para conta local", "SetPassword")
+                @Html.ActionLink("Definir senha para conta local", "SetPassword", null, new { @class = "btn-link"})
             }
             ]
         </dd>
@@ -26,13 +33,13 @@
             Número do Telefone: @(Model.PhoneNumber ?? "Nenhum") [
             @if (Model.PhoneNumber != null)
             {
-                @Html.ActionLink("Trocar", "AddPhoneNumber")
+                @Html.ActionLink("Trocar", "AddPhoneNumber", null, new { @class = "btn-link" })
                 @: &nbsp;|&nbsp;
-                @Html.ActionLink("Remover", "RemovePhoneNumber")
+                @Html.ActionLink("Remover", "RemovePhoneNumber", null, new { @class = "btn-link"})
             }
             else
             {
-                @Html.ActionLink("Adicionar", "AddPhoneNumber")
+                @Html.ActionLink("Adicionar", "AddPhoneNumber", null, new { @class = "btn-link"})
             }
             ]
         </dd>
@@ -45,18 +52,18 @@
                     @Html.AntiForgeryToken()
                     <p>
                         Autenticação em dois fatores está habilitado:
-                        <input type="submit" value="Desabilitar" class="btn btn-info" />
+                        <input type="submit" value="Desabilitar" class="btn btn-outline-info" />
                     </p>
                 }
             }
             else
             {
-                using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
                 {
                     @Html.AntiForgeryToken()
                     <p>
                         Autenticação em dois fatores está desabilitado:
-                        <input type="submit" value="Habilitar" class="btn btn-info" />
+                        <input type="submit" value="Habilitar" class="btn btn-outline-info" />
                     </p>
                 }
             }
@@ -68,7 +75,7 @@
                 <form method="post" action="/Manage/ForgetBrowser">
                     <p>
                         O browser será lembrado para Autenticação em dois fatores:
-                        <input type="submit" value="Esquecer Browser" class="btn btn-info" />
+                        <input type="submit" value="Esquecer Browser" class="btn btn-outline-info" />
                     </p>
                 </form>
             }
@@ -77,7 +84,7 @@
                 <form method="post" action="/Manage/RememberBrowser">
                     <p>
                         O browser NÃO será lembrado para Autenticação em dois fatores:
-                        <input type="submit" value="Lembrar Browser" class="btn btn-info" />
+                        <input type="submit" value="Lembrar Browser" class="btn btn-outline-info" />
                     </p>
                 </form>
             }

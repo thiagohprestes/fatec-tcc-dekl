@@ -1,4 +1,5 @@
 ﻿using DEKL.CP.Domain.Entities;
+using DEKL.CP.Infra.Data.EF.Context;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

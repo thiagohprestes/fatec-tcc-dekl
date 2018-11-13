@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
-namespace DEKL.CP.Infra.CrossCutting.Identity.Models
+namespace DEKL.CP.Infra.CrossCutting.Identity.ViewModels
 {
     public class VerifyCodeViewModel
     {
@@ -15,6 +16,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Models
         [Display(Name = "Lembrar esse Browser?")]
         public bool RememberBrowser { get; set; }
 
-        public bool RememberMe { get; set; }
+        [HiddenInput]
+        public int UserId { get; set; }
     }
 }

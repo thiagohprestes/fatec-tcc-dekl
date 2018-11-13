@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNet.Identity;
-using System;
-using System.Configuration;
-using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Threading.Tasks;
@@ -17,7 +14,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Configuration
 
             var msg = new MailMessage
             {
-                From = new MailAddress("deklcpadm@gmail.com", "Admin do Sistema"),
+                From = new MailAddress("deklcpadm@gmail.com", "DEKL - Contas a Pagar - Administrador"),
                 Subject = message.Subject,
              };
 
@@ -25,14 +22,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Configuration
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Html));
 
-            var smtpClient = new SmtpClient("smtp.gmail.com", 587)
-            {
-                //var credentials = new NetworkCredential(ConfigurationManager.AppSettings["ContaDeEmail"],
-                //    ConfigurationManager.AppSettings["SenhaEmail"]);
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("deklcpadm@gmail.com", "programadores2016"),
-                EnableSsl = true
-            };
+            var smtpClient = new SmtpClient();
 
             smtpClient.Send(msg);
 

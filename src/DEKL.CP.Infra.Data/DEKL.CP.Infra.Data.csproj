@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF\DbInitializer.cs" />
-    <Compile Include="EF\DEKLCPDataContextEF.cs" />
+    <Compile Include="EF\Context\DEKLCPDataContextEF.cs" />
     <Compile Include="EF\Maps\AgenciaMap.cs" />
     <Compile Include="EF\Maps\BancoMap.cs" />
     <Compile Include="EF\Maps\ContaBancariaMap.cs" />

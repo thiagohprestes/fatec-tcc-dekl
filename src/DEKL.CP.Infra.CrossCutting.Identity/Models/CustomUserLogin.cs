@@ -2,5 +2,6 @@
 
 namespace DEKL.CP.Infra.CrossCutting.Identity.Models
 {
-    public class CustomUserLogin : IdentityUserLogin<int> { }
+    public class CustomUserLogin : IdentityUserLogin<int>
+    { }
 }

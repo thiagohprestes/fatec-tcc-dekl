@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DEKL.CP.Infra.CrossCutting.Identity.Models
+namespace DEKL.CP.Infra.CrossCutting.Identity.ViewModels
 {
     public class ConfigureTwoFactorViewModel
     {

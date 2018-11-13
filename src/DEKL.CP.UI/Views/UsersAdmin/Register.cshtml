@@ -1,4 +1,4 @@
-﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.RegisterViewModel
+﻿@model DEKL.CP.Infra.CrossCutting.Identity.ViewModels.RegisterViewModel
 @{
     ViewBag.Title = "Registrar nova conta";
 }
@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-6">
         <section id="registerForm">
-            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Register", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 <h4>Preencha os dados</h4>
@@ -35,7 +35,7 @@
                     </small>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-info" value="Registrar" />
+                    <input type="submit" class="btn btn-outline-info" value="Registrar" />
                 </div>
             }
         </section>
