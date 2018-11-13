@@ -112,13 +112,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ApplicationCookieIdentityValidator.cs" />
     <Compile Include="Configuration\ApplicationRoleManager.cs" />
     <Compile Include="Configuration\ApplicationUserManager.cs" />
     <Compile Include="Configuration\EmailService.cs" />
     <Compile Include="Configuration\ApplicationSignInManager.cs" />
     <Compile Include="Configuration\SmsService.cs" />
-    <Compile Include="Filters\ClaimsAuthorize.cs" />
     <Compile Include="Maps\ClaimMap.cs" />
     <Compile Include="Maps\ClientMap.cs" />
     <Compile Include="Models\Claim.cs" />
@@ -162,6 +160,9 @@
       <Project>{177E5066-AB90-4A3E-950E-7757616E5749}</Project>
       <Name>DEKL.CP.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Filters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

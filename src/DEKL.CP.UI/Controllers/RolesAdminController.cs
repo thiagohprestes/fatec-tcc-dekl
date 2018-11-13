@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using DEKL.CP.Infra.CrossCutting.Identity.Configuration;
 using DEKL.CP.Infra.CrossCutting.Identity.Models;
+using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace EP.IdentityIsolation.MVC.Controllers
+namespace DEKL.CP.UI.Controllers
 {
     [Authorize]
     public class RolesAdminController : Controller
@@ -27,12 +27,7 @@ namespace EP.IdentityIsolation.MVC.Controllers
         // GET: /Roles/
         public ActionResult Index()
         {
-            var a = _roleManager.Roles.ToList();
-
-            for(int i = 0; i < 20; i++)
-            {
-                a.Add(a.First());                
-            }
+            var a = _roleManager.Roles;
 
             return View(a);
         }

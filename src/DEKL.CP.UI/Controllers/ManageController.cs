@@ -1,5 +1,4 @@
 ﻿using DEKL.CP.Infra.CrossCutting.Identity.Configuration;
-using DEKL.CP.Infra.CrossCutting.Identity.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using System;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
 
 namespace DEKL.CP.UI.Controllers
 {

@@ -1,4 +1,4 @@
-﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.SendCodeViewModel
+﻿@model DEKL.CP.Infra.CrossCutting.Identity.ViewModels.SendCodeViewModel
 @{
     ViewBag.Title = "Enviar código de verificação";
 }
@@ -7,10 +7,10 @@
 <div class="row">
     <div class="col-md-6">
         <section id="sendCodeForm">
-            @using (Html.BeginForm("SendCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("SendCode", "Account", new { Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.Hidden("rememberMe", @Model.RememberMe)
+                @Html.Hidden("rememberMe", @Model.UserId)
                 <hr />
                 <div>
                     Provedor de Autenticação em Dois Fatores:

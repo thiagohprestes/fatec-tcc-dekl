@@ -1,4 +1,4 @@
-﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.VerifyCodeViewModel
+﻿@model DEKL.CP.Infra.CrossCutting.Identity.ViewModels.VerifyCodeViewModel
 @{
     ViewBag.Title = "Validação de código de verificação";
 }
@@ -11,8 +11,7 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.Hidden("provider", @Model.Provider)
-                @Html.Hidden("rememberMe", @Model.RememberMe)
-                <h4>@ViewBag.Status <a href="#" title="@ViewBag.CodigoAcesso">Passe o Mouse :)</a></h4>
+                @Html.Hidden("rememberMe", @Model.UserId)
                 <hr />
                 @Html.ValidationMessage("Error", new { @class = "text-danger" })
                 <div class="form-group">

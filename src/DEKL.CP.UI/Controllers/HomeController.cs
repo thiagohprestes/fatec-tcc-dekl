@@ -18,5 +18,10 @@ namespace DEKL.CP.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult SignOut()
+        {
+            return View();
+        }
     }
 }
