@@ -51,3 +51,11 @@ label.is-invalid {
 .table-hover tbody tr:hover {
     background-color: #e3f4f6;
 }
+
+.btn-link {
+    color: #17a2b8;
+}
+
+.presentation {
+    background-color: #e3f4f6;
+}

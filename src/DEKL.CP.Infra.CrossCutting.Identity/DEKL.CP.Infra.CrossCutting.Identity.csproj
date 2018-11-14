@@ -117,6 +117,7 @@
     <Compile Include="Configuration\EmailService.cs" />
     <Compile Include="Configuration\ApplicationSignInManager.cs" />
     <Compile Include="Configuration\SmsService.cs" />
+    <Compile Include="Maps\ApplicationUserMap.cs" />
     <Compile Include="Maps\ClaimMap.cs" />
     <Compile Include="Maps\ClientMap.cs" />
     <Compile Include="Models\Claim.cs" />

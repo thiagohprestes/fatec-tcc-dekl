@@ -12,7 +12,7 @@ using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
 namespace DEKL.CP.UI.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private readonly ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -67,10 +67,7 @@ namespace DEKL.CP.UI.Controllers
 
         //
         // GET: /Manage/AddPhoneNumber
-        public ActionResult AddPhoneNumber()
-        {
-            return View();
-        }
+        public ActionResult AddPhoneNumber() => View();
 
         //
         // POST: /Manage/AddPhoneNumber
@@ -203,10 +200,7 @@ namespace DEKL.CP.UI.Controllers
 
         //
         // GET: /Manage/ChangePassword
-        public ActionResult ChangePassword()
-        {
-            return View();
-        }
+        public ActionResult ChangePassword() => View();
 
         //
         // POST: /Manage/ChangePassword
@@ -324,40 +318,18 @@ namespace DEKL.CP.UI.Controllers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("Error", error);
-            }
-        }
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         private bool HasPassword()
         {
             var user = _userManager.FindById(User.Identity.GetUserId<int>());
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-            return false;
+            return user?.PasswordHash != null;
         }
 
         private bool HasPhoneNumber()
         {
             var user = _userManager.FindById(User.Identity.GetUserId<int>());
-            if (user != null)
-            {
-                return user.PhoneNumber != null;
-            }
-            return false;
+            return user?.PhoneNumber != null;
         }
 
         public enum ManageMessageId

@@ -11,6 +11,8 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Models
 {
     public class ApplicationUser : IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
+        public string Nome { get; set; }
+        public string Sobrenome { get; set; }
         public DateTime DataCadastro { get; set; } = DateTime.Now;
         public DateTime? DataAlteracao { get; set; }
         public virtual ICollection<Client> Clients { get; set; } = new Collection<Client>();

@@ -19,10 +19,7 @@ namespace DEKL.CP.UI.Controllers
 
         //
         // GET: /Account/Register
-        public ActionResult Register()
-        {
-            return View();
-        }
+        public ActionResult Register() => View();
 
         //
         // POST: /Account/Register
@@ -33,18 +30,19 @@ namespace DEKL.CP.UI.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nome = model.Nome, Sobrenome = model.Sobrenome};
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, protocol: Request.Url.Scheme);
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, protocol: Request.Url?.Scheme);
                 await _userManager.SendEmailAsync(user.Id, "Confirme sua Conta", $"Por favor confirme sua conta clicando neste link: {callbackUrl}");
                 ViewBag.Link = callbackUrl;
                 return View("DisplayEmail");
             }
+
             AddErrors(result);
 
             // If we got this far, something failed, redisplay form

@@ -10,9 +10,9 @@
             toastr.options.newestOnTop = '@toastr.ShowNewestOnTop';
             toastr.options.positionClass = '@toastr.PositionClass';
 
-            @foreach (ToastMessage message in toastr.ToastMessages)
+            @foreach (var message in toastr.ToastMessages)
             {
-              string toastTypeValue = message.ToastType.ToString("F").ToLower();
+              var toastTypeValue = message.ToastType.ToString("F").ToLower();
               @: var optionsOverride = { /* Add message specific options here */ };
               if (message.IsSticky)
               {

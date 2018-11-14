@@ -11,11 +11,11 @@ using Microsoft.AspNet.Identity;
 namespace DEKL.CP.UI.Controllers
 {
     [Authorize]
-    public class RolesAdminController : Controller
+    public class RolesAdminController : BaseController
     {
 
         private readonly ApplicationRoleManager _roleManager;
-        private ApplicationUserManager _userManager;
+        private readonly ApplicationUserManager _userManager;
 
         public RolesAdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
         {
@@ -25,12 +25,7 @@ namespace DEKL.CP.UI.Controllers
 
         //
         // GET: /Roles/
-        public ActionResult Index()
-        {
-            var a = _roleManager.Roles;
-
-            return View(a);
-        }
+        public ActionResult Index() => View(_roleManager.Roles);
 
         //
         // GET: /Roles/Details/5
@@ -60,10 +55,7 @@ namespace DEKL.CP.UI.Controllers
 
         //
         // GET: /Roles/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        public ActionResult Create() => View();
 
         //
         // POST: /Roles/Create
@@ -76,11 +68,12 @@ namespace DEKL.CP.UI.Controllers
                 var roleresult = await _roleManager.CreateAsync(role);
                 if (!roleresult.Succeeded)
                 {
-                    ModelState.AddModelError("", roleresult.Errors.First());
+                    AddErrors(roleresult);
                     return View();
                 }
                 return RedirectToAction("Index");
             }
+
             return View();
         }
 
@@ -127,11 +120,7 @@ namespace DEKL.CP.UI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var role = await _roleManager.FindByIdAsync(id.Value);
-            if (role == null)
-            {
-                return HttpNotFound();
-            }
-            return View(role);
+            return role == null ? HttpNotFound() : (ActionResult)View(role);
         }
 
         //
@@ -162,7 +151,7 @@ namespace DEKL.CP.UI.Controllers
                 }
                 if (!result.Succeeded)
                 {
-                    ModelState.AddModelError("Error", result.Errors.First());
+                    AddErrors(result);
                     return View();
                 }
                 return RedirectToAction("Index");
