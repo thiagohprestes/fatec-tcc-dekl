@@ -19,10 +19,7 @@ namespace DEKL.CP.UI.Controllers
 
         //
         // GET: /Account/Register
-        public ActionResult Register()
-        {
-            return View();
-        }
+        public ActionResult Register() => View();
 
         //
         // POST: /Account/Register
@@ -33,7 +30,7 @@ namespace DEKL.CP.UI.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nome = model.Nome, Sobrenome = model.Sobrenome};
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {

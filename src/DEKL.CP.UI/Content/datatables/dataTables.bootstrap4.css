@@ -204,3 +204,15 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:fir
 div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:last-child {
   padding-right: 0;
 }
+
+.pagination .page-item.active .page-link {
+    background-color: #17a2b8;
+}
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus {
+    background-color: #17a2b8;
+}
+
+.pagination .page-item.active .page-link:hover {
+    background-color: #17a2b8;
+}

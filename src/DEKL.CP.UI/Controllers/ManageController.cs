@@ -12,7 +12,7 @@ using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
 namespace DEKL.CP.UI.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private readonly ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -67,10 +67,7 @@ namespace DEKL.CP.UI.Controllers
 
         //
         // GET: /Manage/AddPhoneNumber
-        public ActionResult AddPhoneNumber()
-        {
-            return View();
-        }
+        public ActionResult AddPhoneNumber() => View();
 
         //
         // POST: /Manage/AddPhoneNumber
@@ -203,10 +200,7 @@ namespace DEKL.CP.UI.Controllers
 
         //
         // GET: /Manage/ChangePassword
-        public ActionResult ChangePassword()
-        {
-            return View();
-        }
+        public ActionResult ChangePassword() => View();
 
         //
         // POST: /Manage/ChangePassword

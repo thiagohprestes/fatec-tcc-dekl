@@ -4,24 +4,12 @@ namespace DEKL.CP.UI.Controllers
 {
     public class HomeController : Controller
     {
-        public ViewResult Index()
-        {
-            return View();
-        }
+        public ViewResult Index() => View();
 
-        public ActionResult About()
-        {
-            return View();
-        }
+        public ActionResult About() => View();
 
-        public ActionResult Contact()
-        {
-            return View();
-        }
+        public ActionResult Contact() => View();
 
-        public ActionResult SignOut()
-        {
-            return View();
-        }
+        public ActionResult SignOut() => View();
     }
 }

@@ -5,6 +5,13 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.ViewModels
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(50, ErrorMessage = "O Limite do {0} é de {1} caracteres")]
+        public string Nome { get; set; }
+
+        [StringLength(50, ErrorMessage = "O Limite do {0} é de {1} caracteres")]
+        public string Sobrenome { get; set; }
+
+        [Required]
         [Display(Name = "E-mail")]
         [EmailAddress(ErrorMessage = "{0} inválido")]
         public string Email { get; set; }

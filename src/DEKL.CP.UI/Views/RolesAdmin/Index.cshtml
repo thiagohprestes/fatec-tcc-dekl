@@ -5,19 +5,6 @@
 
 @section styles{
     @Styles.Render("~/Content/datatables")
-    <style>
-        .pagination .page-item.active .page-link {
-            background-color: #17a2b8;
-        }
-
-        div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus {
-            background-color: #17a2b8;
-        }
-
-        .pagination .page-item.active .page-link:hover {
-            background-color: #17a2b8;
-        }
-    </style>
 }
 
 <h2>@ViewBag.Title</h2>
@@ -57,37 +44,37 @@
     <script type="text/javascript">
         $(() => {
             $('.table').DataTable({
-                "tabIndex": -1,
-                "scrollY": "280px",
-                "scrollCollapse": true,
-                "responsive": true,
-                "columnDefs": [
-                    { "className": "text-left", "targets": [0, 1] },
-                    { "width": "25%", "targets": 1 },
-                    { "orderable": false, "targets": 1 }
+                tabIndex: -1,
+                scrollY: "280px",
+                scrollCollapse: true,
+                responsive: true,
+                columnDefs: [
+                    { className: "text-left", "targets": [0, 1] },
+                    { width: "25%", "targets": 1 },
+                    { orderable: false, "targets": 1 }
                 ],
-                "language": {
-                    "decimal": "",
-                    "emptyTable": "Sem dados disponíveis na tabela",
-                    "info": "Página _PAGE_ de _PAGES_",
-                    "infoEmpty": "Sem registros disponíveis",
-                    "infoFiltered": "(filtrados do total de _MAX_ registros)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Exibir _MENU_ linhas por página",
-                    "loadingRecords": "Carregando...",
-                    "processing": "Processando...",
-                    "search": "Filtrar:",
-                    "zeroRecords": "Não encontrado",
-                    "paginate": {
-                        "first": "Primeiro",
-                        "last": "Último",
-                        "next": "Avançar",
-                        "previous": "Voltar"
+                language: {
+                    decimal: "",
+                    emptyTable: "Sem dados disponíveis na tabela",
+                    info: "Página _PAGE_ de _PAGES_",
+                    infoEmpty: "Sem registros disponíveis",
+                    infoFiltered: "(filtrados do total de _MAX_ registros)",
+                    infoPostFix: "",
+                    thousands: ",",
+                    lengthMenu: "Exibir _MENU_ linhas por página",
+                    loadingRecords: "Carregando...",
+                    processing: "Processando...",
+                    search: "Filtrar:",
+                    zeroRecords: "Não encontrado",
+                    paginate: {
+                        first: "Primeiro",
+                        last: "Último",
+                        next: "Avançar",
+                        previous: "Voltar"
                     },
-                    "aria": {
-                        "sortAscending": ":ativado para ordenação ascendente",
-                        "sortDescending": ":ativado para ordenação descendente"
+                    aria: {
+                        sortAscending: ":ativado para ordenação ascendente",
+                        sortDescending: ":ativado para ordenação descendente"
                     }
                 }
             });

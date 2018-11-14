@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
 using System.Diagnostics;
+using DEKL.CP.Infra.CrossCutting.Identity.Maps;
 
 namespace DEKL.CP.Infra.CrossCutting.Identity.Context
 {
@@ -19,6 +20,8 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Context
 
             modelBuilder.Properties<string>()
                 .Configure(p => p.HasMaxLength(100));
+
+            modelBuilder.Configurations.Add(new ApplicationUserMap());
 
             base.OnModelCreating(modelBuilder);
 
