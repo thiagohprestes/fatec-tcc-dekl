@@ -3,10 +3,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.DataProtection;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DEKL.CP.Infra.CrossCutting.Identity.Configuration
 {
-    public class ApplicationUserManager : UserManager<ApplicationUser, int>
+    public sealed class ApplicationUserManager : UserManager<ApplicationUser, int>
     {
         public ApplicationUserManager(IUserStore<ApplicationUser, int> store)
         : base(store)
@@ -55,6 +57,49 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Configuration
             var dataProtector = provider.Create("ASP.NET Identity");
 
             UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser, int>(dataProtector);
+        }
+
+        // Metodo para login async que guarda os dados Client conectado
+        public async Task<IdentityResult> SignInClientAsync(ApplicationUser user, string clientKey)
+        {
+            if (string.IsNullOrEmpty(clientKey))
+            {
+                throw new ArgumentNullException(nameof(clientKey));
+            }
+
+            var client = user.Clients.SingleOrDefault(c => c.ClientKey == clientKey);
+            if (client == null)
+            {
+                client = new Client {ClientKey = clientKey};
+                user.Clients.Add(client);
+            }
+
+            var result = await UpdateAsync(user);
+            user.CurrentClientId = client.Id.ToString();
+            return result;
+        }
+
+        // Metodo para login async que remove os dados Client conectado
+        public async Task<IdentityResult> SignOutClientAsync(ApplicationUser user, string clientKey)
+        {
+            if (string.IsNullOrEmpty(clientKey))
+            {
+                throw new ArgumentNullException(nameof(clientKey));
+            }
+
+            var client = user.Clients.SingleOrDefault(c => c.ClientKey == clientKey);
+
+            if (client != null)
+            {
+                user.Clients.Remove(client);
+            }
+
+            if(user?.CurrentClientId != null)
+            {
+                user.CurrentClientId = null;
+            }
+
+            return await UpdateAsync(user);
         }
     }
 }
