@@ -64,13 +64,13 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Configuration
         {
             if (string.IsNullOrEmpty(clientKey))
             {
-                throw new ArgumentNullException(nameof(clientKey));
+                throw new ArgumentNullException("clientKey");
             }
 
             var client = user.Clients.SingleOrDefault(c => c.ClientKey == clientKey);
             if (client == null)
             {
-                client = new Client {ClientKey = clientKey};
+                client = new Client() {ClientKey = clientKey};
                 user.Clients.Add(client);
             }
 
@@ -84,21 +84,16 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Configuration
         {
             if (string.IsNullOrEmpty(clientKey))
             {
-                throw new ArgumentNullException(nameof(clientKey));
+                throw new ArgumentNullException("clientKey");
             }
 
             var client = user.Clients.SingleOrDefault(c => c.ClientKey == clientKey);
-
             if (client != null)
             {
                 user.Clients.Remove(client);
             }
 
-            if(user?.CurrentClientId != null)
-            {
-                user.CurrentClientId = null;
-            }
-
+            user.CurrentClientId = null;
             return await UpdateAsync(user);
         }
     }

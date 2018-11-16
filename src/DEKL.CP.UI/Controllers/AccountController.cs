@@ -3,6 +3,7 @@ using DEKL.CP.Infra.CrossCutting.Identity.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -107,8 +108,6 @@ namespace DEKL.CP.UI.Controllers
                     return View(model);
             }
         }
-
-        public ActionResult Register() => View();
 
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(int? userId, string code)
@@ -233,13 +232,15 @@ namespace DEKL.CP.UI.Controllers
             // Zerando contador de logins errados.
             await _userManager.ResetAccessFailedCountAsync(user.Id);
 
+            var ext = await AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
+
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie,
                 DefaultAuthenticationTypes.TwoFactorCookie, DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn
             (
                 new AuthenticationProperties {IsPersistent = isPersistent},
                 // Criação da instancia do Identity e atribuição dos Claims
-                await user.GenerateUserIdentityAsync(_userManager, isPersistent)
+                await user.GenerateUserIdentityAsync(_userManager, ext)
             );
         }
 

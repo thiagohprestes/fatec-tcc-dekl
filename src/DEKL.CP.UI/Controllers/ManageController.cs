@@ -316,7 +316,7 @@ namespace DEKL.CP.UI.Controllers
             await _userManager.SignInClientAsync(user, clientKey);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie, DefaultAuthenticationTypes.TwoFactorCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties {IsPersistent = isPersistent}, 
-                await user.GenerateUserIdentityAsync(_userManager, isPersistent));
+                await user.GenerateUserIdentityAsync(_userManager));
         }
 
         private bool HasPassword() => _userManager.FindById(User.Identity.GetUserId<int>())?.PasswordHash != null;
