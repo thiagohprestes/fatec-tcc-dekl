@@ -12,9 +12,9 @@ namespace DEKL.CP.Infra.Data.EF
         {
             var usuarios = new List<Usuario>
             {
-                new Usuario { UserName = "Thiago", Email = "thiago.prestes@fatec.sp.gov.br", PasswordHash = "12345678", DataCadastro = DateTime.Now },
-                new Usuario { UserName = "Lucio", Email = "luciorosa@hotmail.com" , PasswordHash = "54321", DataCadastro = DateTime.Now },
-                new Usuario { UserName = "Diego", Email = "diego@gmail.com", PasswordHash = "65432", DataCadastro = DateTime.Now }
+                new Usuario { UserName = "Thiago", Email = "thiago.prestes@fatec.sp.gov.br", PasswordHash = "12345678", AddedDate = DateTime.Now },
+                new Usuario { UserName = "Lucio", Email = "luciorosa@hotmail.com" , PasswordHash = "54321", AddedDate = DateTime.Now },
+                new Usuario { UserName = "Diego", Email = "diego@gmail.com", PasswordHash = "65432", AddedDate = DateTime.Now }
             };
 
             context.Usuarios.AddRange(usuarios);

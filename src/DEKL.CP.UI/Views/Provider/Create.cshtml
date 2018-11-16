@@ -1,0 +1,82 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Cadastrar Fornecedor";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-6">
+        <section id="registerProviderForm">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form">
+                    <h4>Preencha os dados</h4>
+                    <hr />
+                    @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                    @if (ViewBag.PhysicalPerson)
+                    {
+                        <div class="form-row">
+                            <div class="form-group col-md-9">
+                                @Html.LabelFor(m => m.Nome, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.Nome)
+                                </small>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-row">
+                            <div class="form-group col-md-9">
+                                @Html.LabelFor(m => m.RazaoSocial, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.RazaoSocial, new { @class = "form-control" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.RazaoSocial)
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                @Html.LabelFor(m => m.InscricaoEstadual, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.InscricaoEstatual, new { @class = "form-control" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.InscricaoEstadual)
+                                </small>
+                            </div>
+                            <div class="form-group col-md-5">
+                                @Html.LabelFor(m => m.InscricaoMunicipal, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.InscricaoMunicipal, new { @class = "form-control" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.InscricaoMunicipal)
+                                </small>
+                            </div>
+                        </div>
+                    }
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-10">
+                            @Html.LabelFor(m => m.Logradouro, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Logradouro, new { @class = "form-control" })
+                            <small>
+                                @Html.ValidationMessageFor(m => m.Logradouro)
+                            </small>
+                        </div>
+                        <div class="form-group col-md-12">
+                            @Html.LabelFor(m => m.Numero, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Numero, new { @class = "form-control" })
+                            <small>
+                                @Html.ValidationMessageFor(m => m.Numero)
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

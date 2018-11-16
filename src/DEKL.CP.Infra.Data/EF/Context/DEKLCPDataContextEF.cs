@@ -7,10 +7,9 @@ namespace DEKL.CP.Infra.Data.EF.Context
 {
     public class DEKLCPDataContextEF : DbContext
     {
-        public DEKLCPDataContextEF() : base("DEKLCPConn")
-        {
-            Database.SetInitializer(new DbInitializer());
-        }
+        public DEKLCPDataContextEF() : base("DEKLCPConn") => Database.SetInitializer(new DbInitializer());
+
+        public new IDbSet<T> Set<T>() where T : EntityBase => base.Set<T>();
 
         //public DbSet<Agencia> Agencias { get; set; }
         //public DbSet<Banco> Bancos { get; set; }
@@ -46,7 +45,9 @@ namespace DEKL.CP.Infra.Data.EF.Context
             //modelBuilder.Configurations.Add(new Maps.PessoaJuridicaMap());
             //modelBuilder.Configurations.Add(new Maps.SimulaContaMap());
 
+            modelBuilder.Configurations.Add(new Maps.EntityBaseMap());
             modelBuilder.Configurations.Add(new Maps.UsuarioMap());
+
             Database.Log = (query) => Debug.Write(query);
         }
     }

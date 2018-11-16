@@ -12,15 +12,8 @@ namespace DEKL.CP.Infra.Data.EF.Maps
             ToTable(nameof(SimulaConta));
 
             //PK
-            HasKey(e => e.Id);
 
             //Columns
-            Property(e => e.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
-            Property(e => e.DataCadastro);
-
-            Property(e => e.DataAlteracao);
         }
     }
 }

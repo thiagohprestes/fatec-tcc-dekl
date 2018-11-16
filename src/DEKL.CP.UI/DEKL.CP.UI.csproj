@@ -56,7 +56,7 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\..\..\..\Downloads\IdentityIsolation-master\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -260,9 +260,12 @@
     <Compile Include="App_Start\SimpleInjectorInitializer.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountToPayController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BaseCrudController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
@@ -278,10 +281,14 @@
     <Compile Include="Scripts\Toastr\Toastr.cs" />
     <Compile Include="Scripts\Toastr\ToastType.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AccountsToPay\AccountsToPayViewModel.cs" />
+    <Compile Include="ViewModels\AccountsToPay\AccountToPayViewModel.cs" />
     <Compile Include="ViewModels\Conta\Login\LoginVM.cs" />
     <Compile Include="ViewModels\Conta\MeuPerfil\MeuPerfil.cs" />
     <Compile Include="ViewModels\Conta\TrocarSenha\TrocaSenha.cs" />
+    <Compile Include="ViewModels\Provider\ProviderViewModel.cs" />
     <Compile Include="ViewModels\Usuarios\UsuarioVM.cs" />
+    <None Include="Views\AccountToPay\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
@@ -331,6 +338,10 @@
     <Content Include="Views\RolesAdmin\Edit.cshtml" />
     <Content Include="Views\RolesAdmin\Index.cshtml" />
     <Content Include="Views\Home\SignOut.cshtml" />
+    <Content Include="Views\AccountToPay\Index.cshtml" />
+    <Content Include="Views\Provider\Index.cshtml" />
+    <Content Include="Views\Provider\Select.cshtml" />
+    <Content Include="Views\Provider\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -359,6 +370,10 @@
     <ProjectReference Include="..\DEKL.CP.Infra.CrossCutting.IoC\DEKL.CP.Infra.CrossCutting.IoC.csproj">
       <Project>{dac5216e-41d8-44ad-90a3-dc88f7a4a2ce}</Project>
       <Name>DEKL.CP.Infra.CrossCutting.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DEKL.CP.Infra.Data\DEKL.CP.Infra.Data.csproj">
+      <Project>{1E04257F-82CE-4D95-AD48-DCC9F7C08D9F}</Project>
+      <Name>DEKL.CP.Infra.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -40,6 +40,7 @@
     <Compile Include="Contracts\Repositories\ICredorRepository.cs" />
     <Compile Include="Contracts\Repositories\IEmpresaRepository.cs" />
     <Compile Include="Contracts\Repositories\IEnderecoRepository.cs" />
+    <Compile Include="Contracts\Repositories\IEntityBase.cs" />
     <Compile Include="Contracts\Repositories\IPessoaFisicaRepository.cs" />
     <Compile Include="Contracts\Repositories\IPessoaJuridicaRepository.cs" />
     <Compile Include="Contracts\Repositories\IRepository.cs" />
@@ -51,13 +52,14 @@
     <Compile Include="Entities\ContaBancaria.cs" />
     <Compile Include="Entities\Credor.cs" />
     <Compile Include="Entities\Empresa.cs" />
-    <Compile Include="Entities\Endereco.cs" />
+    <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\EntityBase.cs" />
-    <Compile Include="Entities\Fornecedor.cs" />
+    <Compile Include="Entities\Provider.cs" />
     <Compile Include="Entities\Funcionario.cs" />
-    <Compile Include="Entities\PessoaFisica.cs" />
-    <Compile Include="Entities\PessoaJuridica.cs" />
+    <Compile Include="Entities\ProviderPhysicalPerson.cs" />
+    <Compile Include="Entities\ProviderLegalPerson.cs" />
     <Compile Include="Entities\SimulaConta.cs" />
+    <Compile Include="Entities\State.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

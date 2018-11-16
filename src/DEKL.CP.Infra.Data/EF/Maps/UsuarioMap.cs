@@ -11,11 +11,7 @@ namespace DEKL.CP.Infra.Data.EF.Maps
             //Table
             ToTable("AspNetUsers");
 
-            HasKey(e => e.Id);
-
             //Columns
-            Property(e => e.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             Property(e => e.Email)
                 .HasMaxLength(256);
@@ -23,10 +19,6 @@ namespace DEKL.CP.Infra.Data.EF.Maps
             Property(u => u.UserName)
                     .IsRequired()
                     .HasMaxLength(256);
-
-            Property(e => e.DataCadastro);
-
-            Property(e => e.DataAlteracao);
 
         }
     }

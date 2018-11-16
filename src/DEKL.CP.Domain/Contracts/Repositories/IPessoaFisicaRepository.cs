@@ -2,7 +2,7 @@
 
 namespace DEKL.CP.Domain.Contracts.Repositories
 {
-    public interface IPessoaFisicaRepository : IRepository<PessoaFisica>
+    public interface IPessoaFisicaRepository : IRepository<ProviderPhysicalPerson>
     {
         
     }

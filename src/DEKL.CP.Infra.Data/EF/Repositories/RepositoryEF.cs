@@ -3,51 +3,139 @@ using DEKL.CP.Domain.Entities;
 using DEKL.CP.Infra.Data.EF.Context;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 
 namespace DEKL.CP.Infra.Data.EF.Repositories
 {
     public class RepositoryEF<T> : IRepository<T> where T : EntityBase
     {
-        protected readonly DEKLCPDataContextEF _ctx;
+        private readonly DEKLCPDataContextEF _ctx;
+        private IDbSet<T> entities;
+        private string _errorMessage = string.Empty;
 
-        public RepositoryEF(DEKLCPDataContextEF ctx)
-        {
-            _ctx = ctx;
-        }
+        public RepositoryEF(DEKLCPDataContextEF ctx) => _ctx = ctx;
 
-        public IEnumerable<T> Get() => _ctx.Set<T>().ToList();
+        public IEnumerable<T> Get() => Entities.ToList();
 
-        public T Get(int id) => _ctx.Set<T>().Find(id);
+        public IEnumerable<T> GetActives() => Entities.Where(e => e.Active).ToList();
+
+        public T Get(int id) => Entities.Find(id);
 
         public void Add(T entity)
         {
-            entity.DataCadastro = DateTime.Now;
-            _ctx.Set<T>().Add(entity);
-            Save();
+            try
+            {
+                if (entity == null)
+                {
+                    throw new ArgumentNullException(nameof(entity));
+                }
+
+                entity.AddedDate = DateTime.Now;
+                Entities.Add(entity);
+                _ctx.SaveChanges();
+            }
+
+            catch (DbEntityValidationException dbEx)
+            {
+                dbEx.EntityValidationErrors.ToList().ForEach(eve =>
+                {
+                    eve.ValidationErrors.ToList().ForEach(vr =>
+                    {
+                        _errorMessage += $"Property: {vr.PropertyName} Error: {vr.ErrorMessage}" + Environment.NewLine;
+                    });
+                });
+
+                throw new Exception(_errorMessage, dbEx);
+            }
         }
 
-        public void Edit(T entity)
+        public void Update(T entity)
         {
-            entity.DataAlteracao = DateTime.Now;
-            _ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-            Save();
+            try
+            {
+                if (entity == null)
+                {
+                    throw new ArgumentNullException(nameof(entity));
+                }
+
+                entity.ModifiedDate = DateTime.Now;
+                _ctx.SaveChanges();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                dbEx.EntityValidationErrors.ToList().ForEach(eve =>
+                {
+                    eve.ValidationErrors.ToList().ForEach(vr =>
+                    {
+                        _errorMessage += $"Property: {vr.PropertyName} Error: {vr.ErrorMessage}" + Environment.NewLine;
+                    });
+                });
+
+                throw new Exception(_errorMessage, dbEx);
+            }
         }
 
-        public void Delete(T entity)
+        public void DeleteLogical(T entity)
         {
-            _ctx.Set<T>().Remove(entity);
-            Save();
+            try
+            {
+                if (entity == null)
+                {
+                    throw new ArgumentNullException(nameof(entity));
+                }
+
+                entity.Active = false;
+                _ctx.SaveChanges();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                dbEx.EntityValidationErrors.ToList().ForEach(eve =>
+                {
+                    eve.ValidationErrors.ToList().ForEach(vr =>
+                    {
+                        _errorMessage += $"Property: {vr.PropertyName} Error: {vr.ErrorMessage}" + Environment.NewLine;
+                    });
+                });
+
+                throw new Exception(_errorMessage, dbEx);
+            }
         }
 
-        private void Save()
+        public void DeletePhysical(T entity)
         {
-            _ctx.SaveChanges();
+            try
+            {
+                if (entity == null)
+                {
+                    throw new ArgumentNullException(nameof(entity));
+                }
+
+                Entities.Remove(entity);
+                _ctx.SaveChanges();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                dbEx.EntityValidationErrors.ToList().ForEach(eve =>
+                {
+                    eve.ValidationErrors.ToList().ForEach(vr =>
+                    {
+                        _errorMessage += $"Property: {vr.PropertyName} Error: {vr.ErrorMessage}" + Environment.NewLine;
+                    });
+                });
+
+                throw new Exception(_errorMessage, dbEx);
+            }
         }
 
         public void Dispose()
         {
             _ctx.Dispose();
         }
+
+        public virtual IQueryable<T> Table => Entities;
+
+        private IDbSet<T> Entities => entities ?? (entities = _ctx.Set<T>());
     }
 }

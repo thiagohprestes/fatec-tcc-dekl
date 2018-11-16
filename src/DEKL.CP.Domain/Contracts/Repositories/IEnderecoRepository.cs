@@ -2,7 +2,7 @@
 
 namespace DEKL.CP.Domain.Contracts.Repositories
 {
-    public interface IEnderecoRepository : IRepository<Endereco>
+    public interface IEnderecoRepository : IRepository<Address>
     {
         
     }

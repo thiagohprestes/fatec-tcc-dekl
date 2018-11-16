@@ -11,16 +11,7 @@ namespace DEKL.CP.Infra.Data.EF.Maps
             //Table
             ToTable(nameof(ContaBancaria));
 
-            //PK
-            HasKey(e => e.Id);
-
             //Columns
-            Property(e => e.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);       
-
-            Property(e => e.DataCadastro);
-
-            Property(e => e.DataAlteracao);
         }
     }
 }

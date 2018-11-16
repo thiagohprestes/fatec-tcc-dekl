@@ -60,7 +60,7 @@ namespace DEKL.CP.UI.Controllers
                 var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
                  if (user != null)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await SignInAsync(user, isPersistent: false);
                 }
                 message = Enum.GetName(typeof(ManageMessageId), ManageMessageId.RemoveLoginSuccess);
             }
@@ -234,7 +234,7 @@ namespace DEKL.CP.UI.Controllers
                     var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
                     if (user != null)
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        await SignInAsync(user, isPersistent: false);
                     }
                     return RedirectToAction("Index", new { Message = Enum.GetName(typeof(ManageMessageId), ManageMessageId.SetPasswordSuccess) });
                 }
@@ -244,7 +244,6 @@ namespace DEKL.CP.UI.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
 
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
@@ -316,7 +315,7 @@ namespace DEKL.CP.UI.Controllers
             await _userManager.SignInClientAsync(user, clientKey);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie, DefaultAuthenticationTypes.TwoFactorCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties {IsPersistent = isPersistent}, 
-                await user.GenerateUserIdentityAsync(_userManager, isPersistent));
+                await user.GenerateUserIdentityAsync(_userManager));
         }
 
         private bool HasPassword() => _userManager.FindById(User.Identity.GetUserId<int>())?.PasswordHash != null;

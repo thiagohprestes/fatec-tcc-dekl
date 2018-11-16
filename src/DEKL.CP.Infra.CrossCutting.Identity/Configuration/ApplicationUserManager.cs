@@ -70,7 +70,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Configuration
             var client = user.Clients.SingleOrDefault(c => c.ClientKey == clientKey);
             if (client == null)
             {
-                client = new Client {ClientKey = clientKey};
+                client = new Client() { ClientKey = clientKey };
                 user.Clients.Add(client);
             }
 
@@ -88,17 +88,12 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Configuration
             }
 
             var client = user.Clients.SingleOrDefault(c => c.ClientKey == clientKey);
-
             if (client != null)
             {
                 user.Clients.Remove(client);
             }
 
-            if(user?.CurrentClientId != null)
-            {
-                user.CurrentClientId = null;
-            }
-
+            user.CurrentClientId = null;
             return await UpdateAsync(user);
         }
     }

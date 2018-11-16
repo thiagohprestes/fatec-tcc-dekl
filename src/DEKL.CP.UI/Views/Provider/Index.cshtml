@@ -1,6 +1,6 @@
-﻿@model IEnumerable<DEKL.CP.Infra.CrossCutting.Identity.ViewModels.RoleViewModel>
+﻿@model IEnumerable<DEKL.CP.UI.ViewModels.AccountsToPay.AccountsToPayViewModel>
 @{
-    ViewBag.Title = "Grupos";
+    ViewBag.Title = "Contas a Pagar";
 }
 
 @section styles{
@@ -10,15 +10,22 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <section id="changePasswordForm">
             <p>
-                @Html.ActionLink("Adicionar", "Create", null, new { @class = "btn btn-outline-info" })
+                @Html.ActionLink("Adicionar", "Create", null, new { @class = "btn btn-info" })
+                @Html.ActionLink("Simular Pagamento", "Create", null, new { @class = "btn btn-info" })
             </p>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>@Html.DisplayNameFor(m => m.Name)</th>
+                        <th>@Html.DisplayNameFor(m => m.Documento)</th>
+                        <th>@Html.DisplayNameFor(m => m.Fornecedor)</th>
+                        <th>@Html.DisplayNameFor(m => m.Tipo)</th>
+                        <th>@Html.DisplayNameFor(m => m.Valor)</th>
+                        <th>@Html.DisplayNameFor(m => m.Juros)</th>
+                        <th>@Html.DisplayNameFor(m => m.Multa)</th>
+                        <th>@Html.DisplayNameFor(m => m.Vencimento)</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -26,7 +33,14 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(m => item.Documento)</td>
+                            <td>@Html.DisplayFor(m => item.Fornecedor)</td>
+                            <td>@Html.DisplayFor(m => item.Tipo)</td>
+                            <td>@Html.DisplayFor(m => item.Valor)</td>
+                            <td>@Html.DisplayFor(m => item.Juros)</td>
+                            <td>@Html.DisplayFor(m => item.Multa)</td>
+                            <td>@Html.DisplayFor(m => item.Vencimento)</td>
+
                             <td>
                                 <a href='@(Url.Action("Edit", new { id = item.Id }))'><i class="fas fa-pen"></i></a>
                                 <a href='@(Url.Action("Details", new { id = item.Id }))'><i class="fas fa-info-circle"></i></a>
@@ -50,8 +64,8 @@
                 responsive: true,
                 columnDefs: [
                     { className: "text-left", "targets": [0, 1] },
-                    { width: "25%", "targets": 1 },
-                    { orderable: false, "targets": 1 }
+                    { width: "10%", "targets": 7 },
+                    { orderable: false, "targets": 7 }
                 ],
                 language: {
                     decimal: "",

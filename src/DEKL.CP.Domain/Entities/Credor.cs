@@ -9,7 +9,7 @@
         public string TelefoneContato { get; set; }
         public short Prioridade { get; set; }
         public string Email { get; set; }
-        public int? EnderecoId { get; set; }
-        public virtual Endereco Endereco { get; set; }
+        public int? AddressId { get; set; }
+        public virtual Address Address { get; set; }
     }
 }
