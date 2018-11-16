@@ -113,7 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\ApplicationCookieIdentityValidator.cs" />
-    <Compile Include="Configuration\ApplicationCookieIdentityValidator2.cs" />
     <Compile Include="Configuration\ApplicationRoleManager.cs" />
     <Compile Include="Configuration\ApplicationUserManager.cs" />
     <Compile Include="Configuration\ClaimsIdentityExtensions.cs" />

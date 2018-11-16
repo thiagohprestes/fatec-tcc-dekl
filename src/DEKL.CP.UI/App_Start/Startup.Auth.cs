@@ -1,7 +1,5 @@
 ﻿using DEKL.CP.Infra.CrossCutting.Identity.Configuration;
-using DEKL.CP.Infra.CrossCutting.Identity.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
@@ -28,25 +26,14 @@ namespace DEKL.CP.UI
                 {
                     // Enables the application to validate the security stamp when the user logs in.
                     // This is a security feature which is used when you change a password or add an external login to your account.  
-                    //OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser, int>(
-                    //        validateInterval: TimeSpan.FromMinutes(30),
-                    //        regenerateIdentityCallback: (manager, user) => user.GenerateUserIdentityAsync(manager),
-                    //        getUserIdCallback: (id) => id.GetUserId<int>())
 
-                    OnValidateIdentity = async (context) =>
-                    {
-                        await SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser, int>(
-                            validateInterval: TimeSpan.FromMinutes(20),
-                            regenerateIdentityCallback: (manager, user) => user.GenerateUserIdentityAsync(manager,context.Identity.GetIsPersistent()),
-                            getUserIdCallback: (id) => id.GetUserId<int>()
-                            )(context);
+                    //OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+                    //    validateInterval: TimeSpan.FromMinutes(30),
+                    //    regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
 
-                        var newResponseGrant = context.OwinContext.Authentication.AuthenticationResponseGrant;
-                        if (newResponseGrant != null)
-                        {
-                            newResponseGrant.Properties.IsPersistent = context.Identity.GetIsPersistent();
-                        }
-                    }
+                    OnValidateIdentity = ApplicationCookieIdentityValidator.OnValidateIdentity(
+                       validateInterval: TimeSpan.FromMinutes(0),
+                       regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
             });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);

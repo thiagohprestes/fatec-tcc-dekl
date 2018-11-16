@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
 
 namespace DEKL.CP.Infra.CrossCutting.Identity.Models
 {
@@ -20,7 +19,8 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Models
         [NotMapped]
         public string CurrentClientId { get; set; }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager, ClaimsIdentity ext = null)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager,
+            ClaimsIdentity ext = null)
         {
             // Observe que o authenticationType precisa ser o mesmo que foi definido em CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
