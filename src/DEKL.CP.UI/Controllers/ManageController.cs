@@ -15,13 +15,11 @@ namespace DEKL.CP.UI.Controllers
     [Authorize]
     public class ManageController : BaseController
     {
-        private readonly ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
         }
 
         public async Task<ActionResult> Index(ManageMessageId? message)
@@ -92,7 +90,7 @@ namespace DEKL.CP.UI.Controllers
             var message = new IdentityMessage
             {
                 Destination = model.Number,
-                Body = "O código de segurança é: " + code
+                Body = $"O código de segurança é: {code}" 
             };
             await _userManager.SmsService.SendAsync(message);
 

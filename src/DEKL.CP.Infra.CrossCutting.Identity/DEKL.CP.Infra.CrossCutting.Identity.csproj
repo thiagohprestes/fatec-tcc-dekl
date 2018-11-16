@@ -115,7 +115,6 @@
     <Compile Include="Configuration\ApplicationCookieIdentityValidator.cs" />
     <Compile Include="Configuration\ApplicationRoleManager.cs" />
     <Compile Include="Configuration\ApplicationUserManager.cs" />
-    <Compile Include="Configuration\ClaimsIdentityExtensions.cs" />
     <Compile Include="Configuration\EmailService.cs" />
     <Compile Include="Configuration\ApplicationSignInManager.cs" />
     <Compile Include="Configuration\SmsService.cs" />

@@ -16,7 +16,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Configuration
         {
             var stamp = context.Identity.FindFirstValue("AspNet.Identity.SecurityStamp");
             var stampUser = await manager.GetSecurityStampAsync(context.Identity.GetUserId<int>());
-            
+
             //arrumar
             return true;
         }

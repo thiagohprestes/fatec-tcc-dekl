@@ -238,7 +238,7 @@ namespace DEKL.CP.UI.Controllers
                 DefaultAuthenticationTypes.TwoFactorCookie, DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn
             (
-                new AuthenticationProperties {IsPersistent = isPersistent},
+                new AuthenticationProperties { IsPersistent = isPersistent },
                 // Criação da instancia do Identity e atribuição dos Claims
                 await user.GenerateUserIdentityAsync(_userManager, ext)
             );

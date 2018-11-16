@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace DEKL.CP.Infra.CrossCutting.Identity.Models
 {
@@ -19,8 +20,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Models
         [NotMapped]
         public string CurrentClientId { get; set; }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager,
-            ClaimsIdentity ext = null)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager, ClaimsIdentity ext = null)
         {
             // Observe que o authenticationType precisa ser o mesmo que foi definido em CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
@@ -52,13 +52,14 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Models
         {
             if (ext != null)
             {
-                var ignoreClaim = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims";
+                const string ignoreClaim = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims";
                 // Adicionando Claims Externos no Identity
                 foreach (var c in ext.Claims)
                 {
-                    if (!c.Type.StartsWith(ignoreClaim))
-                        if (!identity.HasClaim(c.Type, c.Value))
-                            identity.AddClaim(c);
+                    if (c.Type.StartsWith(ignoreClaim)) continue;
+
+                    if (!identity.HasClaim(c.Type, c.Value))
+                        identity.AddClaim(c);
                 }
             }
         }
