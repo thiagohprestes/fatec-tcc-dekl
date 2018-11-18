@@ -31,39 +31,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Contracts\Repositories\IAgenciaRepository.cs" />
-    <Compile Include="Contracts\Repositories\IBancoRepository.cs" />
-    <Compile Include="Contracts\Repositories\IContaBancariaRepository.cs" />
-    <Compile Include="Contracts\Repositories\IContaRepository.cs" />
-    <Compile Include="Contracts\Repositories\ICredorRepository.cs" />
-    <Compile Include="Contracts\Repositories\IEmpresaRepository.cs" />
-    <Compile Include="Contracts\Repositories\IEnderecoRepository.cs" />
-    <Compile Include="Contracts\Repositories\IEntityBase.cs" />
-    <Compile Include="Contracts\Repositories\IPessoaFisicaRepository.cs" />
-    <Compile Include="Contracts\Repositories\IPessoaJuridicaRepository.cs" />
+    <Compile Include="Contracts\Entities\IAccount.cs" />
+    <Compile Include="Contracts\Entities\IBankAccount.cs" />
+    <Compile Include="Contracts\Entities\IEntityBase.cs" />
+    <Compile Include="Contracts\Entities\IProvider.cs" />
     <Compile Include="Contracts\Repositories\IRepository.cs" />
-    <Compile Include="Contracts\Repositories\ISimulaContaRepository.cs" />
-    <Compile Include="Contracts\Repositories\IUsuarioRepository.cs" />
-    <Compile Include="Entities\Agencia.cs" />
-    <Compile Include="Entities\Banco.cs" />
-    <Compile Include="Entities\Conta.cs" />
-    <Compile Include="Entities\ContaBancaria.cs" />
-    <Compile Include="Entities\Credor.cs" />
-    <Compile Include="Entities\Empresa.cs" />
+    <Compile Include="Contracts\Repositories\IApplicationUserRepository.cs" />
+    <Compile Include="Entities\AccountToPay.cs" />
+    <Compile Include="Entities\BankAgency .cs" />
+    <Compile Include="Entities\Audit.cs" />
+    <Compile Include="Entities\Bank.cs" />
+    <Compile Include="Entities\InternalBankAccount.cs" />
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\EntityBase.cs" />
+    <Compile Include="Entities\Installment.cs" />
+    <Compile Include="Entities\BankTransaction.cs" />
+    <Compile Include="Entities\Module.cs" />
+    <Compile Include="Entities\PaymentSimulator.cs" />
     <Compile Include="Entities\Provider.cs" />
-    <Compile Include="Entities\Funcionario.cs" />
+    <Compile Include="Entities\ProviderBankAccount.cs" />
     <Compile Include="Entities\ProviderPhysicalPerson.cs" />
     <Compile Include="Entities\ProviderLegalPerson.cs" />
-    <Compile Include="Entities\SimulaConta.cs" />
     <Compile Include="Entities\State.cs" />
-    <Compile Include="Entities\Usuario.cs" />
-    <Compile Include="Helpers\StringHelpers.cs" />
+    <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Enums\PaymentType.cs" />
+    <Compile Include="Enums\Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

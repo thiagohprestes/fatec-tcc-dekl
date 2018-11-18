@@ -1,6 +1,7 @@
 ﻿using DEKL.CP.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using DEKL.CP.Domain.Contracts.Entities;
 
 namespace DEKL.CP.Domain.Contracts.Repositories
 {

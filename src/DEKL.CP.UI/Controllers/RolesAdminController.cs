@@ -64,7 +64,7 @@ namespace DEKL.CP.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var role = new CustomRole(roleViewModel.Name);
+                var role = new ApplicationRole(roleViewModel.Name);
                 var roleresult = await _roleManager.CreateAsync(role);
                 if (!roleresult.Succeeded)
                 {

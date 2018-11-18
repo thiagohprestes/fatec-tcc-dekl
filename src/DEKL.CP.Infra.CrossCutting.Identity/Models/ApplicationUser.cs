@@ -1,23 +1,23 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
+using DEKL.CP.Domain.Contracts.Entities;
 
 namespace DEKL.CP.Infra.CrossCutting.Identity.Models
 {
-    public class ApplicationUser : IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>
+    public class ApplicationUser : IdentityUser<int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>, IEntityBase
     {
-        public string Nome { get; set; }
-        public string Sobrenome { get; set; }
-        public DateTime DataCadastro { get; set; } = DateTime.Now;
-        public DateTime? DataAlteracao { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime AddedDate { get; set; } = DateTime.Now;
+        public DateTime? ModifiedDate { get; set; }
+        public bool Active { get; set; } = true;
         public virtual ICollection<Client> Clients { get; set; } = new Collection<Client>();
 
-        [NotMapped]
         public string CurrentClientId { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager, ClaimsIdentity ext = null)
@@ -37,7 +37,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Models
             // Adicionando Claims externos capturados no login
             if (ext != null)
             {
-                await SetExternalProperties(userIdentity, ext);
+                SetExternalProperties(userIdentity, ext);
             }
 
             // Gerenciamento de Claims para informaçoes do usuario
@@ -48,18 +48,25 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Models
             return userIdentity;
         }
 
-        private async Task SetExternalProperties(ClaimsIdentity identity, ClaimsIdentity ext)
+        private static void SetExternalProperties(ClaimsIdentity identity, ClaimsIdentity ext)
         {
-            if (ext != null)
+            if (ext == null)
             {
-                const string ignoreClaim = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims";
-                // Adicionando Claims Externos no Identity
-                foreach (var c in ext.Claims)
-                {
-                    if (c.Type.StartsWith(ignoreClaim)) continue;
+                return;
+            }
 
-                    if (!identity.HasClaim(c.Type, c.Value))
-                        identity.AddClaim(c);
+            const string ignoreClaim = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims";
+            // Adicionando Claims Externos no Identity
+            foreach (var c in ext.Claims)
+            {
+                if (c.Type.StartsWith(ignoreClaim))
+                {
+                    continue;
+                }
+
+                if (!identity.HasClaim(c.Type, c.Value))
+                {
+                    identity.AddClaim(c);
                 }
             }
         }

@@ -4,7 +4,7 @@
     {
         public string CorporateName { get; set; }
         public string CNPJ { get; set; }
-        public string InscricaoEstadual { get; set; }
-        public string InscricaoMunicipal { get; set; }
+        public string MunicipalRegistration { get; set; }
+        public string StateRegistration { get; set; }
     }
 }

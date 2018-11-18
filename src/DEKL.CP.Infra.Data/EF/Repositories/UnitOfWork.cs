@@ -46,13 +46,13 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
             var type = typeof(T).Name;
 
             if (_repositories.ContainsKey(type))
-                return (RepositoryEF<T>) _repositories[type];
+                return  _repositories[type] as RepositoryEF<T>;
 
             var repositoryType = typeof(RepositoryEF<>);
             var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), _ctx);
             _repositories.Add(type, repositoryInstance);
 
-            return (RepositoryEF<T>)_repositories[type];
+            return _repositories[type] as RepositoryEF<T>;
         }
     }
 }

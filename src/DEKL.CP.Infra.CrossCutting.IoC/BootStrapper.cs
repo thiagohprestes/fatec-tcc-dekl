@@ -17,11 +17,11 @@ namespace DEKL.CP.Infra.CrossCutting.IoC
             container.Register<DEKLCPDataContextEF>(Lifestyle.Scoped);
             container.Register<ApplicationDbContext>(Lifestyle.Scoped);
             container.Register<IUserStore<ApplicationUser, int>>(()
-                => new UserStore<ApplicationUser, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>(
+                => new UserStore<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>(
                     new ApplicationDbContext()), Lifestyle.Scoped
                 );
-            container.Register<IRoleStore<CustomRole, int>>(()
-                => new RoleStore<CustomRole, int, CustomUserRole>(new ApplicationDbContext()), Lifestyle.Scoped);
+            container.Register<IRoleStore<ApplicationRole, int>>(()
+                => new RoleStore<ApplicationRole, int, ApplicationUserRole>(new ApplicationDbContext()), Lifestyle.Scoped);
             container.Register<ApplicationRoleManager>(Lifestyle.Scoped);
             container.Register<ApplicationUserManager>(Lifestyle.Scoped);
             container.Register<ApplicationSignInManager>(Lifestyle.Scoped);

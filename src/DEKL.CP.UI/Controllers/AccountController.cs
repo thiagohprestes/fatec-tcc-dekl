@@ -118,7 +118,14 @@ namespace DEKL.CP.UI.Controllers
             }
 
             var result = await _userManager.ConfirmEmailAsync(userId.Value, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+
+            if (!result.Succeeded)
+            {
+                ViewBag.MessageError = "Seu token expirou, favor gerar um novo";
+                return View("Error");
+            }
+
+            return View("ConfirmEmail");
         }
 
         [AllowAnonymous]

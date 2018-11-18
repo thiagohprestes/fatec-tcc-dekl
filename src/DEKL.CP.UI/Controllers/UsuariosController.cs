@@ -58,8 +58,8 @@ namespace DEKL.CP.UI.Controllers
         //        try
         //        {
         //            var usuario = _usuarioRepository.Get(model.Id.ToString());
-        //            usuario.NomeCompleto = model.Nome;
-        //            usuario.NomeCompleto = model.Sobrenome;
+        //            usuario.NomeCompleto = model.FirstName;
+        //            usuario.NomeCompleto = model.LastName;
         //            usuario.Email = model.Email;
 
         //            _usuarioRepository.Edit(usuario);

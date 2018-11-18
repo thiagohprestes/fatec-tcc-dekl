@@ -121,16 +121,21 @@
     <Compile Include="Maps\ApplicationUserMap.cs" />
     <Compile Include="Maps\ClaimMap.cs" />
     <Compile Include="Maps\ClientMap.cs" />
+    <Compile Include="Migrations\201811180923132_InitialCreate.cs" />
+    <Compile Include="Migrations\201811180923132_InitialCreate.Designer.cs">
+      <DependentUpon>201811180923132_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\CustomRoleStore.cs" />
-    <Compile Include="Models\CustomUserStore.cs" />
+    <Compile Include="Models\ApplicationRoleStore.cs" />
+    <Compile Include="Models\ApplicationUserStore.cs" />
     <Compile Include="ViewModels\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
-    <Compile Include="Models\CustomRole.cs" />
-    <Compile Include="Models\CustomUserClaim.cs" />
-    <Compile Include="Models\CustomUserLogin.cs" />
-    <Compile Include="Models\CustomUserRole.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
+    <Compile Include="Models\ApplicationUserClaim.cs" />
+    <Compile Include="Models\ApplicationUserLogin.cs" />
+    <Compile Include="Models\ApplicationUserRole.cs" />
     <Compile Include="ViewModels\FactorViewModel.cs" />
     <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -165,6 +170,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811180923132_InitialCreate.resx">
+      <DependentUpon>201811180923132_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

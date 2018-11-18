@@ -30,9 +30,9 @@ namespace DEKL.CP.UI.Controllers
             {
                 Providers = new List<Provider>
                 {
-                    new ProviderPhysicalPerson { Name = "Net Serviços e Telecomunicações Ltda."},
-                    new ProviderPhysicalPerson{ Name = "C&C Casa e Contrução Ltda."},
-                    new ProviderPhysicalPerson{ Name = "Russo Funilária e Pintura Ltda."}
+                    //new ProviderPhysicalPerson { Name = "Net Serviços e Telecomunicações Ltda."},
+                    //new ProviderPhysicalPerson{ Name = "C&C Casa e Contrução Ltda."},
+                    //new ProviderPhysicalPerson{ Name = "Russo Funilária e Pintura Ltda."}
                 } 
 
             };

@@ -24,7 +24,7 @@ namespace DEKL.CP.UI.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nome = model.Nome, Sobrenome = model.Sobrenome};
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.Nome, LastName = model.Sobrenome};
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {

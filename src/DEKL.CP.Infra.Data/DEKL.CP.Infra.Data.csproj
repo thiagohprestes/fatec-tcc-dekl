@@ -45,23 +45,30 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EF\DbInitializer.cs" />
     <Compile Include="EF\Context\DEKLCPDataContextEF.cs" />
-    <Compile Include="EF\Maps\AgenciaMap.cs" />
-    <Compile Include="EF\Maps\BancoMap.cs" />
-    <Compile Include="EF\Maps\ContaBancariaMap.cs" />
-    <Compile Include="EF\Maps\ContaMap.cs" />
-    <Compile Include="EF\Maps\CredorMap.cs" />
-    <Compile Include="EF\Maps\EmpresaMap.cs" />
-    <Compile Include="EF\Maps\EnderecoMap.cs" />
-    <Compile Include="EF\Maps\EntityBaseMap.cs" />
-    <Compile Include="EF\Maps\PessoaFisicaMap.cs" />
+    <Compile Include="EF\Maps\AccountToPayMap.cs" />
+    <Compile Include="EF\Maps\AddressMap.cs" />
+    <Compile Include="EF\Maps\AuditMap.cs" />
+    <Compile Include="EF\Maps\BankAgencyMap.cs" />
+    <Compile Include="EF\Maps\BankMap.cs" />
+    <Compile Include="EF\Maps\BankTransactionMap.cs" />
+    <Compile Include="EF\Maps\InstallmentMap.cs" />
+    <Compile Include="EF\Maps\InternalBankAccountMap.cs" />
+    <Compile Include="EF\Maps\ModuleMap.cs" />
+    <Compile Include="EF\Maps\PaymentSimulatorMap.cs" />
+    <Compile Include="EF\Maps\ProviderBankAccountMap.cs" />
     <Compile Include="EF\Maps\ProviderLegalPersonMap.cs" />
-    <Compile Include="EF\Maps\SimulaContaMap.cs" />
-    <Compile Include="EF\Maps\UsuarioMap.cs" />
+    <Compile Include="EF\Maps\ProviderMap.cs" />
+    <Compile Include="EF\Maps\ProviderPhysicalPersonMap.cs" />
+    <Compile Include="EF\Maps\StateMap.cs" />
     <Compile Include="EF\Repositories\RepositoryEF.cs" />
     <Compile Include="EF\Repositories\UnitOfWork.cs" />
     <Compile Include="EF\Repositories\UsuarioRepositoryEF.cs" />
+    <Compile Include="Migrations\201811180925141_InitialCreate.cs" />
+    <Compile Include="Migrations\201811180925141_InitialCreate.Designer.cs">
+      <DependentUpon>201811180925141_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +80,11 @@
       <Project>{177E5066-AB90-4A3E-950E-7757616E5749}</Project>
       <Name>DEKL.CP.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811180925141_InitialCreate.resx">
+      <DependentUpon>201811180925141_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,20 +1,21 @@
-﻿using DEKL.CP.Infra.CrossCutting.Identity.Models;
+﻿using DEKL.CP.Infra.CrossCutting.Identity.Maps;
+using DEKL.CP.Infra.CrossCutting.Identity.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
-using System.Diagnostics;
-using DEKL.CP.Infra.CrossCutting.Identity.Maps;
 
 namespace DEKL.CP.Infra.CrossCutting.Identity.Context
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole, int, CustomUserLogin, CustomUserRole,
-        CustomUserClaim>, IDisposable
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole,
+        ApplicationUserClaim>, IDisposable
     {
         public ApplicationDbContext() : base("DEKLCPConnIdentity")
         { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Properties<string>()
                 .Configure(e => e.HasColumnType("varchar"));
 
@@ -22,10 +23,10 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Context
                 .Configure(p => p.HasMaxLength(100));
 
             modelBuilder.Configurations.Add(new ApplicationUserMap());
-
-            base.OnModelCreating(modelBuilder);
-
-            Database.Log = (query) => Debug.Write(query);
+            modelBuilder.Entity<ApplicationRole>().ToTable(nameof(ApplicationRole));
+            modelBuilder.Entity<ApplicationUserRole>().ToTable(nameof(ApplicationUserRole));
+            modelBuilder.Entity<ApplicationUserLogin>().ToTable(nameof(ApplicationUserLogin));
+            modelBuilder.Entity<ApplicationUserClaim>().ToTable(nameof(ApplicationUserClaim));
         }
 
         public static ApplicationDbContext Create()

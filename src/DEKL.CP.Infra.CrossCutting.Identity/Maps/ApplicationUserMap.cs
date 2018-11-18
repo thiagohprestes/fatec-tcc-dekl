@@ -8,15 +8,17 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Maps
         public ApplicationUserMap()
         {
             //Table
-            ToTable("AspNetUsers");
+            ToTable("ApplicationUser");
 
             //Columns
-            Property(e => e.Nome)
+            Property(e => e.FirstName)
                 .HasMaxLength(50)
                 .IsRequired();
 
-            Property(e => e.Sobrenome)
+            Property(e => e.LastName)
                 .HasMaxLength(50);
+
+            Ignore(e => e.CurrentClientId);
         }
     }
 }

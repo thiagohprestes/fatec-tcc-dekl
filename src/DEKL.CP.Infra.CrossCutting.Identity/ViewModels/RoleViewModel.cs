@@ -7,7 +7,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.ViewModels
         public int Id { get; set; }
 
         [Required(AllowEmptyStrings = false)]
-        [Display(Name = "Nome do Grupo")]
+        [Display(Name = "FirstName do Grupo")]
         public string Name { get; set; }
     }
 }
