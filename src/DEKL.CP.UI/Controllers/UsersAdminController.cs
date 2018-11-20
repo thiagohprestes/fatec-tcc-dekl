@@ -48,7 +48,7 @@ namespace DEKL.CP.UI.Controllers
                 return View();
             }
 
-           // var user1 = Mapper.Map<RegisterViewModel, ApplicationUser>(model);
+            //var user1 = Mapper.Map<ApplicationUser>(model);
 
             var user = new ApplicationUser
             {

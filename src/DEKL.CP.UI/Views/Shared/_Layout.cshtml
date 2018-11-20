@@ -26,7 +26,7 @@
     @Scripts.Render("~/bundles/toastr")
     <script type="text/javascript">
         $(() => {
-            $('#sidebarCollapse').on('click', () => {
+            $('#sidebarCollapse').click(() => {
                 $('#sidebar').toggleClass('active');
             });
         });
