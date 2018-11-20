@@ -223,6 +223,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.maskedinput.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -286,6 +288,7 @@
     <Compile Include="ViewModels\Conta\MeuPerfil\MeuPerfil.cs" />
     <Compile Include="ViewModels\Conta\TrocarSenha\TrocaSenha.cs" />
     <Compile Include="ViewModels\Provider\ProviderViewModel.cs" />
+    <Compile Include="ViewModels\UsersAdmin\ApplicationUsersViewModel.cs" />
     <Compile Include="ViewModels\Usuarios\UsuarioVM.cs" />
     <None Include="Views\AccountToPay\Create.cshtml" />
   </ItemGroup>
@@ -316,7 +319,7 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\UsersAdmin\Register.cshtml" />
+    <Content Include="Views\UsersAdmin\Create.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
@@ -341,6 +344,7 @@
     <Content Include="Views\Provider\Index.cshtml" />
     <Content Include="Views\Provider\Select.cshtml" />
     <Content Include="Views\Provider\Create.cshtml" />
+    <Content Include="Views\UsersAdmin\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

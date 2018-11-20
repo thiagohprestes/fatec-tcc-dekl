@@ -21,7 +21,7 @@ namespace DEKL.CP.UI.Controllers
 
         //public ActionResult Index()
         //{
-        //    var usuarios = _usuarioRepository.Get();
+        //    var usuarios = _usuarioRepository.GetAll();
         //    return View(Mapper.Map<IEnumerable<UsuarioVM>>(usuarios));
         //}
 
@@ -32,7 +32,7 @@ namespace DEKL.CP.UI.Controllers
 
         //    if (id != null)
         //    {
-        //        usuario = _usuarioRepository.Get(id.ToString());
+        //        usuario = _usuarioRepository.GetAll(id.ToString());
         //    }
 
         //    return View(Mapper.Map<UsuarioVM>(usuario));
@@ -57,7 +57,7 @@ namespace DEKL.CP.UI.Controllers
         //    {
         //        try
         //        {
-        //            var usuario = _usuarioRepository.Get(model.Id.ToString());
+        //            var usuario = _usuarioRepository.GetAll(model.Id.ToString());
         //            usuario.NomeCompleto = model.FirstName;
         //            usuario.NomeCompleto = model.LastName;
         //            usuario.Email = model.Email;

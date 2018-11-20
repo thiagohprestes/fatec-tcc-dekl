@@ -49,7 +49,7 @@ namespace DEKL.CP.UI.Controllers
                     var user = await _userManager.FindAsync(model.Email, model.Password);
                     if (!user.EmailConfirmed)
                     {
-                        this.AddToastMessage("Usuário não confirmado", "verifique seu e-mail");
+                        this.AddToastMessage("Usuário não confirmado", "verifique seu e-mail", ToastType.Warning);
                     }
 
                     await SignInAsync(user, model.RememberMe);

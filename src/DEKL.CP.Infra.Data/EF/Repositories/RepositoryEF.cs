@@ -12,16 +12,18 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
     public class RepositoryEF<T> : IRepository<T> where T : EntityBase
     {
         private readonly DEKLCPDataContextEF _ctx;
-        private IDbSet<T> entities;
+        private IDbSet<T> _entities;
         private string _errorMessage = string.Empty;
 
         public RepositoryEF(DEKLCPDataContextEF ctx) => _ctx = ctx;
 
-        public IEnumerable<T> Get() => Entities.ToList();
+        public IEnumerable<T> GetAll() => Entities.ToList();
 
         public IEnumerable<T> GetActives() => Entities.Where(e => e.Active).ToList();
 
-        public T Get(int id) => Entities.Find(id);
+        public T Find(int id) => Entities.Find(id);
+
+        public IEnumerable<T> Find(Func<T, bool> predicate) => Entities.Where(predicate);
 
         public void Add(T entity)
         {
@@ -136,6 +138,6 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
 
         public virtual IQueryable<T> Table => Entities;
 
-        private IDbSet<T> Entities => entities ?? (entities = _ctx.Set<T>());
+        private IDbSet<T> Entities => _entities ?? (_entities = _ctx.Set<T>());
     }
 }

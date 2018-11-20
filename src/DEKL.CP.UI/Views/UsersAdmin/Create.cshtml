@@ -1,0 +1,88 @@
+﻿@model DEKL.CP.Infra.CrossCutting.Identity.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Cadastar novo Usuário";
+}
+
+<h2>@ViewBag.Title.</h2>
+<div class="row">
+    <div class="col-md-6">
+        <section id="registerForm">
+            @using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Preencha os dados</h4>
+                <hr />
+                @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "Primeiro Nome" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Último Nome" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "example@email.com" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = "Seu número principal" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PasswordHash, new { @class = "control-label" })
+                    @Html.PasswordFor(m => m.PasswordHash, new { @class = "form-control", placeholder = "Deve conter mais de 7 caracteres" })
+                    <small>
+                        @Html.ValidationMessageFor(m => m.PasswordHash, null, new { @class = "text-danger" })
+                    </small>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPasswordHash, new { @class = "control-label" })
+                    @Html.PasswordFor(m => m.ConfirmPasswordHash, new { @class = "form-control", placeholder = "Confirme sua senha" })
+                    <small>
+                        @Html.ValidationMessageFor(m => m.ConfirmPasswordHash, null, new { @class = "text-danger" })
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        Selecione os Grupos para este usuário
+                    </label>
+                    @foreach (var item in (SelectList)ViewBag.RoleId)
+                    {
+                        <input type="checkbox" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
+                        @Html.Label(item.Value, new { @class = "control-label" })
+                    }
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-info" value="Registrar" />
+                </div>
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    <script>
+        $(() => {
+            $('#PhoneNumber').mask('(99) 99999-9999');
+        });
+    </script>
+}

@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using System.Text.RegularExpressions;
+using AutoMapper;
 using DEKL.CP.Domain.Entities;
-using DEKL.CP.UI.ViewModels;
+using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
+using DEKL.CP.UI.ViewModels.UsersAdmin;
 
 namespace DEKL.CP.UI.Mappers
 {
@@ -8,9 +10,10 @@ namespace DEKL.CP.UI.Mappers
     {
         public ViewModelToDomainMappingProfile()
         {
-            CreateMap<LoginVM, ApplicationUser>();
-            CreateMap<TrocaSenhaVM, ApplicationUser>();
-            CreateMap<UsuarioVM, ApplicationUser>();
+            CreateMap<ApplicationUsersViewModel, ApplicationUser>();
+            CreateMap<RegisterViewModel, ApplicationUser>(MemberList.Source)
+                .ForSourceMember(src => src.ConfirmPasswordHash, opt => opt.Ignore())
+                .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => Regex.Replace(src.PhoneNumber, @"[^\d]", "")));
         }
     }
 }

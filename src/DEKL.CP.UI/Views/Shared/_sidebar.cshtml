@@ -12,10 +12,10 @@
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cadastro</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li>
-                    @Html.ActionLink("Usuário", "Index", "UsersAdmin", null, htmlAttributes: new { id = "registerLink" })
+                    @Html.ActionLink("Usuário", "Index", "UsersAdmin", null, new { id = "registerLink" })
                 </li>
                 <li>
-                    @Html.ActionLink("Grupo", "Index", "RolesAdmin", null, htmlAttributes: new { id = "registerLink" })
+                    @Html.ActionLink("Grupo", "Index", "RolesAdmin", null, new { id = "registerLink" })
                 </li>
                 <li>
                     <a href="#">Home 3</a>

@@ -14,16 +14,12 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Migrations
 
         protected override void Seed(Context.ApplicationDbContext context)
         {
-            if (!context.Users.Any())
+            if(!context.Roles.Any())
             {
-                context.Users.Add(new ApplicationUser
-                {
-                    FirstName = "Adminstrator",
-                    Email = "deklcpadm@gmail.com",
-                    EmailConfirmed = true,
-                    PasswordHash = "ABauAHyvumBbxNWKuEXYLgpB0cfhEjtwrknR/WrLrxoOd6fQ0Q9FfZ0KbLzQyEncmw==", //12345678
-                    UserName = "deklcpadm@gmail.com"
-                });
+                context.Roles.AddOrUpdate(
+                new ApplicationRole ("Administrador"),
+                new ApplicationRole ("Operacional")
+                );
             }
         }
     }

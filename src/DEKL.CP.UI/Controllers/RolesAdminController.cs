@@ -23,12 +23,8 @@ namespace DEKL.CP.UI.Controllers
             _roleManager = roleManager;
         }
 
-        //
-        // GET: /Roles/
         public ActionResult Index() => View(_roleManager.Roles);
 
-        //
-        // GET: /Roles/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,10 +32,10 @@ namespace DEKL.CP.UI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var role = await _roleManager.FindByIdAsync(id.Value);
-            // Get the list of Users in this Role
+            // GetAll the list of Users in this Role
             var users = new List<ApplicationUser>();
 
-            // Get the list of Users in this Role
+            // GetAll the list of Users in this Role
             foreach (var user in _userManager.Users.ToList())
             {
                 if (await _userManager.IsInRoleAsync(user.Id, role.Name))
@@ -53,12 +49,8 @@ namespace DEKL.CP.UI.Controllers
             return View(role);
         }
 
-        //
-        // GET: /Roles/Create
         public ActionResult Create() => View();
 
-        //
-        // POST: /Roles/Create
         [HttpPost]
         public async Task<ActionResult> Create(RoleViewModel roleViewModel)
         {
@@ -94,8 +86,6 @@ namespace DEKL.CP.UI.Controllers
             return View(roleModel);
         }
 
-        //
-        // POST: /Roles/Edit/5
         [HttpPost]
 
         [ValidateAntiForgeryToken]
@@ -111,8 +101,6 @@ namespace DEKL.CP.UI.Controllers
             return View();
         }
 
-        //
-        // GET: /Roles/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,39 +111,39 @@ namespace DEKL.CP.UI.Controllers
             return role == null ? HttpNotFound() : (ActionResult)View(role);
         }
 
-        //
-        // POST: /Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int? id, string deleteUser)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                var role = await _roleManager.FindByIdAsync(id.Value);
-                if (role == null)
-                {
-                    return HttpNotFound();
-                }
-                IdentityResult result;
-                if (deleteUser != null)
-                {
-                    result = await _roleManager.DeleteAsync(role);
-                }
-                else
-                {
-                    result = await _roleManager.DeleteAsync(role);
-                }
-                if (!result.Succeeded)
-                {
-                    AddErrors(result);
-                    return View();
-                }
-                return RedirectToAction("Index");
+                return View();
             }
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var role = await _roleManager.FindByIdAsync(id.Value);
+            if (role == null)
+            {
+                return HttpNotFound();
+            }
+            IdentityResult result;
+            if (deleteUser != null)
+            {
+                result = await _roleManager.DeleteAsync(role);
+            }
+            else
+            {
+                result = await _roleManager.DeleteAsync(role);
+            }
+
+            if (result.Succeeded)
+                return RedirectToAction("Index");
+
+            AddErrors(result);
             return View();
         }
     }

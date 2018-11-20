@@ -1,4 +1,4 @@
-﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.CustomRole
+﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.ApplicationRole
 
 @{
     ViewBag.Title = "Detalhes";
@@ -37,8 +37,8 @@
     }
 </table>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-outline-info" })
-    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-outline-info" })
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
 </p>
 
 

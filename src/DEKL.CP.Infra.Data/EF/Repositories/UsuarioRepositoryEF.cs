@@ -10,7 +10,7 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
     //    public UsuarioRepositoryEF(UnitOfWork ctx) : base( ctx: c)
     //    { }
 
-    //    public Usuario Get(string email) 
+    //    public Usuario GetAll(string email) 
     //        => _ctx.Usuarios.FirstOrDefault(u => string.Equals(u.Email, email, StringComparison.CurrentCultureIgnoreCase));
     //}
 }

@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-6">
         <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Login", "Account", new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 <h4>Utilize uma conta local para login.</h4>

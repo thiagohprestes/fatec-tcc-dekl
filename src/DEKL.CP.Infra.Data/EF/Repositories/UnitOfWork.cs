@@ -15,15 +15,14 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
 
         public UnitOfWork() => _ctx = new DEKLCPDataContextEF();
 
+        public void Save()
+        {
+            _ctx.SaveChanges();
+        }
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-        }
-
-        public void Save()
-        {
-            _ctx.SaveChanges();
         }
 
         public virtual void Dispose(bool disposing)

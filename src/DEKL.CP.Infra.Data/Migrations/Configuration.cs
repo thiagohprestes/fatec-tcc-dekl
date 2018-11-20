@@ -19,7 +19,7 @@ namespace DEKL.CP.Infra.Data.Migrations
             {
                 var states = new Collection<State>
             {
-                new State { Id = 0, Name = "Acre", Initials = "AC" },
+                new State { Name = "Acre", Initials = "AC" },
                 new State { Name = "Alagoas", Initials = "AL" },
                 new State { Name = "Amapá", Initials = "AP" },
                 new State { Name = "Amazonas", Initials = "AM" },

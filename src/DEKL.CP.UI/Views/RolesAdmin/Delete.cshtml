@@ -1,4 +1,4 @@
-﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.CustomRole
+﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.ApplicationRole
 @{
     ViewBag.Title = "Excluir Grupo";
 }
@@ -30,8 +30,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" class="btn btn-outline-danger" value="Deletar" />
-            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-outline-info" })
+            <input type="submit" class="btn btn-danger" value="Deletar" />
+            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
         </div>
     }
 </div>

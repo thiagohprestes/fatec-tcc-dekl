@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="DEKL.CP.Domain.Entities.AccountToPay">
+    <Position X="3" Y="3" Width="3.75" />
+    <Members>
+      <Field Name="teste" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AACEAAEAAAMkAAAEBAAQgAEAAEQAgAQAAAAgAAAAAAA=</HashCode>
+      <FileName>Entities\AccountToPay.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.Address">
+    <Position X="8.75" Y="5.25" Width="2" />
+    <InheritanceLine Type="DEKL.CP.Domain.Entities.EntityBase" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="16.5" Y="2.18" />
+        <Point X="16.5" Y="2.625" />
+        <Point X="11.125" Y="2.625" />
+        <Point X="11.125" Y="6.187" />
+        <Point X="10.75" Y="6.187" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAIBEAAAAAIAAAAAAABAAIABAAAAAA=</HashCode>
+      <FileName>Entities\Address.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.Audit">
+    <Position X="12.25" Y="8.25" Width="2.5" />
+    <InheritanceLine Type="DEKL.CP.Domain.Entities.EntityBase" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="16.5" Y="2.18" />
+        <Point X="16.5" Y="9.5" />
+        <Point X="14.75" Y="9.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACQAAAAAAQAAgAAAAQAAAAACAAAAAA=</HashCode>
+      <FileName>Entities\Audit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.Bank">
+    <Position X="24" Y="6.25" Width="3" />
+    <InheritanceLine Type="DEKL.CP.Domain.Entities.EntityBase" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="16.5" Y="2.18" />
+        <Point X="16.5" Y="2.625" />
+        <Point X="27.878" Y="2.625" />
+        <Point X="27.878" Y="7.062" />
+        <Point X="27" Y="7.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAEAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Bank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.BankAgency">
+    <Position X="2.75" Y="7.75" Width="4" />
+    <InheritanceLine Type="DEKL.CP.Domain.Entities.EntityBase" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="16.5" Y="2.18" />
+        <Point X="16.5" Y="2.625" />
+        <Point X="2.229" Y="2.625" />
+        <Point X="2.229" Y="9.5" />
+        <Point X="2.75" Y="9.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>QQAAAAAAACAAAAAAAEAAQAAAAAABAAACACCAAAAAAAA=</HashCode>
+      <FileName>Entities\BankAgency .cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.BankTransaction">
+    <Position X="7.5" Y="8.25" Width="3.25" />
+    <InheritanceLine Type="DEKL.CP.Domain.Entities.EntityBase" FixedToPoint="true">
+      <Path>
+        <Point X="16.5" Y="2.18" />
+        <Point X="16.5" Y="2.625" />
+        <Point X="11.125" Y="2.625" />
+        <Point X="11.125" Y="9.812" />
+        <Point X="10.75" Y="9.812" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAQAAAAAAAgAAAAAgAAAAQAACAAEAAAAAAAA=</HashCode>
+      <FileName>Entities\BankTransaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.EntityBase">
+    <Position X="15.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAgAAAAAgAAgAAAAAAAA=</HashCode>
+      <FileName>Entities\EntityBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.Installment">
+    <Position X="17" Y="8.75" Width="2.25" />
+    <InheritanceLine Type="DEKL.CP.Domain.Entities.EntityBase" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="16.5" Y="2.18" />
+        <Point X="16.5" Y="9.5" />
+        <Point X="17" Y="9.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAQEAAAAAAAAAAAAgAAAAgAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Entities\Installment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.InternalBankAccount">
+    <Position X="24" Y="8.5" Width="3.5" />
+    <InheritanceLine Type="DEKL.CP.Domain.Entities.EntityBase" FixedToPoint="true">
+      <Path>
+        <Point X="16.5" Y="2.18" />
+        <Point X="16.5" Y="2.625" />
+        <Point X="27.875" Y="2.625" />
+        <Point X="27.875" Y="9.812" />
+        <Point X="27.5" Y="9.812" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAABAIAAAAAAAAAAAEgAAAQAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\InternalBankAccount.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.Module">
+    <Position X="8.5" Y="3" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Module.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.PaymentSimulator">
+    <Position X="11.75" Y="3" Width="4" />
+    <TypeIdentifier>
+      <HashCode>ABAAAgAAAAEAAAAAAAAQAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\PaymentSimulator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.Provider">
+    <Position X="17.25" Y="3" Width="4" />
+    <TypeIdentifier>
+      <HashCode>QAAAAgAAACAAAAAAAAAAQAAAAAABAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Provider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.ProviderBankAccount">
+    <Position X="22.5" Y="3.25" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAIAAAAAEAAAABEAAAAQAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\ProviderBankAccount.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.ProviderLegalPerson">
+    <Position X="19.75" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIACAAAAAAAAAAAAAQAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\ProviderLegalPerson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.ProviderPhysicalPerson">
+    <Position X="17.25" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\ProviderPhysicalPerson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DEKL.CP.Domain.Entities.State">
+    <Position X="12.25" Y="6" Width="2.5" />
+    <InheritanceLine Type="DEKL.CP.Domain.Entities.EntityBase" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="16.5" Y="2.18" />
+        <Point X="16.5" Y="6.688" />
+        <Point X="14.75" Y="6.688" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAACAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
