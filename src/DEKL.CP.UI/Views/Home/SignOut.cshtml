@@ -14,7 +14,7 @@
         using (Html.BeginForm("SignOutEverywhere", "Account", FormMethod.Post, new { id = "signOutEverywhereForm" }))
         {
             @Html.AntiForgeryToken();
-            <input type="submit" value="Sair de Todos os Lugares" class="btn btn-outline-info">
+            <input type="submit" value="Sair de Todos os Lugares" class="btn btn-info">
         }
     }
 
@@ -46,7 +46,7 @@
                         @client.ClientKey
                     </td>
                     <td>
-                        <input type="button" value="Sair" onclick="SignOutClient(@client.Id);" class="btn btn-outline-info">
+                        <input type="button" value="Sair" onclick="SignOutClient(@client.Id);" class="btn btn-info">
                     </td>
                 </tr>
             }

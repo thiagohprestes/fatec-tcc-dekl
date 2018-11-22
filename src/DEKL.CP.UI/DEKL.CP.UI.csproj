@@ -264,6 +264,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountToPayController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ClaimsAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
@@ -289,6 +290,7 @@
     <Compile Include="ViewModels\Conta\TrocarSenha\TrocaSenha.cs" />
     <Compile Include="ViewModels\Provider\ProviderViewModel.cs" />
     <Compile Include="ViewModels\UsersAdmin\ApplicationUsersViewModel.cs" />
+    <Compile Include="ViewModels\UsersAdmin\EditApplicationUserViewModel.cs" />
     <Compile Include="ViewModels\Usuarios\UsuarioVM.cs" />
     <None Include="Views\AccountToPay\Create.cshtml" />
   </ItemGroup>
@@ -345,6 +347,12 @@
     <Content Include="Views\Provider\Select.cshtml" />
     <Content Include="Views\Provider\Create.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Views\UsersAdmin\Edit.cshtml" />
+    <Content Include="Views\UsersAdmin\Details.cshtml" />
+    <Content Include="Views\UsersAdmin\Delete.cshtml" />
+    <Content Include="Views\ClaimsAdmin\CreateClaim.cshtml" />
+    <Content Include="Views\ClaimsAdmin\Index.cshtml" />
+    <Content Include="Views\ClaimsAdmin\SetUserClaim.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

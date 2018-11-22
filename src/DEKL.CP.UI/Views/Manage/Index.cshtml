@@ -3,12 +3,6 @@
     ViewBag.Title = "Gerencie sua conta";
 }
 
-<style>
-    .btn-link {
-        color: #17a2b8;
-    }
-</style>
-
 <h2>@ViewBag.Title.</h2>
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
@@ -52,7 +46,7 @@
                     @Html.AntiForgeryToken()
                     <p>
                         Autenticação em dois fatores está habilitado:
-                        <input type="submit" value="Desabilitar" class="btn btn-outline-info" />
+                        <input type="submit" value="Desabilitar" class="btn btn-info" />
                     </p>
                 }
             }
@@ -63,7 +57,7 @@
                     @Html.AntiForgeryToken()
                     <p>
                         Autenticação em dois fatores está desabilitado:
-                        <input type="submit" value="Habilitar" class="btn btn-outline-info" />
+                        <input type="submit" value="Habilitar" class="btn btn-info" />
                     </p>
                 }
             }
@@ -75,7 +69,7 @@
                 <form method="post" action="/Manage/ForgetBrowser">
                     <p>
                         O browser será lembrado para Autenticação em dois fatores:
-                        <input type="submit" value="Esquecer Browser" class="btn btn-outline-info" />
+                        <input type="submit" value="Esquecer Browser" class="btn btn-info" />
                     </p>
                 </form>
             }
@@ -84,7 +78,7 @@
                 <form method="post" action="/Manage/RememberBrowser">
                     <p>
                         O browser NÃO será lembrado para Autenticação em dois fatores:
-                        <input type="submit" value="Lembrar Browser" class="btn btn-outline-info" />
+                        <input type="submit" value="Lembrar Browser" class="btn btn-info" />
                     </p>
                 </form>
             }

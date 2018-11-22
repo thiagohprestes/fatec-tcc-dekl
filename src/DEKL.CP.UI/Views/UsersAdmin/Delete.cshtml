@@ -1,0 +1,31 @@
+﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Excluir Usuário";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Você tem certeza que deseja excluir @Model.FirstName @Model.LastName</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(m => m.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(m => m.UserName)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-danger" />
+            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info"})
+        </div>
+    }
+</div>

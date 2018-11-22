@@ -5,6 +5,8 @@ namespace DEKL.CP.UI.ViewModels.UsersAdmin
 {
     public class ApplicationUsersViewModel
     {
+        [Key]
+        public int Id { get; set; }
         public string FirstName { private get; set; }
 
         public string LastName { private get; set; }

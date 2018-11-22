@@ -8,6 +8,27 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Claims",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(maxLength: 100, unicode: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Clients",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        ClientKey = c.String(maxLength: 100, unicode: false),
+                        ApplicationUser_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
+                .Index(t => t.ApplicationUser_Id);
+            
+            CreateTable(
                 "dbo.ApplicationRole",
                 c => new
                     {
@@ -70,18 +91,6 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Migrations
                 .Index(t => t.ApplicationUser_Id);
             
             CreateTable(
-                "dbo.Clients",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        ClientKey = c.String(maxLength: 100, unicode: false),
-                        ApplicationUser_Id = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
-                .Index(t => t.ApplicationUser_Id);
-            
-            CreateTable(
                 "dbo.ApplicationUserLogin",
                 c => new
                     {
@@ -104,17 +113,18 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Migrations
             DropForeignKey("dbo.ApplicationUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.ApplicationUserRole", "RoleId", "dbo.ApplicationRole");
             DropIndex("dbo.ApplicationUserLogin", new[] { "ApplicationUser_Id" });
-            DropIndex("dbo.Clients", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.ApplicationUserClaim", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.ApplicationUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.ApplicationUserRole", new[] { "RoleId" });
             DropIndex("dbo.ApplicationRole", "RoleNameIndex");
+            DropIndex("dbo.Clients", new[] { "ApplicationUser_Id" });
             DropTable("dbo.ApplicationUserLogin");
-            DropTable("dbo.Clients");
             DropTable("dbo.ApplicationUserClaim");
             DropTable("dbo.ApplicationUser");
             DropTable("dbo.ApplicationUserRole");
             DropTable("dbo.ApplicationRole");
+            DropTable("dbo.Clients");
+            DropTable("dbo.Claims");
         }
     }
 }

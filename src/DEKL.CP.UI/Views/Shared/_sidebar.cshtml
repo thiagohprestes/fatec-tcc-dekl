@@ -9,16 +9,16 @@
     <ul class="list-unstyled components">
         <p>Contas a Pagar</p>
         <li>
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cadastro</a>
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Controle de Usuário</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li>
-                    @Html.ActionLink("Usuário", "Index", "UsersAdmin", null, new { id = "registerLink" })
+                    @Html.ActionLink("Usuário", "Index", "UsersAdmin")
                 </li>
                 <li>
-                    @Html.ActionLink("Grupo", "Index", "RolesAdmin", null, new { id = "registerLink" })
+                    @Html.ActionLink("Grupo", "Index", "RolesAdmin")
                 </li>
                 <li>
-                    <a href="#">Home 3</a>
+                    @Html.ActionLink("Papel", "Index", "ClaimsAdmin")
                 </li>
             </ul>
         </li>

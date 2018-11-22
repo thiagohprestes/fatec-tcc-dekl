@@ -6,6 +6,7 @@ using DEKL.CP.UI.ViewModels.UsersAdmin;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -29,6 +30,20 @@ namespace DEKL.CP.UI.Controllers
             var users = await _userManager.Users.Where(u => u.Active).ToListAsync();
 
             return View(Mapper.Map<IEnumerable<ApplicationUsersViewModel>>(users));
+        }
+
+        public async Task<ActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = await _userManager.FindByIdAsync(id.Value);
+
+            ViewBag.RoleNames = await _userManager.GetRolesAsync(user.Id);
+            ViewBag.Claims = await _userManager.GetClaimsAsync(user.Id);
+
+            return View(user);
         }
 
         public async Task<ActionResult> Create()
@@ -56,7 +71,7 @@ namespace DEKL.CP.UI.Controllers
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                PhoneNumber = Regex.Replace(model.PhoneNumber, @"[^\d]", "")
+                PhoneNumber = Regex.Replace(model.PhoneNumber ?? string.Empty, @"[^\d]", "")
             };
 
             var result = await _userManager.CreateAsync(user, model.PasswordHash);
@@ -89,5 +104,135 @@ namespace DEKL.CP.UI.Controllers
             this.AddToastMessage("Usuário Adicionado", "Solicite que o usuário verifique o e-mail", ToastType.Success);
             return RedirectToAction("Index");
         }
+
+
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var user = await _userManager.FindByIdAsync(id.Value);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            var userRoles = await _userManager.GetRolesAsync(user.Id);
+
+            return View(new EditApplicationUserViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                RolesList = _roleManager.Roles.ToList().Select(r => new SelectListItem
+                {
+                    Selected = userRoles.Contains(r.Name),
+                    Text = r.Name,
+                    Value = r.Name
+                })
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "FirstName,LastName,Email,Id")] EditApplicationUserViewModel model, 
+            params string[] selectedRole)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByIdAsync(model.Id);
+
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.UserName = model.Email;
+                user.Email = model.Email;
+
+                var userRoles = await _userManager.GetRolesAsync(user.Id);
+
+                selectedRole = selectedRole ?? new string[] { };
+
+                var result = await _userManager.AddToRolesAsync(user.Id, selectedRole.Except(userRoles).ToArray());
+
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("Error", result.Errors.First());
+                    return View();
+                }
+                result = await _userManager.RemoveFromRolesAsync(user.Id, userRoles.Except(selectedRole).ToArray());
+
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("Error", result.Errors.First());
+                    return View();
+                }
+
+                this.AddToastMessage("Edição de Usuário Salva", "O usuário foi editado com sucesso", ToastType.Success);
+                return RedirectToAction("Index");
+            }
+
+            this.AddToastMessage("Erro na Edição do Usuário", 
+                "Ocorreu um erro na edição do usuário, favor tentar novamente", ToastType.Success);
+            return View();
+        }
+
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var user = await _userManager.FindByIdAsync(id.Value);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var user = await _userManager.FindByIdAsync(id.Value);
+
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                var result = await _userManager.DeleteAsync(user);
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("Error", result.Errors.First());
+                    return View();
+                }
+
+                this.AddToastMessage("Usuário Excluído", "O usuário foi excluído com sucesso", ToastType.Success);
+                return RedirectToAction("Index");
+            }
+
+            this.AddToastMessage("Erro na Exclusão do Usuário",
+                "Ocorreu um erro na exclusão do usuário, favor tentar novamente", ToastType.Success);
+            return View();
+        }
+
     }
 }

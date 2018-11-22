@@ -121,9 +121,9 @@
     <Compile Include="Maps\ApplicationUserMap.cs" />
     <Compile Include="Maps\ClaimMap.cs" />
     <Compile Include="Maps\ClientMap.cs" />
-    <Compile Include="Migrations\201811181708425_InitialCreate.cs" />
-    <Compile Include="Migrations\201811181708425_InitialCreate.Designer.cs">
-      <DependentUpon>201811181708425_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201811202236286_InitialCreate.cs" />
+    <Compile Include="Migrations\201811202236286_InitialCreate.Designer.cs">
+      <DependentUpon>201811202236286_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Claim.cs" />
@@ -136,6 +136,7 @@
     <Compile Include="Models\ApplicationUserClaim.cs" />
     <Compile Include="Models\ApplicationUserLogin.cs" />
     <Compile Include="Models\ApplicationUserRole.cs" />
+    <Compile Include="ViewModels\ClaimViewModel.cs" />
     <Compile Include="ViewModels\FactorViewModel.cs" />
     <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -173,8 +174,8 @@
     <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811181708425_InitialCreate.resx">
-      <DependentUpon>201811181708425_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811202236286_InitialCreate.resx">
+      <DependentUpon>201811202236286_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

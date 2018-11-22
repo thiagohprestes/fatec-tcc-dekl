@@ -12,6 +12,10 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Context
         public ApplicationDbContext() : base("DEKLCPConnIdentity")
         { }
 
+        public DbSet<Client> Client { get; set; }
+
+        public DbSet<Claim> Claims { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

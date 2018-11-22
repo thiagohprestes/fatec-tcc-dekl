@@ -1,0 +1,37 @@
+﻿@using DEKL.CP.Infra.CrossCutting.Identity.Models
+@model DEKL.CP.Infra.CrossCutting.Identity.ViewModels.ClaimViewModel
+@{
+    ViewBag.Title = "Associar Papel";
+}
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Informe o papel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <h4>Adicione um novo Claim para o Usuário @ViewBag.User.FirstName @ViewBag.User.LastName</h4>
+        @{
+            ApplicationUser user = ViewBag.User;
+        }
+
+        @Html.Hidden("id", user.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Type, new { @class = "control-label" })
+            @Html.DropDownList("Type", string.Empty, null,  new { @class = "form-control" })
+            <small>
+                @Html.ValidationMessageFor(m => m.Type)
+            </small>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Criar" class="btn btn-info" />
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Voltar para a Lista", "Index")
+</div>
