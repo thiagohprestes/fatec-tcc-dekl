@@ -285,6 +285,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountsToPay\AccountsToPayViewModel.cs" />
     <Compile Include="ViewModels\AccountsToPay\AccountToPayViewModel.cs" />
+    <Compile Include="ViewModels\AddressViewModel.cs" />
     <Compile Include="ViewModels\Conta\Login\LoginVM.cs" />
     <Compile Include="ViewModels\Conta\MeuPerfil\MeuPerfil.cs" />
     <Compile Include="ViewModels\Conta\TrocarSenha\TrocaSenha.cs" />
@@ -353,6 +354,7 @@
     <Content Include="Views\ClaimsAdmin\CreateClaim.cshtml" />
     <Content Include="Views\ClaimsAdmin\Index.cshtml" />
     <Content Include="Views\ClaimsAdmin\SetUserClaim.cshtml" />
+    <Content Include="Views\ClaimsAdmin\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

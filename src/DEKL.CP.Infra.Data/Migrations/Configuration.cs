@@ -14,7 +14,7 @@ namespace DEKL.CP.Infra.Data.Migrations
         }
 
         protected override void Seed(EF.Context.DEKLCPDataContextEF context)
-        {          
+        {
             if (!context.States.Any())
             {
                 var states = new Collection<State>

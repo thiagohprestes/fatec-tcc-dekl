@@ -4,16 +4,13 @@ namespace DEKL.CP.UI.Controllers
 {
     public class ProviderController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
 
         public ActionResult Select() => View();
 
-        public ActionResult Create()
+        public ActionResult Create(int typeprovider)
         {
-            ViewBag.PhysicalPerson = true;
+            ViewBag.PhysicalPerson = typeprovider;
             return View();
         }
     }

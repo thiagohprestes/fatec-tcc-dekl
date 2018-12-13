@@ -22,6 +22,16 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Migrations
                 );
             }
 
+            if (!context.Claims.Any())
+            {
+                context.Claims.AddOrUpdate(
+                    new Claim { Name = "Cadastrar Conta a Pagar" },
+                    new Claim { Name = "Cadastrar Fornecedor" },
+                    new Claim { Name = "Cadastrar Conta Bancária de Fornecedor" },
+                    new Claim { Name = "Cadastrar Conta Bancária Interna" }
+                );
+            }
+
             if (!context.Users.Any())
             {
                 context.Users.AddOrUpdate(new ApplicationUser

@@ -6,7 +6,7 @@ namespace DEKL.CP.UI.ViewModels
 {
     public class MeuPerfil
     {
-        [Required(ErrorMessage = "O {0} é obrigatório")]
+        [Required]
         [StringLength(50, ErrorMessage = "O Limite do {0} é de {1} caracteres")]
         public string Nome { get; set; }
 

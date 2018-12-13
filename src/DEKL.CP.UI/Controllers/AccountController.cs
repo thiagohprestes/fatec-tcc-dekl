@@ -3,7 +3,6 @@ using DEKL.CP.Infra.CrossCutting.Identity.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -60,7 +59,7 @@ namespace DEKL.CP.UI.Controllers
                     return RedirectToAction("SendCode", new {ReturnUrl = returnUrl});
                 case SignInStatus.Failure:
                 default:
-                     ModelState.AddModelError("Error", "Login ou Senha incorretos.");
+                     ModelState.AddModelError("Error", @"Login ou Senha incorretos.");
                     return View(model);
             }
         }
@@ -93,7 +92,9 @@ namespace DEKL.CP.UI.Controllers
                 return View(model);
             }
 
-            var result = await _signInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: false, rememberBrowser: model.RememberBrowser);
+            var result = await _signInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: false, 
+                rememberBrowser: model.RememberBrowser);
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -104,7 +105,7 @@ namespace DEKL.CP.UI.Controllers
                     return View("Lockout");
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("Error", "Código Inválido.");
+                    ModelState.AddModelError("Error", @"Código Inválido.");
                     return View(model);
             }
         }

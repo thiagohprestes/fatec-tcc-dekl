@@ -7,7 +7,7 @@ using System.Data.Entity;
 namespace DEKL.CP.Infra.CrossCutting.Identity.Context
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole,
-        ApplicationUserClaim>, IDisposable
+        ApplicationUserClaim>
     {
         public ApplicationDbContext() : base("DEKLCPConnIdentity")
         { }
@@ -27,6 +27,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Context
                 .Configure(p => p.HasMaxLength(100));
 
             modelBuilder.Configurations.Add(new ApplicationUserMap());
+            modelBuilder.Configurations.Add(new ClaimMap());
             modelBuilder.Entity<ApplicationRole>().ToTable(nameof(ApplicationRole));
             modelBuilder.Entity<ApplicationUserRole>().ToTable(nameof(ApplicationUserRole));
             modelBuilder.Entity<ApplicationUserLogin>().ToTable(nameof(ApplicationUserLogin));

@@ -1,4 +1,4 @@
-﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.ApplicationRole
+﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.Claim
 
 @{
     ViewBag.Title = "Detalhes";
@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 
 <div>
-    <h4>Grupos</h4>
+    <h4>Funcionalidades</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -18,11 +18,11 @@
         </dd>
     </dl>
 </div>
-<h4>Lista de usuários nesse grupo</h4>
+<h4>Lista de usuários associados a funcionalidade</h4>
 @if (ViewBag.UserCount == 0)
 {
     <hr />
-    <p>Não há usuários nesse grupo</p>
+    <p>Não há usuários associados a essa funcionalidade</p>
 }
 
 <table class="table">
@@ -40,3 +40,6 @@
     @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
     @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
 </p>
+
+
+

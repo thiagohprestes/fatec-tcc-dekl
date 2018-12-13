@@ -1,6 +1,5 @@
 namespace DEKL.CP.Infra.CrossCutting.Identity.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class InitialCreate : DbMigration
@@ -8,7 +7,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Claims",
+                "dbo.AspNetClaims",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -124,7 +123,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Migrations
             DropTable("dbo.ApplicationUserRole");
             DropTable("dbo.ApplicationRole");
             DropTable("dbo.Clients");
-            DropTable("dbo.Claims");
+            DropTable("dbo.AspNetClaims");
         }
     }
 }

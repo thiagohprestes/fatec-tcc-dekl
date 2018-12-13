@@ -170,7 +170,7 @@ namespace DEKL.CP.UI.Controllers
             }
 
             // No caso de falha, reexibir a view. 
-            ModelState.AddModelError("Error", "Falha ao adicionar telefone");
+            ModelState.AddModelError("Error", @"Falha ao adicionar telefone");
             return View(model);
         }
 
