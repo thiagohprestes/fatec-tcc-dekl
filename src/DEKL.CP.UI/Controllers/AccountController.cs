@@ -240,15 +240,13 @@ namespace DEKL.CP.UI.Controllers
             // Zerando contador de logins errados.
             await _userManager.ResetAccessFailedCountAsync(user.Id);
 
-            var ext = await AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
-
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie,
                 DefaultAuthenticationTypes.TwoFactorCookie, DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn
             (
                 new AuthenticationProperties { IsPersistent = isPersistent },
                 // Criação da instancia do Identity e atribuição dos Claims
-                await user.GenerateUserIdentityAsync(_userManager, ext)
+                await user.GenerateUserIdentityAsync(_userManager)
             );
         }
 

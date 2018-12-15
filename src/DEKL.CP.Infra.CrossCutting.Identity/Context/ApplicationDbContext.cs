@@ -3,6 +3,7 @@ using DEKL.CP.Infra.CrossCutting.Identity.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
+using System.Security.Claims;
 
 namespace DEKL.CP.Infra.CrossCutting.Identity.Context
 {
@@ -12,9 +13,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Context
         public ApplicationDbContext() : base("DEKLCPConnIdentity")
         { }
 
-        public DbSet<Client> Client { get; set; }
-
-        public DbSet<Claim> Claims { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -27,7 +26,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Context
                 .Configure(p => p.HasMaxLength(100));
 
             modelBuilder.Configurations.Add(new ApplicationUserMap());
-            modelBuilder.Configurations.Add(new ClaimMap());
+            modelBuilder.Configurations.Add(new ClientMap());
             modelBuilder.Entity<ApplicationRole>().ToTable(nameof(ApplicationRole));
             modelBuilder.Entity<ApplicationUserRole>().ToTable(nameof(ApplicationUserRole));
             modelBuilder.Entity<ApplicationUserLogin>().ToTable(nameof(ApplicationUserLogin));

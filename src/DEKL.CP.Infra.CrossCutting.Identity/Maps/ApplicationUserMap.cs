@@ -8,7 +8,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Maps
         public ApplicationUserMap()
         {
             //Table
-            ToTable("ApplicationUser");
+            ToTable(nameof(ApplicationUser));
 
             //Columns
             Property(e => e.FirstName)

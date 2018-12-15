@@ -14,6 +14,7 @@ using DEKL.CP.UI.Scripts.Toastr;
 
 namespace DEKL.CP.UI.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class UsersAdminController : BaseController
     {
         private readonly ApplicationUserManager _userManager;
@@ -41,7 +42,6 @@ namespace DEKL.CP.UI.Controllers
             var user = await _userManager.FindByIdAsync(id.Value);
 
             ViewBag.RoleNames = await _userManager.GetRolesAsync(user.Id);
-            ViewBag.Claims = await _userManager.GetClaimsAsync(user.Id);
 
             return View(user);
         }

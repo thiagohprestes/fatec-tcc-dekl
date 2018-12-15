@@ -64,9 +64,9 @@
     <Compile Include="EF\Repositories\RepositoryEF.cs" />
     <Compile Include="EF\Repositories\UnitOfWork.cs" />
     <Compile Include="EF\Repositories\UsuarioRepositoryEF.cs" />
-    <Compile Include="Migrations\201812130255521_InitialCreate.cs" />
-    <Compile Include="Migrations\201812130255521_InitialCreate.Designer.cs">
-      <DependentUpon>201812130255521_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201812151815445_InitialCreate.cs" />
+    <Compile Include="Migrations\201812151815445_InitialCreate.Designer.cs">
+      <DependentUpon>201812151815445_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,8 +82,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812130255521_InitialCreate.resx">
-      <DependentUpon>201812130255521_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812151815445_InitialCreate.resx">
+      <DependentUpon>201812151815445_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

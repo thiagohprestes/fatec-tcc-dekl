@@ -9,8 +9,9 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Maps
         public ClientMap()
         {
             //Table
-            ToTable("AspNetClients");
+            ToTable(nameof(Client));
 
+            //Key
             HasKey(e => e.Id);
 
             //Columns

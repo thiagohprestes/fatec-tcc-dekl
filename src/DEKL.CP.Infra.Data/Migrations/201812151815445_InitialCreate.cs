@@ -233,29 +233,29 @@ namespace DEKL.CP.Infra.Data.Migrations
                 .Index(t => t.ApplicationUserId)
                 .Index(t => t.ModuleId);
             
-            CreateTable(
-                "dbo.ApplicationUser",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        AddedDate = c.DateTime(nullable: false),
-                        ModifiedDate = c.DateTime(),
-                        Active = c.Boolean(nullable: false),
-                        FirstName = c.String(maxLength: 100, unicode: false),
-                        LastName = c.String(maxLength: 100, unicode: false),
-                        Email = c.String(maxLength: 100, unicode: false),
-                        EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(maxLength: 100, unicode: false),
-                        SecurityStamp = c.String(maxLength: 100, unicode: false),
-                        PhoneNumber = c.String(maxLength: 100, unicode: false),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
-                        LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(maxLength: 100, unicode: false),
-                    })
-                .PrimaryKey(t => t.Id);
+            //CreateTable(
+            //    "dbo.ApplicationUser",
+            //    c => new
+            //        {
+            //            Id = c.Int(nullable: false, identity: true),
+            //            AddedDate = c.DateTime(nullable: false),
+            //            ModifiedDate = c.DateTime(),
+            //            Active = c.Boolean(nullable: false),
+            //            FirstName = c.String(maxLength: 100, unicode: false),
+            //            LastName = c.String(maxLength: 100, unicode: false),
+            //            Email = c.String(maxLength: 100, unicode: false),
+            //            EmailConfirmed = c.Boolean(nullable: false),
+            //            PasswordHash = c.String(maxLength: 100, unicode: false),
+            //            SecurityStamp = c.String(maxLength: 100, unicode: false),
+            //            PhoneNumber = c.String(maxLength: 100, unicode: false),
+            //            PhoneNumberConfirmed = c.Boolean(nullable: false),
+            //            TwoFactorEnabled = c.Boolean(nullable: false),
+            //            LockoutEndDateUtc = c.DateTime(),
+            //            LockoutEnabled = c.Boolean(nullable: false),
+            //            AccessFailedCount = c.Int(nullable: false),
+            //            UserName = c.String(maxLength: 100, unicode: false),
+            //        })
+            //    .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Module",

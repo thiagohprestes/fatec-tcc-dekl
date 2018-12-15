@@ -119,14 +119,12 @@
     <Compile Include="Configuration\ApplicationSignInManager.cs" />
     <Compile Include="Configuration\SmsService.cs" />
     <Compile Include="Maps\ApplicationUserMap.cs" />
-    <Compile Include="Maps\ClaimMap.cs" />
     <Compile Include="Maps\ClientMap.cs" />
-    <Compile Include="Migrations\201812130259233_InitialCreate.cs" />
-    <Compile Include="Migrations\201812130259233_InitialCreate.Designer.cs">
-      <DependentUpon>201812130259233_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201812151814374_InitialCreate.cs" />
+    <Compile Include="Migrations\201812151814374_InitialCreate.Designer.cs">
+      <DependentUpon>201812151814374_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\ApplicationRoleStore.cs" />
     <Compile Include="Models\ApplicationUserStore.cs" />
@@ -136,7 +134,6 @@
     <Compile Include="Models\ApplicationUserClaim.cs" />
     <Compile Include="Models\ApplicationUserLogin.cs" />
     <Compile Include="Models\ApplicationUserRole.cs" />
-    <Compile Include="ViewModels\ClaimViewModel.cs" />
     <Compile Include="ViewModels\FactorViewModel.cs" />
     <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -174,8 +171,8 @@
     <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812130259233_InitialCreate.resx">
-      <DependentUpon>201812130259233_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812151814374_InitialCreate.resx">
+      <DependentUpon>201812151814374_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

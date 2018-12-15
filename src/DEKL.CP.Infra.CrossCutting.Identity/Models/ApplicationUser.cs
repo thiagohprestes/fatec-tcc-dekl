@@ -17,29 +17,21 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Models
         public DateTime? ModifiedDate { get; set; }
         public bool Active { get; set; } = true;
         public virtual ICollection<Client> Clients { get; set; } = new Collection<Client>();
-
         public string CurrentClientId { get; set; }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager, ClaimsIdentity ext = null)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager)
         {
             // Observe que o authenticationType precisa ser o mesmo que foi definido em CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
 
-            var claims = new List<System.Security.Claims.Claim>();
+            var claims = new List<Claim>();
 
             if (!string.IsNullOrEmpty(CurrentClientId))
             {
-                claims.Add(new System.Security.Claims.Claim("AspNet.Identity.ClientId", CurrentClientId));
+                claims.Add(new Claim("AspNet.Identity.ClientId", CurrentClientId));
             }
 
             //  Adicione novos Claims aqui //
-
-            // Adicionando Claims externos capturados no login
-            if (ext != null)
-            {
-                SetExternalProperties(userIdentity, ext);
-            }
-
             // Gerenciamento de Claims para informaçoes do usuario
             //claims.Add(new Claim("AdmRoles", "True"));
 

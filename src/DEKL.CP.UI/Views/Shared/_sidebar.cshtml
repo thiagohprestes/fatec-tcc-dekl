@@ -8,20 +8,20 @@
 
     <ul class="list-unstyled components">
         <p>Contas a Pagar</p>
-        <li>
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Controle de Usuário</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li>
-                    @Html.ActionLink("Usuário", "Index", "UsersAdmin")
-                </li>
-                <li>
-                    @Html.ActionLink("Grupo", "Index", "RolesAdmin")
-                </li>
-                <li>
-                    @Html.ActionLink("Funcionalidade", "Index", "ClaimsAdmin")
-                </li>
-            </ul>
-        </li>
+        @if (User.IsInRole("Administrador"))
+        {
+            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Controle de Usuário</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        @Html.ActionLink("Usuário", "Index", "UsersAdmin")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Grupo", "Index", "RolesAdmin")
+                    </li>
+                </ul>
+            </li>
+        }
         <li>
             <a href="#">About</a>
         </li>

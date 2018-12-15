@@ -264,13 +264,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountToPayController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\ClaimsAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
-    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -286,13 +284,9 @@
     <Compile Include="ViewModels\AccountsToPay\AccountsToPayViewModel.cs" />
     <Compile Include="ViewModels\AccountsToPay\AccountToPayViewModel.cs" />
     <Compile Include="ViewModels\AddressViewModel.cs" />
-    <Compile Include="ViewModels\Conta\Login\LoginVM.cs" />
-    <Compile Include="ViewModels\Conta\MeuPerfil\MeuPerfil.cs" />
-    <Compile Include="ViewModels\Conta\TrocarSenha\TrocaSenha.cs" />
     <Compile Include="ViewModels\Provider\ProviderViewModel.cs" />
     <Compile Include="ViewModels\UsersAdmin\ApplicationUsersViewModel.cs" />
     <Compile Include="ViewModels\UsersAdmin\EditApplicationUserViewModel.cs" />
-    <Compile Include="ViewModels\Usuarios\UsuarioVM.cs" />
     <None Include="Views\AccountToPay\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -311,10 +305,7 @@
     <Content Include="Views\Account\MeuPerfil.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Shared\_navbar.cshtml" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
-    <Content Include="Views\Usuarios\AddEdit.cshtml" />
     <Content Include="Views\Shared\_Toastr.cshtml" />
-    <Content Include="Views\Usuarios\Lockout.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\UsersAdmin\DisplayEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -351,10 +342,6 @@
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Details.cshtml" />
     <Content Include="Views\UsersAdmin\Delete.cshtml" />
-    <Content Include="Views\ClaimsAdmin\CreateClaim.cshtml" />
-    <Content Include="Views\ClaimsAdmin\Index.cshtml" />
-    <Content Include="Views\ClaimsAdmin\SetUserClaim.cshtml" />
-    <Content Include="Views\ClaimsAdmin\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

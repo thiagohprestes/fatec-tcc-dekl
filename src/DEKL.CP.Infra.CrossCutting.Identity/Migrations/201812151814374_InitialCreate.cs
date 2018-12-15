@@ -7,16 +7,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.AspNetClaims",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(maxLength: 100, unicode: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Clients",
+                "dbo.Client",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -51,29 +42,29 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Migrations
                 .Index(t => t.RoleId)
                 .Index(t => t.ApplicationUser_Id);
             
-            //CreateTable(
-            //    "dbo.ApplicationUser",
-            //    c => new
-            //        {
-            //            Id = c.Int(nullable: false, identity: true),
-            //            FirstName = c.String(nullable: false, maxLength: 50, unicode: false),
-            //            LastName = c.String(maxLength: 50, unicode: false),
-            //            AddedDate = c.DateTime(nullable: false),
-            //            ModifiedDate = c.DateTime(),
-            //            Active = c.Boolean(nullable: false),
-            //            Email = c.String(maxLength: 100, unicode: false),
-            //            EmailConfirmed = c.Boolean(nullable: false),
-            //            PasswordHash = c.String(maxLength: 100, unicode: false),
-            //            SecurityStamp = c.String(maxLength: 100, unicode: false),
-            //            PhoneNumber = c.String(maxLength: 100, unicode: false),
-            //            PhoneNumberConfirmed = c.Boolean(nullable: false),
-            //            TwoFactorEnabled = c.Boolean(nullable: false),
-            //            LockoutEndDateUtc = c.DateTime(),
-            //            LockoutEnabled = c.Boolean(nullable: false),
-            //            AccessFailedCount = c.Int(nullable: false),
-            //            UserName = c.String(maxLength: 100, unicode: false),
-            //        })
-            //    .PrimaryKey(t => t.Id);
+            CreateTable(
+                "dbo.ApplicationUser",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(nullable: false, maxLength: 50, unicode: false),
+                        LastName = c.String(maxLength: 50, unicode: false),
+                        AddedDate = c.DateTime(nullable: false),
+                        ModifiedDate = c.DateTime(),
+                        Active = c.Boolean(nullable: false),
+                        Email = c.String(maxLength: 100, unicode: false),
+                        EmailConfirmed = c.Boolean(nullable: false),
+                        PasswordHash = c.String(maxLength: 100, unicode: false),
+                        SecurityStamp = c.String(maxLength: 100, unicode: false),
+                        PhoneNumber = c.String(maxLength: 100, unicode: false),
+                        PhoneNumberConfirmed = c.Boolean(nullable: false),
+                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        LockoutEndDateUtc = c.DateTime(),
+                        LockoutEnabled = c.Boolean(nullable: false),
+                        AccessFailedCount = c.Int(nullable: false),
+                        UserName = c.String(maxLength: 100, unicode: false),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.ApplicationUserClaim",
@@ -108,7 +99,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Migrations
         {
             DropForeignKey("dbo.ApplicationUserRole", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.ApplicationUserLogin", "ApplicationUser_Id", "dbo.ApplicationUser");
-            DropForeignKey("dbo.Clients", "ApplicationUser_Id", "dbo.ApplicationUser");
+            DropForeignKey("dbo.Client", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.ApplicationUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.ApplicationUserRole", "RoleId", "dbo.ApplicationRole");
             DropIndex("dbo.ApplicationUserLogin", new[] { "ApplicationUser_Id" });
@@ -116,14 +107,13 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Migrations
             DropIndex("dbo.ApplicationUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.ApplicationUserRole", new[] { "RoleId" });
             DropIndex("dbo.ApplicationRole", "RoleNameIndex");
-            DropIndex("dbo.Clients", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.Client", new[] { "ApplicationUser_Id" });
             DropTable("dbo.ApplicationUserLogin");
             DropTable("dbo.ApplicationUserClaim");
             DropTable("dbo.ApplicationUser");
             DropTable("dbo.ApplicationUserRole");
             DropTable("dbo.ApplicationRole");
-            DropTable("dbo.Clients");
-            DropTable("dbo.AspNetClaims");
+            DropTable("dbo.Client");
         }
     }
 }

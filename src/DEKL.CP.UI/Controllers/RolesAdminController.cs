@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity;
 
 namespace DEKL.CP.UI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     public class RolesAdminController : BaseController
     {
 
@@ -69,8 +69,6 @@ namespace DEKL.CP.UI.Controllers
             return View();
         }
 
-        //
-        // GET: /Roles/Edit/Admin
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,7 +85,6 @@ namespace DEKL.CP.UI.Controllers
         }
 
         [HttpPost]
-
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Name,Id")] RoleViewModel roleModel)
         {

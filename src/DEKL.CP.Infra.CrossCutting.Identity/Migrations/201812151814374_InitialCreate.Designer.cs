@@ -13,7 +13,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201812130259233_InitialCreate"; }
+            get { return "201812151814374_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
