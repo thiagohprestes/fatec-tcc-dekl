@@ -31,6 +31,8 @@ namespace DEKL.CP.UI.ViewModels
 
         [Required]
         [DisplayName("Estado")]
+        public int SelectedSateId { get; set; }
+
         public IEnumerable<SelectListItem> State { get; set; }
     }
 }

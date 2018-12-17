@@ -269,6 +269,7 @@
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -284,6 +285,8 @@
     <Compile Include="ViewModels\AccountsToPay\AccountsToPayViewModel.cs" />
     <Compile Include="ViewModels\AccountsToPay\AccountToPayViewModel.cs" />
     <Compile Include="ViewModels\AddressViewModel.cs" />
+    <Compile Include="ViewModels\Provider\ProviderLegalPersonViewModel.cs" />
+    <Compile Include="ViewModels\Provider\ProviderPhysicalPersonViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderViewModel.cs" />
     <Compile Include="ViewModels\UsersAdmin\ApplicationUsersViewModel.cs" />
     <Compile Include="ViewModels\UsersAdmin\EditApplicationUserViewModel.cs" />
@@ -337,7 +340,7 @@
     <Content Include="Views\AccountToPay\Index.cshtml" />
     <Content Include="Views\Provider\Index.cshtml" />
     <Content Include="Views\Provider\Select.cshtml" />
-    <Content Include="Views\Provider\Create.cshtml" />
+    <Content Include="Views\Provider\CreateProviderPhysicalPerson.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Details.cshtml" />

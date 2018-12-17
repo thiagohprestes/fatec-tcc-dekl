@@ -1,6 +1,5 @@
 ﻿using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
-using DEKL.CP.Infra.Data.EF.Context;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,11 +10,11 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
 {
     public class RepositoryEF<T> : IRepository<T> where T : EntityBase
     {
-        private readonly DEKLCPDataContextEF _ctx;
+        private readonly DbContext _ctx;
         private IDbSet<T> _entities;
         private string _errorMessage = string.Empty;
 
-        public RepositoryEF(DEKLCPDataContextEF ctx) => _ctx = ctx;
+        public RepositoryEF(DbContext ctx) => _ctx = ctx;
 
         public IEnumerable<T> GetAll() => Entities.ToList();
 

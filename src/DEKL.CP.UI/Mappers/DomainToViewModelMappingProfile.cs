@@ -9,9 +9,6 @@ namespace DEKL.CP.UI.Mappers
     {
         public DomainToViewModelMappingProfile()
         {
-            //CreateMap<ApplicationUser, LoginVM>();
-            //CreateMap<ApplicationUser, TrocaSenhaVM>();
-            //CreateMap<ApplicationUser, UsuarioVM>();
             CreateMap<ApplicationUser, ApplicationUsersViewModel>();
             CreateMap<ApplicationUser, RegisterViewModel>();
         }

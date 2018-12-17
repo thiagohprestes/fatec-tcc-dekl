@@ -1,14 +1,14 @@
 ﻿using DEKL.CP.Infra.CrossCutting.Identity.Configuration;
+using DEKL.CP.Infra.CrossCutting.Identity.Models;
+using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
+using DEKL.CP.UI.Extensions;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using DEKL.CP.Infra.CrossCutting.Identity.Models;
-using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
 
 namespace DEKL.CP.UI.Controllers
 {
@@ -24,7 +24,7 @@ namespace DEKL.CP.UI.Controllers
 
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
-            ViewBag.StatusMessage = message != null ? Enum.GetName(typeof(ManageMessageId), message) : string.Empty;
+            ViewBag.StatusMessage = message.GetDescription();
 
             var userId = User.Identity.GetUserId<int>();
 
@@ -56,16 +56,17 @@ namespace DEKL.CP.UI.Controllers
             if (result.Succeeded)
             {
                 var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
-                 if (user != null)
+                if (user != null)
                 {
                     await SignInAsync(user, isPersistent: false);
                 }
-                message = Enum.GetName(typeof(ManageMessageId), ManageMessageId.RemoveLoginSuccess);
+                message = ManageMessageId.RemoveLoginSuccess.GetDescription();
             }
             else
             {
-                message = Enum.GetName(typeof(ManageMessageId), ManageMessageId.Error);
+                message = ManageMessageId.Error.GetDescription();
             }
+
             return RedirectToAction("ManageLogins", new { Message = message });
         }
 
@@ -84,17 +85,17 @@ namespace DEKL.CP.UI.Controllers
             var code = await _userManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId<int>(), model.Number);
             if (_userManager.SmsService == null)
             {
-                return RedirectToAction("VerifyPhoneNumber", new {PhoneNumber = model.Number});
+                return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
             }
 
             var message = new IdentityMessage
             {
                 Destination = model.Number,
-                Body = $"O código de segurança é: {code}" 
+                Body = $"O código de segurança é: {code}"
             };
             await _userManager.SmsService.SendAsync(message);
 
-            return RedirectToAction("VerifyPhoneNumber", new {PhoneNumber = model.Number});
+            return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
         }
 
 
@@ -145,7 +146,7 @@ namespace DEKL.CP.UI.Controllers
         {
             await _userManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId<int>(), phoneNumber);
 
-            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel {PhoneNumber = phoneNumber});
+            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         }
 
         [HttpPost]
@@ -166,7 +167,7 @@ namespace DEKL.CP.UI.Controllers
                     await SignInAsync(user, isPersistent: false);
                 }
 
-                return RedirectToAction("Index", new {Message = ManageMessageId.AddPhoneSuccess});
+                return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess.GetDescription() });
             }
 
             // No caso de falha, reexibir a view. 
@@ -179,7 +180,7 @@ namespace DEKL.CP.UI.Controllers
             var result = await _userManager.SetPhoneNumberAsync(User.Identity.GetUserId<int>(), null);
             if (!result.Succeeded)
             {
-                return RedirectToAction("Index", new {Message = Enum.GetName(typeof(ManageMessageId), ManageMessageId.Error) });
+                return RedirectToAction("Index", new { Message = ManageMessageId.Error.GetDescription() });
             }
 
             var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
@@ -188,7 +189,7 @@ namespace DEKL.CP.UI.Controllers
                 await SignInAsync(user, isPersistent: false);
             }
 
-            return RedirectToAction("Index", new {Message = Enum.GetName(typeof(ManageMessageId), ManageMessageId.RemovePhoneSuccess)});
+            return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess.GetDescription() });
         }
 
         public ActionResult ChangePassword() => View();
@@ -211,7 +212,7 @@ namespace DEKL.CP.UI.Controllers
                     await SignInAsync(user, isPersistent: false);
                 }
 
-                return RedirectToAction("Index", new {Message = Enum.GetName(typeof(ManageMessageId), ManageMessageId.ChangePasswordSuccess) });
+                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess.GetDescription() });
             }
 
             AddErrors(result);
@@ -234,7 +235,7 @@ namespace DEKL.CP.UI.Controllers
                     {
                         await SignInAsync(user, isPersistent: false);
                     }
-                    return RedirectToAction("Index", new { Message = Enum.GetName(typeof(ManageMessageId), ManageMessageId.SetPasswordSuccess) });
+                    return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess.GetDescription() });
                 }
                 AddErrors(result);
             }
@@ -245,7 +246,7 @@ namespace DEKL.CP.UI.Controllers
 
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
-            ViewBag.StatusMessage = message != null ? Enum.GetName(typeof(ManageMessageId), message) : string.Empty;
+            ViewBag.StatusMessage = message.GetDescription();
 
             var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
 
@@ -276,17 +277,17 @@ namespace DEKL.CP.UI.Controllers
         public async Task<ActionResult> LinkLoginCallback()
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
-            var messageError = Enum.GetName(typeof(ManageMessageId), ManageMessageId.Error);
+            var messageError = ManageMessageId.Error.GetDescription();
 
             if (loginInfo == null)
             {
-                return RedirectToAction("ManageLogins", new {Message = messageError});
+                return RedirectToAction("ManageLogins", new { Message = messageError });
             }
 
             var result = await _userManager.AddLoginAsync(User.Identity.GetUserId<int>(), loginInfo.Login);
             return result.Succeeded
                 ? RedirectToAction("ManageLogins")
-                : RedirectToAction("ManageLogins", new {Message = messageError});
+                : RedirectToAction("ManageLogins", new { Message = messageError });
         }
 
         protected override void Dispose(bool disposing)
@@ -312,12 +313,11 @@ namespace DEKL.CP.UI.Controllers
             var clientKey = Request.Browser.Type;
             await _userManager.SignInClientAsync(user, clientKey);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie, DefaultAuthenticationTypes.TwoFactorCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties {IsPersistent = isPersistent}, 
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent },
                 await user.GenerateUserIdentityAsync(_userManager));
         }
 
         private bool HasPassword() => _userManager.FindById(User.Identity.GetUserId<int>())?.PasswordHash != null;
-
         private bool HasPhoneNumber() => _userManager.FindById(User.Identity.GetUserId<int>())?.PasswordHash != null;
 
         public enum ManageMessageId

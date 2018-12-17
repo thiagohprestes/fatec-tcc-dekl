@@ -1,12 +1,14 @@
-﻿
+﻿@using DEKL.CP.Domain.Enums
+@using DEKL.CP.UI.Extensions
 @{
     ViewBag.Title = "Cadastrar Fornecedor";
 }
+
 <h2>@ViewBag.Title</h2>
 <div class="row">
     <div class="col-md-6">
         <section id="registerProviderForm">
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("Create", "Provider"))
             {
                 @Html.AntiForgeryToken()
                 <div class="form">
@@ -17,12 +19,12 @@
                         <div class="form-group">
                             <label>Tipo de Fornecedor</label>
                             <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="physicalperson" name="typeprovider" value="1" checked>
-                                <label class="custom-control-label" for="physicalperson">Pessoa Física</label>
+                                <input class="custom-control-input" type="radio" id="@(TypeProvider.PhysicalPerson.GetDisplayName())" name="typeprovider" value="@TypeProvider.PhysicalPerson" checked>
+                                <label class="custom-control-label" for="@(TypeProvider.PhysicalPerson.GetDisplayName())">@(TypeProvider.PhysicalPerson.GetDescription())</label>
                             </div>
                             <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="legalperson" name="typeprovider" value="2">
-                                <label class="custom-control-label" for="legalperson">Pessoa Jurídica</label>
+                                <input class="custom-control-input" type="radio" id="@(TypeProvider.LegalPerson.GetDisplayName())" name="typeprovider" value="@TypeProvider.LegalPerson">
+                                <label class="custom-control-label" for="@(TypeProvider.LegalPerson.GetDisplayName())">@(TypeProvider.LegalPerson.GetDescription())</label>
                             </div>
                         </div>
                     </div>

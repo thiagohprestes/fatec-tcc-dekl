@@ -151,7 +151,8 @@ namespace DEKL.CP.UI.Controllers
 
             var code = await _userManager.GeneratePasswordResetTokenAsync(user.Id);
             var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code }, Request.Url?.Scheme);
-            await _userManager.SendEmailAsync(user.Id, "Esqueci minha senha", $"Por favor altere sua senha clicando aqui: {callbackUrl}");
+            await _userManager.SendEmailAsync(user.Id, 
+                "Esqueci minha senha", $"Por favor altere sua senha clicando aqui: {callbackUrl}");
 
             return View("ForgotPasswordConfirmation");
 
@@ -200,7 +201,9 @@ namespace DEKL.CP.UI.Controllers
             var userId = await _signInManager.GetVerifiedUserIdAsync();
 
             var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(userId);
-            var factorOptions = userFactors.Select(purpose => new SelectListItem {Text = purpose, Value = purpose}).ToList();
+            var factorOptions = userFactors
+                .Select(purpose => new SelectListItem {Text = purpose, Value = purpose})
+                .ToList();
 
             return View(new SendCodeViewModel {Providers = factorOptions, ReturnUrl = returnUrl, UserId = userId});
         }

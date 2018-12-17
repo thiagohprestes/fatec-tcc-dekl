@@ -10,10 +10,7 @@ namespace DEKL.CP.Infra.Data.EF.Context
         public DEKLCPDataContextEF() : base("DEKLCPConn")
         { }
 
-        public new IDbSet<T> Set<T>() where T : EntityBase
-        {
-            return base.Set<T>();
-        }
+        public new IDbSet<T> Set<T>() where T : EntityBase => base.Set<T>();
 
         public DbSet<Module> Modules { get; set; }
         public DbSet<Audit> Audits { get; set; }
@@ -33,7 +30,6 @@ namespace DEKL.CP.Infra.Data.EF.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Properties()

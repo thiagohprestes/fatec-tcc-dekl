@@ -56,6 +56,7 @@
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Enums\PaymentType.cs" />
     <Compile Include="Enums\Priority.cs" />
+    <Compile Include="Enums\TypeProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
