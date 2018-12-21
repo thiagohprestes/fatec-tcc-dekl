@@ -8,10 +8,7 @@ namespace DEKL.CP.Infra.Data.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<EF.Context.DEKLCPDataContextEF>
     {
-        public Configuration()
-        {
-            AutomaticMigrationsEnabled = false;
-        }
+        public Configuration() => AutomaticMigrationsEnabled = false;
 
         protected override void Seed(EF.Context.DEKLCPDataContextEF context)
         {

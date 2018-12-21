@@ -1,4 +1,5 @@
-﻿using DEKL.CP.Infra.CrossCutting.Identity.Configuration;
+﻿using DEKL.CP.Domain.Contracts.Repositories;
+using DEKL.CP.Infra.CrossCutting.Identity.Configuration;
 using DEKL.CP.Infra.CrossCutting.Identity.Context;
 using DEKL.CP.Infra.CrossCutting.Identity.Models;
 using DEKL.CP.Infra.Data.EF.Context;
@@ -14,7 +15,6 @@ namespace DEKL.CP.Infra.CrossCutting.IoC
         public static void RegisterServices(Container container)
         {
             container.Register<DEKLCPDataContextEF>(Lifestyle.Scoped);
-            container.Register(() => new UnitOfWork(new DEKLCPDataContextEF()), Lifestyle.Scoped);
             container.Register<ApplicationDbContext>(Lifestyle.Scoped);
             container.Register<IUserStore<ApplicationUser, int>>(()
                 => new UserStore<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>(
@@ -26,7 +26,8 @@ namespace DEKL.CP.Infra.CrossCutting.IoC
             container.Register<ApplicationUserManager>(Lifestyle.Scoped);
             container.Register<ApplicationSignInManager>(Lifestyle.Scoped);
 
-            //container.Register<IUsuarioRepository, UsuarioRepositoryEF>(Lifestyle.Scoped);
+            container.Register<IProviderRepository, ProviderRepositoryEF>(Lifestyle.Scoped);
+            container.Register<IStateRepository, StateRepositoryEF>(Lifestyle.Scoped);
         }
     }
 }

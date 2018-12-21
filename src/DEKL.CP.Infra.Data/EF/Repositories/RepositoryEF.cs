@@ -5,20 +5,21 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using DEKL.CP.Infra.Data.EF.Context;
 
 namespace DEKL.CP.Infra.Data.EF.Repositories
 {
     public class RepositoryEF<T> : IRepository<T> where T : EntityBase
     {
-        private readonly DbContext _ctx;
+        private readonly DEKLCPDataContextEF _ctx;
         private IDbSet<T> _entities;
         private string _errorMessage = string.Empty;
 
-        public RepositoryEF(DbContext ctx) => _ctx = ctx;
+        public RepositoryEF(DEKLCPDataContextEF ctx) => _ctx = ctx;
 
-        public IEnumerable<T> GetAll() => Entities.ToList();
+        public IEnumerable<T> All => Entities.ToList();
 
-        public IEnumerable<T> GetActives() => Entities.Where(e => e.Active).ToList();
+        public IEnumerable<T> Actives => Entities.Where(e => e.Active).ToList();
 
         public T Find(int id) => Entities.Find(id);
 
@@ -40,13 +41,8 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
 
             catch (DbEntityValidationException dbEx)
             {
-                dbEx.EntityValidationErrors.ToList().ForEach(eve =>
-                {
-                    eve.ValidationErrors.ToList().ForEach(vr =>
-                    {
-                        _errorMessage += $"Property: {vr.PropertyName} Error: {vr.ErrorMessage}" + Environment.NewLine;
-                    });
-                });
+                dbEx.EntityValidationErrors.ToList().ForEach(eve => eve.ValidationErrors.ToList()
+                    .ForEach(vr => _errorMessage += $"Property: {vr.PropertyName} Error: {vr.ErrorMessage}" + Environment.NewLine));
 
                 throw new Exception(_errorMessage, dbEx);
             }
@@ -66,13 +62,8 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
             }
             catch (DbEntityValidationException dbEx)
             {
-                dbEx.EntityValidationErrors.ToList().ForEach(eve =>
-                {
-                    eve.ValidationErrors.ToList().ForEach(vr =>
-                    {
-                        _errorMessage += $"Property: {vr.PropertyName} Error: {vr.ErrorMessage}" + Environment.NewLine;
-                    });
-                });
+                dbEx.EntityValidationErrors.ToList().ForEach(eve => eve.ValidationErrors.ToList()
+                    .ForEach(vr => _errorMessage += $"Property: {vr.PropertyName} Error: {vr.ErrorMessage}" + Environment.NewLine));
 
                 throw new Exception(_errorMessage, dbEx);
             }
@@ -92,13 +83,8 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
             }
             catch (DbEntityValidationException dbEx)
             {
-                dbEx.EntityValidationErrors.ToList().ForEach(eve =>
-                {
-                    eve.ValidationErrors.ToList().ForEach(vr =>
-                    {
-                        _errorMessage += $"Property: {vr.PropertyName} Error: {vr.ErrorMessage}" + Environment.NewLine;
-                    });
-                });
+                dbEx.EntityValidationErrors.ToList().ForEach(eve => eve.ValidationErrors.ToList()
+                    .ForEach(vr => _errorMessage += $"Property: {vr.PropertyName} Error: {vr.ErrorMessage}" + Environment.NewLine));
 
                 throw new Exception(_errorMessage, dbEx);
             }
@@ -118,22 +104,14 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
             }
             catch (DbEntityValidationException dbEx)
             {
-                dbEx.EntityValidationErrors.ToList().ForEach(eve =>
-                {
-                    eve.ValidationErrors.ToList().ForEach(vr =>
-                    {
-                        _errorMessage += $"Property: {vr.PropertyName} Error: {vr.ErrorMessage}" + Environment.NewLine;
-                    });
-                });
+                dbEx.EntityValidationErrors.ToList().ForEach(eve => eve.ValidationErrors.ToList()
+                        .ForEach(vr => _errorMessage += $"Property: {vr.PropertyName} Error: {vr.ErrorMessage}" + Environment.NewLine));
 
                 throw new Exception(_errorMessage, dbEx);
             }
         }
 
-        public void Dispose()
-        {
-            _ctx.Dispose();
-        }
+        public void Dispose() => _ctx.Dispose();
 
         public virtual IQueryable<T> Table => Entities;
 

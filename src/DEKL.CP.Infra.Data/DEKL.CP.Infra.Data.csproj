@@ -45,6 +45,7 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\ProviderPhysicalLegalPersonDTO.cs" />
     <Compile Include="EF\Context\DEKLCPDataContextEF.cs" />
     <Compile Include="EF\Maps\AccountToPayMap.cs" />
     <Compile Include="EF\Maps\AddressMap.cs" />
@@ -61,12 +62,14 @@
     <Compile Include="EF\Maps\ProviderMap.cs" />
     <Compile Include="EF\Maps\ProviderPhysicalPersonMap.cs" />
     <Compile Include="EF\Maps\StateMap.cs" />
+    <Compile Include="EF\Repositories\ProviderRepositoryEF.cs" />
     <Compile Include="EF\Repositories\RepositoryEF.cs" />
+    <Compile Include="EF\Repositories\StateRepositoryEF.cs" />
     <Compile Include="EF\Repositories\UnitOfWork.cs" />
     <Compile Include="EF\Repositories\UsuarioRepositoryEF.cs" />
-    <Compile Include="Migrations\201812151815445_InitialCreate.cs" />
-    <Compile Include="Migrations\201812151815445_InitialCreate.Designer.cs">
-      <DependentUpon>201812151815445_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201812211059522_InitialCreate.cs" />
+    <Compile Include="Migrations\201812211059522_InitialCreate.Designer.cs">
+      <DependentUpon>201812211059522_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,8 +85,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812151815445_InitialCreate.resx">
-      <DependentUpon>201812151815445_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812211059522_InitialCreate.resx">
+      <DependentUpon>201812211059522_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

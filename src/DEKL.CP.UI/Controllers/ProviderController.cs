@@ -1,10 +1,11 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using AutoMapper;
 using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.Domain.Enums;
-using DEKL.CP.Infra.Data.EF.Repositories;
 using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels.Provider;
 
@@ -12,51 +13,76 @@ namespace DEKL.CP.UI.Controllers
 {
     public class ProviderController : Controller
     {
-        private readonly IRepository<State> _stateRepository;
-        private readonly IRepository<Provider> _providerRepository;
-        private readonly IRepository<ProviderPhysicalPerson> _providerPhysicalPersonRepository;
-        private readonly IRepository<ProviderLegalPerson> _providerLegalPersonRepository;
+        private readonly IStateRepository _stateRepository;
+        private readonly IProviderRepository _providerRepository;
 
-        public ProviderController(UnitOfWork unitOfWork)
+        public ProviderController(IStateRepository stateRepository, IProviderRepository providerRepository)
         {
-            _stateRepository = unitOfWork.RepositoryEF<State>();
-            _providerRepository = unitOfWork.RepositoryEF<Provider>();
-            _providerPhysicalPersonRepository = unitOfWork.RepositoryEF<ProviderPhysicalPerson>();
-            _providerLegalPersonRepository = unitOfWork.RepositoryEF<ProviderLegalPerson>();
+            _stateRepository = stateRepository;
+            _providerRepository = providerRepository;
         }
 
-        public ActionResult Index() => View();
+        public ActionResult Index() 
+            => View(Mapper.Map<IEnumerable<ProviderPhysicalLegalPersonViewModel>>(_providerRepository.AllActivesProviderPhysicalLegalPerson));
 
         public ActionResult Select() =>View();
  
         public ActionResult Create(TypeProvider typeprovider)
         {
-            ViewBag.States = new SelectList(_stateRepository.GetActives(), nameof(State.Initials), nameof(State.Name));
+            ViewBag.States = new SelectList(_stateRepository.Actives, nameof(State.Id), nameof(State.Name));
             return View(typeprovider == TypeProvider.PhysicalPerson ? "CreateProviderPhysicalPerson" : "CreateProviderLegalPerson");
         }
 
-        public ActionResult CreateProviderPhysicalPerson(ProviderPhysicalPersonViewModel model)
+        public ActionResult CreateProviderPhysicalPerson(ProviderPhysicalPerson model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var provider = new Provider
+                try
                 {
-                    PhoneNumber = model.PhoneNumber,
-                    Email = model.Email,
+                    _providerRepository.AddProviderPhysicalPerson(model);
 
-                };
-
-                var providerPhysicalPerson = Mapper.Map<ProviderPhysicalPerson>(model);
-
-                _providerRepository.Add(provider);
-                _providerPhysicalPersonRepository.Add(providerPhysicalPerson);
-            }
-            catch (Exception ex)
-            {
-                this.AddToastMessage("Erro no salvamento", "Erro ao salvar o fornecedor, favor tentar novamente", ToastType.Error);
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    this.AddToastMessage("Erro no salvamento", "Erro ao salvar o fornecedor, favor tentar novamente", ToastType.Error);
+                }
             }
 
+            ViewBag.States = new SelectList(_stateRepository.Actives, nameof(State.Id), nameof(State.Name));
             return View();
+        }
+
+        public ActionResult CreateProviderLegalPerson(ProviderLegalPerson model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _providerRepository.AddProviderLegalPerson(model);
+
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    this.AddToastMessage("Erro no salvamento", "Erro ao salvar o fornecedor, favor tentar novamente", ToastType.Error);
+                }
+            }
+
+            ViewBag.States = new SelectList(_stateRepository.Actives, nameof(State.Id), nameof(State.Name));
+            return View();
+        }
+
+        public ActionResult Details(int? id, TypeProvider typeProvider)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (typeProvider == TypeProvider.LegalPerson)
+            {
+            }
         }
     }
 }

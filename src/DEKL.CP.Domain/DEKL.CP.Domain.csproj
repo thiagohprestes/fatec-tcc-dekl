@@ -32,11 +32,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Contracts\Entities\IAccount.cs" />
+    <Compile Include="Contracts\Entities\IAddress.cs" />
     <Compile Include="Contracts\Entities\IBankAccount.cs" />
     <Compile Include="Contracts\Entities\IEntityBase.cs" />
     <Compile Include="Contracts\Entities\IProvider.cs" />
+    <Compile Include="Contracts\Entities\IProviderPhysicalLegalPerson.cs" />
+    <Compile Include="Contracts\Entities\IProviderPhysicalPerson.cs" />
+    <Compile Include="Contracts\Entities\IState.cs" />
+    <Compile Include="Contracts\Repositories\IProviderRepository.cs" />
     <Compile Include="Contracts\Repositories\IRepository.cs" />
     <Compile Include="Contracts\Repositories\IApplicationUserRepository.cs" />
+    <Compile Include="Contracts\Repositories\IStateRepository.cs" />
     <Compile Include="Entities\AccountToPay.cs" />
     <Compile Include="Entities\BankAgency .cs" />
     <Compile Include="Entities\Audit.cs" />

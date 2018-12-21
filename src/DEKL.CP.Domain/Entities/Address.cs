@@ -1,6 +1,8 @@
-﻿namespace DEKL.CP.Domain.Entities
+﻿using DEKL.CP.Domain.Contracts.Entities;
+
+namespace DEKL.CP.Domain.Entities
 { 
-    public class Address : EntityBase
+    public class Address : EntityBase, IAddress
     {
         public string Street { get; set; }
         public string Number { get; set; }

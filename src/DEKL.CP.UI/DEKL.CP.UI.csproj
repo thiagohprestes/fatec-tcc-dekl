@@ -286,6 +286,7 @@
     <Compile Include="ViewModels\AccountsToPay\AccountToPayViewModel.cs" />
     <Compile Include="ViewModels\AddressViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderLegalPersonViewModel.cs" />
+    <Compile Include="ViewModels\Provider\ProviderPhysicalLegalPersonViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderPhysicalPersonViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderViewModel.cs" />
     <Compile Include="ViewModels\UsersAdmin\ApplicationUsersViewModel.cs" />
@@ -345,6 +346,7 @@
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Details.cshtml" />
     <Content Include="Views\UsersAdmin\Delete.cshtml" />
+    <Content Include="Views\Provider\CreateProviderLegalPerson.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,6 +1,5 @@
 namespace DEKL.CP.Infra.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class InitialCreate : DbMigration
@@ -300,7 +299,7 @@ namespace DEKL.CP.Infra.Data.Migrations
                 .Index(t => t.CNPJ, unique: true, name: "UQ_dbo.ProviderLegalPerson.CNPJ");
             
             CreateTable(
-                "dbo.ProviderPhysicalPersonMap",
+                "dbo.ProviderPhysicalPerson",
                 c => new
                     {
                         Id = c.Int(nullable: false),
@@ -316,7 +315,7 @@ namespace DEKL.CP.Infra.Data.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.ProviderPhysicalPersonMap", "Id", "dbo.Provider");
+            DropForeignKey("dbo.ProviderPhysicalPerson", "Id", "dbo.Provider");
             DropForeignKey("dbo.ProviderLegalPerson", "Id", "dbo.Provider");
             DropForeignKey("dbo.Audit", "ModuleId", "dbo.Module");
             DropForeignKey("dbo.Audit", "ApplicationUserId", "dbo.ApplicationUser");
@@ -335,8 +334,8 @@ namespace DEKL.CP.Infra.Data.Migrations
             DropForeignKey("dbo.PaymentSimulatorAccountToPay", "AccountToPay_Id", "dbo.AccountToPay");
             DropForeignKey("dbo.PaymentSimulatorAccountToPay", "PaymentSimulator_Id", "dbo.PaymentSimulator");
             DropForeignKey("dbo.Installment", "AccountToPayId", "dbo.AccountToPay");
-            DropIndex("dbo.ProviderPhysicalPersonMap", "UQ_dbo.ProviderPhysicalPerson.CPF");
-            DropIndex("dbo.ProviderPhysicalPersonMap", new[] { "Id" });
+            DropIndex("dbo.ProviderPhysicalPerson", "UQ_dbo.ProviderPhysicalPerson.CPF");
+            DropIndex("dbo.ProviderPhysicalPerson", new[] { "Id" });
             DropIndex("dbo.ProviderLegalPerson", "UQ_dbo.ProviderLegalPerson.CNPJ");
             DropIndex("dbo.ProviderLegalPerson", new[] { "Id" });
             DropIndex("dbo.PaymentSimulatorAccountToPay", new[] { "AccountToPay_Id" });
@@ -364,7 +363,7 @@ namespace DEKL.CP.Infra.Data.Migrations
             DropIndex("dbo.PaymentSimulator", new[] { "InternalBankAccountId" });
             DropIndex("dbo.Installment", new[] { "AccountToPayId" });
             DropIndex("dbo.AccountToPay", new[] { "ProviderId" });
-            DropTable("dbo.ProviderPhysicalPersonMap");
+            DropTable("dbo.ProviderPhysicalPerson");
             DropTable("dbo.ProviderLegalPerson");
             DropTable("dbo.PaymentSimulatorAccountToPay");
             DropTable("dbo.Module");

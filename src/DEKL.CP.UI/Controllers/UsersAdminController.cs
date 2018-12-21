@@ -14,7 +14,7 @@ using DEKL.CP.UI.Scripts.Toastr;
 
 namespace DEKL.CP.UI.Controllers
 {
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public class UsersAdminController : BaseController
     {
         private readonly ApplicationUserManager _userManager;
@@ -30,7 +30,7 @@ namespace DEKL.CP.UI.Controllers
         {
             var users = await _userManager.Users.Where(u => u.Active).ToListAsync();
 
-            return View(Mapper.Map<IEnumerable<ApplicationUsersViewModel>>(users));
+            return View(Mapper.Map<IEnumerable<ApplicationUsersViewModel>>(users) ?? new List<ApplicationUsersViewModel>());
         }
 
         public async Task<ActionResult> Details(int? id)

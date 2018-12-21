@@ -1,4 +1,5 @@
-﻿using DEKL.CP.Domain.Entities;
+﻿using System.Collections.Generic;
+using DEKL.CP.Domain.Entities;
 using System.Data.Entity.ModelConfiguration;
 
 namespace DEKL.CP.Infra.Data.EF.Maps

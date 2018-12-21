@@ -45,7 +45,7 @@ namespace DEKL.CP.UI.Controllers
             }
 
             ViewBag.Users = users;
-            ViewBag.UserCount = users.Count();
+            ViewBag.UserCount = users.Count;
             return View(role);
         }
 

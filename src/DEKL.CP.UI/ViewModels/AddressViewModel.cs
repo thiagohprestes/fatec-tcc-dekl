@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
+using DEKL.CP.Domain.Contracts.Entities;
+using DEKL.CP.Domain.Entities;
 
 namespace DEKL.CP.UI.ViewModels
 {
-    public class AddressViewModel
+    public class AddressViewModel : IAddress
     {
         [Required]
         [DisplayName("Logradouro")]
@@ -31,8 +31,8 @@ namespace DEKL.CP.UI.ViewModels
 
         [Required]
         [DisplayName("Estado")]
-        public int SelectedSateId { get; set; }
+        public int? StateId { get; set; }
 
-        public IEnumerable<SelectListItem> State { get; set; }
+        public State State { get; set; }
     }
 }

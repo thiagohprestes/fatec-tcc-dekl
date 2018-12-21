@@ -10,7 +10,7 @@ namespace DEKL.CP.Infra.Data.EF.Maps
         public ProviderPhysicalPersonMap()
         {
             //Table
-            ToTable(nameof(ProviderPhysicalPersonMap));
+            ToTable(nameof(ProviderPhysicalPerson));
 
             //Collumns
             Property(e => e.Name)

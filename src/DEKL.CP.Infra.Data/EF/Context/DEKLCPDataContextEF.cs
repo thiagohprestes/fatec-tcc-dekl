@@ -10,8 +10,6 @@ namespace DEKL.CP.Infra.Data.EF.Context
         public DEKLCPDataContextEF() : base("DEKLCPConn")
         { }
 
-        public new IDbSet<T> Set<T>() where T : EntityBase => base.Set<T>();
-
         public DbSet<Module> Modules { get; set; }
         public DbSet<Audit> Audits { get; set; }
         public DbSet<State> States { get; set; }
@@ -49,7 +47,7 @@ namespace DEKL.CP.Infra.Data.EF.Context
             modelBuilder.Properties<decimal>()
                 .Configure(e => e.HasPrecision(4, 2));
 
-            modelBuilder.Entity<ApplicationUser>().ToTable(nameof(ApplicationUser));
+            //modelBuilder.Entity<ApplicationUser>().ToTable(nameof(ApplicationUser));
             modelBuilder.Configurations.Add(new Maps.ModuleMap());
             modelBuilder.Configurations.Add(new Maps.AuditMap());
             modelBuilder.Configurations.Add(new Maps.StateMap());
