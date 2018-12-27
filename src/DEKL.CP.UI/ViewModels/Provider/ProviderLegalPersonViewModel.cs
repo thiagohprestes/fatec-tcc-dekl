@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using DEKL.CP.Domain.Contracts.Entities;
 
 namespace DEKL.CP.UI.ViewModels.Provider
 {
-    public class ProviderLegalPersonViewModel : ProviderViewModel
+    public class ProviderLegalPersonViewModel : ProviderViewModel, IProviderLegalPerson
     {
-        [Required(AllowEmptyStrings = false)]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
-        [DisplayName("Razão Social")]
+        [Required(AllowEmptyStrings = false), DisplayFormat(ConvertEmptyStringToNull = false), DisplayName("Razão Social")]
         public string CorporateName { get; set; }
 
         [Required]

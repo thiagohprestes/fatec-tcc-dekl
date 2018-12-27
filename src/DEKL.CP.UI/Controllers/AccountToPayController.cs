@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using DEKL.CP.Domain.Entities;
 using DEKL.CP.UI.ViewModels.AccountsToPay;
 
 namespace DEKL.CP.UI.Controllers
@@ -26,18 +25,7 @@ namespace DEKL.CP.UI.Controllers
 
         public ActionResult Create()
         {
-            var accountToPay = new AccountToPayViewModel
-            {
-                Providers = new List<Provider>
-                {
-                    //new ProviderPhysicalPerson { Name = "Net Serviços e Telecomunicações Ltda."},
-                    //new ProviderPhysicalPerson{ Name = "C&C Casa e Contrução Ltda."},
-                    //new ProviderPhysicalPerson{ Name = "Russo Funilária e Pintura Ltda."}
-                } 
-
-            };
-
-            return View(accountToPay);
+            return View();
         }
     }
 }

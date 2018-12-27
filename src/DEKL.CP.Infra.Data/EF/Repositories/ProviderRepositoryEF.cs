@@ -44,18 +44,7 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                         }
                 ).ToList();
 
-        public void AddProviderPhysicalPerson(ProviderPhysicalPerson providerPhysicalPerson)
-        {
-            _ctx.ProviderPhysicalPersons.Add(providerPhysicalPerson);
-
-            _ctx.SaveChanges();
-        }
-
-        public void AddProviderLegalPerson(ProviderLegalPerson providerLegalPerson)
-        {
-            _ctx.ProviderLegalPersons.Add(providerLegalPerson);
-
-            _ctx.SaveChanges();
-        }
+        public ProviderPhysicalPerson FindActiveProviderPhysicalPerson (int id) => _ctx.ProviderPhysicalPersons.First(p => p.Active && p.Id == id);
+        public ProviderLegalPerson FindActiveProviderLegalPerson(int id) => _ctx.ProviderLegalPersons.First(p => p.Active && p.Id == id);
     }
 }

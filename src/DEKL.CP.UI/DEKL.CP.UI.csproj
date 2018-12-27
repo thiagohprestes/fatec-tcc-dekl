@@ -263,6 +263,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountToPayController.cs" />
+    <Compile Include="Controllers\BankAdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -285,6 +286,11 @@
     <Compile Include="ViewModels\AccountsToPay\AccountsToPayViewModel.cs" />
     <Compile Include="ViewModels\AccountsToPay\AccountToPayViewModel.cs" />
     <Compile Include="ViewModels\AddressViewModel.cs" />
+    <Compile Include="ViewModels\BankAgency\BankAgencyViewModel.cs" />
+    <Compile Include="ViewModels\BankTransactionViewModel.cs" />
+    <Compile Include="ViewModels\Bank\BankViewModel.cs" />
+    <Compile Include="ViewModels\InternalBankAccount\InternalBankAccountViewModel.cs" />
+    <Compile Include="ViewModels\Provider\ProviderBankAccountViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderLegalPersonViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderPhysicalLegalPersonViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderPhysicalPersonViewModel.cs" />
@@ -347,6 +353,12 @@
     <Content Include="Views\UsersAdmin\Details.cshtml" />
     <Content Include="Views\UsersAdmin\Delete.cshtml" />
     <Content Include="Views\Provider\CreateProviderLegalPerson.cshtml" />
+    <Content Include="Views\Provider\DetailsProviderPhysicalPerson.cshtml" />
+    <Content Include="Views\BankAdmin\Index.cshtml" />
+    <Content Include="Views\BankAdmin\Create.cshtml" />
+    <Content Include="Views\BankAdmin\Details.cshtml" />
+    <Content Include="Views\BankAdmin\Delete.cshtml" />
+    <Content Include="Views\BankAdmin\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

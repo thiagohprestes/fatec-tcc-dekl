@@ -8,8 +8,8 @@ namespace DEKL.CP.Domain.Contracts.Repositories
     {
         IEnumerable<IProviderPhysicalLegalPerson> AllActivesProviderPhysicalLegalPerson { get; }
 
-        void AddProviderPhysicalPerson(ProviderPhysicalPerson providerPhysicalPerson);
+        ProviderPhysicalPerson FindActiveProviderPhysicalPerson(int id);
 
-        void AddProviderLegalPerson(ProviderLegalPerson providerLegalPerson);
+        ProviderLegalPerson FindActiveProviderLegalPerson(int id);
     }
 }

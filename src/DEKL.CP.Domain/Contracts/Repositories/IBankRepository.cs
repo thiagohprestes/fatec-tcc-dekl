@@ -2,6 +2,6 @@
 
 namespace DEKL.CP.Domain.Contracts.Repositories
 {
-    public interface IStateRepository : IRepository<State>
+    public interface IBankRepository : IRepository<Bank>
     { }
 }

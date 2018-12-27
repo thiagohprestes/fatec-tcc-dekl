@@ -1,18 +1,18 @@
-﻿using DEKL.CP.Infra.CrossCutting.IoC;
-using DEKL.CP.UI.App_Start;
+﻿using System.Reflection;
+using System.Web;
+using System.Web.Mvc;
+using DEKL.CP.Infra.CrossCutting.IoC;
+using DEKL.CP.UI;
 using Microsoft.Owin;
 using SimpleInjector;
 using SimpleInjector.Advanced;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
-using System.Reflection;
-using System.Web;
-using System.Web.Mvc;
 using WebActivator;
 
 [assembly: PostApplicationStartMethod(typeof(SimpleInjectorInitializer), "Initialize")]
 
-namespace DEKL.CP.UI.App_Start
+namespace DEKL.CP.UI
 {
     public class SimpleInjectorInitializer
     {

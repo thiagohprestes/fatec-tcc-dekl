@@ -25,30 +25,6 @@ namespace DEKL.CP.UI.Controllers
 
         public ActionResult Index() => View(_roleManager.Roles);
 
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var role = await _roleManager.FindByIdAsync(id.Value);
-            // GetAll the list of Users in this Role
-            var users = new List<ApplicationUser>();
-
-            // GetAll the list of Users in this Role
-            foreach (var user in _userManager.Users.ToList())
-            {
-                if (await _userManager.IsInRoleAsync(user.Id, role.Name))
-                {
-                    users.Add(user);
-                }
-            }
-
-            ViewBag.Users = users;
-            ViewBag.UserCount = users.Count;
-            return View(role);
-        }
-
         public ActionResult Create() => View();
 
         [HttpPost]
@@ -67,6 +43,31 @@ namespace DEKL.CP.UI.Controllers
             }
 
             return View();
+        }
+
+        public async Task<ActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var role = await _roleManager.FindByIdAsync(id.Value);
+            // GetAll the list of Users in this Role
+            var users = new List<ApplicationUser>();
+
+            // GetAll the list of Users in this Role
+            foreach (var user in _userManager.Users.ToList())
+            {
+                if (await _userManager.IsInRoleAsync(user.Id, role.Name))
+                {
+                    users.Add(user);
+                }
+            }
+
+            ViewBag.Users = users;
+            ViewBag.UserCount = users.Count;
+            return View(role);
         }
 
         public async Task<ActionResult> Edit(int? id)

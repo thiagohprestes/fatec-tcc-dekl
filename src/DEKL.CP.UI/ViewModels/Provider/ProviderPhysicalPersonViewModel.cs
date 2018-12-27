@@ -1,11 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Entities;
+using DEKL.CP.UI.ViewModels.AccountsToPay;
 
 namespace DEKL.CP.UI.ViewModels.Provider
 {
-    public class ProviderPhysicalPersonViewModel : ProviderViewModel, IProviderPhysicalLegalPerson
+    public class ProviderPhysicalPersonViewModel : ProviderViewModel, IProviderPhysicalPerson
     {
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
@@ -15,8 +17,7 @@ namespace DEKL.CP.UI.ViewModels.Provider
         [Required]
         public string CPF { get; set; }
 
-        public string NameCorporateName { get; set; }
-
-        public string CPFCNPJ { get; set; }
+        public virtual ICollection<AccountToPayViewModel> AccountsToPay { get; set; }
+        public virtual ICollection<ProviderBankAccountViewModel> ProviderBankAccounts { get; set; }
     }
 }

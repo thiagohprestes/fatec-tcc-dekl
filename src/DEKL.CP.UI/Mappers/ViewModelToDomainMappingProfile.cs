@@ -4,6 +4,7 @@ using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
 using DEKL.CP.UI.ViewModels;
+using DEKL.CP.UI.ViewModels.Bank;
 using DEKL.CP.UI.ViewModels.Provider;
 using DEKL.CP.UI.ViewModels.UsersAdmin;
 
@@ -19,6 +20,8 @@ namespace DEKL.CP.UI.Mappers
                 .ForMember(dest => dest.PhoneNumber,
                     opt => opt.MapFrom(src => Regex.Replace(src.PhoneNumber, @"[^\d]", string.Empty)));
             CreateMap<AddressViewModel, Address>();
+            CreateMap<BankViewModel, Bank>();
+
             CreateMap<ProviderViewModel, Provider>();
             CreateMap<ProviderPhysicalPersonViewModel, ProviderPhysicalPerson>();
             CreateMap<ProviderLegalPersonViewModel, ProviderLegalPerson>();

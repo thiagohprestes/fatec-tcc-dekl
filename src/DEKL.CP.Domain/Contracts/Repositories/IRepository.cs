@@ -9,6 +9,7 @@ namespace DEKL.CP.Domain.Contracts.Repositories
         IEnumerable<T> All { get; }
         IEnumerable<T> Actives { get; }
         T Find(int id);
+        T FindActive(int id);
         IEnumerable<T> Find(Func<T, bool> predicate);
         void Add(T entity);
         void Update(T entity);

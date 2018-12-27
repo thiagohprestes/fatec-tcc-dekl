@@ -17,14 +17,11 @@ namespace DEKL.CP.UI.Controllers
     {
         private ApplicationUserManager _userManager;
 
-        public ManageController(ApplicationUserManager userManager)
-        {
-            _userManager = userManager;
-        }
+        public ManageController(ApplicationUserManager userManager) => _userManager = userManager;
 
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
-            ViewBag.StatusMessage = message.GetDescription();
+            ViewBag.StatusMessage = message != null ? message.GetDescription() : string.Empty;
 
             var userId = User.Identity.GetUserId<int>();
 

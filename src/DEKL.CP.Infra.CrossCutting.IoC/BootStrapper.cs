@@ -26,8 +26,9 @@ namespace DEKL.CP.Infra.CrossCutting.IoC
             container.Register<ApplicationUserManager>(Lifestyle.Scoped);
             container.Register<ApplicationSignInManager>(Lifestyle.Scoped);
 
-            container.Register<IProviderRepository, ProviderRepositoryEF>(Lifestyle.Scoped);
             container.Register<IStateRepository, StateRepositoryEF>(Lifestyle.Scoped);
+            container.Register<IBankRepository, BankRepositoryEF>(Lifestyle.Scoped);
+            container.Register<IProviderRepository, ProviderRepositoryEF>(Lifestyle.Scoped);
         }
     }
 }

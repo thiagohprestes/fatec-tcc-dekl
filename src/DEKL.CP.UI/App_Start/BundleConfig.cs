@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace DEKL.CP.UI.App_Start
+namespace DEKL.CP.UI
 {
     public class BundleConfig
     {

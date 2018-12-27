@@ -23,6 +23,8 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
 
         public T Find(int id) => Entities.Find(id);
 
+        public T FindActive(int id) => Entities.First(e => e.Active && e.Id == id);
+
         public IEnumerable<T> Find(Func<T, bool> predicate) => Entities.Where(predicate);
 
         public void Add(T entity)

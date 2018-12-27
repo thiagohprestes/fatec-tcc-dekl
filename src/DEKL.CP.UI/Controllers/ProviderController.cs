@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using AutoMapper;
@@ -25,7 +24,7 @@ namespace DEKL.CP.UI.Controllers
         public ActionResult Index() 
             => View(Mapper.Map<IEnumerable<ProviderPhysicalLegalPersonViewModel>>(_providerRepository.AllActivesProviderPhysicalLegalPerson));
 
-        public ActionResult Select() =>View();
+        public ActionResult Select() => View();
  
         public ActionResult Create(TypeProvider typeprovider)
         {
@@ -39,7 +38,7 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
-                    _providerRepository.AddProviderPhysicalPerson(model);
+                    _providerRepository.Add(model);
 
                     return RedirectToAction("Index");
                 }
@@ -59,7 +58,7 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
-                    _providerRepository.AddProviderLegalPerson(model);
+                    _providerRepository.Add(model);
 
                     return RedirectToAction("Index");
                 }
@@ -80,9 +79,9 @@ namespace DEKL.CP.UI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            if (typeProvider == TypeProvider.LegalPerson)
-            {
-            }
+            return typeProvider == TypeProvider.PhysicalPerson ? 
+                View("DetailsProviderPhysicalPerson", Mapper.Map<ProviderPhysicalPersonViewModel>(_providerRepository.FindActiveProviderPhysicalPerson(id.Value))) : 
+                View("DetailsProviderLegalPerson", Mapper.Map<ProviderLegalPersonViewModel>(_providerRepository.FindActiveProviderLegalPerson(id.Value)));
         }
     }
 }

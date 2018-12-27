@@ -71,7 +71,7 @@ namespace DEKL.CP.UI.Controllers
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                PhoneNumber = Regex.Replace(model.PhoneNumber ?? string.Empty, @"[^\d]", "")
+                PhoneNumber = Regex.Replace(model.PhoneNumber ?? string.Empty, @"[^\d]", string.Empty)
             };
 
             var result = await _userManager.CreateAsync(user, model.PasswordHash);
