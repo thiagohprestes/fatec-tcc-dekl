@@ -21,10 +21,19 @@
                     </li>
                 </ul>
             </li>
-        }
+
             <li>
-                @Html.ActionLink("Fornecedor", "Index", "Provider")
+                @Html.ActionLink("Banco", "Index", "Bank")
             </li>
+
+            <li>
+                @Html.ActionLink("Agência", "Index", "BankAgency")
+            </li>
+        }
+
+        <li>
+            @Html.ActionLink("Fornecedor", "Index", "Provider")
+        </li>
         <li>
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
             <ul class="collapse list-unstyled" id="pageSubmenu">

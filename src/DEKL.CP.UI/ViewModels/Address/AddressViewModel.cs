@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Entities;
 
-namespace DEKL.CP.UI.ViewModels
+namespace DEKL.CP.UI.ViewModels.Address
 {
     public class AddressViewModel : IAddress
     {

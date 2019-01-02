@@ -35,12 +35,14 @@
     <Compile Include="Contracts\Entities\IAddress.cs" />
     <Compile Include="Contracts\Entities\IBank.cs" />
     <Compile Include="Contracts\Entities\IBankAccount.cs" />
+    <Compile Include="Contracts\Entities\IBankAgency.cs" />
     <Compile Include="Contracts\Entities\IEntityBase.cs" />
     <Compile Include="Contracts\Entities\IProvider.cs" />
     <Compile Include="Contracts\Entities\IProviderLegalPerson.cs" />
     <Compile Include="Contracts\Entities\IProviderPhysicalLegalPerson.cs" />
     <Compile Include="Contracts\Entities\IProviderPhysicalPerson.cs" />
     <Compile Include="Contracts\Entities\IState.cs" />
+    <Compile Include="Contracts\Repositories\IBankAgencyRepository.cs" />
     <Compile Include="Contracts\Repositories\IBankRepository.cs" />
     <Compile Include="Contracts\Repositories\IProviderRepository.cs" />
     <Compile Include="Contracts\Repositories\IRepository.cs" />

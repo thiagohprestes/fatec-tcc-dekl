@@ -10,7 +10,6 @@ namespace DEKL.CP.Domain.Contracts.Entities
        string Complement { get; set; }
        string Neighborhood { get; set; }
        string City { get; set; }
-       int? StateId { get; set; }
        State State { get; set; }
     }
 }

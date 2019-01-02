@@ -35,18 +35,18 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-9">
-                            @Html.LabelFor(m => m.MunicipalRegistration, new {@class = "control-label"})
-                            @Html.TextBoxFor(m => m.MunicipalRegistration, new {@class = "form-control", placeholder = "Digite o nome completo"})
+                            @Html.LabelFor(m => m.MunicipalRegistration, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.MunicipalRegistration, new { @class = "form-control", placeholder = "Digite o nome completo" })
                             <small>
-                                @Html.ValidationMessageFor(m => m.MunicipalRegistration, null, new {@class = "text-danger"})
+                                @Html.ValidationMessageFor(m => m.MunicipalRegistration, null, new { @class = "text-danger" })
                             </small>
                         </div>
 
                         <div class="form-group col-md-3">
-                            @Html.LabelFor(m => m.StateRegistration, new {@class = "control-label"})
-                            @Html.TextBoxFor(m => m.StateRegistration, new {@class = "form-control", placeholder = "000.000.000-00"})
+                            @Html.LabelFor(m => m.StateRegistration, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.StateRegistration, new { @class = "form-control", placeholder = "000.000.000-00" })
                             <small>
-                                @Html.ValidationMessageFor(m => m.StateRegistration, null, new {@class = "text-danger"})
+                                @Html.ValidationMessageFor(m => m.StateRegistration, null, new { @class = "text-danger" })
                             </small>
                         </div>
                     </div>
@@ -69,70 +69,11 @@
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-                            @Html.LabelFor(m => m.Address.ZipCode, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Address.ZipCode, new { @class = "form-control", placeholder = "00000-000" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.Address.ZipCode, null, new { @class = "text-danger" })
-                            </small>
-                        </div>
+                    @Html.Partial("~/Views/Shared/_Address.cshtml")
 
-                        <div class="form-group col-md-7">
-                            @Html.LabelFor(m => m.Address.Street, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Address.Street, new { @class = "form-control", placeholder = "Digite a rua ou avenida" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.Address.Street, null, new { @class = "text-danger" })
-                            </small>
-                        </div>
-
-                        <div class="form-group col-md-2">
-                            @Html.LabelFor(m => m.Address.Number, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Address.Number, new { @class = "form-control", placeholder = "000" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.Address.Number, null, new { @class = "text-danger" })
-                            </small>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-8">
-                            @Html.LabelFor(m => m.Address.Neighborhood, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Address.Neighborhood, new { @class = "form-control", placeholder = "Digite o bairro" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.Address.Neighborhood, null, new { @class = "text-danger" })
-                            </small>
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(m => m.Address.City, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Address.City, new { @class = "form-control", placeholder = "Digite a cidade" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.Address.City, null, new { @class = "text-danger" })
-                            </small>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(m => m.Address.StateId, new { @class = "control-label" })
-                            @Html.DropDownListFor(m => m.Address.StateId, (SelectList)ViewBag.States, "Selecione o Estado", new { @class = "form-control" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.Address.StateId, null, new { @class = "text-danger" })
-                            </small>
-                        </div>
-
-                        <div class="form-group col-md-8">
-                            @Html.LabelFor(m => m.Address.Complement, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Address.Complement, new { @class = "form-control", placeholder = "Ex: casa 1, próximo ao mercado Bom Lugar" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.Address.Complement, null, new { @class = "text-danger" })
-                            </small>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="submit" value="Salvar" class="btn btn-info" />
-                            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
-                        </div>
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-info" />
+                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
                     </div>
                 </div>
             }

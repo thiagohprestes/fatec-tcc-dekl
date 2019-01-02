@@ -1,14 +1,14 @@
-﻿@model DEKL.CP.UI.ViewModels.Provider.ProviderPhysicalPersonViewModel
+﻿@model DEKL.CP.UI.ViewModels.BankAgency.BankAgencyViewModel
 
 @{
-    ViewBag.Title = "Cadastrar Fornecedor - Pessoa Física";
+    ViewBag.Title = "Cadastrar Agência Bancária";
 }
 
 <h2>@ViewBag.Title</h2>
 <div class="row">
     <div class="col-md-6">
         <section id="registerProviderForm">
-            @using (Html.BeginForm("CreateProviderPhysicalPerson", "Provider", FormMethod.Post))
+            @using (Html.BeginForm("CreateProviderLegalPerson", "Provider", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
                 <div class="form">
@@ -17,18 +17,36 @@
                     @Html.ValidationMessage("Error", new { @class = "text-danger" })
                     <div class="form-row">
                         <div class="form-group col-md-9">
-                            @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Digite o nome completo" })
+                            @Html.LabelFor(m => m.Number, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Number, new { @class = "form-control", placeholder = "Ex: 04237-7" })
                             <small>
-                                @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(m => m.Number, null, new { @class = "text-danger" })
                             </small>
                         </div>
 
                         <div class="form-group col-md-3">
-                            @Html.LabelFor(m => m.CPF, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.CPF, new { @class = "form-control", placeholder = "000.000.000-00" })
+                            @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = "(99) 99999-9999" })
                             <small>
-                                @Html.ValidationMessageFor(m => m.CPF, null, new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "text-danger" })
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-9">
+                            @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "example@email.com" })
+                            <small>
+                                @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                            </small>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(m => m.ManagerName, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.ManagerName, new { @class = "form-control", placeholder = "Ex: Carlos da Costa" })
+                            <small>
+                                @Html.ValidationMessageFor(m => m.ManagerName, null, new { @class = "text-danger" })
                             </small>
                         </div>
                     </div>

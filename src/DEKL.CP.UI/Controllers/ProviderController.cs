@@ -12,32 +12,24 @@ namespace DEKL.CP.UI.Controllers
 {
     public class ProviderController : Controller
     {
-        private readonly IStateRepository _stateRepository;
         private readonly IProviderRepository _providerRepository;
 
-        public ProviderController(IStateRepository stateRepository, IProviderRepository providerRepository)
-        {
-            _stateRepository = stateRepository;
-            _providerRepository = providerRepository;
-        }
+        public ProviderController(IProviderRepository providerRepository) => _providerRepository = providerRepository;
 
         public ActionResult Index() 
             => View(Mapper.Map<IEnumerable<ProviderPhysicalLegalPersonViewModel>>(_providerRepository.AllActivesProviderPhysicalLegalPerson));
 
         public ActionResult Select() => View();
- 
-        public ActionResult Create(TypeProvider typeprovider)
-        {
-            ViewBag.States = new SelectList(_stateRepository.Actives, nameof(State.Id), nameof(State.Name));
-            return View(typeprovider == TypeProvider.PhysicalPerson ? "CreateProviderPhysicalPerson" : "CreateProviderLegalPerson");
-        }
+
+        public ActionResult Create(TypeProvider typeprovider) 
+            => View(typeprovider == TypeProvider.PhysicalPerson ? "CreateProviderPhysicalPerson" : "CreateProviderLegalPerson");
 
         public ActionResult CreateProviderPhysicalPerson(ProviderPhysicalPerson model)
         {
             if (ModelState.IsValid)
             {
                 try
-                {
+                { 
                     _providerRepository.Add(model);
 
                     return RedirectToAction("Index");
@@ -48,7 +40,6 @@ namespace DEKL.CP.UI.Controllers
                 }
             }
 
-            ViewBag.States = new SelectList(_stateRepository.Actives, nameof(State.Id), nameof(State.Name));
             return View();
         }
 
@@ -68,7 +59,6 @@ namespace DEKL.CP.UI.Controllers
                 }
             }
 
-            ViewBag.States = new SelectList(_stateRepository.Actives, nameof(State.Id), nameof(State.Name));
             return View();
         }
 

@@ -3,8 +3,9 @@ using AutoMapper;
 using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
-using DEKL.CP.UI.ViewModels;
+using DEKL.CP.UI.ViewModels.Address;
 using DEKL.CP.UI.ViewModels.Bank;
+using DEKL.CP.UI.ViewModels.BankAgency;
 using DEKL.CP.UI.ViewModels.Provider;
 using DEKL.CP.UI.ViewModels.UsersAdmin;
 
@@ -21,6 +22,7 @@ namespace DEKL.CP.UI.Mappers
                     opt => opt.MapFrom(src => Regex.Replace(src.PhoneNumber, @"[^\d]", string.Empty)));
             CreateMap<AddressViewModel, Address>();
             CreateMap<BankViewModel, Bank>();
+            CreateMap<BankAgencyViewModel, BankAgency>();
 
             CreateMap<ProviderViewModel, Provider>();
             CreateMap<ProviderPhysicalPersonViewModel, ProviderPhysicalPerson>();

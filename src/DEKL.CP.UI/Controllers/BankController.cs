@@ -9,11 +9,12 @@ using System.Web.Mvc;
 
 namespace DEKL.CP.UI.Controllers
 {
-    public class BankAdminController : Controller
+    [Authorize]
+    public class BankController : Controller
     {
         private readonly IBankRepository _bankRepository;
 
-        public BankAdminController(IBankRepository bankRepositoy) => _bankRepository = bankRepositoy;
+        public BankController(IBankRepository bankRepositoy) => _bankRepository = bankRepositoy;
 
         public ActionResult Index() => View(Mapper.Map<IEnumerable<BankViewModel>>(_bankRepository.Actives));
 
@@ -67,8 +68,7 @@ namespace DEKL.CP.UI.Controllers
             return View(Mapper.Map<BankViewModel>(bank));
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, Authorize(Roles = "Administrador"), ValidateAntiForgeryToken]
         public ActionResult Edit(BankViewModel bankViewModel)
         {
             if (ModelState.IsValid)

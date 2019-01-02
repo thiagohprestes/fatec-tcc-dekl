@@ -1,12 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using DEKL.CP.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
+using DEKL.CP.Domain.Contracts.Entities;
+using DEKL.CP.UI.ViewModels.Address;
 using DEKL.CP.UI.ViewModels.Bank;
+using DEKL.CP.UI.ViewModels.InternalBankAccount;
+using DEKL.CP.UI.ViewModels.Provider;
 
 namespace DEKL.CP.UI.ViewModels.BankAgency
 {
-    public class BankAgencyViewModel
+    public class BankAgencyViewModel : IBankAgency
     {
+        public int Id { get; set; }
+
         [DisplayName("Número")]
         public short Number { get; set; }
 
@@ -18,7 +24,7 @@ namespace DEKL.CP.UI.ViewModels.BankAgency
         [DisplayName("Telefone")]
         public string PhoneNumber { get; set; }
 
-        [DisplayName("E-mail")]
+        [DisplayName("E-mail"), EmailAddress]
         public string Email { get; set; }
 
         [DisplayName("Banco")]
@@ -26,7 +32,8 @@ namespace DEKL.CP.UI.ViewModels.BankAgency
 
         public virtual BankViewModel Bank { get; set; }
 
-        public virtual ICollection<Domain.Entities.InternalBankAccount> InternalBankAccounts { get; set; }
-        public virtual ICollection<ProviderBankAccount> ProviderBankAccounts { get; set; }
+        public virtual ICollection<InternalBankAccountViewModel> InternalBankAccounts { get; set; }
+
+        public virtual ICollection<ProviderBankAccountViewModel> ProviderBankAccounts { get; set; }
     }
 }

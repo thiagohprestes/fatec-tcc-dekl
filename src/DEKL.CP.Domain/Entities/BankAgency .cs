@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using DEKL.CP.Domain.Contracts.Entities;
 
 namespace DEKL.CP.Domain.Entities
 {
-    public class BankAgency : EntityBase
+    public class BankAgency : EntityBase, IBankAgency
     {
         public short Number { get; set; }
         public int AddressId { get; set; }

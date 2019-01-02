@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Enums;
+using DEKL.CP.UI.ViewModels.Address;
 
 namespace DEKL.CP.UI.ViewModels.Provider
 {

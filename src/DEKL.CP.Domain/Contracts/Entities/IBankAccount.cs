@@ -6,7 +6,6 @@ namespace DEKL.CP.Domain.Contracts.Entities
     {
         string Number { get; set; }
         string Name { get; set; }
-        int BankAgencyId { get; set; }
         BankAgency BankAgency { get; set; }
     }
 }

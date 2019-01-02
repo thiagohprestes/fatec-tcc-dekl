@@ -263,7 +263,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountToPayController.cs" />
-    <Compile Include="Controllers\BankAdminController.cs" />
+    <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Controllers\BankAgencyController.cs" />
+    <Compile Include="Controllers\BankController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -285,7 +287,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountsToPay\AccountsToPayViewModel.cs" />
     <Compile Include="ViewModels\AccountsToPay\AccountToPayViewModel.cs" />
-    <Compile Include="ViewModels\AddressViewModel.cs" />
+    <Compile Include="ViewModels\Address\AddressViewModel.cs" />
+    <Compile Include="ViewModels\Address\AddressVM.cs" />
     <Compile Include="ViewModels\BankAgency\BankAgencyViewModel.cs" />
     <Compile Include="ViewModels\BankTransactionViewModel.cs" />
     <Compile Include="ViewModels\Bank\BankViewModel.cs" />
@@ -308,13 +311,13 @@
     </None>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_sidebar.cshtml" />
+    <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Account\TrocarSenha.cshtml" />
     <Content Include="Views\Account\MeuPerfil.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Shared\_navbar.cshtml" />
+    <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_Toastr.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\UsersAdmin\DisplayEmail.cshtml" />
@@ -354,11 +357,13 @@
     <Content Include="Views\UsersAdmin\Delete.cshtml" />
     <Content Include="Views\Provider\CreateProviderLegalPerson.cshtml" />
     <Content Include="Views\Provider\DetailsProviderPhysicalPerson.cshtml" />
-    <Content Include="Views\BankAdmin\Index.cshtml" />
-    <Content Include="Views\BankAdmin\Create.cshtml" />
-    <Content Include="Views\BankAdmin\Details.cshtml" />
-    <Content Include="Views\BankAdmin\Delete.cshtml" />
-    <Content Include="Views\BankAdmin\Edit.cshtml" />
+    <Content Include="Views\Bank\Index.cshtml" />
+    <Content Include="Views\Bank\Create.cshtml" />
+    <Content Include="Views\Bank\Details.cshtml" />
+    <Content Include="Views\Bank\Delete.cshtml" />
+    <Content Include="Views\Bank\Edit.cshtml" />
+    <Content Include="Views\Shared\_Address.cshtml" />
+    <Content Include="Views\BankAgency\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
