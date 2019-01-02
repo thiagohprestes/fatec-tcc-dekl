@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using System.Web.Mvc;
-using AutoMapper;
+﻿using AutoMapper;
 using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels.Bank;
 using DEKL.CP.UI.ViewModels.BankAgency;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
 
 namespace DEKL.CP.UI.Controllers
 {
@@ -14,16 +15,13 @@ namespace DEKL.CP.UI.Controllers
     {
         private readonly IBankAgencyRepository _bankAgencyRepository;
 
-        public BankAgencyController(IBankAgencyRepository bankAgencyRepositoy)
-        {
-            _bankAgencyRepository = bankAgencyRepositoy;
-        }
+        public BankAgencyController(IBankAgencyRepository bankAgencyRepositoy) => _bankAgencyRepository = bankAgencyRepositoy;
 
         public ActionResult Index() => View(Mapper.Map<IEnumerable<BankAgencyViewModel>>(_bankAgencyRepository.Actives));
 
         public ActionResult Create()
         {
-            
+            ViewBag.Banks = new SelectList(_bankAgencyRepository.BanksActives, nameof(Bank.Id), nameof(Bank.Name));
             return View();
         }
 
@@ -36,13 +34,14 @@ namespace DEKL.CP.UI.Controllers
                 {
                     _bankAgencyRepository.Add(bankAgency);
 
-                    this.AddToastMessage("Banco salvo", $"A Agência de número {bankAgency.Number} foi salvo com sucesso", 
+                    this.AddToastMessage("Banco salvo", $"A Agência de número {bankAgency.Number} foi salva com sucesso", 
                         ToastType.Success);
 
                     return RedirectToAction("Index");
                 }
-                catch
+                catch (Exception ex)
                 {
+                    ViewBag.Banks = new SelectList(_bankAgencyRepository.BanksActives, nameof(Bank.Id), nameof(Bank.Name));
                     this.AddToastMessage("Erro no salvamento", $"Erro ao salvar a Agência de número {bankAgency.Number}, " +
                                                                 "favor tentar novamente",  ToastType.Error);
                 }
@@ -58,7 +57,7 @@ namespace DEKL.CP.UI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View(Mapper.Map<BankViewModel>(_bankAgencyRepository.Find(id.Value)));
+            return View(Mapper.Map<BankAgencyViewModel>(_bankAgencyRepository.Find(id.Value)));
         }
 
         public ActionResult Edit(int? id)
@@ -68,13 +67,13 @@ namespace DEKL.CP.UI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var bank = _bankAgencyRepository.FindActive(id.Value);
-            if (bank == null)
+            var bankAgency = _bankAgencyRepository.FindActive(id.Value);
+            if (bankAgency == null)
             {
                 return HttpNotFound();
             }
 
-            return View(Mapper.Map<BankAgencyViewModel>(bank));
+            return View(Mapper.Map<BankAgencyViewModel>(bankAgency));
         }
 
         [HttpPost, Authorize(Roles = "Administrador"), ValidateAntiForgeryToken]
@@ -91,7 +90,7 @@ namespace DEKL.CP.UI.Controllers
 
                     _bankAgencyRepository.Update(bankAgency);
 
-                    this.AddToastMessage("Banco Editado", $"A Agência de número {bankAgency.Number} foi editado com sucesso", 
+                    this.AddToastMessage("Banco Editado", $"A Agência de número {bankAgency.Number} foi editada com sucesso", 
                         ToastType.Success);
 
                     return RedirectToAction("Index");
@@ -113,9 +112,9 @@ namespace DEKL.CP.UI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var bank = _bankAgencyRepository.Find(id.Value);
+            var bankAgency = _bankAgencyRepository.Find(id.Value);
 
-            return bank == null ? HttpNotFound() : (ActionResult)View(bank);
+            return bankAgency == null ? HttpNotFound() : (ActionResult)View(Mapper.Map<BankAgencyViewModel>(bankAgency));
         }
 
         [HttpPost, ActionName("Delete")]
@@ -140,7 +139,7 @@ namespace DEKL.CP.UI.Controllers
 
                     _bankAgencyRepository.DeleteLogical(bankAgency);
 
-                    this.AddToastMessage("Banco excluído", $"A Agência de número {bankAgency.Number} foi excluído com sucesso",
+                    this.AddToastMessage("Banco excluído", $"A Agência de número {bankAgency.Number} foi excluída com sucesso",
                         ToastType.Success);
 
                     return RedirectToAction("Index");

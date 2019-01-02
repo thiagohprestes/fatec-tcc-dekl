@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.UI.ViewModels.Address;
-using DEKL.CP.UI.ViewModels.Bank;
 using DEKL.CP.UI.ViewModels.InternalBankAccount;
 using DEKL.CP.UI.ViewModels.Provider;
 
@@ -14,7 +13,7 @@ namespace DEKL.CP.UI.ViewModels.BankAgency
         public int Id { get; set; }
 
         [DisplayName("Número")]
-        public short Number { get; set; }
+        public int Number { get; set; }
 
         public AddressViewModel Address { get; set; }
 
@@ -30,7 +29,7 @@ namespace DEKL.CP.UI.ViewModels.BankAgency
         [DisplayName("Banco")]
         public int BankId { get; set; }
 
-        public virtual BankViewModel Bank { get; set; }
+        public virtual Domain.Entities.Bank Bank { get; set; }
 
         public virtual ICollection<InternalBankAccountViewModel> InternalBankAccounts { get; set; }
 

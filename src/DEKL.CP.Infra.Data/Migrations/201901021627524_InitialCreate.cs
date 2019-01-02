@@ -1,5 +1,6 @@
 namespace DEKL.CP.Infra.Data.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
     
     public partial class InitialCreate : DbMigration
@@ -89,7 +90,7 @@ namespace DEKL.CP.Infra.Data.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Number = c.Short(nullable: false),
+                        Number = c.Int(nullable: false),
                         AddressId = c.Int(nullable: false),
                         ManagerName = c.String(maxLength: 80, unicode: false),
                         PhoneNumber = c.String(maxLength: 20, unicode: false),
@@ -100,10 +101,10 @@ namespace DEKL.CP.Infra.Data.Migrations
                         Active = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Address", t => t.Id)
+                .ForeignKey("dbo.Address", t => t.AddressId, cascadeDelete: true)
                 .ForeignKey("dbo.Bank", t => t.BankId)
-                .Index(t => t.Id)
                 .Index(t => t.Number, unique: true, name: "UQ_dbo.BankAgency.Number")
+                .Index(t => t.AddressId)
                 .Index(t => t.Email, unique: true, name: "UQ_dbo.BankAgency.Email")
                 .Index(t => t.BankId);
             
@@ -115,7 +116,7 @@ namespace DEKL.CP.Infra.Data.Migrations
                         Street = c.String(nullable: false, maxLength: 60, unicode: false),
                         Number = c.String(maxLength: 20, unicode: false),
                         ZipCode = c.String(nullable: false, maxLength: 100, unicode: false),
-                        Complement = c.String(nullable: false, maxLength: 100, unicode: false),
+                        Complement = c.String(maxLength: 100, unicode: false),
                         Neighborhood = c.String(nullable: false, maxLength: 60, unicode: false),
                         City = c.String(nullable: false, maxLength: 60, unicode: false),
                         StateId = c.Int(nullable: false),
@@ -329,7 +330,7 @@ namespace DEKL.CP.Infra.Data.Migrations
             DropForeignKey("dbo.BankTransaction", "AccountToPayId", "dbo.AccountToPay");
             DropForeignKey("dbo.ProviderBankAccount", "BankAgencyId", "dbo.BankAgency");
             DropForeignKey("dbo.BankAgency", "BankId", "dbo.Bank");
-            DropForeignKey("dbo.BankAgency", "Id", "dbo.Address");
+            DropForeignKey("dbo.BankAgency", "AddressId", "dbo.Address");
             DropForeignKey("dbo.Address", "StateId", "dbo.State");
             DropForeignKey("dbo.PaymentSimulatorAccountToPay", "AccountToPay_Id", "dbo.AccountToPay");
             DropForeignKey("dbo.PaymentSimulatorAccountToPay", "PaymentSimulator_Id", "dbo.PaymentSimulator");
@@ -356,8 +357,8 @@ namespace DEKL.CP.Infra.Data.Migrations
             DropIndex("dbo.Address", new[] { "StateId" });
             DropIndex("dbo.BankAgency", new[] { "BankId" });
             DropIndex("dbo.BankAgency", "UQ_dbo.BankAgency.Email");
+            DropIndex("dbo.BankAgency", new[] { "AddressId" });
             DropIndex("dbo.BankAgency", "UQ_dbo.BankAgency.Number");
-            DropIndex("dbo.BankAgency", new[] { "Id" });
             DropIndex("dbo.InternalBankAccount", new[] { "BankAgencyId" });
             DropIndex("dbo.InternalBankAccount", "UQ_dbo.InternalBankAccount.Number");
             DropIndex("dbo.PaymentSimulator", new[] { "InternalBankAccountId" });

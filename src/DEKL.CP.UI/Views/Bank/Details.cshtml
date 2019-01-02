@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 <div>
     <h4>Bancos</h4>
-    <hr/>
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(m => m.Name)
@@ -27,22 +27,32 @@
 <h4>Lista de Agências que pertencem a esse banco</h4>
 @if (Model.BankAgencies.Count == 0)
 {
-    <hr/>
+    <hr />
     <p>Não há agências que pertencem a esse banco</p>
 }
 
-<table class="table">
-
-    @foreach (var item in Model.BankAgencies)
+<table class="table col-md-6">
+    @if (Model.BankAgencies.Any())
     {
-    <tr>
-        <td>@item.Number</td>
-        <td>@item.ManagerName</td>
-        <td>@item.PhoneNumber</td>
-    </tr>
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Nome do(a) Gerente</th>
+            </tr>
+        </thead>
     }
+
+    <tbody>
+        @foreach (var item in Model.BankAgencies)
+        {
+            <tr>
+                <td>@item.Number</td>
+                <td>@item.ManagerName</td>
+            </tr>
+        }
+    </tbody>
 </table>
 <p>
-    @Html.ActionLink("Editar", "Edit", new {id = Model.Id}, new {@class = "btn btn-info"})
-    @Html.ActionLink("Voltar", "Index", null, new {@class = "btn btn-info"})
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
 </p>

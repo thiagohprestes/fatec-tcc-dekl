@@ -105,7 +105,7 @@ namespace DEKL.CP.UI.Controllers
 
             var bank = _bankRepository.Find(id.Value);
 
-            return bank == null ? HttpNotFound() : (ActionResult)View(bank);
+            return bank == null ? HttpNotFound() : (ActionResult)View(Mapper.Map<BankViewModel>(bank));
         }
 
         [HttpPost, ActionName("Delete")]

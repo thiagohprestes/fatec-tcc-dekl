@@ -13,7 +13,7 @@ namespace DEKL.CP.Infra.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201812211059522_InitialCreate"; }
+            get { return "201901021627524_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

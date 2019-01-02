@@ -60,3 +60,17 @@
         </small>
     </div>
 </div>
+
+<script>
+    $('#Address_ZipCode').focusout(() => {
+        $.getScript('http://cep.republicavirtual.com.br/web_cep.php' + "?formato=javascript&cep=" + this.value, () => {
+            if (resultadoCEP["resultado"]) {
+                $('#Address_Street').val(unescape(resultadoCEP["tipo_logradouro"]) + " " + unescape(resultadoCEP["logradouro"]));
+                $('#Address_Neighborhood').val(unescape(resultadoCEP["bairro"]));
+                $('#Address_City').val(unescape(resultadoCEP["cidade"]));
+                $('Address_StateId').val($('select [data-uf="' + unescape(resultadoCEP["uf"]) + '"]').val()).change();
+                $('#Address_Number').focus();
+            }
+        }
+    }
+</script>

@@ -22,8 +22,7 @@ namespace DEKL.CP.Infra.Data.EF.Maps
             Property(e => e.ZipCode)
                 .IsRequired();
 
-            Property(e => e.Complement)
-                .IsRequired();
+            Property(e => e.Complement);
 
             Property(e => e.Neighborhood)
                 .HasMaxLength(60)

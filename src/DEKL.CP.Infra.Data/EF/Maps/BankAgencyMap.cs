@@ -37,10 +37,6 @@ namespace DEKL.CP.Infra.Data.EF.Maps
                 .WithMany(e => e.BankAgencies)
                 .HasForeignKey(e => e.BankId)
                 .WillCascadeOnDelete(false);
-
-            HasRequired(e => e.Address)
-                .WithRequiredDependent()
-                .WillCascadeOnDelete(false);
         }
     }
 }

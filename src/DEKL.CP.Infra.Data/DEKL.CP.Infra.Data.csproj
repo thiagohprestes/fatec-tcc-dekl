@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -69,9 +71,9 @@
     <Compile Include="EF\Repositories\StateRepositoryEF.cs" />
     <Compile Include="EF\Repositories\UnitOfWork.cs" />
     <Compile Include="EF\Repositories\UsuarioRepositoryEF.cs" />
-    <Compile Include="Migrations\201812211059522_InitialCreate.cs" />
-    <Compile Include="Migrations\201812211059522_InitialCreate.Designer.cs">
-      <DependentUpon>201812211059522_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201901021627524_InitialCreate.cs" />
+    <Compile Include="Migrations\201901021627524_InitialCreate.Designer.cs">
+      <DependentUpon>201901021627524_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,8 +89,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812211059522_InitialCreate.resx">
-      <DependentUpon>201812211059522_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901021627524_InitialCreate.resx">
+      <DependentUpon>201901021627524_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

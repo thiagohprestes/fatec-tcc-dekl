@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28407.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DEKL.CP.UI", "DEKL.CP.UI\DEKL.CP.UI.csproj", "{8EFA0049-5BCE-49E3-94D5-4AC7F3F9AC2B}"
 EndProject
@@ -18,6 +18,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.1 - Data", "2.1 - Data", "{EB0CD691-52FF-418B-BEF5-7566A4FF210A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.2 - CrossCutting", "2.2 - CrossCutting", "{C0FAD499-385B-4793-A3BC-6119FA16C9F7}"
+	ProjectSection(SolutionItems) = preProject
+		DEKL.CP.Infra.Data\packages.config = DEKL.CP.Infra.Data\packages.config
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DEKL.CP.Infra.Data", "DEKL.CP.Infra.Data\DEKL.CP.Infra.Data.csproj", "{1E04257F-82CE-4D95-AD48-DCC9F7C08D9F}"
 EndProject
