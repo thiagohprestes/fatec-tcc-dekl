@@ -373,6 +373,7 @@
     <Content Include="Views\BankAgency\Index.cshtml" />
     <Content Include="Views\BankAgency\Delete.cshtml" />
     <Content Include="Views\BankAgency\Edit.cshtml" />
+    <Content Include="Views\BankAgency\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

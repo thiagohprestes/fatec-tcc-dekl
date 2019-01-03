@@ -33,9 +33,6 @@
     <LangVersion>7.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator">
-      <HintPath>..\packages\Unity.5.8.11\lib\net47\CommonServiceLocator.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -58,9 +55,6 @@
     <Reference Include="SimpleInjector, Version=4.3.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\SimpleInjector.4.4.0\lib\net45\SimpleInjector.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector.Integration.Web, Version=4.3.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.Integration.Web.4.3.0\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

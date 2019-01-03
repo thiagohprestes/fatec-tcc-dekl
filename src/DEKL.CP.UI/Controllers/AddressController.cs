@@ -19,7 +19,7 @@ namespace DEKL.CP.UI.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult AddressPartialView(AddressViewModel addressViewModel)
+        public ActionResult AddressPartialViewFilled(AddressViewModel addressViewModel)
         {
             ViewBag.States = new SelectList(_stateRepository.Actives, nameof(Bank.Id), nameof(Bank.Name));
             return PartialView("~/Views/Shared/_Address.cshtml", new AddressVM { Address = addressViewModel });

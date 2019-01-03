@@ -85,7 +85,11 @@ namespace DEKL.CP.UI.Controllers
                 try
                 {
                     bankAgency.Number = bankAgencyViewModel.Number;
+                    bankAgency.BankId = bankAgencyViewModel.BankId;
                     bankAgency.ManagerName = bankAgencyViewModel.ManagerName;
+                    bankAgency.Email = bankAgencyViewModel.Email;
+                    bankAgency.PhoneNumber = bankAgencyViewModel.PhoneNumber;
+                    bankAgency.Address = Mapper.Map<Address>(bankAgencyViewModel.Address);
 
                     _bankAgencyRepository.Update(bankAgency);
 

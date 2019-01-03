@@ -31,27 +31,27 @@
     <p>Não há agências que pertencem a esse banco</p>
 }
 
-<table class="table col-md-6">
-    @if (Model.BankAgencies.Any())
-    {
+else
+{
+    <table class="table col-md-6">
         <thead>
             <tr>
                 <th>Número</th>
                 <th>Nome do(a) Gerente</th>
             </tr>
         </thead>
-    }
 
-    <tbody>
-        @foreach (var item in Model.BankAgencies)
-        {
-            <tr>
-                <td>@item.Number</td>
-                <td>@item.ManagerName</td>
-            </tr>
-        }
-    </tbody>
-</table>
+        <tbody>
+            @foreach (var item in Model.BankAgencies)
+            {
+                <tr>
+                    <td>@item.Number</td>
+                    <td>@item.ManagerName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
     @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
