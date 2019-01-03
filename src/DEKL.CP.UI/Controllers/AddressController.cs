@@ -1,6 +1,7 @@
 ﻿using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
 using System.Web.Mvc;
+using DEKL.CP.UI.ViewModels.Address;
 
 namespace DEKL.CP.UI.Controllers
 {
@@ -15,6 +16,13 @@ namespace DEKL.CP.UI.Controllers
         {
             ViewBag.States = new SelectList(_stateRepository.Actives, nameof(Bank.Id), nameof(Bank.Name));
             return PartialView("~/Views/Shared/_Address.cshtml");
+        }
+
+        [ChildActionOnly]
+        public ActionResult AddressPartialView(AddressViewModel addressViewModel)
+        {
+            ViewBag.States = new SelectList(_stateRepository.Actives, nameof(Bank.Id), nameof(Bank.Name));
+            return PartialView("~/Views/Shared/_Address.cshtml", new AddressVM { Address = addressViewModel });
         }
     }
 }

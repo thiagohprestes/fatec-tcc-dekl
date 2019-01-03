@@ -15,36 +15,51 @@ namespace DEKL.CP.Infra.Data.Migrations
             if (!context.States.Any())
             {
                 var states = new Collection<State>
-            {
-                new State { Name = "Acre", Initials = "AC" },
-                new State { Name = "Alagoas", Initials = "AL" },
-                new State { Name = "Amapá", Initials = "AP" },
-                new State { Name = "Amazonas", Initials = "AM" },
-                new State { Name = "Bahia", Initials = "BA" },
-                new State { Name = "Ceará", Initials = "CE" },
-                new State { Name = "Distrito Federal", Initials = "DF" },
-                new State { Name = "Espírito Santo", Initials = "ES" },
-                new State { Name = "Goiás", Initials = "GO" },
-                new State { Name = "Maranhão", Initials = "MA" },
-                new State { Name = "Mato Grosso", Initials = "MT" },
-                new State { Name = "Mato Grosso do Sul", Initials = "MS" },
-                new State { Name = "Minas Gerais", Initials = "MG" },
-                new State { Name = "Pará", Initials = "PA" },
-                new State { Name = "Paraíba", Initials = "PB" },
-                new State { Name = "Paraná", Initials = "PR" },
-                new State { Name = "Pernambuco", Initials = "PE" },
-                new State { Name = "Piauí", Initials = "PI" },
-                new State { Name = "Rio de Janeiro", Initials = "RJ" },
-                new State { Name = "Rio Grande do Norte", Initials = "RN" },
-                new State { Name = "Rio Grande do Sul", Initials = "RS" },
-                new State { Name = "Rondônia", Initials = "RO" },
-                new State { Name = "Roraima", Initials = "RR" },
-                new State { Name = "Santa Catarina", Initials = "SC" },
-                new State { Name = "São Paulo", Initials = "SP" },
-                new State { Name = "Sergipe", Initials = "SE" },
-                new State { Name = "Tocantins", Initials = "TO" }
-            };
+                {
+                    new State {Name = "Acre", Initials = "AC"},
+                    new State {Name = "Alagoas", Initials = "AL"},
+                    new State {Name = "Amapá", Initials = "AP"},
+                    new State {Name = "Amazonas", Initials = "AM"},
+                    new State {Name = "Bahia", Initials = "BA"},
+                    new State {Name = "Ceará", Initials = "CE"},
+                    new State {Name = "Distrito Federal", Initials = "DF"},
+                    new State {Name = "Espírito Santo", Initials = "ES"},
+                    new State {Name = "Goiás", Initials = "GO"},
+                    new State {Name = "Maranhão", Initials = "MA"},
+                    new State {Name = "Mato Grosso", Initials = "MT"},
+                    new State {Name = "Mato Grosso do Sul", Initials = "MS"},
+                    new State {Name = "Minas Gerais", Initials = "MG"},
+                    new State {Name = "Pará", Initials = "PA"},
+                    new State {Name = "Paraíba", Initials = "PB"},
+                    new State {Name = "Paraná", Initials = "PR"},
+                    new State {Name = "Pernambuco", Initials = "PE"},
+                    new State {Name = "Piauí", Initials = "PI"},
+                    new State {Name = "Rio de Janeiro", Initials = "RJ"},
+                    new State {Name = "Rio Grande do Norte", Initials = "RN"},
+                    new State {Name = "Rio Grande do Sul", Initials = "RS"},
+                    new State {Name = "Rondônia", Initials = "RO"},
+                    new State {Name = "Roraima", Initials = "RR"},
+                    new State {Name = "Santa Catarina", Initials = "SC"},
+                    new State {Name = "São Paulo", Initials = "SP"},
+                    new State {Name = "Sergipe", Initials = "SE"},
+                    new State {Name = "Tocantins", Initials = "TO"}
+                };
                 context.States.AddRange(states);
+            }
+
+            if (!context.Banks.Any())
+            {
+                var banks = new Collection<Bank>
+                {
+                    new Bank {Name = "Itaú Unibanco Holding S.A.", Number = 341},
+                    new Bank {Name = "Bradesco S.A.", Number = 237},
+                    new Bank {Name = "Banco do Brasil S.A.", Number = 1},
+                    new Bank {Name = "Banco Santander (Brasil) S.A.", Number = 033},
+                    new Bank {Name = "Banco Safra S.A.", Number = 422},
+                    new Bank {Name = "Caixa Econômica Federal", Number = 104}
+                };
+
+                context.Banks.AddRange(banks);
             }
         }
     }

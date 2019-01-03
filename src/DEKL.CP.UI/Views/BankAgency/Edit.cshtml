@@ -1,0 +1,76 @@
+﻿@model DEKL.CP.UI.ViewModels.BankAgency.BankAgencyViewModel
+
+@{
+    ViewBag.Title = "Edição";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-6">
+        <section id="editRoleForm">
+            @using (Html.BeginForm(new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Agências</h4>
+                <hr />
+                @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(m => m.Number, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Number, new { @class = "form-control", placeholder = "Ex: 04237-7" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.Number, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        @Html.LabelFor(m => m.BankId, new { @class = "control-label" })
+                        @Html.DropDownListFor(m => m.BankId, (SelectList)ViewBag.Banks, "Selecione o Banco", new { @class = "form-control" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.Address.StateId, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        @Html.LabelFor(m => m.ManagerName, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.ManagerName, new { @class = "form-control", placeholder = "Ex: Carlos da Costa" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.ManagerName, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "example@email.com" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = "(99) 99999-9999" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+                </div>
+
+                @Html.Action("AddressPartialView", "Address", Model.Address)
+
+                <div class="form-group">
+                    <input type="submit" value="Salvar" class="btn btn-info" />
+                    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
+                </div>
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

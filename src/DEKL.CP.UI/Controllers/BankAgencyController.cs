@@ -2,9 +2,7 @@
 using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.UI.Scripts.Toastr;
-using DEKL.CP.UI.ViewModels.Bank;
 using DEKL.CP.UI.ViewModels.BankAgency;
-using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
@@ -39,7 +37,7 @@ namespace DEKL.CP.UI.Controllers
 
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
+                catch
                 {
                     ViewBag.Banks = new SelectList(_bankAgencyRepository.BanksActives, nameof(Bank.Id), nameof(Bank.Name));
                     this.AddToastMessage("Erro no salvamento", $"Erro ao salvar a Agência de número {bankAgency.Number}, " +
@@ -73,6 +71,7 @@ namespace DEKL.CP.UI.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.Banks = new SelectList(_bankAgencyRepository.BanksActives, nameof(Bank.Id), nameof(Bank.Name));
             return View(Mapper.Map<BankAgencyViewModel>(bankAgency));
         }
 
