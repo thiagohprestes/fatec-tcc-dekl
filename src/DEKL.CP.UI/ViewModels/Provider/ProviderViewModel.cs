@@ -10,8 +10,7 @@ namespace DEKL.CP.UI.ViewModels.Provider
     {
         public int Id { get; set; }
 
-        [Required]
-        [DisplayName("Telefone")]
+        [Required, DisplayName("Telefone")]
         public string PhoneNumber { get; set; }
 
         [EmailAddress, DisplayName("E-mail")]

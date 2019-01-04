@@ -1,4 +1,4 @@
-﻿@model DEKL.CP.UI.ViewModels.Provider.ProviderPhysicalPersonViewModel
+﻿@model DEKL.CP.UI.ViewModels.Provider.ProviderLegalPersonViewModel
 
 @{
     ViewBag.Title = "Detalhes";
@@ -8,27 +8,27 @@
 
 <div>
     <h4>Fornecedor</h4>
-    <hr/>
+    <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(m => m.Name)
+            @Html.DisplayNameFor(m => m.CorporateName)
         </dt>
         <dd>
-            @Html.DisplayFor(m => m.Name)
+            @Html.DisplayFor(m => m.CorporateName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(m => m.CPF)
+            @Html.DisplayNameFor(m => m.CNPJ)
         </dt>
         <dd>
-            @Html.DisplayFor(m => m.CPF)
+            @Html.DisplayFor(m => m.CNPJ)
         </dd>
     </dl>
 </div>
 <h4>Lista de contas</h4>
 @if (Model.AccountsToPay.Count == 0)
 {
-    <hr/>
+    <hr />
     <p>Não há contas cadastradas para este fornecedor</p>
 }
 
@@ -44,6 +44,6 @@
     }
 </table>
 <p>
-    @Html.ActionLink("Editar", "Edit", new {id = Model.Id}, new {@class = "btn btn-info"})
-    @Html.ActionLink("Voltar", "Index", null, new {@class = "btn btn-info"})
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
 </p>

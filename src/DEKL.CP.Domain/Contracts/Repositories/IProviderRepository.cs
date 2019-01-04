@@ -8,6 +8,8 @@ namespace DEKL.CP.Domain.Contracts.Repositories
     {
         IEnumerable<IProviderPhysicalLegalPerson> AllActivesProviderPhysicalLegalPerson { get; }
 
+        IProviderPhysicalLegalPerson ActiveProviderPhysicalLegalPerson(int id);
+
         ProviderPhysicalPerson FindActiveProviderPhysicalPerson(int id);
 
         ProviderLegalPerson FindActiveProviderLegalPerson(int id);

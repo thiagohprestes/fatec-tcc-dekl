@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using DEKL.CP.Domain.Contracts.Entities;
+using DEKL.CP.UI.ViewModels.AccountsToPay;
 
 namespace DEKL.CP.UI.ViewModels.Provider
 {
@@ -17,5 +19,7 @@ namespace DEKL.CP.UI.ViewModels.Provider
 
         [DisplayName("Inscrição Estadual")]
         public string StateRegistration { get; set; }
+
+        public virtual ICollection<AccountToPayViewModel> AccountsToPay { get; set; }
     }
 }

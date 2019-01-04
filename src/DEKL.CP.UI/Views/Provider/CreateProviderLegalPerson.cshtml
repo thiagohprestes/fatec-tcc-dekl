@@ -69,7 +69,14 @@
                         </div>
                     </div>
 
-                    @Html.Action("AddressPartialView", "Address")
+                    @if (Model?.Address != null)
+                    {
+                        @Html.Action("AddressPartialViewFilled", "Address", Model.Address)
+                    }
+                    else
+                    {
+                        @Html.Action("AddressPartialView", "Address")
+                    }
 
                     <div class="form-group">
                         <input type="submit" value="Salvar" class="btn btn-info" />

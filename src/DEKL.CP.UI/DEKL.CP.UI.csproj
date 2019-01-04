@@ -384,6 +384,10 @@
     <Content Include="Views\BankAgency\Details.cshtml" />
     <Content Include="Views\ProviderBankAccount\Index.cshtml" />
     <Content Include="Views\ProviderBankAccount\Create.cshtml" />
+    <Content Include="Views\Provider\Delete.cshtml" />
+    <Content Include="Views\Provider\DetailsProviderLegalPerson.cshtml" />
+    <Content Include="Views\Provider\EditProviderPhysicalPerson.cshtml" />
+    <Content Include="Views\Provider\EditProviderLegalPerson.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
