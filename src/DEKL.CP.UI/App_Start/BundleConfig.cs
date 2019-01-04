@@ -35,7 +35,7 @@ namespace DEKL.CP.UI
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/fontawesome/all.css",
+                      "~/Content/fontawesome-all.css",
                       "~/Content/toastr.min.css",
                       "~/Content/sidebar-navbar.css"));
 

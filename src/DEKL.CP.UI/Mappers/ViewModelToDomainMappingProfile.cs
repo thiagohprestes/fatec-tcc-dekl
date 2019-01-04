@@ -17,10 +17,7 @@ namespace DEKL.CP.UI.Mappers
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<ApplicationUsersViewModel, ApplicationUser>();
-            CreateMap<RegisterViewModel, ApplicationUser>()
-                .ForSourceMember(src => src.ConfirmPasswordHash, opt => opt.Ignore())
-                .ForMember(dest => dest.PhoneNumber,
-                    opt => opt.MapFrom(src => Regex.Replace(src.PhoneNumber, @"[^\d]", string.Empty)));
+            CreateMap<RegisterViewModel, ApplicationUser>();
             CreateMap<AddressViewModel, Address>();
             CreateMap<BankViewModel, Bank>();
             CreateMap<BankAgencyViewModel, BankAgency>();
