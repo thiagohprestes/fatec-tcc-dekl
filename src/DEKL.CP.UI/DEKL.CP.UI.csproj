@@ -388,6 +388,7 @@
     <Content Include="Views\Provider\DetailsProviderLegalPerson.cshtml" />
     <Content Include="Views\Provider\EditProviderPhysicalPerson.cshtml" />
     <Content Include="Views\Provider\EditProviderLegalPerson.cshtml" />
+    <Content Include="Views\ProviderBankAccount\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

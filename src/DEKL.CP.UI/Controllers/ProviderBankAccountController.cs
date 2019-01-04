@@ -78,6 +78,10 @@ namespace DEKL.CP.UI.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.BankAgencies = new SelectList(_providerBankAccountRepository.BankAgencyesActives, nameof(BankAgency.Id),
+                nameof(BankAgency.BankAgencyDescription));
+            ViewBag.Providers = new SelectList(_providerRepository.AllActivesProviderPhysicalLegalPerson, nameof(Provider.Id),
+                nameof(ProviderPhysicalLegalPersonViewModel.NameCorporateName));
             return View(Mapper.Map<ProviderBankAccountViewModel>(providerBankAccount));
         }
 

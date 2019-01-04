@@ -1,7 +1,9 @@
-﻿@model DEKL.CP.UI.ViewModels.Provider.ProviderPhysicalPersonViewModel
+﻿@using DEKL.CP.Domain.Enums
+@model DEKL.CP.UI.ViewModels.Provider.ProviderPhysicalPersonViewModel
 
 @{
     ViewBag.Title = "Cadastrar Fornecedor - Pessoa Física";
+    Model.TypeProvider = TypeProvider.PhysicalPerson;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -15,6 +17,7 @@
                     <h4>Preencha os dados</h4>
                     <hr />
                     @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                    @Html.Hidden(nameof(TypeProvider), TypeProvider.PhysicalPerson)
                     <div class="form-row">
                         <div class="form-group col-md-9">
                             @Html.LabelFor(m => m.Name, new { @class = "control-label" })
