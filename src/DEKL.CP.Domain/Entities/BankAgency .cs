@@ -5,7 +5,7 @@ namespace DEKL.CP.Domain.Entities
 {
     public class BankAgency : EntityBase, IBankAgency
     {
-        public int Number { get; set; }
+        public short Number { get; set; }
         public int AddressId { get; set; }
         public virtual Address Address { get; set; }
         public string ManagerName { get; set; }
@@ -15,5 +15,7 @@ namespace DEKL.CP.Domain.Entities
         public virtual Bank Bank { get; set; }
         public virtual ICollection<InternalBankAccount> InternalBankAccounts { get; set; }
         public virtual ICollection<ProviderBankAccount> ProviderBankAccounts { get; set; }
+
+        public string BankAgencyDescription => $"{Number} - {Bank.Name}";
     }
 }

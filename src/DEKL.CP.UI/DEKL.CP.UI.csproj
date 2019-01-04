@@ -45,7 +45,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.0</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
@@ -90,8 +90,8 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -275,6 +275,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProviderBankAccountController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
@@ -299,6 +300,7 @@
     <Compile Include="ViewModels\BankTransactionViewModel.cs" />
     <Compile Include="ViewModels\Bank\BankViewModel.cs" />
     <Compile Include="ViewModels\InternalBankAccount\InternalBankAccountViewModel.cs" />
+    <Compile Include="ViewModels\Provider\ProviderBankAccountRelashionshipsViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderBankAccountViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderLegalPersonViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderPhysicalLegalPersonViewModel.cs" />
@@ -374,6 +376,8 @@
     <Content Include="Views\BankAgency\Delete.cshtml" />
     <Content Include="Views\BankAgency\Edit.cshtml" />
     <Content Include="Views\BankAgency\Details.cshtml" />
+    <Content Include="Views\ProviderBankAccount\Index.cshtml" />
+    <Content Include="Views\ProviderBankAccount\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.0</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,7 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.0</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Contracts\Entities\IAccount.cs" />
@@ -40,12 +40,15 @@
     <Compile Include="Contracts\Entities\IBankAgency.cs" />
     <Compile Include="Contracts\Entities\IEntityBase.cs" />
     <Compile Include="Contracts\Entities\IProvider.cs" />
+    <Compile Include="Contracts\Entities\IProviderBankAccountRelashionships.cs" />
     <Compile Include="Contracts\Entities\IProviderLegalPerson.cs" />
     <Compile Include="Contracts\Entities\IProviderPhysicalLegalPerson.cs" />
     <Compile Include="Contracts\Entities\IProviderPhysicalPerson.cs" />
     <Compile Include="Contracts\Entities\IState.cs" />
     <Compile Include="Contracts\Repositories\IBankAgencyRepository.cs" />
     <Compile Include="Contracts\Repositories\IBankRepository.cs" />
+    <Compile Include="Contracts\Repositories\IInternalBankAccountRepository.cs" />
+    <Compile Include="Contracts\Repositories\IProviderBankAccountRepository.cs" />
     <Compile Include="Contracts\Repositories\IProviderRepository.cs" />
     <Compile Include="Contracts\Repositories\IRepository.cs" />
     <Compile Include="Contracts\Repositories\IApplicationUserRepository.cs" />

@@ -12,8 +12,8 @@ namespace DEKL.CP.UI.ViewModels.BankAgency
     {
         public int Id { get; set; }
 
-        [DisplayName("Número")]
-        public int Number { get; set; }
+        [Required, DisplayName("Número")]
+        public short Number { get; set; }
 
         public AddressViewModel Address { get; set; }
 
@@ -26,7 +26,7 @@ namespace DEKL.CP.UI.ViewModels.BankAgency
         [DisplayName("E-mail"), EmailAddress]
         public string Email { get; set; }
 
-        [DisplayName("Banco")]
+        [Required, DisplayName("Banco")]
         public int BankId { get; set; }
 
         public virtual Domain.Entities.Bank Bank { get; set; }

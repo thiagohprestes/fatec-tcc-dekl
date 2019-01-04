@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using DEKL.CP.Domain.Contracts.Entities;
-using DEKL.CP.Domain.Entities;
 using DEKL.CP.UI.ViewModels.AccountsToPay;
 
 namespace DEKL.CP.UI.ViewModels.Provider

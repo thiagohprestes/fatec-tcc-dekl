@@ -12,6 +12,6 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
 
         public BankAgencyRepositoryEF(DEKLCPDataContextEF ctx) : base(ctx) => _ctx = ctx;
 
-        public IEnumerable<Bank> BanksActives => _ctx.Banks.Where(b => b.Active);
+        public IEnumerable<Bank> BanksActives => _ctx.Banks.Where(b => b.Active).AsEnumerable();
     }
 }

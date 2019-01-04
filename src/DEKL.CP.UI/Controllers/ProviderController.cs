@@ -24,38 +24,40 @@ namespace DEKL.CP.UI.Controllers
         public ActionResult Create(TypeProvider typeprovider) 
             => View(typeprovider == TypeProvider.PhysicalPerson ? "CreateProviderPhysicalPerson" : "CreateProviderLegalPerson");
 
-        public ActionResult CreateProviderPhysicalPerson(ProviderPhysicalPerson model)
+        public ActionResult CreateProviderPhysicalPerson(ProviderPhysicalPerson providerPhysicalPerson)
         {
             if (ModelState.IsValid)
             {
                 try
                 { 
-                    _providerRepository.Add(model);
+                    _providerRepository.Add(providerPhysicalPerson);
 
                     return RedirectToAction("Index");
                 }
                 catch
                 {
                     this.AddToastMessage("Erro no salvamento", "Erro ao salvar o fornecedor, favor tentar novamente", ToastType.Error);
+                    return View(providerPhysicalPerson);
                 }
             }
 
             return View();
         }
 
-        public ActionResult CreateProviderLegalPerson(ProviderLegalPerson model)
+        public ActionResult CreateProviderLegalPerson(ProviderLegalPerson providerLegalPerson)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _providerRepository.Add(model);
+                    _providerRepository.Add(providerLegalPerson);
 
                     return RedirectToAction("Index");
                 }
                 catch
                 {
                     this.AddToastMessage("Erro no salvamento", "Erro ao salvar o fornecedor, favor tentar novamente", ToastType.Error);
+                    return View(providerLegalPerson);
                 }
             }
 

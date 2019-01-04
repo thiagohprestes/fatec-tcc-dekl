@@ -32,6 +32,8 @@ namespace DEKL.CP.Infra.Data.EF.Maps
                     new IndexAnnotation(new IndexAttribute($"UQ_dbo.{nameof(BankAgency)}.{nameof(BankAgency.Email)}") { IsUnique = true })
                 );
 
+            Ignore(e => e.BankAgencyDescription);
+
             //Relationships
             HasRequired(e => e.Bank)
                 .WithMany(e => e.BankAgencies)

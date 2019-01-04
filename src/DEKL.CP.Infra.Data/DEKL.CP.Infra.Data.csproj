@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.0</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,7 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.0</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -47,6 +47,7 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\ProviderBankAccountDTO.cs" />
     <Compile Include="DTO\ProviderPhysicalLegalPersonDTO.cs" />
     <Compile Include="EF\Context\DEKLCPDataContextEF.cs" />
     <Compile Include="EF\Maps\AccountToPayMap.cs" />
@@ -66,14 +67,19 @@
     <Compile Include="EF\Maps\StateMap.cs" />
     <Compile Include="EF\Repositories\BankAgencyRepositoryEF.cs" />
     <Compile Include="EF\Repositories\BankRepositoryEF.cs" />
+    <Compile Include="EF\Repositories\InternalBankAccountRepositoryEF.cs" />
+    <Compile Include="EF\Repositories\ProviderBankAccountRepositoryEF.cs" />
     <Compile Include="EF\Repositories\ProviderRepositoryEF.cs" />
     <Compile Include="EF\Repositories\RepositoryEF.cs" />
     <Compile Include="EF\Repositories\StateRepositoryEF.cs" />
     <Compile Include="EF\Repositories\UnitOfWork.cs" />
-    <Compile Include="EF\Repositories\UsuarioRepositoryEF.cs" />
     <Compile Include="Migrations\201901021627524_InitialCreate.cs" />
     <Compile Include="Migrations\201901021627524_InitialCreate.Designer.cs">
       <DependentUpon>201901021627524_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901041555502_Second-Migration.cs" />
+    <Compile Include="Migrations\201901041555502_Second-Migration.Designer.cs">
+      <DependentUpon>201901041555502_Second-Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,6 +97,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201901021627524_InitialCreate.resx">
       <DependentUpon>201901021627524_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901041555502_Second-Migration.resx">
+      <DependentUpon>201901041555502_Second-Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

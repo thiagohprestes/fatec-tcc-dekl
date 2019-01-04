@@ -1,27 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using DEKL.CP.Domain.Entities;
-using DEKL.CP.UI.ViewModels.BankAgency;
+using System.ComponentModel.DataAnnotations;
+using DEKL.CP.Domain.Contracts.Entities;
 
 namespace DEKL.CP.UI.ViewModels.Provider
 {
-    public class ProviderBankAccountViewModel
+    public class ProviderBankAccountViewModel : IBankAccount
     {
-        [DisplayName("Número da conta")]
+        public int Id { get; set; }
+
+        [Required, DisplayName("Número da conta")]
         public string Number { get; set; }
 
-        [DisplayName("Nome")]
+        [Required, DisplayName("Nome")]
         public string Name { get; set; }
 
-        [DisplayName("Agência Bancária")]
+        [Required, DisplayName("Agência Bancária")]
         public int BankAgencyId { get; set; }
 
-        public BankAgencyViewModel BankAgency { get; set; }
+        public Domain.Entities.BankAgency BankAgency { get; set; }
 
-        [DisplayName("Fornecedor")]
+        [Required, DisplayName("Fornecedor")]
         public int? ProviderId { get; set; }
 
-        public virtual ProviderViewModel Provider { get; set; }
+        public virtual Domain.Entities.Provider Provider { get; set; }
 
         public virtual ICollection<BankTransactionViewModel> BankTransactions { get; set; }
     }

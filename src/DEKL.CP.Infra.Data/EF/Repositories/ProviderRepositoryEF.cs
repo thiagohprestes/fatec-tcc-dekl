@@ -42,7 +42,7 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                             CPFCNPJ = plp.CNPJ,
                             TypeProvider = TypeProvider.LegalPerson
                         }
-                ).ToList();
+                ).AsEnumerable();
 
         public ProviderPhysicalPerson FindActiveProviderPhysicalPerson (int id) => _ctx.ProviderPhysicalPersons.First(p => p.Active && p.Id == id);
         public ProviderLegalPerson FindActiveProviderLegalPerson(int id) => _ctx.ProviderLegalPersons.First(p => p.Active && p.Id == id);

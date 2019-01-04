@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DEKL.CP.Domain.Contracts.Entities;
+using DEKL.CP.Domain.Enums;
 
 namespace DEKL.CP.Domain.Entities
 {
@@ -9,6 +10,7 @@ namespace DEKL.CP.Domain.Entities
         public string Email { get; set; }
         public int AddressId { get; set; }
         public virtual Address Address { get; set; }
+        public TypeProvider TypeProvider { get; set; }  
         public virtual ICollection<AccountToPay> AccountsToPay { get; set; }
         public virtual ICollection<ProviderBankAccount> ProviderBankAccounts { get; set; }
     }
