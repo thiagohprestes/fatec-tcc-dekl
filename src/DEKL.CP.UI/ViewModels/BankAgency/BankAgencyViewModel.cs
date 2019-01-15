@@ -34,5 +34,8 @@ namespace DEKL.CP.UI.ViewModels.BankAgency
         public virtual ICollection<InternalBankAccountViewModel> InternalBankAccounts { get; set; }
 
         public virtual ICollection<ProviderBankAccountViewModel> ProviderBankAccounts { get; set; }
+
+        [DisplayName("Agência")]
+        public string BankAgencyDescription => $"{Number} - {Bank.Name}";
     }
 }

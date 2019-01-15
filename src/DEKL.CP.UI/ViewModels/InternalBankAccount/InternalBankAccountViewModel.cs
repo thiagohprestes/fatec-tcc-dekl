@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using DEKL.CP.UI.ViewModels.BankAgency;
 
 namespace DEKL.CP.UI.ViewModels.InternalBankAccount
 {
     public class InternalBankAccountViewModel
     {
-        [DisplayName("Número")]
+        public int Id { get; set; }
+        [DisplayName("Número da conta")]
         public string Number { get; set; }
 
         [DisplayName("Nome")]
@@ -18,7 +18,7 @@ namespace DEKL.CP.UI.ViewModels.InternalBankAccount
         [DisplayName("Agência bancária")]
         public int BankAgencyId { get; set; }
 
-        public virtual BankAgencyViewModel BankAgency { get; set; }
+        public virtual Domain.Entities.BankAgency BankAgency { get; set; }
 
         [DisplayName("Transações bancárias")]
         public virtual ICollection<BankTransactionViewModel> BankTransactions { get; set; }

@@ -62,7 +62,9 @@ namespace DEKL.CP.UI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View(Mapper.Map<ProviderBankAccountViewModel>(_providerBankAccountRepository.Find(id.Value)));
+            var providerBankAccount = _providerBankAccountRepository.ProviderBankAccountRelashionships(id.Value);
+
+            return View(Mapper.Map<ProviderBankAccountRelashionshipsViewModel>(providerBankAccount));
         }
 
         public ActionResult Edit(int? id)
@@ -150,7 +152,7 @@ namespace DEKL.CP.UI.Controllers
 
                     _providerBankAccountRepository.DeleteLogical(providerBankAccount);
 
-                    this.AddToastMessage("Conta excluída", $"O banco {providerBankAccount.Name} foi excluído com sucesso", ToastType.Success);
+                    this.AddToastMessage("Conta Excluída", $"A conta {providerBankAccount.Name} foi excluída com sucesso", ToastType.Success);
                     return RedirectToAction("Index");
                 }
                 catch

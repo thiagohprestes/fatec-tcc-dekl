@@ -280,6 +280,7 @@
     <Compile Include="Controllers\BankController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InternalBankAccountController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProviderBankAccountController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
@@ -389,6 +390,13 @@
     <Content Include="Views\Provider\EditProviderPhysicalPerson.cshtml" />
     <Content Include="Views\Provider\EditProviderLegalPerson.cshtml" />
     <Content Include="Views\ProviderBankAccount\Edit.cshtml" />
+    <Content Include="Views\ProviderBankAccount\Details.cshtml" />
+    <Content Include="Views\ProviderBankAccount\Delete.cshtml" />
+    <Content Include="Views\InternalBankAccount\Index.cshtml" />
+    <Content Include="Views\InternalBankAccount\Edit.cshtml" />
+    <Content Include="Views\InternalBankAccount\Details.cshtml" />
+    <Content Include="Views\InternalBankAccount\Delete.cshtml" />
+    <Content Include="Views\InternalBankAccount\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

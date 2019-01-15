@@ -19,7 +19,7 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
 
         public IEnumerable<T> All => Entities.ToList();
 
-        public IEnumerable<T> Actives => Entities.Where(e => e.Active).ToList();
+        public virtual IEnumerable<T> Actives => Entities.Where(e => e.Active).ToList();
 
         public T Find(int id) => Entities.Find(id);
 

@@ -9,5 +9,7 @@ namespace DEKL.CP.Domain.Contracts.Repositories
         IEnumerable<BankAgency> BankAgencyesActives { get; }
 
         IEnumerable<IProviderBankAccountRelashionships> ProviderBankAccountActivesRelashionships { get; }
+
+        IProviderBankAccountRelashionships ProviderBankAccountRelashionships(int id);
     }
 }
