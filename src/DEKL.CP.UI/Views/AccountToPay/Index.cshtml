@@ -32,21 +32,21 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>@Html.DisplayFor(m => item.Documento)</td>
-                        <td>@Html.DisplayFor(m => item.Fornecedor)</td>
-                        <td>@Html.DisplayFor(m => item.Tipo)</td>
-                        <td>@Html.DisplayFor(m=> item.Valor)</td>
-                        <td>@Html.DisplayFor(m => item.Juros)</td>
-                        <td>@Html.DisplayFor(m => item.Multa)</td>
-                        <td>@Html.DisplayFor(m => item.Vencimento)</td>
+                        <tr>
+                             <td>@Html.DisplayFor(m => item.Documento)</td>
+                            <td>@Html.DisplayFor(m => item.Fornecedor)</td>
+                            <td>@Html.DisplayFor(m => item.Tipo)</td>
+                            <td>@Html.DisplayFor(m => item.Valor)</td>
+                            <td>@Html.DisplayFor(m => item.Juros)</td>
+                            <td>@Html.DisplayFor(m => item.Multa)</td>
+                            <td>@Html.DisplayFor(m => item.Vencimento)</td>
 
-                        <td>
-                            <a href='@(Url.Action("Edit", new { id = item.Id }))'><i class="fas fa-pen"></i></a>
-                            <a href='@(Url.Action("Details", new { id = item.Id }))'><i class="fas fa-info-circle"></i></a>
-                            <a href='@(Url.Action("Delete", new { id = item.Id }))'><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
+                            <td>
+                                <a href='@(Url.Action("Edit", new { id = item.Id }))'><i class="fas fa-pen"></i></a>
+                                <a href='@(Url.Action("Details", new { id = item.Id }))'><i class="fas fa-info-circle"></i></a>
+                                <a href='@(Url.Action("Delete", new { id = item.Id }))'><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>

@@ -1,1 +1,69 @@
-﻿
+﻿@model DEKL.CP.UI.ViewModels.InternalBankAccount.InternalBankAccountViewModel
+@{
+    ViewBag.Title = "Edição";
+}
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-6">
+        <section id="editInternalBankAccountForm">
+            @using (Html.BeginForm(new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Contas Bancárias Internas</h4>
+                <hr />
+                @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                @Html.HiddenFor(m => m.Id)
+                <div class="form-row">
+                    <div class="form-group col-md-9">
+                        @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Ex: Thiago - Itaú" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(m => m.Number, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Number, new { @class = "form-control", placeholder = "Ex: 14237-7" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.Number, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(m => m.Balance, new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.Balance, new { @class = "form-control" })
+                            <div class="input-group-lg">
+                                <span class="input-group-text">R$</span>
+                            </div>
+                        </div>
+
+                        <small>
+                            @Html.ValidationMessageFor(m => m.Balance, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(m => m.BankAgencyId, new { @class = "control-label" })
+                        @Html.DropDownListFor(m => m.BankAgencyId, (SelectList)ViewBag.BankAgencies, "Selecione a Agência", new { @class = "form-control" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.BankAgencyId, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Salvar" class="btn btn-info" />
+                    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
+                </div>
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

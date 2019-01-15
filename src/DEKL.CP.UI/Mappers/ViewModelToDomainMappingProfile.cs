@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using AutoMapper;
+﻿using AutoMapper;
 using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
@@ -23,6 +22,7 @@ namespace DEKL.CP.UI.Mappers
             CreateMap<BankAgencyViewModel, BankAgency>();
             CreateMap<ProviderBankAccountViewModel, ProviderBankAccount>();
             CreateMap<ProviderBankAccountRelashionshipsViewModel, IProviderBankAccountRelashionships>();
+            CreateMap<InternalBankAccountRelashionshipsViewModel, IInternalBankAccountRelashionships>();
             CreateMap<InternalBankAccountViewModel, InternalBankAccount>();
             CreateMap<ProviderViewModel, Provider>();
             CreateMap<ProviderPhysicalPersonViewModel, ProviderPhysicalPerson>();

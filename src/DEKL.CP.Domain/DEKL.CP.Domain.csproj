@@ -39,6 +39,7 @@
     <Compile Include="Contracts\Entities\IBankAccount.cs" />
     <Compile Include="Contracts\Entities\IBankAgency.cs" />
     <Compile Include="Contracts\Entities\IEntityBase.cs" />
+    <Compile Include="Contracts\Entities\IInternalBankAccountRelashionships.cs" />
     <Compile Include="Contracts\Entities\IProvider.cs" />
     <Compile Include="Contracts\Entities\IProviderBankAccountRelashionships.cs" />
     <Compile Include="Contracts\Entities\IProviderLegalPerson.cs" />

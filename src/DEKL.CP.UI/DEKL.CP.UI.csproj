@@ -306,6 +306,7 @@
     <Compile Include="ViewModels\BankAgency\BankAgencyViewModel.cs" />
     <Compile Include="ViewModels\BankTransactionViewModel.cs" />
     <Compile Include="ViewModels\Bank\BankViewModel.cs" />
+    <Compile Include="ViewModels\InternalBankAccount\InternalBankAccountRelashionshipsViewModel.cs" />
     <Compile Include="ViewModels\InternalBankAccount\InternalBankAccountViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderBankAccountRelashionshipsViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderBankAccountViewModel.cs" />

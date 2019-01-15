@@ -22,8 +22,8 @@ namespace DEKL.CP.UI.Mappers
             CreateMap<BankAgency, BankAgencyViewModel>();
             CreateMap<ProviderBankAccount, ProviderBankAccountViewModel>();
             CreateMap<IProviderBankAccountRelashionships, ProviderBankAccountRelashionshipsViewModel>();
+            CreateMap<IInternalBankAccountRelashionships, InternalBankAccountRelashionshipsViewModel>();
             CreateMap<InternalBankAccount, InternalBankAccountViewModel>();
-
             CreateMap<Provider, ProviderViewModel>();
             CreateMap<ProviderPhysicalPerson, ProviderPhysicalPersonViewModel>();
             CreateMap<ProviderLegalPerson, ProviderLegalPersonViewModel>();

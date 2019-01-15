@@ -61,6 +61,68 @@ namespace DEKL.CP.Infra.Data.Migrations
 
                 context.Banks.AddRange(banks);
             }
+
+            if (!context.BankAgencies.Any())
+            {
+                var Addresses = new Collection<Address>
+                {
+                    new Address
+                    {
+                        Street = "Avenida Pereira Da Silva",
+                        Number = "1276",
+                        ZipCode = "18095340",
+                        Neighborhood = "Jardim Santa Rosália",
+                        City = "Sorocaba",
+                        StateId = 25
+                    },
+                    new Address
+                    {
+                        Street = "Avenida Independência",
+                        Number = "5055",
+                        ZipCode = "18103000",
+                        Neighborhood = "Éden",
+                        City = "Sorocaba",
+                        StateId = 25
+                    },
+                    new Address
+                    {
+                        Street = "Avenida Itavuvu",
+                        Number = "516",
+                        ZipCode = "18103000",
+                        Neighborhood = "Vila Olímpia",
+                        City = "Sorocaba",
+                        StateId = 25
+                    }
+                };
+
+                var banksAgencies = new Collection<BankAgency>
+                {
+                    new BankAgency
+                    {
+                        Number = 6582,
+                        ManagerName = "Fábio de Lima",
+                        Address = Addresses[0],
+                        BankId = 1
+                    },
+                    new BankAgency
+                    {
+                        Number = 1599,
+                        PhoneNumber = "1533219100",
+                        Address = Addresses[1],
+                        BankId = 4
+                    },
+                    new BankAgency
+                    {
+                        Number = 1512,
+                        PhoneNumber = "1532241044",
+                        Email = "age1512@bb.com.br",
+                        Address = Addresses[2],
+                        BankId = 3
+                    }
+                };
+
+                context.BankAgencies.AddRange(banksAgencies);
+            }
         }
     }
 }

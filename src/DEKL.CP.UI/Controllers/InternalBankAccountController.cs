@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.UI.Scripts.Toastr;
@@ -17,7 +18,7 @@ namespace DEKL.CP.UI.Controllers
             => _internalBankAccountRepository = internalBankAccountRepository;
 
         public ActionResult Index() 
-            => View(Mapper.Map<IEnumerable<InternalBankAccountViewModel>>(_internalBankAccountRepository.Actives));
+            => View(Mapper.Map<IEnumerable<InternalBankAccountRelashionshipsViewModel>>(_internalBankAccountRepository.InternalBankAccountRelashionships));
 
         public ActionResult Create()
         {

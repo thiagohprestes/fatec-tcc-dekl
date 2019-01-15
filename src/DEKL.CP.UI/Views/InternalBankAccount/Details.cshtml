@@ -1,1 +1,38 @@
-﻿
+﻿@model DEKL.CP.UI.ViewModels.InternalBankAccount.InternalBankAccountViewModel
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>@ViewBag.Title</h2>
+<div>
+    <h4>Conta Bancária Interna</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(m => m.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(m => m.Number)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(m => m.BankAgency.BankAgencyDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.BankAgency.BankAgencyDescription)
+        </dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
+</p>
