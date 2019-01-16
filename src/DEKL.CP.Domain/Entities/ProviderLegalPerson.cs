@@ -1,4 +1,5 @@
 ﻿using DEKL.CP.Domain.Contracts.Entities;
+using DEKL.CP.Domain.Enums;
 
 namespace DEKL.CP.Domain.Entities
 {
@@ -8,5 +9,6 @@ namespace DEKL.CP.Domain.Entities
         public string CNPJ { get; set; }
         public string MunicipalRegistration { get; set; }
         public string StateRegistration { get; set; }
+        public override TypeProvider TypeProvider { get; set; } = TypeProvider.LegalPerson;
     }
 }

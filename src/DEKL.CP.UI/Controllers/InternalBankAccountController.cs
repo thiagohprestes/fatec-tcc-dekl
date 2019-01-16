@@ -4,6 +4,8 @@ using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels.InternalBankAccount;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
@@ -35,13 +37,17 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
+                    internalBankAccount.ApplicationUserId = User.Identity.GetUserId<int>();
                     _internalBankAccountRepository.Add(internalBankAccount);
 
                     this.AddToastMessage("Conta salva", $"A conta {internalBankAccount.Name} foi salva com sucesso", ToastType.Success);
                     return RedirectToAction("Index");
                 }
-                catch
+                catch (Exception ex)
                 {
+                    ViewBag.BankAgencies = new SelectList(_internalBankAccountRepository.BankAgencyesActives, nameof(BankAgency.Id),
+                        nameof(BankAgency.BankAgencyDescription));
+
                     this.AddToastMessage("Erro no salvamento", $"Erro ao salvar a conta {internalBankAccount.Name}, favor tentar novamente",
                         ToastType.Error);
                 }
@@ -93,6 +99,7 @@ namespace DEKL.CP.UI.Controllers
                     internalBankAccount.Name = internalBankAccountViewModel.Name;
                     internalBankAccount.BankAgencyId = internalBankAccountViewModel.BankAgencyId;
                     internalBankAccount.Balance = internalBankAccountViewModel.Balance;
+                    internalBankAccount.ApplicationUserId = User.Identity.GetUserId<int>();
 
                     _internalBankAccountRepository.Update(internalBankAccount);
 

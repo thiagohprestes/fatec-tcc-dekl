@@ -30,7 +30,7 @@ namespace DEKL.CP.Infra.Data.EF.Maps
                 .HasMaxLength(11);
 
             Property(e => e.StateRegistration)
-                .HasMaxLength(9);
+                .HasMaxLength(12);
         }
     }
 }

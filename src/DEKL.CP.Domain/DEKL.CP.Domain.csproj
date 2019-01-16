@@ -71,6 +71,7 @@
     <Compile Include="Entities\ProviderLegalPerson.cs" />
     <Compile Include="Entities\State.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Enums\Module.cs" />
     <Compile Include="Enums\PaymentType.cs" />
     <Compile Include="Enums\Priority.cs" />
     <Compile Include="Enums\TypeProvider.cs" />

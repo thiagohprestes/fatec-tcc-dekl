@@ -17,9 +17,8 @@ namespace DEKL.CP.Infra.Data.EF.Maps
                 .HasMaxLength(20)
                 .IsRequired();
 
-            Property(e => e.Name)
+            Property(e => e.Number)
                 .HasMaxLength(80)
-                .IsRequired()
                 .HasColumnAnnotation(
                     IndexAnnotation.AnnotationName,
                     new IndexAnnotation(

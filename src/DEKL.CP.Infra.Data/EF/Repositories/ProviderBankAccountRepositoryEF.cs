@@ -34,6 +34,7 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                         Name = pba.Name,
                         NumberBankAgency = ba.Number,
                         NameBank = b.Name,
+                        TypeProvider = p.TypeProvider,
                         NameProvider = string.IsNullOrEmpty(lppp.Name) ? string.Empty : lppp.Name,
                         CorporateNameProvider = string.IsNullOrEmpty(lplp.CorporateName) ? string.Empty : lplp.CorporateName,
                         CPF = string.IsNullOrEmpty(lppp.CPF) ? string.Empty : lppp.CPF,

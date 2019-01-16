@@ -3,6 +3,7 @@ using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels.Provider;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
@@ -40,6 +41,7 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
+                    providerBankAccount.ApplicationUserId = User.Identity.GetUserId<int>();
                     _providerBankAccountRepository.Add(providerBankAccount);
 
                     this.AddToastMessage("Conta salva", $"A conta {providerBankAccount.Name} foi salva com sucesso", ToastType.Success);
@@ -100,6 +102,7 @@ namespace DEKL.CP.UI.Controllers
                     providerBankAccount.Name = providerBankAccountViewModel.Name;
                     providerBankAccount.BankAgencyId = providerBankAccountViewModel.BankAgencyId;
                     providerBankAccount.ProviderId = providerBankAccountViewModel.ProviderId;
+                    providerBankAccount.ApplicationUserId = User.Identity.GetUserId<int>();
 
                     _providerBankAccountRepository.Update(providerBankAccount);
 

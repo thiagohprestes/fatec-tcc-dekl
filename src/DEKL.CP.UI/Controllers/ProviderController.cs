@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 using AutoMapper;
@@ -7,6 +8,7 @@ using DEKL.CP.Domain.Entities;
 using DEKL.CP.Domain.Enums;
 using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels.Provider;
+using Microsoft.AspNet.Identity;
 
 namespace DEKL.CP.UI.Controllers
 {
@@ -30,12 +32,14 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
+                    providerPhysicalPerson.ApplicationUserId = User.Identity.GetUserId<int>();
+
                     _providerRepository.Add(providerPhysicalPerson);
 
                     this.AddToastMessage("Fornecedor salvo", $"O fornecedor {providerPhysicalPerson.Name} foi salvo com sucesso", ToastType.Success);
                     return RedirectToAction("Index");
                 }
-                catch
+                catch (Exception ex)
                 {
                     this.AddToastMessage("Erro no salvamento", "Erro ao salvar o fornecedor, favor tentar novamente", ToastType.Error);
                     return View(Mapper.Map<ProviderPhysicalPersonViewModel>(providerPhysicalPerson));
@@ -51,6 +55,8 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
+                    providerLegalPerson.ApplicationUserId = User.Identity.GetUserId<int>();
+
                     _providerRepository.Add(providerLegalPerson);
 
                     this.AddToastMessage("Banco salvo", $"O banco {providerLegalPerson.CorporateName} foi salvo com sucesso",
@@ -121,6 +127,7 @@ namespace DEKL.CP.UI.Controllers
                     providerPhysicalPerson.CPF = providerPhysicalPersonViewModel.CPF;
                     providerPhysicalPerson.PhoneNumber = providerPhysicalPersonViewModel.PhoneNumber;
                     providerPhysicalPerson.Email = providerPhysicalPersonViewModel.Email;
+                    providerPhysicalPerson.ApplicationUserId = User.Identity.GetUserId<int>();
                     providerPhysicalPerson.Address = Mapper.Map<Address>(providerPhysicalPersonViewModel.Address);
 
                     _providerRepository.Update(providerPhysicalPerson);
@@ -155,6 +162,7 @@ namespace DEKL.CP.UI.Controllers
                     providerLegalPerson.StateRegistration = providerLegalPersonViewModel.StateRegistration;
                     providerLegalPerson.PhoneNumber = providerLegalPersonViewModel.PhoneNumber;
                     providerLegalPerson.Email = providerLegalPersonViewModel.Email;
+                    providerLegalPerson.ApplicationUserId = User.Identity.GetUserId<int>();
                     providerLegalPerson.Address = Mapper.Map<Address>(providerLegalPersonViewModel.Address);
 
                     _providerRepository.Update(providerLegalPerson);

@@ -21,6 +21,10 @@ namespace DEKL.CP.Domain.Entities
         public short NumberOfInstallments { get; set; } //Número de parcelas
         public int ProviderId { get; set; }
         public virtual Provider Provider { get; set; }
+        public int ApplicationUserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
+        public int ModuleId { get; set; } = (int)Enums.Module.AccountToPay;
+        public virtual Module Module { get; set; }
         public virtual ICollection<Installment> Installments { get; set; }
         public virtual ICollection<PaymentSimulator> PaymentSimulators { get; set; }
     }
