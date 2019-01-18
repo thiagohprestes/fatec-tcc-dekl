@@ -14,14 +14,14 @@ namespace DEKL.CP.UI.Controllers
         [ChildActionOnly]
         public ActionResult AddressPartialView()
         {
-            ViewBag.States = new SelectList(_stateRepository.Actives, nameof(Bank.Id), nameof(Bank.Name));
+            ViewBag.States = new SelectList(_stateRepository.Actives, nameof(State.Id), nameof(State.Name), nameof(State.Initials));
             return PartialView("~/Views/Shared/_Address.cshtml");
         }
 
         [ChildActionOnly]
         public ActionResult AddressPartialViewFilled(AddressViewModel addressViewModel)
         {
-            ViewBag.States = new SelectList(_stateRepository.Actives, nameof(Bank.Id), nameof(Bank.Name));
+            ViewBag.States = new SelectList(_stateRepository.Actives, nameof(State.Id), nameof(State.Name), nameof(State.Initials));
             return PartialView("~/Views/Shared/_Address.cshtml", new AddressVM { Address = addressViewModel });
         }
     }

@@ -61,7 +61,8 @@
     </div>
 </div>
 
-<script>
+@section Scripts{
+    <script type="text/javascript">
     $('#Address_ZipCode').focusout(() => {
         $.getScript('http://cep.republicavirtual.com.br/web_cep.php' + "?formato=javascript&cep=" + this.value, () => {
             if (resultadoCEP["resultado"]) {
@@ -73,4 +74,5 @@
             }
         }
     }
-</script>
+    </script>
+}

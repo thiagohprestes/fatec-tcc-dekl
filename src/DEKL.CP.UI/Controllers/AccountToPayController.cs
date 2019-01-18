@@ -2,10 +2,8 @@
 using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
-using DEKL.CP.Domain.Enums;
 using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels.AccountsToPay;
-using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
