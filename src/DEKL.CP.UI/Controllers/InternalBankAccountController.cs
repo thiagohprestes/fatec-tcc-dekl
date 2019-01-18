@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels.InternalBankAccount;
 using Microsoft.AspNet.Identity;
-using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
@@ -43,7 +41,7 @@ namespace DEKL.CP.UI.Controllers
                     this.AddToastMessage("Conta salva", $"A conta {internalBankAccount.Name} foi salva com sucesso", ToastType.Success);
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
+                catch
                 {
                     ViewBag.BankAgencies = new SelectList(_internalBankAccountRepository.BankAgencyesActives, nameof(BankAgency.Id),
                         nameof(BankAgency.BankAgencyDescription));

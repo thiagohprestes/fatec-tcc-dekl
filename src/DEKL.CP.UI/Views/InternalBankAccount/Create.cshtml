@@ -50,7 +50,7 @@
 
                         <div class="form-group col-md-6">
                             @Html.LabelFor(m => m.BankAgencyId, new { @class = "control-label" })
-                            @Html.DropDownListFor(m => m.BankAgencyId, (SelectList)ViewBag.BankAgencies, "Selecione a Agência", new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.BankAgencyId, ViewBag.BankAgencies as SelectList, "Selecione a Agência", new { @class = "form-control" })
                             <small>
                                 @Html.ValidationMessageFor(m => m.BankAgencyId, null, new { @class = "text-danger" })
                             </small>

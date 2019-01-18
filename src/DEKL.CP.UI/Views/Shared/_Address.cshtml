@@ -46,7 +46,7 @@
 <div class="form-row">
     <div class="form-group col-md-4">
         @Html.LabelFor(m => m.Address.StateId, new { @class = "control-label" })
-        @Html.DropDownListFor(m => m.Address.StateId, (SelectList)ViewBag.States, "Selecione o Estado", new { @class = "form-control" })
+        @Html.DropDownListFor(m => m.Address.StateId, ViewBag.States as SelectList, "Selecione o Estado", new { @class = "form-control" })
         <small>
             @Html.ValidationMessageFor(m => m.Address.StateId, null, new { @class = "text-danger" })
         </small>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DEKL.CP.UI.ViewModels.AccountsToPay.AccountsToPayViewModel>
+﻿@model IEnumerable<DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel>
 @{
     ViewBag.Title = "Contas a Pagar";
 }
@@ -19,13 +19,13 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>@Html.DisplayNameFor(m => m.Documento)</th>
-                        <th>@Html.DisplayNameFor(m => m.Fornecedor)</th>
-                        <th>@Html.DisplayNameFor(m => m.Tipo)</th>
-                        <th>@Html.DisplayNameFor(m => m.Valor)</th>
-                        <th>@Html.DisplayNameFor(m => m.Juros)</th>
-                        <th>@Html.DisplayNameFor(m => m.Multa)</th>
-                        <th>@Html.DisplayNameFor(m => m.Vencimento)</th>
+                        <th>@Html.DisplayNameFor(m => m.DocumentNumber)</th>
+                        <th>@Html.DisplayNameFor(m => m.Provider)</th>
+                        <th>@Html.DisplayNameFor(m => m.PaymentType)</th>
+                        <th>@Html.DisplayNameFor(m => m.Value)</th>
+                        <th>@Html.DisplayNameFor(m => m.Penalty)</th>
+                        <th>@Html.DisplayNameFor(m => m.MonthlyAccount)</th>
+                        <th>@Html.DisplayNameFor(m => m.MaturityDate)</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -33,13 +33,13 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                             <td>@Html.DisplayFor(m => item.Documento)</td>
-                            <td>@Html.DisplayFor(m => item.Fornecedor)</td>
-                            <td>@Html.DisplayFor(m => item.Tipo)</td>
-                            <td>@Html.DisplayFor(m => item.Valor)</td>
-                            <td>@Html.DisplayFor(m => item.Juros)</td>
-                            <td>@Html.DisplayFor(m => item.Multa)</td>
-                            <td>@Html.DisplayFor(m => item.Vencimento)</td>
+                             <td>@Html.DisplayFor(m => item.DocumentNumber)</td>
+                            <td>@Html.DisplayFor(m => item.Provider)</td>
+                            <td>@Html.DisplayFor(m => item.PaymentType)</td>
+                            <td>@Html.DisplayFor(m => item.Value)</td>
+                            <td>@Html.DisplayFor(m => item.Penalty)</td>
+                            <td>@Html.DisplayFor(m => item.MonthlyAccount)</td>
+                            <td>@Html.DisplayFor(m => item.MaturityDate)</td>
 
                             <td>
                                 <a href='@(Url.Action("Edit", new { id = item.Id }))'><i class="fas fa-pen"></i></a>

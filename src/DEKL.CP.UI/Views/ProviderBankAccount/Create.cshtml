@@ -36,7 +36,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             @Html.LabelFor(m => m.BankAgencyId, new { @class = "control-label" })
-                            @Html.DropDownListFor(m => m.BankAgencyId, (SelectList)ViewBag.BankAgencies, "Selecione a Agência", new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.BankAgencyId, ViewBag.BankAgencies as SelectList, "Selecione a Agência", new { @class = "form-control" })
                             <small>
                                 @Html.ValidationMessageFor(m => m.BankAgencyId, null, new { @class = "text-danger" })
                             </small>
@@ -44,7 +44,7 @@
 
                         <div class="form-group col-md-6">
                             @Html.LabelFor(m => m.ProviderId, new { @class = "control-label" })
-                            @Html.DropDownListFor(m => m.ProviderId, (SelectList)ViewBag.Providers, "Selecione o Fornecedor", new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.ProviderId, ViewBag.Providers as SelectList, "Selecione o Fornecedor", new { @class = "form-control" })
                             <small>
                                 @Html.ValidationMessageFor(m => m.ProviderId, null, new { @class = "text-danger" })
                             </small>

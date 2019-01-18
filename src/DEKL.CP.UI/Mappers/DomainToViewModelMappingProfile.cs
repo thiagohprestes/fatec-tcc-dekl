@@ -2,6 +2,7 @@
 using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
+using DEKL.CP.UI.ViewModels.AccountsToPay;
 using DEKL.CP.UI.ViewModels.Address;
 using DEKL.CP.UI.ViewModels.Bank;
 using DEKL.CP.UI.ViewModels.BankAgency;
@@ -28,6 +29,7 @@ namespace DEKL.CP.UI.Mappers
             CreateMap<ProviderPhysicalPerson, ProviderPhysicalPersonViewModel>();
             CreateMap<ProviderLegalPerson, ProviderLegalPersonViewModel>();
             CreateMap<IProviderPhysicalLegalPerson, ProviderPhysicalLegalPersonViewModel>();
+            CreateMap<AccountToPay, AccountToPayViewModel>();
         }
     }
 }

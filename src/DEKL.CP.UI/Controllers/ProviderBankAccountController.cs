@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.UI.Scripts.Toastr;
@@ -29,7 +30,7 @@ namespace DEKL.CP.UI.Controllers
             ViewBag.BankAgencies = new SelectList(_providerBankAccountRepository.BankAgencyesActives, nameof(BankAgency.Id), 
                 nameof(BankAgency.BankAgencyDescription));
             ViewBag.Providers = new SelectList(_providerRepository.AllActivesProviderPhysicalLegalPerson, nameof(Provider.Id),
-                nameof(ProviderPhysicalLegalPersonViewModel.NameCorporateName));
+                nameof(IProviderPhysicalLegalPerson.NameCorporateName));
 
             return View();
         }

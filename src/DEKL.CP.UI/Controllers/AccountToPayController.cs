@@ -1,30 +1,161 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using AutoMapper;
+using DEKL.CP.Domain.Contracts.Entities;
+using DEKL.CP.Domain.Contracts.Repositories;
+using DEKL.CP.Domain.Entities;
+using DEKL.CP.Domain.Enums;
+using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels.AccountsToPay;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
 
 namespace DEKL.CP.UI.Controllers
 {
     public class AccountToPayController : Controller
     {
-        public ActionResult Index()
-        {
-            var users = new List<AccountsToPayViewModel>
-            {
-                new AccountsToPayViewModel { Id = 1, Documento = "255987236991", Fornecedor = "C&C Casa e Contrução Ltda.", Tipo = "à vista",
-                    Valor = "R$ 1.537,87", Juros = "0.25 ad", Multa = "R$ 8,27", Vencimento = "05/10/2017"},
-                new AccountsToPayViewModel { Id = 2, Documento = "632455-A", Fornecedor = "Russo Funilária e Pintura Ltda.", Tipo = "à prazo",
-                    Valor = "R$ 787,00", Juros = "0.25 ad", Multa = "R$ 10,97", Vencimento = "05/11/2017"},
-                new AccountsToPayViewModel { Id = 3, Documento = "632455-B", Fornecedor = "Russo Funilária e Pintura Ltda.", Tipo = "à prazo",
-                    Valor = "R$ 787,00", Juros = "0.25 ad", Multa = "R$ 10,97", Vencimento = "05/11/2017"},
-                new AccountsToPayViewModel { Id = 4, Documento = "632455-C", Fornecedor = "Auto Posto Rachid", Tipo = "à vista",
-                    Valor = "R$ 135,00", Juros = "N/A", Multa = "N/A", Vencimento = "05/10/2017"},
-            };
+        private readonly IProviderRepository _providerRepository;
+        private readonly IAccountToPayRepository _accountToPayRepository;
 
-            return View(users);
+        public AccountToPayController(IAccountToPayRepository accountToPayRepository, IProviderRepository providerRepository)
+        {
+            _providerRepository = providerRepository;
+            _accountToPayRepository = accountToPayRepository;
         }
+
+        public ActionResult Index() => View(Mapper.Map<IEnumerable<AccountToPayViewModel>>(_accountToPayRepository.Actives));
 
         public ActionResult Create()
         {
+            ViewBag.Providers = new SelectList(_providerRepository.AllActivesProviderPhysicalLegalPerson, nameof(Provider.Id),
+                nameof(IProviderPhysicalLegalPerson.NameCorporateName));
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(AccountToPay accountToPay)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _accountToPayRepository.Add(accountToPay);
+
+                    this.AddToastMessage("Conta salva", $"A conta {accountToPay.Description} foi salva com sucesso", ToastType.Success);
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    this.AddToastMessage("Erro no salvamento", $"Erro ao salvar a conta {accountToPay.Description}, " +
+                        $"favor tentar novamente", ToastType.Error);
+                }
+            }
+
+            return View();
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var accountToPay = _accountToPayRepository.FindActive(id.Value);
+            if (accountToPay == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(Mapper.Map<AccountToPayViewModel>(accountToPay));
+        }
+
+        [HttpPost, Authorize(Roles = "Administrador"), ValidateAntiForgeryToken]
+        public ActionResult Edit(AccountToPayViewModel accountToPayViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var accountToPay = _accountToPayRepository.FindActive(accountToPayViewModel.Id);
+
+                    accountToPay.Value = accountToPayViewModel.Value;
+                    //accountToPay.Name = accountToPayViewModel.Name;
+                    //accountToPay.Number = accountToPayViewModel.Number;
+
+                    _accountToPayRepository.Update(accountToPay);
+
+                    this.AddToastMessage("Conta Editada", $"A Conta {accountToPay.Description} foi editada com sucesso", 
+                        ToastType.Success);
+
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    this.AddToastMessage("Erro na Edição", $"Erro ao editar a conta {accountToPayViewModel.Description}, " +
+                        $"favor tentar novamente", ToastType.Error);
+                }
+            }
+
+            return View();
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var accountToPay = _accountToPayRepository.Find(id.Value);
+
+            return accountToPay == null ? HttpNotFound() : (ActionResult)View(Mapper.Map<AccountToPayViewModel>(accountToPay));
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var accountToPay = _accountToPayRepository.Find(id.Value);
+
+                try
+                {
+                    if (accountToPay == null)
+                    {
+                        return HttpNotFound();
+                    }
+
+                    _accountToPayRepository.DeleteLogical(accountToPay);
+
+                    this.AddToastMessage("Conta excluída", $"A Conta {accountToPay.Description} foi excluída com sucesso", 
+                        ToastType.Success);
+
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    this.AddToastMessage("Erro na Exclusão", $"Erro ao excluir a Conta {accountToPay?.Description}, " +
+                        $"favor tentar novamente", ToastType.Error);
+                }
+            }
+
             return View();
         }
     }

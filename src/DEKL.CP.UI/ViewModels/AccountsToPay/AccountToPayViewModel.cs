@@ -7,6 +7,8 @@ namespace DEKL.CP.UI.ViewModels.AccountsToPay
 {
     public class AccountToPayViewModel
     {
+        public int Id { get; set; }
+
         [DisplayName("Valor")]
         public decimal Value { get; set; }
 
@@ -25,7 +27,7 @@ namespace DEKL.CP.UI.ViewModels.AccountsToPay
         [DisplayName("Mora diária")]
         public decimal DailyInterest { get; set; } = 0;
 
-        [DisplayName("Multa")]
+        [DisplayName("Juros")]
         public decimal Penalty { get; set; } = 0;
 
         [DisplayName("Conta mensal")]

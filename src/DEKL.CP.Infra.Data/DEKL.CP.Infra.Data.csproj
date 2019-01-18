@@ -66,6 +66,7 @@
     <Compile Include="EF\Maps\ProviderMap.cs" />
     <Compile Include="EF\Maps\ProviderPhysicalPersonMap.cs" />
     <Compile Include="EF\Maps\StateMap.cs" />
+    <Compile Include="EF\Repositories\AccountToPayRepositoryEF.cs" />
     <Compile Include="EF\Repositories\BankAgencyRepositoryEF.cs" />
     <Compile Include="EF\Repositories\BankRepositoryEF.cs" />
     <Compile Include="EF\Repositories\InternalBankAccountRepositoryEF.cs" />

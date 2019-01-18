@@ -31,6 +31,7 @@ namespace DEKL.CP.Infra.CrossCutting.IoC
             container.Register<IInternalBankAccountRepository, InternalBankAccountRepositoryEF>(Lifestyle.Scoped);
             container.Register<IProviderBankAccountRepository, ProviderBankAccountRepositoryEF>(Lifestyle.Scoped);
             container.Register<IProviderRepository, ProviderRepositoryEF>(Lifestyle.Scoped);
+            container.Register<IAccountToPayRepository, AccountToPayRepositoryEF>(Lifestyle.Scoped);
         }
     }
 }
