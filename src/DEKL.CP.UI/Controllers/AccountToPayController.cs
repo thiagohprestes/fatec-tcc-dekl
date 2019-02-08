@@ -5,6 +5,7 @@ using DEKL.CP.Domain.Entities;
 using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels.AccountsToPay;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
@@ -38,6 +39,18 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
+                    if(accountToPay.Installments?.Count > 0)
+                    {
+                        var valueInstallment = accountToPay.Value / accountToPay.Installments.Count;
+
+                        new Installment
+                        {
+                            Value = valueInstallment,
+                            MaturityDate = new DateTime(accountToPay.MaturityDate.Year, 
+                                                        accountToPay.MaturityDate.Month, 
+                                                        DateTime.DaysInMonth(accountToPay.MaturityDate.Year, accountToPay.MaturityDate.Month);
+                    }
+
                     accountToPay.ApplicationUserId = User.Identity.GetUserId<int>();
                     _accountToPayRepository.Add(accountToPay);
 
@@ -80,6 +93,9 @@ namespace DEKL.CP.UI.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Providers = new SelectList(_providerRepository.AllActivesProviderPhysicalLegalPerson, nameof(Provider.Id),
+                nameof(IProviderPhysicalLegalPerson.NameCorporateName));
 
             return View(Mapper.Map<AccountToPayViewModel>(accountToPay));
         }

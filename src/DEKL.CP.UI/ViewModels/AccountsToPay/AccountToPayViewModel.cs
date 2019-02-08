@@ -3,10 +3,13 @@ using DEKL.CP.UI.ViewModels.Provider;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using DEKL.CP.Domain.Contracts.Entities;
+using DEKL.CP.Domain.Entities;
+using System.Collections.Generic;
 
 namespace DEKL.CP.UI.ViewModels.AccountsToPay
 {
-    public class AccountToPayViewModel
+    public class AccountToPayViewModel : IAccount
     {
         public int Id { get; set; }
 
@@ -50,5 +53,7 @@ namespace DEKL.CP.UI.ViewModels.AccountsToPay
         public int ProviderId { get; set; }
 
         public virtual ProviderViewModel Provider { get; set; }
+
+        public virtual ICollection<Installment> Installments { get; set; }
     }
 }

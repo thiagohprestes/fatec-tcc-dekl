@@ -22,6 +22,7 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                     from lppp in temp.DefaultIfEmpty()
                     join plp in _ctx.ProviderLegalPersons on p.Id equals plp.Id into temp2
                     from lplp in temp2.DefaultIfEmpty()
+                    where atp.Active && p.Active
                     select new AccountToPayDTO
                     {
                          Id = atp.Id,

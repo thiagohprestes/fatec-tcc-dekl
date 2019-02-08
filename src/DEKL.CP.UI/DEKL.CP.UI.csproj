@@ -448,6 +448,9 @@
     <Content Include="Views\InternalBankAccount\Details.cshtml" />
     <Content Include="Views\InternalBankAccount\Delete.cshtml" />
     <Content Include="Views\InternalBankAccount\Create.cshtml" />
+    <Content Include="Views\AccountToPay\Delete.cshtml" />
+    <Content Include="Views\AccountToPay\Details.cshtml" />
+    <Content Include="Views\AccountToPay\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
