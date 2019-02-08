@@ -30,6 +30,7 @@ namespace DEKL.CP.UI.Mappers
             CreateMap<ProviderLegalPerson, ProviderLegalPersonViewModel>();
             CreateMap<IProviderPhysicalLegalPerson, ProviderPhysicalLegalPersonViewModel>();
             CreateMap<AccountToPay, AccountToPayViewModel>();
+            CreateMap<IAccountToPayRelashionships, AccountToPayRelashionships>();
         }
     }
 }

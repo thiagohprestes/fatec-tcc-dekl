@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 using AutoMapper;
@@ -39,7 +38,7 @@ namespace DEKL.CP.UI.Controllers
                     this.AddToastMessage("Fornecedor salvo", $"O fornecedor {providerPhysicalPerson.Name} foi salvo com sucesso", ToastType.Success);
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
+                catch
                 {
                     this.AddToastMessage("Erro no salvamento", "Erro ao salvar o fornecedor, favor tentar novamente", ToastType.Error);
                     return View(Mapper.Map<ProviderPhysicalPersonViewModel>(providerPhysicalPerson));

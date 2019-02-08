@@ -1,4 +1,5 @@
-﻿@model DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel
+﻿@using DEKL.CP.UI.Extensions
+@model DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel
 @{
     ViewBag.Title = "Cadastrar nova Conta";
 }
@@ -14,30 +15,31 @@
                     <hr />
                     @Html.ValidationMessage("Error", new { @class = "text-danger" })
                     <div class="form-row">
-                        <div class="form-group col-md-9">
+                        <div class="form-group col-md-8">
                             @Html.LabelFor(m => m.ProviderId, "Fornecedor", new { @class = "control-label" })
                             @Html.DropDownListFor(m => m.ProviderId, ViewBag.Providers as SelectList, "Selecione o Fornecedor", new { @class = "form-control" })
                             <small>
-                                @Html.ValidationMessageFor(m => m.ProviderId)
+                                @Html.ValidationMessageFor(m => m.ProviderId, null, new { @class = "text-danger" })
                             </small>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             @Html.LabelFor(m => m.MaturityDate, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.MaturityDate, new { @class = "form-control", placeholder = "Data do vencimento" })
+                            @*@Html.TextBoxFor(m => m.MaturityDate, new { @class = "form-control", placeholder = "Data do vencimento" })*@
+                            @Html.JQueryUI().DatepickerFor(m=> m.MaturityDate, new { @class = "form-control", placeholder = "Data do vencimento" })
                             <small>
-                                @Html.ValidationMessageFor(m => m.MaturityDate)
+                                @Html.ValidationMessageFor(m => m.MaturityDate, null, new { @class = "text-danger" })
                             </small>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             @Html.LabelFor(m => m.NumberOfInstallments, new { @class = "control-label" })
                             @Html.TextBoxFor(m => m.NumberOfInstallments, new { @class = "form-control" })
                             <small>
-                                @Html.ValidationMessageFor(m => m.NumberOfInstallments)
+                                @Html.ValidationMessageFor(m => m.NumberOfInstallments, null, new { @class = "text-danger" })
                             </small>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             @Html.LabelFor(m => m.DailyInterest, new { @class = "control-label" })
                             <div class="input-group">
                                 @Html.TextBoxFor(m => m.DailyInterest, new { @class = "form-control" })
@@ -46,10 +48,10 @@
                                 </div>
                             </div>
                             <small>
-                                @Html.ValidationMessageFor(m => m.DailyInterest)
+                                @Html.ValidationMessageFor(m => m.DailyInterest, null, new { @class = "text-danger" })
                             </small>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             @Html.LabelFor(m => m.Penalty, new { @class = "control-label" })
                             <div class="input-group">
                                 @Html.TextBoxFor(m => m.Penalty, new { @class = "form-control" })
@@ -58,7 +60,7 @@
                                 </div>
                             </div>
                             <small>
-                                @Html.ValidationMessageFor(m => m.Penalty)
+                                @Html.ValidationMessageFor(m => m.Penalty, null, new { @class = "text-danger" })
                             </small>
                         </div>
                         <div class="form-group col-md-4">
@@ -70,7 +72,7 @@
                                 </div>
                             </div>
                             <small>
-                                @Html.ValidationMessageFor(m => m.Value)
+                                @Html.ValidationMessageFor(m => m.Value, null, new { @class = "text-danger" })
                             </small>
                         </div>
                     </div>
@@ -84,14 +86,14 @@
                                 </div>
                             </div>
                             <small>
-                                @Html.ValidationMessageFor(m => m.DocumentNumber)
+                                @Html.ValidationMessageFor(m => m.DocumentNumber, null, new { @class = "text-danger" })
                             </small>
                         </div>
                         <div class="form-group col-md-5">
                             @Html.LabelFor(m => m.Priority, new { @class = "control-label" })
                             @Html.DropDownListFor(m => m.Priority, DEKL.CP.Domain.Enums.Priority.High.ToSelectList() as SelectList, new { @class = "form-control" })
                             <small>
-                                @Html.ValidationMessageFor(m => m.Priority)
+                                @Html.ValidationMessageFor(m => m.Priority, null, new { @class = "text-danger" })
                             </small>
                         </div>
                     </div>
@@ -100,17 +102,17 @@
                             @Html.LabelFor(m => m.Description, new { @class = "control-label" })
                             @Html.TextBoxFor(m => m.Description, new { @class = "form-control", placeholder = "Identificação da conta" })
                             <small>
-                                @Html.ValidationMessageFor(m => m.Description)
+                                @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
                             </small>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <div class="form-check">
-                                @Html.CheckBoxFor(m => m.MonthlyAccount, new { @class = "form-check-input" })
-                                @Html.LabelFor(m => m.MonthlyAccount, "Conta Mensal", new { @class = "form-check-label" })
+                            <div class="custom-control custom-checkbox">
+                                @Html.CheckBoxFor(m => m.MonthlyAccount, new { @class = "checkbox-inline custom-control-input" })
+                                @Html.LabelFor(m => m.MonthlyAccount, "Conta Mensal", new { @class = "custom-control-label" })
                                 <small>
-                                    @Html.ValidationMessageFor(m => m.MonthlyAccount)
+                                    @Html.ValidationMessageFor(m => m.MonthlyAccount, null, new { @class = "text-danger" })
                                 </small>
                             </div>
                         </div>

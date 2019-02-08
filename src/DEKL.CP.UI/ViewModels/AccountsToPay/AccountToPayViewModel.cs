@@ -2,6 +2,7 @@
 using DEKL.CP.UI.ViewModels.Provider;
 using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace DEKL.CP.UI.ViewModels.AccountsToPay
 {
@@ -15,37 +16,37 @@ namespace DEKL.CP.UI.ViewModels.AccountsToPay
         [DisplayName("Valor pago")]
         public decimal? PaidValue { get; set; }
 
-        [DisplayName("Data de pagamento")]
+        [DisplayName("Data de pagamento"), DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? PaymentDate { get; set; }
 
         [DisplayName("Descrição")]
         public string Description { get; set; } = string.Empty;
 
-        [DisplayName("Data de vencimento")]
+        [Required, DisplayName("Data de vencimento"), DataType(DataType.Date)]
         public DateTime MaturityDate { get; set; }
 
-        [DisplayName("Mora diária")]
+        [Required, DisplayName("Mora diária")]
         public decimal DailyInterest { get; set; } = 0;
 
-        [DisplayName("Juros")]
+        [Required, DisplayName("Juros")]
         public decimal Penalty { get; set; } = 0;
 
         [DisplayName("Conta mensal")]
         public bool MonthlyAccount { get; set; } = false;
 
-        [DisplayName("Prioridade")]
+        [Required, DisplayName("Prioridade")]
         public Priority Priority { get; set; }
 
-        [DisplayName("Tipo de pagamento")]
+        [Required, DisplayName("Tipo de pagamento")]
         public PaymentType PaymentType { get; set; }
 
-        [DisplayName("Número do documento")]
+        [Required, DisplayName("Número do documento")]
         public string DocumentNumber { get; set; }
 
-        [DisplayName("Número de parcelas")]
+        [Required, DisplayName("Parcelas")]
         public short NumberOfInstallments { get; set; }
 
-        [DisplayName("Fornecedor")]
+        [Required, DisplayName("Fornecedor")]
         public int ProviderId { get; set; }
 
         public virtual ProviderViewModel Provider { get; set; }

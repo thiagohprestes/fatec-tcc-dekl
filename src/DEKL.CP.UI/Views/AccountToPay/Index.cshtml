@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel>
+﻿@model IEnumerable<DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayRelashionships>
 @{
     ViewBag.Title = "Contas a Pagar";
 }
@@ -33,12 +33,12 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                             <td>@Html.DisplayFor(m => item.DocumentNumber)</td>
+                            <td>@Html.DisplayFor(m => item.DocumentNumber)</td>
                             <td>@Html.DisplayFor(m => item.Provider)</td>
-                            <td>@Html.DisplayFor(m => item.PaymentType)</td>
+                            <td>@Html.DisplayFor(m => item.PaymentTypeDescription)</td>
                             <td>@Html.DisplayFor(m => item.Value)</td>
                             <td>@Html.DisplayFor(m => item.Penalty)</td>
-                            <td>@Html.DisplayFor(m => item.MonthlyAccount)</td>
+                            <td>@(item.MonthlyAccount ? "Sim" : "Não")</td>
                             <td>@Html.DisplayFor(m => item.MaturityDate)</td>
 
                             <td>

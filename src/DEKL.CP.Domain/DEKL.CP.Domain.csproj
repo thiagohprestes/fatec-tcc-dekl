@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Contracts\Entities\IAccount.cs" />
+    <Compile Include="Contracts\Entities\IAccountToPayRelashionships.cs" />
     <Compile Include="Contracts\Entities\IAddress.cs" />
     <Compile Include="Contracts\Entities\IBank.cs" />
     <Compile Include="Contracts\Entities\IBankAccount.cs" />
@@ -82,6 +83,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Contracts\IAccountToPayRelashionships" />
     <None Include="Diagrama de Classes Domínio.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
