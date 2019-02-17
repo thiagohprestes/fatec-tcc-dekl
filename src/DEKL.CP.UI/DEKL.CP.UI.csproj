@@ -35,7 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -334,6 +334,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProviderBankAccountController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
@@ -451,6 +452,9 @@
     <Content Include="Views\AccountToPay\Delete.cshtml" />
     <Content Include="Views\AccountToPay\Details.cshtml" />
     <Content Include="Views\AccountToPay\Edit.cshtml" />
+    <Content Include="Views\Report\AccountToPayReport.cshtml" />
+    <Content Include="Views\Report\ProviderReport.cshtml" />
+    <Content Include="Views\Report\BankTransactionReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

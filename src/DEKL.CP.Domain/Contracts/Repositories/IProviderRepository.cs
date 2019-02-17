@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Entities;
+using System;
 
 namespace DEKL.CP.Domain.Contracts.Repositories
 {
@@ -13,5 +14,6 @@ namespace DEKL.CP.Domain.Contracts.Repositories
         ProviderPhysicalPerson FindActiveProviderPhysicalPerson(int id);
 
         ProviderLegalPerson FindActiveProviderLegalPerson(int id);
+        IEnumerable<IProviderPhysicalLegalPerson> ProviderReport();
     }
 }

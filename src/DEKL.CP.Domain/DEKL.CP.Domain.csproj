@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,6 +39,7 @@
     <Compile Include="Contracts\Entities\IBank.cs" />
     <Compile Include="Contracts\Entities\IBankAccount.cs" />
     <Compile Include="Contracts\Entities\IBankAgency.cs" />
+    <Compile Include="Contracts\Entities\IBankTransaction.cs" />
     <Compile Include="Contracts\Entities\IEntityBase.cs" />
     <Compile Include="Contracts\Entities\IInternalBankAccountRelashionships.cs" />
     <Compile Include="Contracts\Entities\IProvider.cs" />
@@ -50,9 +51,11 @@
     <Compile Include="Contracts\Repositories\IAccountToPayRepository.cs" />
     <Compile Include="Contracts\Repositories\IBankAgencyRepository.cs" />
     <Compile Include="Contracts\Repositories\IBankRepository.cs" />
+    <Compile Include="Contracts\Repositories\IBankTransactionRepository.cs" />
     <Compile Include="Contracts\Repositories\IInternalBankAccountRepository.cs" />
     <Compile Include="Contracts\Repositories\IProviderBankAccountRepository.cs" />
     <Compile Include="Contracts\Repositories\IProviderRepository.cs" />
+    <Compile Include="Contracts\Repositories\IReportRepository.cs" />
     <Compile Include="Contracts\Repositories\IRepository.cs" />
     <Compile Include="Contracts\Repositories\IApplicationUserRepository.cs" />
     <Compile Include="Contracts\Repositories\IStateRepository.cs" />
@@ -60,6 +63,7 @@
     <Compile Include="Entities\BankAgency .cs" />
     <Compile Include="Entities\Audit.cs" />
     <Compile Include="Entities\Bank.cs" />
+    <Compile Include="Entities\Filters\AccountsToPayFilter.cs" />
     <Compile Include="Entities\InternalBankAccount.cs" />
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\EntityBase.cs" />
@@ -81,10 +85,18 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Contracts\Entities\EF.Reverse.POCO.Core.ttinclude" />
+    <None Include="Contracts\Entities\EF.Reverse.POCO.ttinclude" />
     <None Include="Contracts\IAccountToPayRelashionships" />
     <None Include="Diagrama de Classes Domínio.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

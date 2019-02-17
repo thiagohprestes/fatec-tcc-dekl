@@ -75,5 +75,18 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
 
         public ProviderPhysicalPerson FindActiveProviderPhysicalPerson (int id) => _ctx.ProviderPhysicalPersons.First(p => p.Active && p.Id == id);
         public ProviderLegalPerson FindActiveProviderLegalPerson(int id) => _ctx.ProviderLegalPersons.First(p => p.Active && p.Id == id);
+
+        public IEnumerable<IProviderPhysicalLegalPerson> ProviderReport()
+        {
+            var Providers = _ctx.Providers.Select(p => new ProviderPhysicalLegalPersonDTO
+            {
+                Id = p.Id,
+                PhoneNumber = p.PhoneNumber,
+                Email = p.Email,
+                TypeProvider = TypeProvider.PhysicalPerson
+            }).AsEnumerable();
+
+            return Providers;
+        }
     }
 }
