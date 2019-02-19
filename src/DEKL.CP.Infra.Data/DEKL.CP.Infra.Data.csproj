@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\AccountToPayDTO.cs" />
+    <Compile Include="DTO\BankTransactionDTO.cs" />
     <Compile Include="DTO\InternalBankAccountDTO.cs" />
     <Compile Include="DTO\ProviderBankAccountDTO.cs" />
     <Compile Include="DTO\ProviderPhysicalLegalPersonDTO.cs" />
@@ -70,9 +71,11 @@
     <Compile Include="EF\Repositories\AccountToPayRepositoryEF.cs" />
     <Compile Include="EF\Repositories\BankAgencyRepositoryEF.cs" />
     <Compile Include="EF\Repositories\BankRepositoryEF.cs" />
+    <Compile Include="EF\Repositories\BankTransactionRepositoryEF.cs" />
     <Compile Include="EF\Repositories\InternalBankAccountRepositoryEF.cs" />
     <Compile Include="EF\Repositories\ProviderBankAccountRepositoryEF.cs" />
     <Compile Include="EF\Repositories\ProviderRepositoryEF.cs" />
+    <Compile Include="EF\Repositories\ReportRepositoryEF.cs" />
     <Compile Include="EF\Repositories\RepositoryEF.cs" />
     <Compile Include="EF\Repositories\StateRepositoryEF.cs" />
     <Compile Include="EF\Repositories\UnitOfWork.cs" />

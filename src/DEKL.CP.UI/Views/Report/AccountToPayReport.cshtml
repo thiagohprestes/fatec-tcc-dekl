@@ -1,0 +1,140 @@
+﻿@using DEKL.CP.UI.Extensions
+@model IEnumerable<DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayRelashionships>
+@{
+    ViewBag.Title = "Relatório de Contas à Pagar";
+}
+
+@section styles{
+    @Styles.Render("~/Content/datatables")
+}
+
+<style>
+    .datepicker{
+        
+    }
+</style>
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="form-group col-md-3">
+        <input type="text" class="form-control datepicker" 
+               data-jqui-dpicker-dateformat="dd/mm/yy"
+               data-jqui-type="datepicker" data-val="true" 
+               data-val-date="O campo Data Início deve ser uma data."
+               id="MaturityDateInitial" name="MaturityDateInitial" placeholder="Data Início" value="">
+
+    </div>
+    <div class="form-group col-md-3">
+        <input type="text" class="form-control datepicker" 
+               data-jqui-dpicker-dateformat="dd/mm/yy"
+               data-jqui-type="datepicker" data-val="true" 
+               data-val-date="O campo Data Início deve ser uma data."
+               id="MaturityDateFinal" name="MaturityDateFinal" placeholder="Data Fim" value="">
+
+    </div>
+    <input type="button" class="btn btn-info" id="SearchButton" value="Pesquisar"/>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-hover" id="AccountToPayTable">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.MaturityDate)</th>
+                    <th>@Html.DisplayNameFor(m => m.Provider)</th>
+                    <th>@Html.DisplayNameFor(m => m.Value)</th>
+                    <th>@Html.DisplayNameFor(m => m.DocumentNumber)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.MaturityDate)</td>
+                        <td>@Html.DisplayFor(m => item.Provider)</td>
+                        <td>@Html.DisplayFor(m => item.Value)</td>
+                        <td>@Html.DisplayFor(m => item.DocumentNumber)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/datatables")
+    <script type="text/javascript">
+        $(() => {
+            $('.table').DataTable({
+                tabIndex: -1,
+                scrollY: "280px",
+                scrollCollapse: true,
+                responsive: true,
+                columnDefs: [
+                    { className: "text-left", "targets": [0, 1] },
+                    { width: "10%", "targets": 7 },
+                    { orderable: false, "targets": 7 }
+                ],
+                language: {
+                    decimal: "",
+                    emptyTable: "Sem dados disponíveis na tabela",
+                    info: "Página _PAGE_ de _PAGES_",
+                    infoEmpty: "Sem registros disponíveis",
+                    infoFiltered: "(filtrados do total de _MAX_ registros)",
+                    infoPostFix: "",
+                    thousands: ",",
+                    lengthMenu: "Exibir _MENU_ linhas por página",
+                    loadingRecords: "Carregando...",
+                    processing: "Processando...",
+                    search: "Filtrar:",
+                    zeroRecords: "Não encontrado",
+                    paginate: {
+                        first: "Primeiro",
+                        last: "Último",
+                        next: "Avançar",
+                        previous: "Voltar"
+                    },
+                    aria: {
+                        sortAscending: ":ativado para ordenação ascendente",
+                        sortDescending: ":ativado para ordenação descendente"
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $(".datepicker").datepicker();
+        });
+
+        $("#SearchButton").click(function () {            
+            var _InitialDate = $("#MaturityDateInitial").val();
+            var _FinalDate = $("#MaturityDateFinal").val();
+
+            var AccountToPayFilter = {
+                InitialDate: _InitialDate,
+                FinalDate: _FinalDate
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("SearchAccountToPayReport", "Report")',
+                dataType: "json",
+                data: { 'AccountToPayFilter': AccountToPayFilter }
+            }).done(function (data) {
+                var AccountToPayTable = $("#AccountToPayTable");
+                AccountToPayTable.find("tbody tr").remove();
+                data.AccountToPay.forEach(function (item) {
+                    AccountToPayTable.append(
+                        "<tr>" +
+                            "<td>" + item.MaturityDate + "</td>" +
+                            "<td>" + item.Provider + "</td>" +
+                            "<td>" + item.Value + "</td>" +
+                            "<td>" + item.DocumentNumber + "</td>" +
+                        "</tr>")
+                });
+            });
+            });
+    </script>
+}

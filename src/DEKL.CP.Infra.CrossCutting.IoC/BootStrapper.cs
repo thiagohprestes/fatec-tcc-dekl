@@ -28,10 +28,12 @@ namespace DEKL.CP.Infra.CrossCutting.IoC
             container.Register<IStateRepository, StateRepositoryEF>(Lifestyle.Scoped);
             container.Register<IBankRepository, BankRepositoryEF>(Lifestyle.Scoped);
             container.Register<IBankAgencyRepository, BankAgencyRepositoryEF>(Lifestyle.Scoped);
+            container.Register<IBankTransactionRepository, BankTransactionRepositoryEF>(Lifestyle.Scoped);
             container.Register<IInternalBankAccountRepository, InternalBankAccountRepositoryEF>(Lifestyle.Scoped);
             container.Register<IProviderBankAccountRepository, ProviderBankAccountRepositoryEF>(Lifestyle.Scoped);
             container.Register<IProviderRepository, ProviderRepositoryEF>(Lifestyle.Scoped);
             container.Register<IAccountToPayRepository, AccountToPayRepositoryEF>(Lifestyle.Scoped);
+            container.Register<IReportRepository, ReportRepositoryEF>(Lifestyle.Scoped);            
         }
     }
 }

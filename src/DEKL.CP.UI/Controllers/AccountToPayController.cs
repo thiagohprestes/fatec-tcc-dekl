@@ -39,16 +39,17 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
-                    if(accountToPay.Installments?.Count > 0)
+                    if (accountToPay.Installments?.Count > 0)
                     {
                         var valueInstallment = accountToPay.Value / accountToPay.Installments.Count;
 
                         new Installment
                         {
                             Value = valueInstallment,
-                            MaturityDate = new DateTime(accountToPay.MaturityDate.Year, 
-                                                        accountToPay.MaturityDate.Month, 
-                                                        DateTime.DaysInMonth(accountToPay.MaturityDate.Year, accountToPay.MaturityDate.Month);
+                            MaturityDate = new DateTime(accountToPay.MaturityDate.Year,
+                                                        accountToPay.MaturityDate.Month,
+                                                        DateTime.DaysInMonth(accountToPay.MaturityDate.Year, accountToPay.MaturityDate.Month))
+                        };
                     }
 
                     accountToPay.ApplicationUserId = User.Identity.GetUserId<int>();
