@@ -9,8 +9,7 @@
 }
 
 <style>
-    .datepicker{
-        
+    .datepicker {
     }
 </style>
 
@@ -18,22 +17,25 @@
 
 <div class="row">
     <div class="form-group col-md-3">
-        <input type="text" class="form-control datepicker" 
+        <input type="text" class="form-control datepicker"
                data-jqui-dpicker-dateformat="dd/mm/yy"
-               data-jqui-type="datepicker" data-val="true" 
+               data-jqui-type="datepicker" data-val="true"
                data-val-date="O campo Data Início deve ser uma data."
                id="MaturityDateInitial" name="MaturityDateInitial" placeholder="Data Início" value="">
 
     </div>
     <div class="form-group col-md-3">
-        <input type="text" class="form-control datepicker" 
+        <input type="text" class="form-control datepicker"
                data-jqui-dpicker-dateformat="dd/mm/yy"
-               data-jqui-type="datepicker" data-val="true" 
+               data-jqui-type="datepicker" data-val="true"
                data-val-date="O campo Data Início deve ser uma data."
                id="MaturityDateFinal" name="MaturityDateFinal" placeholder="Data Fim" value="">
 
     </div>
-    <input type="button" class="btn btn-info" id="SearchButton" value="Pesquisar"/>
+
+    <div class="form-group">
+        <input type="button" class="btn btn-info" id="SearchButton" value="Pesquisar" />
+    </div>
 </div>
 
 <div class="row">
@@ -108,7 +110,7 @@
             $(".datepicker").datepicker();
         });
 
-        $("#SearchButton").click(function () {            
+        $("#SearchButton").click(function () {
             var _InitialDate = $("#MaturityDateInitial").val();
             var _FinalDate = $("#MaturityDateFinal").val();
 

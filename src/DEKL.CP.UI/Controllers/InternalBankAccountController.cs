@@ -22,7 +22,7 @@ namespace DEKL.CP.UI.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.BankAgencies = new SelectList(_internalBankAccountRepository.BankAgencyesActives, nameof(BankAgency.Id),
+            ViewBag.BankAgencies = new SelectList(_internalBankAccountRepository.BankAgenciesActives, nameof(BankAgency.Id),
                 nameof(BankAgency.BankAgencyDescription));
 
             return View();
@@ -43,7 +43,7 @@ namespace DEKL.CP.UI.Controllers
                 }
                 catch
                 {
-                    ViewBag.BankAgencies = new SelectList(_internalBankAccountRepository.BankAgencyesActives, nameof(BankAgency.Id),
+                    ViewBag.BankAgencies = new SelectList(_internalBankAccountRepository.BankAgenciesActives, nameof(BankAgency.Id),
                         nameof(BankAgency.BankAgencyDescription));
 
                     this.AddToastMessage("Erro no salvamento", $"Erro ao salvar a conta {internalBankAccount.Name}, favor tentar novamente",
@@ -79,7 +79,7 @@ namespace DEKL.CP.UI.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.BankAgencies = new SelectList(_internalBankAccountRepository.BankAgencyesActives, nameof(BankAgency.Id),
+            ViewBag.BankAgencies = new SelectList(_internalBankAccountRepository.BankAgenciesActives, nameof(BankAgency.Id),
                 nameof(BankAgency.BankAgencyDescription));
             return View(Mapper.Map<InternalBankAccountViewModel>(providerBankAccount));
         }

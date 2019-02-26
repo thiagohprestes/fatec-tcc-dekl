@@ -14,7 +14,7 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
 
         public InternalBankAccountRepositoryEF(DEKLCPDataContextEF ctx) : base(ctx) => _ctx = ctx;
 
-        public IEnumerable<BankAgency> BankAgencyesActives => _ctx.BankAgencies.Include(nameof(Bank)).Where(ba => ba.Active);
+        public IEnumerable<BankAgency> BankAgenciesActives => _ctx.BankAgencies.Include(nameof(Bank)).Where(ba => ba.Active);
 
         public IEnumerable<IInternalBankAccountRelashionships> InternalBankAccountRelashionships =>
             (

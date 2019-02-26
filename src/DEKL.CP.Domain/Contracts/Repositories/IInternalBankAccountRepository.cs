@@ -6,7 +6,7 @@ namespace DEKL.CP.Domain.Contracts.Repositories
 {
     public interface IInternalBankAccountRepository : IRepository<InternalBankAccount>
     {
-        IEnumerable<BankAgency> BankAgencyesActives { get; }
+        IEnumerable<BankAgency> BankAgenciesActives { get; }
 
         IEnumerable<IInternalBankAccountRelashionships> InternalBankAccountRelashionships { get; }
     }

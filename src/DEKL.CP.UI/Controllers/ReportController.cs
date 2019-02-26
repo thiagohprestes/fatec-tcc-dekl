@@ -6,7 +6,6 @@ using DEKL.CP.UI.ViewModels.AccountsToPay;
 using DEKL.CP.UI.ViewModels.Provider;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace DEKL.CP.UI.Controllers
@@ -17,34 +16,29 @@ namespace DEKL.CP.UI.Controllers
         private readonly DateTime _YESTERDAY = DateTime.Now.AddDays(-1);
         private readonly DateTime _TODAY = DateTime.Now;
 
-        public ReportController(IReportRepository reportRepository)
-        {
-            _reportRepository = reportRepository;
-        }
-
+        public ReportController(IReportRepository reportRepository) => _reportRepository = reportRepository;
 
         public ActionResult AccountToPayReport()
         {
-            AccountsToPayFilter AccountToPayFilter = new AccountsToPayFilter()
+            var accountToPayFilter = new AccountsToPayFilter
             {
                 InitialDate = _YESTERDAY,
                 FinalDate = _TODAY
             };
 
            return View(Mapper.Map<IEnumerable<AccountToPayRelashionships>>
-                (_reportRepository.AccountToPayReport(AccountToPayFilter)));
+                (_reportRepository.AccountToPayReport(accountToPayFilter)));
         }   
         
         [HttpPost]
-        public JsonResult SearchAccountToPayReport(AccountsToPayFilter AccountToPayFilter)
+        public JsonResult SearchAccountToPayReport(AccountsToPayFilter accountToPayFilter)
         {
-            var AccountToPay = Mapper.Map<IEnumerable<AccountToPayRelashionships>>
-                (_reportRepository.AccountToPayReport(AccountToPayFilter));
+            var accountToPay = Mapper.Map<IEnumerable<AccountToPayRelashionships>>
+                (_reportRepository.AccountToPayReport(accountToPayFilter));
 
-            return Json(new { AccountToPay }, JsonRequestBehavior.AllowGet);
+            return Json(new { AccountToPay = accountToPay }, JsonRequestBehavior.AllowGet);
         }
                  
-
         public ActionResult ProviderReport() => View(Mapper.Map<IEnumerable<ProviderPhysicalLegalPersonViewModel>>
             (_reportRepository.ProviderReport()));
 
