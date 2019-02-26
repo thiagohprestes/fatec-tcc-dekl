@@ -1,11 +1,8 @@
 ﻿using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities.Filters;
-using DEKL.CP.Infra.Data.DTO;
-using DEKL.CP.Infra.Data.EF.Context;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DEKL.CP.Infra.Data.EF.Repositories
 {
@@ -24,19 +21,16 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
             _bankTransactionRepository = bankTransactionRepository;
         }
 
-        public IEnumerable<IProviderPhysicalLegalPerson> ProviderReport()
+        public IEnumerable<IProviderPhysicalLegalPerson> ProviderReport() => _providerRepository.ProviderReport();
+
+        public IEnumerable<IBankTransaction> BankTransactionReport(DateTime startDate, DateTime endDate)
         {
-            return _providerRepository.ProviderReport();
+            return _bankTransactionRepository.BankTransactionReport(startDate, endDate);
         }
 
-        public IEnumerable<IBankTransaction> BankTransactionReport(DateTime StartDate, DateTime EndDate)
+        IEnumerable<IAccountToPayRelashionships> IReportRepository.AccountToPayReport(AccountsToPayFilter accountToPayFilterData)
         {
-            return _bankTransactionRepository.BankTransactionReport(StartDate, EndDate);
-        }
-
-        IEnumerable<IAccountToPayRelashionships> IReportRepository.AccountToPayReport(AccountsToPayFilter AccountToPayFilterData)
-        {
-            return _accountToPayRepository.AccountToPayReport(AccountToPayFilterData);
+            return _accountToPayRepository.AccountToPayReport(accountToPayFilterData);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace DEKL.CP.UI.ViewModels.Provider
 
         public AddressViewModel Address { get; set; }
 
+        [DisplayName("Tipo de Fornecedor")]
         public TypeProvider TypeProvider { get; set; }
     }
 }

@@ -4,9 +4,7 @@ using System.Linq;
 namespace DEKL.CP.Infra.Data.Migrations
 {
     using Domain.Entities;
-    using System;
     using System.Data.Entity.Migrations;
-    using System.Data.Entity.Validation;
 
     internal sealed class Configuration : DbMigrationsConfiguration<EF.Context.DEKLCPDataContextEF>
     {

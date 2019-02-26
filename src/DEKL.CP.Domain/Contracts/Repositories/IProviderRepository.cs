@@ -14,6 +14,7 @@ namespace DEKL.CP.Domain.Contracts.Repositories
         ProviderPhysicalPerson FindActiveProviderPhysicalPerson(int id);
 
         ProviderLegalPerson FindActiveProviderLegalPerson(int id);
+
         IEnumerable<IProviderPhysicalLegalPerson> ProviderReport();
     }
 }

@@ -76,17 +76,22 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
         public ProviderPhysicalPerson FindActiveProviderPhysicalPerson (int id) => _ctx.ProviderPhysicalPersons.First(p => p.Active && p.Id == id);
         public ProviderLegalPerson FindActiveProviderLegalPerson(int id) => _ctx.ProviderLegalPersons.First(p => p.Active && p.Id == id);
 
-        public IEnumerable<IProviderPhysicalLegalPerson> ProviderReport()
-        {
-            var Providers = _ctx.Providers.Select(p => new ProviderPhysicalLegalPersonDTO
-            {
-                Id = p.Id,
-                PhoneNumber = p.PhoneNumber,
-                Email = p.Email,
-                TypeProvider = TypeProvider.PhysicalPerson
-            }).AsEnumerable();
-
-            return Providers;
-        }
+        public IEnumerable<IProviderPhysicalLegalPerson> ProviderReport() =>
+            (
+                from p in _ctx.Providers
+                join ppp in _ctx.ProviderPhysicalPersons on p.Id equals ppp.Id into temp
+                from lppp in temp.DefaultIfEmpty()
+                join plp in _ctx.ProviderLegalPersons on p.Id equals plp.Id into temp2
+                from lplp in temp2.DefaultIfEmpty()
+                where p.Active
+                select new ProviderPhysicalLegalPersonDTO
+                {
+                    Id = p.Id,
+                    NameCorporateName = lppp.Name ?? lplp.CorporateName,
+                    PhoneNumber = p.PhoneNumber,
+                    Email = p.Email,
+                    TypeProvider = p.TypeProvider,
+                }
+           ).AsEnumerable();
     }
 }
