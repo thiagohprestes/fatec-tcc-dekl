@@ -1,6 +1,5 @@
 namespace DEKL.CP.Infra.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class InitialCreate : DbMigration
@@ -8,8 +7,8 @@ namespace DEKL.CP.Infra.Data.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.AccountToPay",
-                c => new
+                    "dbo.AccountToPay",
+                    c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Value = c.Decimal(nullable: false, storeType: "money"),
@@ -31,20 +30,16 @@ namespace DEKL.CP.Infra.Data.Migrations
                         ModifiedDate = c.DateTime(),
                         Active = c.Boolean(nullable: false),
                         PaymentSimulator_Id = c.Int(),
-                        PaymentSimulators_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUserId, cascadeDelete: true)
                 .ForeignKey("dbo.Module", t => t.ModuleId, cascadeDelete: true)
                 .ForeignKey("dbo.PaymentSimulator", t => t.PaymentSimulator_Id)
-                .ForeignKey("dbo.PaymentSimulator", t => t.PaymentSimulators_Id)
                 .ForeignKey("dbo.Provider", t => t.ProviderId)
                 .Index(t => t.ProviderId)
                 .Index(t => t.ApplicationUserId)
                 .Index(t => t.ModuleId)
-                .Index(t => t.PaymentSimulator_Id)
-                .Index(t => t.PaymentSimulators_Id);
-            
+                .Index(t => t.PaymentSimulator_Id);       
 
             //CreateTable(
             //    "dbo.ApplicationUser",
