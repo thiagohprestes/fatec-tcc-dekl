@@ -7,6 +7,7 @@ using DEKL.CP.UI.ViewModels.Provider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 
 namespace DEKL.CP.UI.Controllers
@@ -58,9 +59,20 @@ namespace DEKL.CP.UI.Controllers
                 };
 
                 var lista = Mapper.Map<IEnumerable<AccountToPayRelashionships>>(_reportRepository.AccountToPayReport(AccountToPayFilter));
+                var ListaExportar = new List<ExportarAccountToPayRelashionships>();
+
+                foreach (var item in lista)
+                {
+                    var obj = new ExportarAccountToPayRelashionships();
+                    obj.Id = item.Id;
+                    obj.DocumentNumber = item.DocumentNumber;
+                    obj.MaturityDate = item.MaturityDate;
+                    obj.Provider = item.Provider;
+                    obj.Value = item.Value;
+                    ListaExportar.Add(obj);
+                }
 
                 // Retorna os resultados
-
                 string fileName = "AccountToPayReport-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm") + ".csv";
 
                 Response.Clear();
@@ -73,12 +85,11 @@ namespace DEKL.CP.UI.Controllers
                 Response.AddHeader("content-disposition", "attachment; filename=" + fileName);
                 Response.AddHeader("pragma", "public");
 
-                //Response.Write(exportar<IEnumerable<AccountToPayRelashionships>>(lista, ";"));
-
+                Response.Write(exportar<ExportarAccountToPayRelashionships>(ListaExportar, ";"));
                 Response.End();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Json(new { success = false });
             }
@@ -99,7 +110,7 @@ namespace DEKL.CP.UI.Controllers
                 {
                     var obj = new ExportarProviderPhysicalLegalPersonViewModel();
                     obj.Id = item.Id;
-                    obj.CPFCNPJ = item.CPFCNPJ;
+                    obj.TypeProvider = item.TypeProvider.ToString().Equals("PhysicalPerson") ? "Pessoa Física" : "Pessoa Jurídica";
                     obj.Email = item.Email;
                     obj.NameCorporateName = item.NameCorporateName;
                     obj.PhoneNumber = item.PhoneNumber;
@@ -120,11 +131,10 @@ namespace DEKL.CP.UI.Controllers
                 Response.AddHeader("pragma", "public");
 
                 Response.Write(exportar<ExportarProviderPhysicalLegalPersonViewModel>(ListaExportar, ";"));
-
                 Response.End();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Json(new { success = false });
             }
@@ -138,18 +148,18 @@ namespace DEKL.CP.UI.Controllers
         {
             try
             {
-                var lista = Mapper.Map<IEnumerable<ProviderPhysicalLegalPersonViewModel>>(_reportRepository.ProviderReport());
-                var ListaExportar = new List<ExportarProviderPhysicalLegalPersonViewModel>();
+                var lista = Mapper.Map<IEnumerable<BankTransactionViewModel>>(_reportRepository.BankTransactionReport(_YESTERDAY, _TODAY));
+                var ListaExportar = new List<ExportBankTransactionViewModel>();
 
                 foreach (var item in lista)
                 {
-                    var obj = new ExportarProviderPhysicalLegalPersonViewModel();
-                    obj.Id = item.Id;
-                    obj.CPFCNPJ = item.CPFCNPJ;
-                    obj.Email = item.Email;
-                    obj.NameCorporateName = item.NameCorporateName;
-                    obj.PhoneNumber = item.PhoneNumber;
-                    ListaExportar.Add(obj);
+                    var obj = new ExportBankTransactionViewModel();
+                    //obj.Id = item.Id;
+                    ////obj.CPFCNPJ = item.CPFCNPJ;
+                    //obj.Email = item.Email;
+                    //obj.NameCorporateName = item.NameCorporateName;
+                    //obj.PhoneNumber = item.PhoneNumber;
+                    //ListaExportar.Add(obj);
                 }
 
                 // Retorna os resultados
@@ -165,12 +175,12 @@ namespace DEKL.CP.UI.Controllers
                 Response.AddHeader("content-disposition", "attachment; filename=" + fileName);
                 Response.AddHeader("pragma", "public");
 
-                Response.Write(exportar<ExportarProviderPhysicalLegalPersonViewModel>(ListaExportar, ";"));
+                Response.Write(exportar<ExportBankTransactionViewModel>(ListaExportar, ";"));
 
                 Response.End();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Json(new { success = false });
             }
@@ -222,7 +232,7 @@ namespace DEKL.CP.UI.Controllers
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

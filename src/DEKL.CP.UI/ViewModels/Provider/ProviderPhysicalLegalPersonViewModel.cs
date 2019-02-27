@@ -20,13 +20,13 @@ namespace DEKL.CP.UI.ViewModels.Provider
         [DisplayName("Nome/Razão Social")]
         public string NameCorporateName { get; set; }
 
-        [DisplayName("E-mail")]
-        public string Email { get; set; }
+        [DisplayName("Tipo de Fornecedor")]
+        public string TypeProvider { get; set; }
 
         [DisplayName("Telefone")]
         public string PhoneNumber { get; set; }
 
-        [DisplayName("CPF/CNPJ")]
-        public string CPFCNPJ { get; set; }
+        [DisplayName("E-mail")]
+        public string Email { get; set; }
     }
 }

@@ -32,16 +32,12 @@
                id="MaturityDateFinal" name="MaturityDateFinal" placeholder="Data Fim" value="">
 
     </div>
-
-    <div class="form-group">
+    <div class="form-group" style="margin-right:15px;">
         <input type="button" class="btn btn-info" id="SearchButton" value="Pesquisar" />
     </div>
-    <p>
-        <input type="button" class="btn btn-info" id="SearchButton" value="Pesquisar" />
-    </p>
-    <p>
+    <div class="form-group">
         <input type="button" onclick="ExportarAccountToPayReport();" class="btn btn-info" id="ExportButton" value="Exportar" />
-    </p>
+    </div>
 </div>
 
 <div class="row">
@@ -110,12 +106,11 @@
             });
         });
 
-    <script>
         $(function () {
             $(".datepicker").datepicker();
         });
 
-        $("#SearchButton").click(function () {            
+        $("#SearchButton").click(function () {
             var _InitialDate = $("#MaturityDateInitial").val();
             var _FinalDate = $("#MaturityDateFinal").val();
 
@@ -123,6 +118,30 @@
                 InitialDate: _InitialDate,
                 FinalDate: _FinalDate
             }
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("SearchAccountToPayReport", "Report")',
+                dataType: "json",
+                data: { 'AccountToPayFilter': AccountToPayFilter }
+            }).done(function (data) {
+                var AccountToPayTable = $("#AccountToPayTable");
+                AccountToPayTable.find("tbody tr").remove();
+                data.AccountToPay.forEach(function (item) {
+                    AccountToPayTable.append(
+                        "<tr>" +
+                            "<td>" + item.MaturityDate + "</td>" +
+                            "<td>" + item.Provider + "</td>" +
+                            "<td>" + item.Value + "</td>" +
+                            "<td>" + item.DocumentNumber + "</td>" +
+                        "</tr>")
+                });
+            });
+        });
+
+        function ExportarProviderReport() {
+            document.getElementById('downloader').src = '@Url.Action("ExportarAccountToPayReport", "Report")';
+        }
 
     </script>
 }
