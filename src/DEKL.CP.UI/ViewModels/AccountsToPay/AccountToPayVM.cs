@@ -35,4 +35,22 @@ namespace DEKL.CP.UI.ViewModels.AccountsToPay
         [DisplayName("Data de vencimento"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime MaturityDate { get; set; }
     }
+
+    public class ExportarAccountToPayRelashionships
+    {
+        [DisplayName("Id")]
+        public int Id { get; set; }
+
+        [DisplayName("Data de vencimento"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime MaturityDate { get; set; }
+
+        [DisplayName("Fornecedor")]
+        public string Provider { get; set; }
+
+        [DisplayName("Valor"), DisplayFormat(DataFormatString = "{0:C2}")]
+        public decimal Value { get; set; }
+
+        [DisplayName("Número do documento")]
+        public string DocumentNumber { get; set; }
+    }
 }

@@ -25,4 +25,9 @@ namespace DEKL.CP.UI.ViewModels
         [DisplayName("Novo saldo")]
         public decimal NewBalance { get; set; }
     }
+
+    public class ExportBankTransactionViewModel
+    {
+
+    }
 }

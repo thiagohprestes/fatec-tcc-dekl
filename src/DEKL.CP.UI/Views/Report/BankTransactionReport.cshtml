@@ -9,6 +9,10 @@
 
 <h2>@ViewBag.Title</h2>
 
+<p>
+    <input type="button" onclick="ExportarBankTransactionReport();" class="btn btn-info" id="ExportButton" value="Exportar" />
+</p>
+
 <div class="row">
     <div class="col-md-12">
         <table class="table table-striped table-hover">
@@ -68,5 +72,12 @@
                 }
             });
         });
+
+        function ExportarBankTransactionReport() {
+            document.getElementById('downloader').src = '@Url.Action("ExportarBankTransactionReport", "Report")';
+        }
+
     </script>
 }
+
+<iframe id="downloader" style="display:none;"></iframe>
