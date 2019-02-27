@@ -29,6 +29,7 @@ namespace DEKL.CP.Infra.Data.EF.Context
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
             modelBuilder.Properties()
                 .Where(p => p.Name == nameof(EntityBase.Id))

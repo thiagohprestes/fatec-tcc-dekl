@@ -83,6 +83,14 @@
     <Compile Include="Migrations\201901161430485_InitialCreate.Designer.cs">
       <DependentUpon>201901161430485_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902270551146_Correction-Relashionship-AccountToPay-to-PaymentSimulator.cs" />
+    <Compile Include="Migrations\201902270551146_Correction-Relashionship-AccountToPay-to-PaymentSimulator.Designer.cs">
+      <DependentUpon>201902270551146_Correction-Relashionship-AccountToPay-to-PaymentSimulator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902270625573_Correction-Precision-Column-NewBalance-BankTransaction.cs" />
+    <Compile Include="Migrations\201902270625573_Correction-Precision-Column-NewBalance-BankTransaction.Designer.cs">
+      <DependentUpon>201902270625573_Correction-Precision-Column-NewBalance-BankTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -99,6 +107,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201901161430485_InitialCreate.resx">
       <DependentUpon>201901161430485_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902270551146_Correction-Relashionship-AccountToPay-to-PaymentSimulator.resx">
+      <DependentUpon>201902270551146_Correction-Relashionship-AccountToPay-to-PaymentSimulator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902270625573_Correction-Precision-Column-NewBalance-BankTransaction.resx">
+      <DependentUpon>201902270625573_Correction-Precision-Column-NewBalance-BankTransaction.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

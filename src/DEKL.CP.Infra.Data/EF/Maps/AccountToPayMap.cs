@@ -40,16 +40,14 @@ namespace DEKL.CP.Infra.Data.EF.Maps
 
             Property(e => e.PaymentDate);
 
-            //Relationships
+            //Relashionships
             HasRequired(e => e.Provider)
                 .WithMany(e => e.AccountsToPay)
                 .HasForeignKey(e => e.ProviderId)
                 .WillCascadeOnDelete(false);
 
-            //Relationships
-            HasOptional(e => e.PaymentSimulators)
-                .WithMany()
-                .WillCascadeOnDelete(false);
+            HasMany(e => e.PaymentSimulators)
+                .WithMany(e => e.AccountsToPay);
         }
     }
 }

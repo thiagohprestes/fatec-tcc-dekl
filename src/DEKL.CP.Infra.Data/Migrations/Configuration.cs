@@ -1,5 +1,7 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using DEKL.CP.Domain.Enums;
 
 namespace DEKL.CP.Infra.Data.Migrations
 {
@@ -15,29 +17,28 @@ namespace DEKL.CP.Infra.Data.Migrations
             if (!context.Modules.Any())
             {
                 var modules = new Collection<Module>
+                {
+                    new Module
                     {
-                        new Module
-                        {
-                            Name = "Contas a Pagar",
-                            Description = "Módulo de Contas a Pagar"
-                        },
-                        new Module
-                        {
-                            Name = "Fornecedor",
-                            Description = "Módulo de gerenciamento de Fornecedores"
-                        },
-                        new Module
-                        {
-                            Name = "Conta Bancária Interna",
-                            Description = "Módulo de gerenciamento de contas bancárias internas"
-                        },
-                        new Module
-                        {
-                            Name = "Conta Bancária de Fornecedor",
-                            Description = "Módulo de gerenciamento de contas bancárias de fornecedor"
-                        },
-
-                    };
+                        Name = "Contas a Pagar",
+                        Description = "Módulo de Contas a Pagar"
+                    },
+                    new Module
+                    {
+                        Name = "Fornecedor",
+                        Description = "Módulo de gerenciamento de Fornecedores"
+                    },
+                    new Module
+                    {
+                        Name = "Conta Bancária Interna",
+                        Description = "Módulo de gerenciamento de contas bancárias internas"
+                    },
+                    new Module
+                    {
+                        Name = "Conta Bancária de Fornecedor",
+                        Description = "Módulo de gerenciamento de contas bancárias de fornecedor"
+                    },
+                };
 
                 context.Modules.AddRange(modules);
             }
@@ -80,80 +81,80 @@ namespace DEKL.CP.Infra.Data.Migrations
             if (!context.ProviderPhysicalPersons.Any())
             {
                 var providersPhysicalPerson = new Collection<ProviderPhysicalPerson>
+                {
+                    new ProviderPhysicalPerson
                     {
-                        new ProviderPhysicalPerson
+                        Name = "Igor Raimundo Ferreira",
+                        CPF = "27079285852",
+                        PhoneNumber = "15985369558",
+                        Email = "iigorraimundoferreira@nine9.com.br",
+                        ApplicationUserId = 1,
+                        ModuleId = 2,
+                        Address = new Address
                         {
-                            Name = "Igor Raimundo Ferreira",
-                            CPF = "27079285852",
-                            PhoneNumber = "15985369558",
-                            Email = "iigorraimundoferreira@nine9.com.br",
-                            ApplicationUserId = 1,
-                            ModuleId = 2,
-                            Address = new Address
-                            {
-                                Street = "Rua Paulo Muller",
-                                Number = "757",
-                                ZipCode = "18087763",
-                                Neighborhood = "Jardim Residencial Morada das Flores",
-                                City = "Sorocaba",
-                                StateId = 25
-                            },
+                            Street = "Rua Paulo Muller",
+                            Number = "757",
+                            ZipCode = "18087763",
+                            Neighborhood = "Jardim Residencial Morada das Flores",
+                            City = "Sorocaba",
+                            StateId = 25
                         },
-                        new ProviderPhysicalPerson
+                    },
+                    new ProviderPhysicalPerson
+                    {
+                        Name = "Andrea Aparecida Rocha",
+                        CPF = "05733098848",
+                        PhoneNumber = "15996947613",
+                        ApplicationUserId = 1,
+                        ModuleId = 2,
+                        Email = "andreaaparecidarocha-74@stilomovelaria.com.br",
+                        Address = new Address
                         {
-                            Name = "Andrea Aparecida Rocha",
-                            CPF = "05733098848",
-                            PhoneNumber = "15996947613",
-                            ApplicationUserId = 1,
-                            ModuleId = 2,
-                            Email = "andreaaparecidarocha-74@stilomovelaria.com.br",
-                            Address = new Address
-                            {
-                                Street = "Rua Interventor João Alberto",
-                                Number = "418",
-                                ZipCode = "18271030",
-                                Neighborhood = "Jardim São Paulo",
-                                City = "Tatuí",
-                                StateId = 25
-                            }
-                        },
-                        new ProviderPhysicalPerson
-                        {
-                            Name = "Nicolas Vinicius Tomás Castro",
-                            CPF = "35545958886",
-                            PhoneNumber = "15994888577",
-                            ApplicationUserId = 1,
-                            ModuleId = 2,
-                            Email = "nnicolasviniciustomascastro@hotmail.com",
-                            Address = new Address
-                            {
-                                Street = "Avenida General Waldomiro de Lima",
-                                Number = "443",
-                                ZipCode = "18170970",
-                                Neighborhood = "Centro",
-                                City = "Piedade",
-                                StateId = 25
-                            }
-                        },
-                        new ProviderPhysicalPerson
-                        {
-                            Name = "Camila Simone Barros",
-                            CPF = "78123513860",
-                            PhoneNumber = "15985504488",
-                            Email = "ccamilasimonebarros@hotmail.com",
-                            ApplicationUserId = 1,
-                            ModuleId = 2,
-                            Address = new Address
-                            {
-                                Street = "Rua Astrogilda Ayrola Ribeiro",
-                                Number = "443",
-                                ZipCode = "18086703",
-                                Neighborhood = "Jardim das Azaléias",
-                                City = "Sorocaba",
-                                StateId = 25
-                            }
+                            Street = "Rua Interventor João Alberto",
+                            Number = "418",
+                            ZipCode = "18271030",
+                            Neighborhood = "Jardim São Paulo",
+                            City = "Tatuí",
+                            StateId = 25
                         }
-                    };
+                    },
+                    new ProviderPhysicalPerson
+                    {
+                        Name = "Nicolas Vinicius Tomás Castro",
+                        CPF = "35545958886",
+                        PhoneNumber = "15994888577",
+                        ApplicationUserId = 1,
+                        ModuleId = 2,
+                        Email = "nnicolasviniciustomascastro@hotmail.com",
+                        Address = new Address
+                        {
+                            Street = "Avenida General Waldomiro de Lima",
+                            Number = "443",
+                            ZipCode = "18170970",
+                            Neighborhood = "Centro",
+                            City = "Piedade",
+                            StateId = 25
+                        }
+                    },
+                    new ProviderPhysicalPerson
+                    {
+                        Name = "Camila Simone Barros",
+                        CPF = "78123513860",
+                        PhoneNumber = "15985504488",
+                        Email = "ccamilasimonebarros@hotmail.com",
+                        ApplicationUserId = 1,
+                        ModuleId = 2,
+                        Address = new Address
+                        {
+                            Street = "Rua Astrogilda Ayrola Ribeiro",
+                            Number = "443",
+                            ZipCode = "18086703",
+                            Neighborhood = "Jardim das Azaléias",
+                            City = "Sorocaba",
+                            StateId = 25
+                        }
+                    }
+                };
 
                 context.ProviderPhysicalPersons.AddRange(providersPhysicalPerson);
             }
@@ -161,84 +162,84 @@ namespace DEKL.CP.Infra.Data.Migrations
             if (!context.ProviderLegalPersons.Any())
             {
                 var providersLegalPerson = new Collection<ProviderLegalPerson>
+                {
+                    new ProviderLegalPerson
                     {
-                        new ProviderLegalPerson
+                        CorporateName = "Bianca e Lívia Contábil Ltda",
+                        CNPJ = "61844994000117",
+                        StateRegistration = "356403594664",
+                        PhoneNumber = "11991954444",
+                        Email = "faleconosco@biancaeliviacontabilltda.com.br",
+                        ApplicationUserId = 1,
+                        ModuleId = 2,
+                        Address = new Address
                         {
-                            CorporateName = "Bianca e Lívia Contábil Ltda",
-                            CNPJ = "61844994000117",
-                            StateRegistration = "356403594664",
-                            PhoneNumber = "11991954444",
-                            Email = "faleconosco@biancaeliviacontabilltda.com.br",
-                            ApplicationUserId = 1,
-                            ModuleId = 2,
-                            Address = new Address
-                            {
-                                Street = "Rua São João",
-                                Number = "853",
-                                ZipCode = "18087763",
-                                Neighborhood = "Vila Sorocabana",
-                                City = "Guarulhos",
-                                StateId = 25
-                            }
-                        },
-                        new ProviderLegalPerson
-                        {
-                            CorporateName = "Nelson e Filipe Aços ME",
-                            CNPJ = "15795557000133",
-                            StateRegistration = "908863725724",
-                            PhoneNumber = "1937565945",
-                            Email = "representantes@nelsonefilipeacosme.com.br",
-                            ApplicationUserId = 1,
-                            ModuleId = 2,
-                            Address = new Address
-                            {
-                                Street = "Travessa José Pereira Cardoso",
-                                Number = "120",
-                                ZipCode = "13417757",
-                                Neighborhood = "Nova América",
-                                City = "Piracicaba",
-                                StateId = 25
-                            }
-                        },
-                        new ProviderLegalPerson
-                        {
-                            CorporateName = "Sabrina e José Construções Ltda",
-                            CNPJ = "82522372000142",
-                            StateRegistration = "519482566719",
-                            PhoneNumber = "1135337707",
-                            ApplicationUserId = 1,
-                            ModuleId = 2,
-                            Email = "desenvolvimento@sabrinaejoseconstrucoesltda.com.br",
-                            Address = new Address
-                            {
-                                Street = "Rua Morioka",
-                                Number = "951",
-                                ZipCode = "06365-595",
-                                Neighborhood = "Jardim Angélica",
-                                City = "Carapicuíba",
-                                StateId = 25
-                            }
-                        },
-                        new ProviderLegalPerson
-                        {
-                            CorporateName = "Lorena e Ayla Consultoria Financeira Ltda",
-                            CNPJ = "97077956000123",
-                            StateRegistration = "454805570260",
-                            PhoneNumber = "15983130826",
-                            ApplicationUserId = 1,
-                            ModuleId = 2,
-                            Email = "representantes@lorenaeaylaconsultoriafinanceiraltda.com.br",
-                            Address = new Address
-                            {
-                                Street = "Rua Salgado Filho",
-                                Number = "746",
-                                ZipCode = "18280445",
-                                Neighborhood = "Jardim Aeroporto",
-                                City = "Tatuí",
-                                StateId = 25
-                            }
+                            Street = "Rua São João",
+                            Number = "853",
+                            ZipCode = "18087763",
+                            Neighborhood = "Vila Sorocabana",
+                            City = "Guarulhos",
+                            StateId = 25
                         }
-                    };
+                    },
+                    new ProviderLegalPerson
+                    {
+                        CorporateName = "Nelson e Filipe Aços ME",
+                        CNPJ = "15795557000133",
+                        StateRegistration = "908863725724",
+                        PhoneNumber = "1937565945",
+                        Email = "representantes@nelsonefilipeacosme.com.br",
+                        ApplicationUserId = 1,
+                        ModuleId = 2,
+                        Address = new Address
+                        {
+                            Street = "Travessa José Pereira Cardoso",
+                            Number = "120",
+                            ZipCode = "13417757",
+                            Neighborhood = "Nova América",
+                            City = "Piracicaba",
+                            StateId = 25
+                        }
+                    },
+                    new ProviderLegalPerson
+                    {
+                        CorporateName = "Sabrina e José Construções Ltda",
+                        CNPJ = "82522372000142",
+                        StateRegistration = "519482566719",
+                        PhoneNumber = "1135337707",
+                        ApplicationUserId = 1,
+                        ModuleId = 2,
+                        Email = "desenvolvimento@sabrinaejoseconstrucoesltda.com.br",
+                        Address = new Address
+                        {
+                            Street = "Rua Morioka",
+                            Number = "951",
+                            ZipCode = "06365-595",
+                            Neighborhood = "Jardim Angélica",
+                            City = "Carapicuíba",
+                            StateId = 25
+                        }
+                    },
+                    new ProviderLegalPerson
+                    {
+                        CorporateName = "Lorena e Ayla Consultoria Financeira Ltda",
+                        CNPJ = "97077956000123",
+                        StateRegistration = "454805570260",
+                        PhoneNumber = "15983130826",
+                        ApplicationUserId = 1,
+                        ModuleId = 2,
+                        Email = "representantes@lorenaeaylaconsultoriafinanceiraltda.com.br",
+                        Address = new Address
+                        {
+                            Street = "Rua Salgado Filho",
+                            Number = "746",
+                            ZipCode = "18280445",
+                            Neighborhood = "Jardim Aeroporto",
+                            City = "Tatuí",
+                            StateId = 25
+                        }
+                    }
+                };
 
                 context.ProviderLegalPersons.AddRange(providersLegalPerson);
             }
@@ -246,14 +247,14 @@ namespace DEKL.CP.Infra.Data.Migrations
             if (!context.Banks.Any())
             {
                 var banks = new Collection<Bank>
-                    {
-                        new Bank { Name = "Itaú Unibanco Holding S.A.", Number = 341 },
-                        new Bank { Name = "Bradesco S.A.", Number = 237},
-                        new Bank { Name = "Banco do Brasil S.A.", Number = 1},
-                        new Bank { Name = "Banco Santander (Brasil) S.A.", Number = 033 },
-                        new Bank { Name = "Banco Safra S.A.", Number = 422},
-                        new Bank { Name = "Caixa Econômica Federal", Number = 104 }
-                    };
+                {
+                    new Bank { Name = "Itaú Unibanco Holding S.A.", Number = 341 },
+                    new Bank { Name = "Bradesco S.A.", Number = 237},
+                    new Bank { Name = "Banco do Brasil S.A.", Number = 1},
+                    new Bank { Name = "Banco Santander (Brasil) S.A.", Number = 033 },
+                    new Bank { Name = "Banco Safra S.A.", Number = 422},
+                    new Bank { Name = "Caixa Econômica Federal", Number = 104 }
+                };
 
                 context.Banks.AddRange(banks);
             }
@@ -261,71 +262,71 @@ namespace DEKL.CP.Infra.Data.Migrations
             if (!context.BankAgencies.Any())
             {
                 var banksAgencies = new Collection<BankAgency>
+                {
+                    new BankAgency
                     {
-                        new BankAgency
+                        Number = 6582,
+                        ManagerName = "Fábio de Lima",
+                        BankId = 1,
+                        Address = new Address
                         {
-                            Number = 6582,
-                            ManagerName = "Fábio de Lima",
-                            BankId = 1,
-                            Address = new Address
-                            {
-                                Street = "Avenida Pereira Da Silva",
-                                Number = "1276",
-                                ZipCode = "18095340",
-                                Neighborhood = "Jardim Santa Rosália",
-                                City = "Sorocaba",
-                                StateId = 25
-                            }
-                        },
-                        new BankAgency
-                        {
-                            Number = 1512,
-                            PhoneNumber = "1532241044",
-                            Email = "age1512@bb.com.br",
-                            BankId = 3,
-                            Address = new Address
-                            {
-                                Street = "Avenida Itavuvu",
-                                Number = "516",
-                                ZipCode = "18103000",
-                                Neighborhood = "Vila Olímpia",
-                                City = "Sorocaba",
-                                StateId = 25
-                            }
-                        },
-                        new BankAgency
-                        {
-                            Number = 0356,
-                            PhoneNumber = "1530116753",
-                            BankId = 6,
-                            Email = "agencia0356@caixa.com.br",
-                            Address = new Address
-                            {
-                                Street = "Rua Doutor Álvaro Soares",
-                                Number = "516",
-                                ZipCode = "	18010190",
-                                Neighborhood = "Centro",
-                                City = "Sorocaba",
-                                StateId = 25
-                            }
-                        },
-                        new BankAgency
-                        {
-                            Number = 3327,
-                            PhoneNumber = "1532341331",
-                            BankId = 4,
-                            Email = "santanderag3327@santander.com",
-                            Address = new Address
-                            {
-                                Street = "Rua 15 de Novembro",
-                                Number = "516",
-                                ZipCode = "	18010082",
-                                Neighborhood = "Centro",
-                                City = "Sorocaba",
-                                StateId = 25
-                            }
+                            Street = "Avenida Pereira Da Silva",
+                            Number = "1276",
+                            ZipCode = "18095340",
+                            Neighborhood = "Jardim Santa Rosália",
+                            City = "Sorocaba",
+                            StateId = 25
                         }
-                    };
+                    },
+                    new BankAgency
+                    {
+                        Number = 1512,
+                        PhoneNumber = "1532241044",
+                        Email = "age1512@bb.com.br",
+                        BankId = 3,
+                        Address = new Address
+                        {
+                            Street = "Avenida Itavuvu",
+                            Number = "516",
+                            ZipCode = "18103000",
+                            Neighborhood = "Vila Olímpia",
+                            City = "Sorocaba",
+                            StateId = 25
+                        }
+                    },
+                    new BankAgency
+                    {
+                        Number = 0356,
+                        PhoneNumber = "1530116753",
+                        BankId = 6,
+                        Email = "agencia0356@caixa.com.br",
+                        Address = new Address
+                        {
+                            Street = "Rua Doutor Álvaro Soares",
+                            Number = "516",
+                            ZipCode = "	18010190",
+                            Neighborhood = "Centro",
+                            City = "Sorocaba",
+                            StateId = 25
+                        }
+                    },
+                    new BankAgency
+                    {
+                        Number = 3327,
+                        PhoneNumber = "1532341331",
+                        BankId = 4,
+                        Email = "santanderag3327@santander.com",
+                        Address = new Address
+                        {
+                            Street = "Rua 15 de Novembro",
+                            Number = "516",
+                            ZipCode = "	18010082",
+                            Neighborhood = "Centro",
+                            City = "Sorocaba",
+                            StateId = 25
+                        }
+                    }
+                };
 
                 context.BankAgencies.AddRange(banksAgencies);
             }
@@ -359,25 +360,197 @@ namespace DEKL.CP.Infra.Data.Migrations
                 context.InternalBankAccounts.AddRange(internalBankAccounts);
             }
 
-            //if (!context.AccountToPays.Any())
-            //{
-            //    var accountToPays = new Collection<AccountToPay>
-            //{
-            //    new AccountToPay
-            //    {
-            //    },
-            //    new AccountToPay
-            //    {
-            //    },
-            //    new AccountToPay
-            //    {
-            //    },
-            //    new AccountToPay
-            //    {
-            //    },
-            //};
-            //    context.Modules.AddRange(accountToPays);
-            //}
+            if (!context.AccountToPays.Any())
+            {
+                var accountToPays = new Collection<AccountToPay>
+                {
+                    new AccountToPay
+                    {
+                        Value = 100, 
+                        PaidValue = 100,
+                        PaymentDate = new DateTime(2019, 01, 19),
+                        MaturityDate = new DateTime(2019, 02, 21),
+                        DailyInterest = 0.012M,
+                        Penalty = 0.01M,
+                        Priority = Priority.Medium,
+                        PaymentType = PaymentType.BankTransfer,
+                        DocumentNumber = "3184978737543947",
+                        NumberOfInstallments = 0,
+                        ProviderId = 1,
+                        ApplicationUserId = 1
+                    },
+                    new AccountToPay
+                    {
+                        Value = 1200,
+                        PaidValue = 1200,
+                        PaymentDate = new DateTime(2018, 05, 15),
+                        MaturityDate = new DateTime(2018, 06, 17),
+                        DailyInterest = 0.012M,
+                        Penalty = 0.01M,
+                        Priority = Priority.Low,
+                        PaymentType = PaymentType.BankTransfer,
+                        DocumentNumber = "2958643658659434",
+                        NumberOfInstallments = 3,
+                        Installments = new Collection<Installment>
+                        {
+                            new Installment
+                            {
+                                Value = 400,
+                                PaidValue = 400,
+                                MaturityDate = new DateTime(2018, 04, 17),
+                                PaymentDate = new DateTime(2018, 04, 17),
+                            },
+                            new Installment
+                            {
+                                Value = 400,
+                                PaidValue = 400,
+                                MaturityDate = new DateTime(2018, 05, 17),
+                                PaymentDate = new DateTime(2018, 05, 17)
+                            },
+                            new Installment
+                            {
+                                Value = 400,
+                                PaidValue = 400,
+                                MaturityDate = new DateTime(2018, 06, 17),
+                                PaymentDate = new DateTime(2018, 06, 17)
+                            },
+                        },
+                        ProviderId = 2,
+                        ApplicationUserId = 1
+                    },
+                    new AccountToPay
+                    {
+                        Value = 3000,
+                        PaidValue = 3000,
+                        PaymentDate = new DateTime(2018, 07, 24),
+                        MaturityDate = new DateTime(2018, 07, 24),
+                        DailyInterest = 0.012M,
+                        Penalty = 0.01M,
+                        Priority = Priority.High,
+                        PaymentType = PaymentType.BankDeposit,
+                        DocumentNumber = "6984969403945849",
+                        NumberOfInstallments = 6,
+                        Installments = new Collection<Installment>
+                        {
+                            new Installment
+                            {
+                                Value = 500,
+                                PaidValue = 500,
+                                MaturityDate = new DateTime(2018, 02, 24),
+                                PaymentDate = new DateTime(2018, 02, 24)
+                            },
+                            new Installment
+                            {
+                                Value = 500,
+                                PaidValue = 500,
+                                MaturityDate = new DateTime(2018, 03, 24),
+                                PaymentDate = new DateTime(2018, 03, 24)
+                            },
+                            new Installment
+                            {
+                                Value = 500,
+                                PaidValue = 500,
+                                MaturityDate = new DateTime(2018, 04, 24),
+                                PaymentDate = new DateTime(2018, 04, 24)
+                            },
+                            new Installment
+                            {
+                                Value = 500,
+                                PaidValue = 500,
+                                MaturityDate = new DateTime(2018, 05, 24), 
+                                PaymentDate = new DateTime(2018, 05, 24)
+                            },
+                            new Installment
+                            {
+                                Value = 500,
+                                PaidValue = 500,
+                                MaturityDate = new DateTime(2018, 06, 24),
+                                PaymentDate = new DateTime(2018, 06, 24)
+                            },
+                            new Installment
+                            {
+                                Value = 500,
+                                PaidValue = 500,
+                                MaturityDate = new DateTime(2018, 07, 24),
+                                PaymentDate = new DateTime(2018, 07, 24)
+                            }
+                        },
+                        ProviderId = 3,
+                        ApplicationUserId = 1
+                    },
+                    new AccountToPay
+                    {
+                        Value = 220,
+                        PaidValue = 220,
+                        PaymentDate = new DateTime(2018, 07, 18),
+                        MaturityDate = new DateTime(2018, 07, 18),
+                        DailyInterest = 0.016M,
+                        Penalty = 0.015M,
+                        Priority = Priority.Medium,
+                        PaymentType = PaymentType.BankTransfer,
+                        DocumentNumber = "69548345678345231",
+                        NumberOfInstallments = 4,
+                        Installments = new Collection<Installment>
+                        {
+                            new Installment
+                            {
+                                Value = 55,
+                                PaidValue = 55,
+                                MaturityDate = new DateTime(2018, 04, 18),
+                                PaymentDate = new DateTime(2018, 04, 18)
+                            },
+                            new Installment
+                            {
+                                Value = 55,
+                                PaidValue = 55,
+                                MaturityDate = new DateTime(2018, 05, 18),
+                                PaymentDate = new DateTime(2018, 05, 18)
+                            },
+                            new Installment
+                            {
+                                Value = 55,
+                                PaidValue = 55,
+                                MaturityDate = new DateTime(2018, 06, 18),
+                                PaymentDate = new DateTime(2018, 06, 18)
+                            },
+                            new Installment
+                            {
+                                Value = 55,
+                                PaidValue = 55,
+                                MaturityDate = new DateTime(2018, 07, 18),
+                                PaymentDate = new DateTime(2018, 07, 18)
+                            },
+                        },
+                        ProviderId = 5,
+                        ApplicationUserId = 1
+                    },
+                };
+
+                context.AccountToPays.AddRange(accountToPays);
+            }
+
+            if (!context.BankTransactions.Any())
+            {
+                var bankTransactions = new Collection<BankTransaction>
+                {
+                    new BankTransaction { AccountToPayId = 1, InternalBankAccountId = 1, ProviderBankAccountId = 1, NewBalance = 1100 },
+                    new BankTransaction { AccountToPayId = 2, InternalBankAccountId = 2, ProviderBankAccountId = 2, NewBalance = 15100 },
+                    new BankTransaction { AccountToPayId = 2, InternalBankAccountId = 2, ProviderBankAccountId = 2, NewBalance = 14700 },
+                    new BankTransaction { AccountToPayId = 2, InternalBankAccountId = 2, ProviderBankAccountId = 2, NewBalance = 14300 },
+                    new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 13800 },
+                    new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 13300 },
+                    new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 12800 },
+                    new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 12300 },
+                    new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 11800 },
+                    new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 11300 },
+                    new BankTransaction { AccountToPayId = 4, InternalBankAccountId = 3, ProviderBankAccountId = 5, NewBalance = 133.945M },
+                    new BankTransaction { AccountToPayId = 4, InternalBankAccountId = 3, ProviderBankAccountId = 5, NewBalance = 133.890M },
+                    new BankTransaction { AccountToPayId = 4, InternalBankAccountId = 3, ProviderBankAccountId = 5, NewBalance = 133.835M },
+                    new BankTransaction { AccountToPayId = 4, InternalBankAccountId = 3, ProviderBankAccountId = 5, NewBalance = 133.780M }
+                };
+
+                context.BankTransactions.AddRange(bankTransactions);
+            }
         }
     }
 }

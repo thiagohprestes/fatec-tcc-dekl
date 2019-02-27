@@ -11,7 +11,8 @@ namespace DEKL.CP.Infra.Data.EF.Maps
             ToTable(nameof(BankTransaction));
 
             //Columns
-            Property(e => e.NewBalance); 
+            Property(e => e.NewBalance)
+                .HasPrecision(10, 2); 
 
             //Relationships
             HasRequired(e => e.InternalBankAccount)
