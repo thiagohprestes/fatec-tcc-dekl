@@ -1,6 +1,8 @@
-﻿@model IEnumerable<DEKL.CP.UI.ViewModels.BankTransactionViewModel>
+﻿@using DEKL.CP.Domain.Enums
+@using DEKL.CP.UI.Extensions
+@model IEnumerable<DEKL.CP.UI.ViewModels.Report.BankAccountViewModel>
 @{
-    ViewBag.Title = "Relatório de Movimentações Bancárias";
+    ViewBag.Title = "Relatório de Contas Bancárias";
 }
 
 @section styles{
@@ -14,19 +16,26 @@
 </p>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(m => m.NewBalance)</th>
+                    <th>@Html.DisplayNameFor(e => e.Number)</th>
+                    <th>@Html.DisplayNameFor(e => e.Agency)</th>
+                    <th>@Html.DisplayNameFor(e => e.Balance)</th>
+                    <th>@Html.DisplayNameFor(e => e.TypeBankAccount)</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(m => item.NewBalance)</td>
-                    </tr>
+                <tr>
+                    <td>@Html.DisplayFor(e => item.Number)</td>
+                    <td>@Html.DisplayFor(e => item.Agency)</td>
+                    <td>@(item.TypeBankAccount == TypeBankAccount.Internal ? item.Balance.ToString("C2") : "Não possui")</td>
+                    <td>@item.TypeBankAccount.GetDescription()</td>
+
+                </tr>
                 }
             </tbody>
         </table>
@@ -42,9 +51,7 @@
                 scrollCollapse: true,
                 responsive: true,
                 columnDefs: [
-                    { className: "text-left", "targets": [0, 1] },
-                    { width: "10%", "targets": 7 },
-                    { orderable: false, "targets": 7 }
+                    { className: "text-left", "targets": [0, 2] }
                 ],
                 language: {
                     decimal: "",

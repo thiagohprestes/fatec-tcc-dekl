@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using DEKL.CP.Domain.Contracts.Entities;
-using DEKL.CP.Domain.Entities;
 
 namespace DEKL.CP.UI.ViewModels.Provider
 {
@@ -26,6 +25,6 @@ namespace DEKL.CP.UI.ViewModels.Provider
 
         public virtual Domain.Entities.Provider Provider { get; set; }
 
-        public virtual ICollection<BankTransaction> BankTransactions { get; set; }
+        public virtual ICollection<Domain.Entities.BankTransaction> BankTransactions { get; set; }
     }
 }

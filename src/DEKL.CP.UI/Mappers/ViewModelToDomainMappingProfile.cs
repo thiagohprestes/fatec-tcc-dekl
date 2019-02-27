@@ -8,6 +8,7 @@ using DEKL.CP.UI.ViewModels.Bank;
 using DEKL.CP.UI.ViewModels.BankAgency;
 using DEKL.CP.UI.ViewModels.InternalBankAccount;
 using DEKL.CP.UI.ViewModels.Provider;
+using DEKL.CP.UI.ViewModels.Report;
 using DEKL.CP.UI.ViewModels.UsersAdmin;
 
 namespace DEKL.CP.UI.Mappers
@@ -31,7 +32,7 @@ namespace DEKL.CP.UI.Mappers
             CreateMap<ProviderPhysicalLegalPersonViewModel, IProviderPhysicalLegalPerson>();
             CreateMap<AccountToPayViewModel, AccountToPay>();
             CreateMap<AccountToPayRelashionships, IAccountToPayRelashionships>();
-
+            CreateMap<BankAccountViewModel, IBankAccountReport>();
         }
     }
 }

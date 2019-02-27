@@ -1,6 +1,7 @@
 ﻿using DEKL.CP.UI.ViewModels.BankAgency;
 using System.Collections.Generic;
 using System.ComponentModel;
+using DEKL.CP.UI.ViewModels.BankTransaction;
 
 namespace DEKL.CP.UI.ViewModels.InternalBankAccount
 {

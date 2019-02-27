@@ -355,7 +355,7 @@
     <Compile Include="ViewModels\Address\AddressVM.cs" />
     <Compile Include="ViewModels\Audit\AuditViewModel.cs" />
     <Compile Include="ViewModels\BankAgency\BankAgencyViewModel.cs" />
-    <Compile Include="ViewModels\BankTransactionViewModel.cs" />
+    <Compile Include="ViewModels\BankTransaction\BankTransactionViewModel.cs" />
     <Compile Include="ViewModels\Bank\BankViewModel.cs" />
     <Compile Include="ViewModels\InternalBankAccount\InternalBankAccountRelashionshipsViewModel.cs" />
     <Compile Include="ViewModels\InternalBankAccount\InternalBankAccountViewModel.cs" />
@@ -365,6 +365,7 @@
     <Compile Include="ViewModels\Provider\ProviderPhysicalLegalPersonViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderPhysicalPersonViewModel.cs" />
     <Compile Include="ViewModels\Provider\ProviderViewModel.cs" />
+    <Compile Include="ViewModels\Report\BankAccountViewModel.cs" />
     <Compile Include="ViewModels\UsersAdmin\ApplicationUsersViewModel.cs" />
     <Compile Include="ViewModels\UsersAdmin\EditApplicationUserViewModel.cs" />
     <None Include="Views\AccountToPay\Create.cshtml" />
@@ -454,7 +455,7 @@
     <Content Include="Views\AccountToPay\Edit.cshtml" />
     <Content Include="Views\Report\AccountToPayReport.cshtml" />
     <Content Include="Views\Report\ProviderReport.cshtml" />
-    <Content Include="Views\Report\BankTransactionReport.cshtml" />
+    <Content Include="Views\Report\BankAccountReport.cshtml" />
     <Content Include="Views\Audit\Index.cshtml" />
     <Content Include="Views\Audit\Details.cshtml" />
     <None Include="Web.Debug.config">

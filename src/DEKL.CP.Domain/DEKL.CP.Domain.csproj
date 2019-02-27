@@ -39,6 +39,7 @@
     <Compile Include="Contracts\Entities\IAddress.cs" />
     <Compile Include="Contracts\Entities\IBank.cs" />
     <Compile Include="Contracts\Entities\IBankAccount.cs" />
+    <Compile Include="Contracts\Entities\IBankAccountReport.cs" />
     <Compile Include="Contracts\Entities\IBankAgency.cs" />
     <Compile Include="Contracts\Entities\IBankTransaction.cs" />
     <Compile Include="Contracts\Entities\IEntityBase.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Enums\Module.cs" />
     <Compile Include="Enums\PaymentType.cs" />
     <Compile Include="Enums\Priority.cs" />
+    <Compile Include="Enums\TypeBankAccount.cs" />
     <Compile Include="Enums\TypeProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

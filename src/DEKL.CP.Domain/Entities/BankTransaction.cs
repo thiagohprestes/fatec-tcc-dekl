@@ -1,6 +1,8 @@
-﻿namespace DEKL.CP.Domain.Entities
+﻿using DEKL.CP.Domain.Contracts.Entities;
+
+namespace DEKL.CP.Domain.Entities
 {
-    public class BankTransaction : EntityBase
+    public class BankTransaction : EntityBase, IBankTransaction
     {
         public int AccountToPayId { get; set; }
         public virtual AccountToPay AccountToPay { get; set; }

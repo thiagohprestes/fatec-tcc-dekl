@@ -1,7 +1,7 @@
 ﻿using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Entities.Filters;
-using System;
 using System.Collections.Generic;
+using DEKL.CP.Domain.Enums;
 
 namespace DEKL.CP.Domain.Contracts.Repositories
 {
@@ -9,6 +9,6 @@ namespace DEKL.CP.Domain.Contracts.Repositories
     {
         IEnumerable<IAccountToPayRelashionships> AccountToPayReport(AccountsToPayFilter AccountToPayFilterData);
         IEnumerable<IProviderPhysicalLegalPerson> ProviderReport();
-        IEnumerable<IBankTransaction> BankTransactionReport(DateTime StartDate, DateTime EndDate);
+        IEnumerable<IBankAccountReport> BankAccountReport(TypeBankAccount? typeAccount = null);
     }
 }

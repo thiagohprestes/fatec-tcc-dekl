@@ -45,53 +45,35 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                 ).AsEnumerable();
 
         public IProviderPhysicalLegalPerson ActiveProviderPhysicalLegalPerson (int id)
-        => (
-                from p in _ctx.Providers
-                join ppp in _ctx.ProviderPhysicalPersons on p.Id equals ppp.Id
-                where p.Active && p.Id == id
-                select new ProviderPhysicalLegalPersonDTO
-                {
-                    Id = p.Id,
-                    PhoneNumber = p.PhoneNumber,
-                    Email = p.Email,
-                    NameCorporateName = ppp.Name,
-                    CPFCNPJ = ppp.CPF,
-                    TypeProvider = TypeProvider.PhysicalPerson
-                }
-            ).Union(
+            => (
                     from p in _ctx.Providers
-                    join plp in _ctx.ProviderLegalPersons on p.Id equals plp.Id
-                    where p.Active
+                    join ppp in _ctx.ProviderPhysicalPersons on p.Id equals ppp.Id
+                    where p.Active && p.Id == id
                     select new ProviderPhysicalLegalPersonDTO
                     {
                         Id = p.Id,
                         PhoneNumber = p.PhoneNumber,
                         Email = p.Email,
-                        NameCorporateName = plp.CorporateName,
-                        CPFCNPJ = plp.CNPJ,
-                        TypeProvider = TypeProvider.LegalPerson
+                        NameCorporateName = ppp.Name,
+                        CPFCNPJ = ppp.CPF,
+                        TypeProvider = TypeProvider.PhysicalPerson
                     }
-            ).First();
+                ).Union(
+                        from p in _ctx.Providers
+                        join plp in _ctx.ProviderLegalPersons on p.Id equals plp.Id
+                        where p.Active
+                        select new ProviderPhysicalLegalPersonDTO
+                        {
+                            Id = p.Id,
+                            PhoneNumber = p.PhoneNumber,
+                            Email = p.Email,
+                            NameCorporateName = plp.CorporateName,
+                            CPFCNPJ = plp.CNPJ,
+                            TypeProvider = TypeProvider.LegalPerson
+                        }
+                ).First();
 
         public ProviderPhysicalPerson FindActiveProviderPhysicalPerson (int id) => _ctx.ProviderPhysicalPersons.First(p => p.Active && p.Id == id);
         public ProviderLegalPerson FindActiveProviderLegalPerson(int id) => _ctx.ProviderLegalPersons.First(p => p.Active && p.Id == id);
-
-        public IEnumerable<IProviderPhysicalLegalPerson> ProviderReport() =>
-            (
-                from p in _ctx.Providers
-                join ppp in _ctx.ProviderPhysicalPersons on p.Id equals ppp.Id into temp
-                from lppp in temp.DefaultIfEmpty()
-                join plp in _ctx.ProviderLegalPersons on p.Id equals plp.Id into temp2
-                from lplp in temp2.DefaultIfEmpty()
-                where p.Active
-                select new ProviderPhysicalLegalPersonDTO
-                {
-                    Id = p.Id,
-                    NameCorporateName = lppp.Name ?? lplp.CorporateName,
-                    PhoneNumber = p.PhoneNumber,
-                    Email = p.Email,
-                    TypeProvider = p.TypeProvider,
-                }
-           ).AsEnumerable();
     }
 }
