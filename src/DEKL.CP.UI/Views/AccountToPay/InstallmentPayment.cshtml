@@ -1,0 +1,37 @@
+﻿@model  DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel
+
+@{
+    ViewBag.Title = "Pagar";
+}
+
+<h2>@ViewBag.Title</h2>
+<div>
+    <h4>Bancos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(m => m.DocumentNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.DocumentNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(m => m.Value)
+        </dt>
+        <dd>
+            @Model.Value.ToString("C2")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(m => m.Description)
+        </dt>
+        <dd>
+            @(!string.IsNullOrEmpty(Model.Description) ? Model.Description : "Sem descrição")
+        </dd>
+    </dl>
+</div>
+<p>
+    <a href="#" class="btn btn-info" onclick="history.go(-1);">Voltar</a>
+    <input type="button" class="btn btn-info" id="PagarConta" value="Pagar" />
+</p>

@@ -19,8 +19,18 @@ namespace DEKL.CP.UI.ViewModels.Report
         public TypeBankAccount TypeBankAccount  { get; set; }
     }
 
-    public class ExportBankAccountViewModel
+    public class ExportarBankAccountViewModel
     {
+        [DisplayName("Número da conta")]
+        public string Number { get; set; }
 
+        [DisplayName("Agência")]
+        public string Agency { get; set; }
+
+        [DisplayName("Saldo")]
+        public decimal Balance { get; set; }
+
+        [DisplayName("Tipo da conta")]
+        public string TypeBankAccount { get; set; }
     }
 }

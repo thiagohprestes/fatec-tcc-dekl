@@ -4,6 +4,7 @@ using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels.AccountsToPay;
+using DEKL.CP.UI.ViewModels.BankAgency;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace DEKL.CP.UI.Controllers
     {
         private readonly IProviderRepository _providerRepository;
         private readonly IAccountToPayRepository _accountToPayRepository;
+        private readonly IBankAgencyRepository _bankAgencyRepository;
 
         public AccountToPayController(IAccountToPayRepository accountToPayRepository, IProviderRepository providerRepository)
         {
@@ -78,6 +80,22 @@ namespace DEKL.CP.UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
+        }
+
+        public ActionResult Payment(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
+        }
+
+        public ActionResult InstallmentPayment(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            ViewBag.Banks = (Mapper.Map<IEnumerable<BankAgencyViewModel>>(_bankAgencyRepository.Actives));
 
             return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
         }

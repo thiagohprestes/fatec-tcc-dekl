@@ -146,21 +146,16 @@ namespace DEKL.CP.UI.Controllers
             try
             {
                 var lista = _reportRepository.BankAccountReport();
-                var ListaExportar = new List<IBankAccount>();
-
-                foreach (var item in lista)
+                var ListaExportar = lista.Select(item => new ExportarBankAccountViewModel
                 {
-                    var obj = new ExportBankAccountViewModel();
-                    //obj.Id = item.Id;
-                    ////obj.CPFCNPJ = item.CPFCNPJ;
-                    //obj.Email = item.Email;
-                    //obj.NameCorporateName = item.NameCorporateName;
-                    //obj.PhoneNumber = item.PhoneNumber;
-                    //ListaExportar.Add(obj);
-                }
+                    Agency = item.Agency,
+                    Balance = item.Balance,
+                    Number = item.Number,
+                    TypeBankAccount = item.TypeBankAccount.GetDescription()
+                }).ToList();
 
-                // Retorna os resultados
-                var fileName = $"ExportarProviderReport-{DateTime.Now:yyyy-MM-dd-HH-mm}.csv";
+            // Retorna os resultados
+            var fileName = $"ExportarProviderReport-{DateTime.Now:yyyy-MM-dd-HH-mm}.csv";
 
                 Response.Clear();
                 Response.ClearHeaders();
