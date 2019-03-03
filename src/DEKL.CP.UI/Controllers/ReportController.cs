@@ -4,12 +4,10 @@ using DEKL.CP.Domain.Entities.Filters;
 using DEKL.CP.UI.ViewModels.AccountsToPay;
 using DEKL.CP.UI.ViewModels.Provider;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.UI.Extensions;
 using DEKL.CP.UI.ViewModels.Report;
 
@@ -18,7 +16,7 @@ namespace DEKL.CP.UI.Controllers
     public class ReportController : Controller
     {
         private readonly IReportRepository _reportRepository;
-        private readonly DateTime _YESTERDAY = DateTime.Now.AddDays(-1);
+        private readonly DateTime _5MONTHSAGO = DateTime.Now.AddMonths(-5);
         private readonly DateTime _TODAY = DateTime.Now;
 
         public ReportController(IReportRepository reportRepository) => _reportRepository = reportRepository;
@@ -27,7 +25,7 @@ namespace DEKL.CP.UI.Controllers
         {
             var accountToPayFilter = new AccountsToPayFilter
             {
-                InitialDate = _YESTERDAY,
+                InitialDate = _5MONTHSAGO,
                 FinalDate = _TODAY
             };
 
@@ -54,16 +52,15 @@ namespace DEKL.CP.UI.Controllers
         {
             try
             {
-                var AccountToPayFilter = new AccountsToPayFilter()
+                var AccountToPayFilter = new AccountsToPayFilter
                 {
-                    InitialDate = _YESTERDAY,
+                    InitialDate = _5MONTHSAGO,
                     FinalDate = _TODAY
                 };
 
                 var lista = Mapper.Map<IEnumerable<AccountToPayRelashionships>>(_reportRepository.AccountToPayReport(AccountToPayFilter));
                 var listaExportar = lista.Select(item => new ExportarAccountToPayRelashionships
                 {
-                    Id = item.Id,
                     DocumentNumber = item.DocumentNumber,
                     MaturityDate = item.MaturityDate,
                     Provider = item.Provider,
@@ -87,7 +84,7 @@ namespace DEKL.CP.UI.Controllers
                 Response.End();
 
             }
-            catch (Exception)
+            catch
             {
                 return Json(new { success = false });
             }
@@ -129,7 +126,7 @@ namespace DEKL.CP.UI.Controllers
                 Response.End();
 
             }
-            catch (Exception)
+            catch
             {
                 return Json(new { success = false });
             }
@@ -172,7 +169,7 @@ namespace DEKL.CP.UI.Controllers
                 Response.End();
 
             }
-            catch (Exception)
+            catch
             {
                 return Json(new { success = false });
             }
@@ -187,51 +184,42 @@ namespace DEKL.CP.UI.Controllers
         {
             var sb = new StringBuilder();
 
-            try
-            {
-                var propriedades = typeof(T).GetProperties();
+            var propriedades = typeof(T).GetProperties();
 
-                // header
+            // header
+            foreach (var p in propriedades)
+            {
+                sb.Append(p.CustomAttributes.FirstOrDefault()?.ConstructorArguments[0].Value);
+                sb.Append(delimitador);
+            }
+            sb.Remove(sb.Length - delimitador.Length, delimitador.Length);
+            sb.AppendLine();
+
+            // conteudo
+            foreach (var item in lista)
+            {
                 foreach (var p in propriedades)
                 {
-                    sb.Append(p.CustomAttributes.FirstOrDefault()?.ConstructorArguments[0].Value);
-                    sb.Append(delimitador);
-                }
-                sb.Remove(sb.Length - delimitador.Length, delimitador.Length);
-                sb.AppendLine();
+                    var conteudo = Convert.ToString(p.GetValue(item, null));
 
-                // conteudo
-                foreach (var item in lista)
-                {
-                    foreach (var p in propriedades)
+                    //pesquisa em 'conteudo' em 'replace', realiza troca de valor caso seja encontrado
+                    if (replace != null && !string.IsNullOrEmpty(conteudo) && replace.ContainsKey(conteudo))
                     {
-                        var conteudo = Convert.ToString(p.GetValue(item, null));
-
-                        //pesquisa em 'conteudo' em 'replace', realiza troca de valor caso seja encontrado
-                        if (replace != null && !string.IsNullOrEmpty(conteudo) && replace.ContainsKey(conteudo))
-                        {
-                            conteudo = replace[conteudo];
-                        }
-
-                        sb.Append(conteudo.Replace(delimitador, "")
-                                          .Replace("\r\n", "")
-                                          .Replace("\n", "")
-                                          .Replace("\r", "")
-                                          .Replace(";", ""));
-
-                        sb.Append(delimitador);
-
+                        conteudo = replace[conteudo];
                     }
 
-                    sb.Remove(sb.Length - delimitador.Length, delimitador.Length);
-                    sb.AppendLine();
+                    sb.Append(conteudo.Replace(delimitador, "")
+                        .Replace("\r\n", "")
+                        .Replace("\n", "")
+                        .Replace("\r", "")
+                        .Replace(";", ""));
+
+                    sb.Append(delimitador);
 
                 }
 
-            }
-            catch (Exception)
-            {
-                throw;
+                sb.Remove(sb.Length - delimitador.Length, delimitador.Length);
+                sb.AppendLine();
             }
 
             return sb.ToString();

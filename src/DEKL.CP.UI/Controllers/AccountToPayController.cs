@@ -19,9 +19,10 @@ namespace DEKL.CP.UI.Controllers
         private readonly IAccountToPayRepository _accountToPayRepository;
         private readonly IBankAgencyRepository _bankAgencyRepository;
 
-        public AccountToPayController(IAccountToPayRepository accountToPayRepository, IProviderRepository providerRepository)
+        public AccountToPayController(IAccountToPayRepository accountToPayRepository, IProviderRepository providerRepository, IBankAgencyRepository bankAgencyRepository)
         {
             _providerRepository = providerRepository;
+            _bankAgencyRepository = bankAgencyRepository;
             _accountToPayRepository = accountToPayRepository;
         }
 
@@ -45,12 +46,12 @@ namespace DEKL.CP.UI.Controllers
                     {
                         var valueInstallment = accountToPay.Value / accountToPay.Installments.Count;
 
-                        new Installment
+                        var installment = new Installment
                         {
                             Value = valueInstallment,
                             MaturityDate = new DateTime(accountToPay.MaturityDate.Year,
-                                                        accountToPay.MaturityDate.Month,
-                                                        DateTime.DaysInMonth(accountToPay.MaturityDate.Year, accountToPay.MaturityDate.Month))
+                                accountToPay.MaturityDate.Month,
+                                DateTime.DaysInMonth(accountToPay.MaturityDate.Year, accountToPay.MaturityDate.Month))
                         };
                     }
 
@@ -66,7 +67,7 @@ namespace DEKL.CP.UI.Controllers
                         nameof(IProviderPhysicalLegalPerson.NameCorporateName));
 
                     this.AddToastMessage("Erro no salvamento", $"Erro ao salvar a conta {accountToPay.Description}, " +
-                        $"favor tentar novamente", ToastType.Error);
+                        "favor tentar novamente", ToastType.Error);
 
                 }
             }
@@ -129,8 +130,13 @@ namespace DEKL.CP.UI.Controllers
                     var accountToPay = _accountToPayRepository.FindActive(accountToPayViewModel.Id);
 
                     accountToPay.Value = accountToPayViewModel.Value;
-                    //accountToPay.Name = accountToPayViewModel.Name;
-                    //accountToPay.Number = accountToPayViewModel.Number;
+                    accountToPay.PaidValue = accountToPayViewModel.PaidValue;
+                    accountToPay.PaymentDate = accountToPayViewModel.PaymentDate;
+                    accountToPay.Description = accountToPayViewModel.Description;
+                    accountToPay.MaturityDate = accountToPayViewModel.MaturityDate;
+                    accountToPay.DailyInterest = accountToPayViewModel.DailyInterest;
+                    accountToPay.MonthlyAccount = accountToPayViewModel.MonthlyAccount;
+                    accountToPay.Priority = accountToPayViewModel.Priority;
 
                     _accountToPayRepository.Update(accountToPay);
 

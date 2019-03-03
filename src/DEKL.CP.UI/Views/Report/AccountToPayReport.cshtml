@@ -1,5 +1,4 @@
-﻿@using DEKL.CP.UI.Extensions
-@model IEnumerable<DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayRelashionships>
+﻿@model IEnumerable<DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayRelashionships>
 @{
     ViewBag.Title = "Relatório de Contas à Pagar";
 }
@@ -62,17 +61,17 @@
 </div>
 @section scripts{
     @Scripts.Render("~/bundles/datatables")
+    <script src="~/Scripts/date.format.js"></script>
+
     <script type="text/javascript">
         $(() => {
             $('.table').DataTable({
                 tabIndex: -1,
-                scrollY: "280px",
+                scrollY: "320px",
                 scrollCollapse: true,
                 responsive: true,
                 columnDefs: [
-                    { className: "text-left", "targets": [0, 1] },
-                    { width: "10%", "targets": 7 },
-                    { orderable: false, "targets": 7 }
+                    { className: "text-left", "targets": [0, 3] }
                 ],
                 language: {
                     decimal: "",
@@ -101,7 +100,7 @@
             });
         });
 
-        $(function () {
+        $(() => {
             $(".datepicker").datepicker();
         });
 
@@ -112,7 +111,7 @@
             var AccountToPayFilter = {
                 InitialDate: _InitialDate,
                 FinalDate: _FinalDate
-            }
+            };
 
             $.ajax({
                 type: 'POST',
@@ -125,16 +124,16 @@
                 data.AccountToPay.forEach(function (item) {
                     AccountToPayTable.append(
                         "<tr>" +
-                            "<td>" + item.MaturityDate + "</td>" +
+                            "<td>" + new Date(parseInt(item.MaturityDate.substr(6))).format("dd/mm/yyyy") + "</td>" +
                             "<td>" + item.Provider + "</td>" +
                             "<td>" + item.Value + "</td>" +
                             "<td>" + item.DocumentNumber + "</td>" +
-                        "</tr>")
+                        "</tr>");
                 });
             });
         });
 
-        function ExportarProviderReport() {
+        function ExportarAccountToPayReport() {
             document.getElementById('downloader').src = '@Url.Action("ExportarAccountToPayReport", "Report")';
         }
 
