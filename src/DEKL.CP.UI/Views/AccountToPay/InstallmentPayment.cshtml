@@ -1,5 +1,5 @@
 ﻿@model  DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel
-
+@using DEKL.CP.UI.Extensions
 
 @{
     ViewBag.Title = "Pagar";
@@ -34,7 +34,11 @@
 </div>
 
 <div>
-    @Html.DropDownList("InternalBankAccount", ViewBag.Banks as SelectList, "Selecione o Banco", new { @class = "form-control" });
+    @Html.DropDownList("Contas Internas", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Interna", new { @class = "form-control" })
+
+
+    @Html.DropDownList("Contas Bancarias", new SelectList(ViewBag.ProviderBankAccounts), "Selecione a Conta", new { @class = "form-control" })
+    @Html.DropDownListFor(m => m.PaymentType, DEKL.CP.Domain.Enums.PaymentType.BankDeposit.ToSelectList() as SelectList, new { @class = "form-control" })
 </div>
 
 <p>
