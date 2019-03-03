@@ -1,5 +1,6 @@
 ﻿@model  DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel
 
+
 @{
     ViewBag.Title = "Pagar";
 }
@@ -31,6 +32,14 @@
         </dd>
     </dl>
 </div>
+
+<div>
+    
+
+    @Html.DropDownListFor(Model => Model.PaidValue, ViewBag.Banks as SelectList, "Selecione o Banco", new { @class = "form-control" });
+
+</div>
+
 <p>
     <a href="#" class="btn btn-info" onclick="history.go(-1);">Voltar</a>
     <input type="button" class="btn btn-info" id="PagarConta" value="Pagar" />
