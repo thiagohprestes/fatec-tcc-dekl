@@ -109,7 +109,7 @@ namespace DEKL.CP.UI.Controllers
                 catch
                 {
                     this.AddToastMessage("Erro na Edição", $"Erro ao editar a conta {internalBankAccountViewModel.Name}, " +
-                        $"favor tentar novamente", ToastType.Error);
+                        "favor tentar novamente", ToastType.Error);
                 }
             }
 

@@ -4,11 +4,9 @@ using DEKL.CP.Domain.Contracts.Repositories;
 using DEKL.CP.Domain.Entities;
 using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels.AccountsToPay;
-using DEKL.CP.UI.ViewModels.BankAgency;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
-using System.Configuration.Internal;
 using System.Net;
 using System.Web.Mvc;
 using DEKL.CP.UI.ViewModels.InternalBankAccount;
@@ -102,8 +100,13 @@ namespace DEKL.CP.UI.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            ViewBag.InternalBankAccounts = new SelectList(_internalBankAccountRepository.Actives, nameof(InternalBankAccountViewModel.Id), nameof(InternalBankAccountViewModel.Name), nameof(InternalBankAccountViewModel.Name));
-            ViewBag.ProviderBankAccounts = new SelectList(_providerBankAccountRepository.Actives, nameof(ProviderBankAccountViewModel.Id), nameof(ProviderBankAccountViewModel.Name), nameof(ProviderBankAccountViewModel.Name));
+            ViewBag.InternalBankAccounts = new SelectList(Mapper.Map<IEnumerable<InternalBankAccountRelashionshipsViewModel>>(_internalBankAccountRepository.InternalBankAccountRelashionships), 
+                                                          nameof(InternalBankAccountRelashionshipsViewModel.DescriptionAccount),
+                                                          nameof(InternalBankAccountRelashionshipsViewModel.DescriptionBankAgency));
+
+            ViewBag.ProviderBankAccounts = new SelectList(Mapper.Map<IEnumerable<ProviderBankAccountRelashionshipsViewModel>>(_providerBankAccountRepository.ProviderBankAccountActivesRelashionships), 
+                                                          nameof(ProviderBankAccountRelashionshipsViewModel.DescriptionAccount), 
+                                                          nameof(ProviderBankAccountRelashionshipsViewModel.DescriptionBankAgency));
 
             return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
         }

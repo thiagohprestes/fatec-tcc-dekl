@@ -60,9 +60,15 @@
 </div>
 
 <div class="row">
-    <div class="form-group col-md-3"> @Html.DropDownList("Contas Internas", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Interna", new { @class = "form-control" })</div>
-    <div class="form-group col-md-3">@Html.DropDownList("Contas Bancarias", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Bancária", new { @class = "form-control" })</div>
-    <div class="form-group col-md-3"> @Html.DropDownListFor(m => m.PaymentType, DEKL.CP.Domain.Enums.PaymentType.BankDeposit.ToSelectList() as SelectList, new { @class = "form-control" })</div>
+    <div class="form-group col-md-3">
+         @Html.DropDownList("Contas Internas", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Interna", new {@class = "form-control"})
+    </div>
+    <div class="form-group col-md-3">
+        @Html.DropDownList("Contas Bancarias", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Bancária", new {@class = "form-control"})
+    </div>
+    <div class="form-group col-md-3">
+         @Html.DropDownListFor(m => m.PaymentType, DEKL.CP.Domain.Enums.PaymentType.BankDeposit.ToSelectList() as SelectList, new {@class = "form-control"})
+    </div>
 </div>
 
 <p>

@@ -20,6 +20,7 @@ namespace DEKL.CP.UI.ViewModels.Provider
 
         [DisplayName("Agência")]
         public string DescriptionBankAgency => $"{NumberBankAgency} - {NameBank}";
+        public string DescriptionAccount => $"{Number} - {NumberBankAgency} - {NameBank}";
 
         public TypeProvider TypeProvider { get; set; }
 
