@@ -34,10 +34,7 @@
 </div>
 
 <div>
-    
-
-    @Html.DropDownListFor(Model => Model.PaidValue, ViewBag.Banks as SelectList, "Selecione o Banco", new { @class = "form-control" });
-
+    @Html.DropDownList("InternalBankAccount", ViewBag.Banks as SelectList, "Selecione o Banco", new { @class = "form-control" });
 </div>
 
 <p>

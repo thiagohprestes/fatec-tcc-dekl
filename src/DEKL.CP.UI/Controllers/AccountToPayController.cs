@@ -17,13 +17,16 @@ namespace DEKL.CP.UI.Controllers
     {
         private readonly IProviderRepository _providerRepository;
         private readonly IAccountToPayRepository _accountToPayRepository;
-        private readonly IBankAgencyRepository _bankAgencyRepository;
+        private readonly IInternalBankAccountRepository _internalBankAccountRepository;
+        private readonly IProviderBankAccountRepository _providerBankAccountRepository;
 
-        public AccountToPayController(IAccountToPayRepository accountToPayRepository, IProviderRepository providerRepository, IBankAgencyRepository bankAgencyRepository)
+        public AccountToPayController(IAccountToPayRepository accountToPayRepository, IProviderRepository providerRepository, IInternalBankAccountRepository internalBankAccountRepository, IProviderBankAccountRepository providerBankAccountRepository)
         {
             _providerRepository = providerRepository;
-            _bankAgencyRepository = bankAgencyRepository;
+            _internalBankAccountRepository = internalBankAccountRepository;
+            _providerBankAccountRepository = providerBankAccountRepository;
             _accountToPayRepository = accountToPayRepository;
+
         }
 
         public ActionResult Index() => View(Mapper.Map<IEnumerable<AccountToPayRelashionships>>(_accountToPayRepository.AccountToPayActivesRelashionships));
@@ -96,7 +99,8 @@ namespace DEKL.CP.UI.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            ViewBag.Banks = (Mapper.Map<IEnumerable<BankAgencyViewModel>>(_bankAgencyRepository.Actives));
+            ViewBag.InternalBankAccounts = (Mapper.Map<IEnumerable<BankAgencyViewModel>>(_internalBankAccountRepository.Actives));
+            ViewBag.ProviderBankAccounts = (Mapper.Map<IEnumerable<BankAgencyViewModel>>(_providerBankAccountRepository.Actives));
 
             return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
         }
