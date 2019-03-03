@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "Pagar";
+    int DiasVencidos = 0; decimal multaDiaria = 0; decimal multa = 0;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -17,12 +18,37 @@
             @Html.DisplayFor(m => m.DocumentNumber)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(m => m.Value)
-        </dt>
-        <dd>
-            @Model.Value.ToString("C2")
-        </dd>
+        @*se for vencido*@
+        @if (DateTime.Now > Model.PaymentDate)
+        {
+            <dt>
+                Valor Vencido
+            </dt>
+            <dd>
+                @Model.Value.ToString("C2")
+            </dd>
+            <dt>
+                Valor total com juros
+            </dt>
+            <dd>
+                @{ 
+                    DiasVencidos = (int)DateTime.Now.Subtract(new DateTime(Model.PaymentDate.Value.Year, Model.PaymentDate.Value.Month, Model.PaymentDate.Value.Day)).TotalDays;
+                    multaDiaria = (DiasVencidos * Model.DailyInterest);
+                    multa = ((Model.Value * Model.Penalty) / 100);
+
+                    @Html.Raw((Model.Value + multaDiaria + multa).ToString("C2"))
+                }
+            </dd>
+        }
+        else
+        {
+            <dt>
+                @Html.DisplayNameFor(m => m.Value)
+            </dt>
+            <dd>
+                @Model.Value.ToString("C2")
+            </dd>
+        }
 
         <dt>
             @Html.DisplayNameFor(m => m.Description)
@@ -33,12 +59,10 @@
     </dl>
 </div>
 
-<div>
-    @Html.DropDownList("Contas Internas", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Interna", new { @class = "form-control" })
-
-
-    @Html.DropDownList("Contas Bancarias", new SelectList(ViewBag.ProviderBankAccounts), "Selecione a Conta", new { @class = "form-control" })
-    @Html.DropDownListFor(m => m.PaymentType, DEKL.CP.Domain.Enums.PaymentType.BankDeposit.ToSelectList() as SelectList, new { @class = "form-control" })
+<div class="row">
+    <div class="form-group col-md-3"> @Html.DropDownList("Contas Internas", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Interna", new { @class = "form-control" })</div>
+    <div class="form-group col-md-3">@Html.DropDownList("Contas Bancarias", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Bancária", new { @class = "form-control" })</div>
+    <div class="form-group col-md-3"> @Html.DropDownListFor(m => m.PaymentType, DEKL.CP.Domain.Enums.PaymentType.BankDeposit.ToSelectList() as SelectList, new { @class = "form-control" })</div>
 </div>
 
 <p>

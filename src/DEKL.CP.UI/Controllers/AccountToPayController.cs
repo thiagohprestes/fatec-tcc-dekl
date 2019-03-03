@@ -102,13 +102,12 @@ namespace DEKL.CP.UI.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            ViewBag.InternalBankAccounts = new SelectList(_internalBankAccountRepository.Actives, nameof(InternalBankAccountViewModel.Id), nameof(InternalBankAccountViewModel.BankAgency.BankAgencyDescription), nameof(InternalBankAccountViewModel.BankAgency.BankAgencyDescription));
-            ViewBag.ProviderBankAccounts = (Mapper.Map<IEnumerable<ProviderBankAccountViewModel>>(_providerBankAccountRepository.Actives)); ViewBag.ProviderBankAccounts = (Mapper.Map<IEnumerable<ProviderBankAccountViewModel>>(_providerBankAccountRepository.Actives));
+            ViewBag.InternalBankAccounts = new SelectList(_internalBankAccountRepository.Actives, nameof(InternalBankAccountViewModel.Id), nameof(InternalBankAccountViewModel.Name), nameof(InternalBankAccountViewModel.Name));
+            ViewBag.ProviderBankAccounts = new SelectList(_providerBankAccountRepository.Actives, nameof(ProviderBankAccountViewModel.Id), nameof(ProviderBankAccountViewModel.Name), nameof(ProviderBankAccountViewModel.Name));
 
             return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
         }
-
-        public ActionResult Edit(int? id)
+         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
