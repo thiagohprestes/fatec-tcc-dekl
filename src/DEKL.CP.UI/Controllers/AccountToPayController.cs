@@ -8,8 +8,11 @@ using DEKL.CP.UI.ViewModels.BankAgency;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Configuration.Internal;
 using System.Net;
 using System.Web.Mvc;
+using DEKL.CP.UI.ViewModels.InternalBankAccount;
+using DEKL.CP.UI.ViewModels.Provider;
 
 namespace DEKL.CP.UI.Controllers
 {
@@ -99,8 +102,8 @@ namespace DEKL.CP.UI.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            ViewBag.InternalBankAccounts = (Mapper.Map<IEnumerable<BankAgencyViewModel>>(_internalBankAccountRepository.Actives));
-            ViewBag.ProviderBankAccounts = (Mapper.Map<IEnumerable<BankAgencyViewModel>>(_providerBankAccountRepository.Actives));
+            ViewBag.InternalBankAccounts = (Mapper.Map<IEnumerable<InternalBankAccountViewModel>>(_internalBankAccountRepository.Actives));
+            ViewBag.ProviderBankAccounts = (Mapper.Map<IEnumerable<ProviderBankAccountViewModel>>(_providerBankAccountRepository.Actives));
 
             return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
         }
