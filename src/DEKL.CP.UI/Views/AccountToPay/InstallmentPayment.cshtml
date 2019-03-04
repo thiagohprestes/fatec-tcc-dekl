@@ -3,37 +3,36 @@
 @using DEKL.CP.Domain.Entities
 
 @{
-    ViewBag.Title = "Pagar";
-    int diasVencidos = 0; decimal multaDiaria = 0; decimal multa = 0;
+    int diasVencidos = 0; decimal multaDiaria = 0;
     bool isConta = Request.QueryString["Parcela"].Equals("0");
     var parcela = (List<Installment>)Model.Installments;
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>Pagar</h2>
 <div>
     <h4>Bancos</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(m => m.DocumentNumber)
+        <dt class="title-detail">
+            @Html.DisplayNameFor(m => m.DocumentNumber):
         </dt>
-        <dd>
+        <dd class="text-detail">
             @Html.DisplayFor(m => m.DocumentNumber)
         </dd>
 
         @*se for vencido*@
         @if (!isConta && DateTime.Now > parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"])).MaturityDate ||  DateTime.Now > Model.MaturityDate)
         {
-            <dt>
+            <dt class="title-detail">
                 Valor Vencido
             </dt>
-            <dd>
+            <dd class="text-detail">
                 @(isConta ? Model.Value.ToString("C2") : parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"])).Value.ToString("C2"))
             </dd>
-            <dt>
+            <dt class="title-detail">
                 Valor total com juros
             </dt>
-            <dd>
+            <dd class="text-detail">
                 @{
                     if (isConta)
                     {
@@ -57,18 +56,18 @@
         }
         else
         {
-            <dt>
+            <dt class="title-detail">
                 @Html.DisplayNameFor(m => m.Value)
             </dt>
-            <dd>
+            <dd class="text-detail">
                 @(isConta ? Model.Value.ToString("C2") : parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"])).Value.ToString("C2"))
             </dd>
         }
 
-        <dt>
+        <dt class="title-detail">
             @Html.DisplayNameFor(m => m.Description)
         </dt>
-        <dd>
+        <dd class="text-detail">
             @(!string.IsNullOrEmpty(Model.Description) ? Model.Description : "Sem descrição")
         </dd>
     </dl>
@@ -93,5 +92,4 @@
         <a href="#" class="btn btn-info" onclick="history.go(-1);">Voltar</a>
         <input type="submit" class="btn btn-info" id="PagarConta" value="Pagar" />
     </p>
-
 </form>

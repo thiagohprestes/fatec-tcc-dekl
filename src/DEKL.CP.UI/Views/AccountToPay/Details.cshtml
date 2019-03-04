@@ -1,10 +1,6 @@
 ﻿@model DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel
 
-@{
-    ViewBag.Title = "Detalhes";
-}
-
-<h2>@ViewBag.Title</h2>
+<h2>Detalhes</h2>
 <div>
     <h4>Bancos</h4>
     <hr />
@@ -31,13 +27,13 @@
         </dd>
     </dl>
 </div>
+
 <h4>Parcelas</h4>
 @if (Model.Installments.Count == 0)
 {
     <hr />
     <p>Conta não possui parcelas</p>
 }
-
 else
 {
     <table class="table col-md-6">

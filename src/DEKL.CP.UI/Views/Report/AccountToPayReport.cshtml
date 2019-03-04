@@ -1,13 +1,10 @@
 ﻿@model IEnumerable<DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayRelashionships>
-@{
-    ViewBag.Title = "Relatório de Contas à Pagar";
-}
 
 @section styles{
     @Styles.Render("~/Content/datatables")
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>Relatório de Contas à Pagar</h2>
 
 <div class="row">
     <div class="form-group col-md-3">
@@ -67,7 +64,7 @@
         $(() => {
             $('.table').DataTable({
                 tabIndex: -1,
-                scrollY: "320px",
+                scrollY: "380px",
                 scrollCollapse: true,
                 responsive: true,
                 columnDefs: [

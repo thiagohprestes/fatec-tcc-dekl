@@ -14,3 +14,7 @@
 .dl-horizontal {
    display: flex;
 }
+
+.group {
+    padding-top: 20px;
+}

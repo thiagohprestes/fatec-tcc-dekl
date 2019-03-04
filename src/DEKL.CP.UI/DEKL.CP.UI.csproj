@@ -384,8 +384,6 @@
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="Views\Account\TrocarSenha.cshtml" />
-    <Content Include="Views\Account\MeuPerfil.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_Toastr.cshtml" />

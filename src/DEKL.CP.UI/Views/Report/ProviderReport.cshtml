@@ -1,14 +1,11 @@
 ﻿@using DEKL.CP.UI.Extensions
 @model IEnumerable<DEKL.CP.UI.ViewModels.Provider.ProviderPhysicalLegalPersonViewModel>
-@{
-    ViewBag.Title = "Relatório de Fornecedores";
-}
 
 @section styles{
     @Styles.Render("~/Content/datatables")
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>Relatório de Fornecedores</h2>
 
 <p>
     <input type="button" onclick="ExportarProviderReport();" class="btn btn-info" id="ExportButton" value="Exportar" />

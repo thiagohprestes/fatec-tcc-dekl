@@ -1,13 +1,10 @@
 ﻿@model IEnumerable<DEKL.CP.UI.ViewModels.Provider.ProviderPhysicalLegalPersonViewModel>
-@{
-    ViewBag.Title = "Fornecedor";
-}
 
 @section styles{
     @Styles.Render("~/Content/datatables")
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>Fornecedor</h2>
 
 <div class="row">
     <div class="col-md-12">
@@ -53,7 +50,7 @@
         $(() => {
             $('.table').DataTable({
                 tabIndex: -1,
-                scrollY: "280px",
+                scrollY: "380px",
                 scrollCollapse: true,
                 responsive: true,
                 columnDefs: [

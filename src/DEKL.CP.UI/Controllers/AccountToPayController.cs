@@ -256,7 +256,9 @@ namespace DEKL.CP.UI.Controllers
 
             _accountToPayRepository.Update(model);
 
-            return Redirect("/AccountToPay/index?salvo=1");
+            this.AddToastMessage("Conta Paga", $"A Conta {model.Description} foi paga com sucesso", ToastType.Success);
+
+            return Redirect("/AccountToPay");
         }
 
         public ActionResult Edit(int? id)
