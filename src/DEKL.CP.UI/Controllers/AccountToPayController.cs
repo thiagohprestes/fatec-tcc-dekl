@@ -119,7 +119,7 @@ namespace DEKL.CP.UI.Controllers
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             if (PaymentInterna == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             if (PaymentType == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            bool isConta = valorParcela.Equals(0);
+            var isConta = valorParcela.Equals(0);
 
             var model = _accountToPayRepository.FindActive(id);
 
@@ -127,7 +127,7 @@ namespace DEKL.CP.UI.Controllers
             {
                 if (isConta)
                 {
-                    int diasVencidos = (int)DateTime.Now.Subtract(new DateTime(model.PaymentDate.Value.Year, model.PaymentDate.Value.Month, model.PaymentDate.Value.Day)).TotalDays;
+                    var diasVencidos = (int)DateTime.Now.Subtract(new DateTime(model.PaymentDate.Value.Year, model.PaymentDate.Value.Month, model.PaymentDate.Value.Day)).TotalDays;
                     model.Value += ((model.Value * model.Penalty) / 100);
                     decimal? multaDiaria = (model.Value * (diasVencidos * model.DailyInterest) / 100);
 
@@ -137,7 +137,7 @@ namespace DEKL.CP.UI.Controllers
                 {
                     var parcela = (List<Installment>)model.Installments;
                     var parcelaSelecionada = parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"]));
-                    int diasVencidos = (int)DateTime.Now.Subtract(new DateTime(parcelaSelecionada.PaymentDate.Value.Year, parcelaSelecionada.PaymentDate.Value.Month, parcelaSelecionada.PaymentDate.Value.Day)).TotalDays;
+                    var diasVencidos = (int)DateTime.Now.Subtract(new DateTime(parcelaSelecionada.PaymentDate.Value.Year, parcelaSelecionada.PaymentDate.Value.Month, parcelaSelecionada.PaymentDate.Value.Day)).TotalDays;
                     parcelaSelecionada.Value += ((parcelaSelecionada.Value * model.Penalty) / 100);
                     decimal? multaDiaria = (parcelaSelecionada.Value * (diasVencidos * model.DailyInterest) / 100);
                     
@@ -150,7 +150,6 @@ namespace DEKL.CP.UI.Controllers
             return Redirect("/AccountToPay/index?salvo=1");
         }
 
-        public ActionResult Edit(int? id)
         public ActionResult Edit(int? id)
         {
             if (id == null)
