@@ -100,17 +100,19 @@ namespace DEKL.CP.UI.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            ViewBag.InternalBankAccounts = new SelectList(Mapper.Map<IEnumerable<InternalBankAccountRelashionshipsViewModel>>(_internalBankAccountRepository.InternalBankAccountRelashionships), 
-                                                          nameof(InternalBankAccountRelashionshipsViewModel.DescriptionAccount),
-                                                          nameof(InternalBankAccountRelashionshipsViewModel.DescriptionBankAgency));
+            var accountToPay = _accountToPayRepository.Find((int)id);
 
-            ViewBag.ProviderBankAccounts = new SelectList(Mapper.Map<IEnumerable<ProviderBankAccountRelashionshipsViewModel>>(_providerBankAccountRepository.ProviderBankAccountActivesRelashionships), 
-                                                          nameof(ProviderBankAccountRelashionshipsViewModel.DescriptionAccount), 
-                                                          nameof(ProviderBankAccountRelashionshipsViewModel.DescriptionBankAgency));
+            ViewBag.InternalBankAccounts = new SelectList(Mapper.Map<IEnumerable<InternalBankAccountRelashionshipsViewModel>>(_internalBankAccountRepository.InternalBankAccountRelashionships), 
+                                                          nameof(InternalBankAccountRelashionshipsViewModel.Id),
+                                                          nameof(InternalBankAccountRelashionshipsViewModel.DescriptionAccount));      
+
+            ViewBag.ProviderBankAccounts = new SelectList(Mapper.Map<IEnumerable<ProviderBankAccountRelashionshipsViewModel>>(_providerBankAccountRepository.ProviderBankAccountRelashionships(accountToPay.ProviderId)), 
+                                                          nameof(ProviderBankAccountRelashionshipsViewModel.Id), 
+                                                          nameof(ProviderBankAccountRelashionshipsViewModel.DescriptionAccount));
 
             return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
         }
-         public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {

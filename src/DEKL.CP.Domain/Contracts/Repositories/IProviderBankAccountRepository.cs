@@ -10,6 +10,6 @@ namespace DEKL.CP.Domain.Contracts.Repositories
 
         IEnumerable<IProviderBankAccountRelashionships> ProviderBankAccountActivesRelashionships { get; }
 
-        IProviderBankAccountRelashionships ProviderBankAccountRelashionships(int id);
+        IEnumerable<IProviderBankAccountRelashionships> ProviderBankAccountRelashionships(int id);
     }
 }

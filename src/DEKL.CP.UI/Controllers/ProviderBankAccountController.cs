@@ -6,6 +6,7 @@ using DEKL.CP.UI.Scripts.Toastr;
 using DEKL.CP.UI.ViewModels.Provider;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -65,7 +66,7 @@ namespace DEKL.CP.UI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var providerBankAccount = _providerBankAccountRepository.ProviderBankAccountRelashionships(id.Value);
+            var providerBankAccount = _providerBankAccountRepository.ProviderBankAccountRelashionships(id.Value).FirstOrDefault();
 
             return View(Mapper.Map<ProviderBankAccountRelashionshipsViewModel>(providerBankAccount));
         }

@@ -42,7 +42,7 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                     }
                 ).AsEnumerable();
 
-        public IProviderBankAccountRelashionships ProviderBankAccountRelashionships(int id)
+        public IEnumerable<IProviderBankAccountRelashionships> ProviderBankAccountRelashionships(int id)
             => (
                     from pba in _ctx.ProviderBankAccounts
                     join ba in _ctx.BankAgencies on pba.BankAgencyId equals ba.Id
@@ -65,6 +65,6 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                         CPF = string.IsNullOrEmpty(lppp.CPF) ? string.Empty : lppp.CPF,
                         CNPJ = string.IsNullOrEmpty(lplp.CNPJ) ? string.Empty : lplp.CNPJ,
                     }
-              ).FirstOrDefault();
+              ).AsEnumerable();
     }
 }
