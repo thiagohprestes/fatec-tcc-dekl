@@ -37,7 +37,7 @@
                 @{
                     if (isConta)
                     {
-                        diasVencidos = (int)DateTime.Now.Subtract(new DateTime(Model.PaymentDate.Value.Year, Model.PaymentDate.Value.Month, Model.PaymentDate.Value.Day)).TotalDays;
+                        diasVencidos = (int)DateTime.Now.Subtract(new DateTime(Model.MaturityDate.Year, Model.MaturityDate.Month, Model.MaturityDate.Day)).TotalDays;
                         Model.Value += ((Model.Value * Model.Penalty) / 100);
                         multaDiaria = (Model.Value * (diasVencidos * Model.DailyInterest) / 100);
 
@@ -46,7 +46,7 @@
                     else
                     {
                         var parcelaSelecionada = parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"]));
-                        diasVencidos = (int)DateTime.Now.Subtract(new DateTime(parcelaSelecionada.PaymentDate.Value.Year, parcelaSelecionada.PaymentDate.Value.Month, parcelaSelecionada.PaymentDate.Value.Day)).TotalDays;
+                        diasVencidos = (int)DateTime.Now.Subtract(new DateTime(parcelaSelecionada.MaturityDate.Year, parcelaSelecionada.MaturityDate.Month, parcelaSelecionada.MaturityDate.Day)).TotalDays;
                         parcelaSelecionada.Value += ((parcelaSelecionada.Value * Model.Penalty) / 100);
                         multaDiaria = (parcelaSelecionada.Value * (diasVencidos * Model.DailyInterest) / 100);
 
