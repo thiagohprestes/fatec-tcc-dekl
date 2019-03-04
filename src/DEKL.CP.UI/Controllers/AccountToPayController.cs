@@ -58,6 +58,21 @@ namespace DEKL.CP.UI.Controllers
                     }
 
                     accountToPay.ApplicationUserId = User.Identity.GetUserId<int>();
+
+                    // criação das parcelas                   
+                    var lista = new List<Installment>();
+                    for (int i = 1; i <= accountToPay.NumberOfInstallments; i++)
+                    {
+                        var obj = new Installment();
+                        obj.MaturityDate =  i.Equals(1) ? accountToPay.MaturityDate : accountToPay.MaturityDate.AddDays(i * 30 - 30);
+                        obj.Value = accountToPay.Value;
+                        obj.AccountToPayId = 1;
+                        obj.Active = true;
+                        lista.Add(obj);
+                    }
+
+                    if (accountToPay.Installments == null) accountToPay.Installments = lista;
+
                     _accountToPayRepository.Add(accountToPay);
 
                     this.AddToastMessage("Conta salva", $"A conta {accountToPay.Description} foi salva com sucesso", ToastType.Success);
