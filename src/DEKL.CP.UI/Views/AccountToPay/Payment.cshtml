@@ -55,7 +55,7 @@ else
                 <tr>
                     <td>@item.Value.ToString("C2")</td>
                     <td>@item.MaturityDate.ToString("dd/MM/yyyy")</td>
-                    <td><a href="/AccountToPay/InstallmentPayment/@item.Id?Parcela=1" class="btn btn-info">Pagar Parcela</a></td>
+                    <td><a href="/AccountToPay/InstallmentPayment/@Model.Id?Parcela=@item.Id" class="btn btn-info">Pagar Parcela</a></td>
                 </tr>
             }
         </tbody>
