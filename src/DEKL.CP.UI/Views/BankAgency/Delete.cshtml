@@ -1,15 +1,6 @@
 ﻿@model DEKL.CP.UI.ViewModels.BankAgency.BankAgencyViewModel
-@{
-    ViewBag.Title = "Excluir Agência";
-}
 
-<style>
-    .group {
-        padding-top: 20px;
-    }
-</style>
-
-<h2>@ViewBag.Title</h2>
+<h2>Excluir Agência</h2>
 <h3>Tem certeza que você quer deletar essa Agência? </h3>
 
 <div class="group">
@@ -17,18 +8,18 @@
     <hr />
     @Html.ValidationMessage("Error", new { @class = "text-danger" })
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(m => m.Number)
+        <dt class="title-detail">
+            @Html.DisplayNameFor(m => m.Number):
         </dt>
-        <dd>
+        <dd class="text-detail">
             @Html.DisplayFor(m => m.Number)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(m => m.ManagerName)
+        <dt class="title-detail">
+            @Html.DisplayNameFor(m => m.ManagerName):
         </dt>
-        <dd>
-            @Html.DisplayFor(m => m.ManagerName)
+        <dd class="text-detail">
+            @(Model.ManagerName ?? "Não informado")
         </dd>
     </dl>
     @using (Html.BeginForm())

@@ -1,32 +1,28 @@
 ﻿@model DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel
 
-@{
-    ViewBag.Title = "Pagar Contas";
-}
-
-<h2>@ViewBag.Title</h2>
+<h2>Pagar Contas</h2>
 <div>
     <h4>Bancos</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(m => m.DocumentNumber)
+        <dt class="title-detail">
+            @Html.DisplayNameFor(m => m.DocumentNumber):
         </dt>
-        <dd>
+        <dd class="text-detail">
             @Html.DisplayFor(m => m.DocumentNumber)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(m => m.Value)
+        <dt class="title-detail">
+            @Html.DisplayNameFor(m => m.Value):
         </dt>
-        <dd>
+        <dd class="text-detail">
             @Model.Value.ToString("C2")
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(m => m.Description)
+        <dt class="title-detail">
+            @Html.DisplayNameFor(m => m.Description):
         </dt>
-        <dd>
+        <dd class="text-detail">
             @(!string.IsNullOrEmpty(Model.Description) ? Model.Description : "Sem descrição")
         </dd>
     </dl>
