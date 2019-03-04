@@ -7,11 +7,11 @@ using DEKL.CP.UI.ViewModels.AccountsToPay;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using DEKL.CP.UI.ViewModels.InternalBankAccount;
 using DEKL.CP.UI.ViewModels.Provider;
-using DEKL.CP.Domain.Entities;
 
 namespace DEKL.CP.UI.Controllers
 {
@@ -153,8 +153,9 @@ namespace DEKL.CP.UI.Controllers
                 }
                 else
                 {
-                    var parcela = (List<Installment>)model.Installments;
-                    var parcelaSelecionada = parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"]));
+                    var parcelaSelecionada = model.Installments
+                                                   .ToList()
+                                                   .Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"]));
                 }
 
                 
@@ -214,7 +215,7 @@ namespace DEKL.CP.UI.Controllers
                 catch
                 {
                     this.AddToastMessage("Erro na Edição", $"Erro ao editar a conta {accountToPayViewModel.Description}, " +
-                        $"favor tentar novamente", ToastType.Error);
+                        "favor tentar novamente", ToastType.Error);
                 }
             }
 
@@ -263,7 +264,7 @@ namespace DEKL.CP.UI.Controllers
                 catch
                 {
                     this.AddToastMessage("Erro na Exclusão", $"Erro ao excluir a Conta {accountToPay?.Description}, " +
-                        $"favor tentar novamente", ToastType.Error);
+                        "favor tentar novamente", ToastType.Error);
                 }
             }
 
