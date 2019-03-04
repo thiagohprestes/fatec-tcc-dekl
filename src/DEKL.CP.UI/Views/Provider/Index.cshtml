@@ -33,7 +33,11 @@
                             <td>
                                 <a href='@(Url.Action("Edit", new { id = provider.Id, typeProvider = provider.TypeProvider }))'><i class="fas fa-pen"></i></a>
                                 <a href='@(Url.Action("Details", new { id = provider.Id, typeProvider = provider.TypeProvider }))'><i class="fas fa-info-circle"></i></a>
-                                <a href='@(Url.Action("Delete", new { id = provider.Id, provider.TypeProvider }))'><i class="fas fa-trash"></i></a>
+
+                                @if (User.IsInRole("Administrador"))
+                                {
+                                    <a href='@(Url.Action("Delete", new {id = provider.Id, provider.TypeProvider}))'><i class="fas fa-trash"></i></a>
+                                }
                             </td>
                         </tr>
                     }

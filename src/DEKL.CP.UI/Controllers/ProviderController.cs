@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace DEKL.CP.UI.Controllers
 {
+    [Authorize]
     public class ProviderController : Controller
     {
         private readonly IProviderRepository _providerRepository;
@@ -113,7 +114,7 @@ namespace DEKL.CP.UI.Controllers
             return View("EditProviderLegalPerson", Mapper.Map<ProviderLegalPersonViewModel>(providerLegalPerson));
         }
 
-        [HttpPost, Authorize(Roles = "Administrador"), ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult EditProviderPhysicalPerson(ProviderPhysicalPersonViewModel providerPhysicalPersonViewModel)
         {
             if (ModelState.IsValid)
@@ -146,7 +147,7 @@ namespace DEKL.CP.UI.Controllers
             return View();
         }
 
-        [HttpPost, Authorize(Roles = "Administrador"), ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult EditProviderLegalPerson(ProviderLegalPersonViewModel providerLegalPersonViewModel)
         {
             if (ModelState.IsValid)
@@ -181,6 +182,7 @@ namespace DEKL.CP.UI.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -193,7 +195,7 @@ namespace DEKL.CP.UI.Controllers
             return provider == null ? HttpNotFound() : (ActionResult)View(Mapper.Map<ProviderPhysicalLegalPersonViewModel>(provider));
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, Authorize(Roles = "Administrador"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id)
         {

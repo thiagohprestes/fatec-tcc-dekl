@@ -1,9 +1,7 @@
 ﻿using DEKL.CP.Infra.CrossCutting.Identity.Maps;
 using DEKL.CP.Infra.CrossCutting.Identity.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
 using System.Data.Entity;
-using System.Security.Claims;
 
 namespace DEKL.CP.Infra.CrossCutting.Identity.Context
 {

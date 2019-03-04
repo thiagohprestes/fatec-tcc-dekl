@@ -68,7 +68,7 @@ namespace DEKL.CP.UI.Controllers
             return View(Mapper.Map<BankViewModel>(bank));
         }
 
-        [HttpPost, Authorize(Roles = "Administrador"), ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Edit(BankViewModel bankViewModel)
         {
             if (ModelState.IsValid)
@@ -96,6 +96,7 @@ namespace DEKL.CP.UI.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,7 +109,7 @@ namespace DEKL.CP.UI.Controllers
             return bank == null ? HttpNotFound() : (ActionResult)View(Mapper.Map<BankViewModel>(bank));
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, Authorize(Roles = "Administrador"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id)
         {

@@ -34,12 +34,13 @@ namespace DEKL.CP.UI.Controllers
             {
                 var role = new ApplicationRole(roleViewModel.Name);
                 var roleresult = await _roleManager.CreateAsync(role);
-                if (!roleresult.Succeeded)
+                if (roleresult.Succeeded)
                 {
-                    AddErrors(roleresult);
-                    return View();
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+
+                AddErrors(roleresult);
+                return View();
             }
 
             return View();
@@ -105,6 +106,7 @@ namespace DEKL.CP.UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var role = await _roleManager.FindByIdAsync(id.Value);
             return role == null ? HttpNotFound() : (ActionResult)View(role);
         }

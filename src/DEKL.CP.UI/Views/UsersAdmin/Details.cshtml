@@ -7,10 +7,16 @@
     <hr />
     <dl class="dl-horizontal">
         <dt class="title-detail">
-            @Html.DisplayNameFor(model => model.UserName):
+            Nome completo:
         </dt>
         <dd class="text-detail">
-            @Html.DisplayFor(model => model.UserName)
+            @Model.FirstName  @Model.LastName
+        </dd>
+        <dt class="title-detail">
+            @Html.DisplayNameFor(m => m.UserName):
+        </dt>
+        <dd class="text-detail">
+            Login
         </dd>
     </dl>
 </div>

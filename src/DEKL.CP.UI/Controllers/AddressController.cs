@@ -5,6 +5,7 @@ using DEKL.CP.UI.ViewModels.Address;
 
 namespace DEKL.CP.UI.Controllers
 {
+    [Authorize]
     public class AddressController : Controller
     {
         private readonly IStateRepository _stateRepository;

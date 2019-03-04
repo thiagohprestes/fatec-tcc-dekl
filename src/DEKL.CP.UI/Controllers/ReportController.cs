@@ -13,6 +13,7 @@ using DEKL.CP.UI.ViewModels.Report;
 
 namespace DEKL.CP.UI.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class ReportController : Controller
     {
         private readonly IReportRepository _reportRepository;

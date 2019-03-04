@@ -59,6 +59,7 @@
         </section>
     </div>
 </div>
+
 @section scripts{
     @Scripts.Render("~/bundles/datatables")
     <script type="text/javascript">
@@ -69,10 +70,10 @@
                 scrollCollapse: true,
                 responsive: true,
                 columnDefs: [
-                    { className: "text-left", "targets": [0, 4] },
-                    { className: "text-center", "targets": 5 },
-                    { width: "15%", "targets": 5 },
-                    { orderable: false, "targets": 5 }
+                    { className: "text-left", targets: [0, 4] },
+                    { className: "text-center", targets: 5 },
+                    { width: "15%", targets: 5 },
+                    { orderable: false, targets: 5 }
                 ],
                 language: {
                     decimal: "",

@@ -14,7 +14,7 @@ using DEKL.CP.UI.Scripts.Toastr;
 
 namespace DEKL.CP.UI.Controllers
 {
-    //[Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador")]
     public class UsersAdminController : BaseController
     {
         private readonly ApplicationUserManager _userManager;
@@ -63,8 +63,6 @@ namespace DEKL.CP.UI.Controllers
                 return View();
             }
 
-            //var user1 = Mapper.Map<ApplicationUser>(model);
-
             var user = new ApplicationUser
             {
                 UserName = model.Email,
@@ -104,7 +102,6 @@ namespace DEKL.CP.UI.Controllers
             this.AddToastMessage("Usuário Adicionado", "Solicite que o usuário verifique o e-mail", ToastType.Success);
             return RedirectToAction("Index");
         }
-
 
         public async Task<ActionResult> Edit(int? id)
         {
@@ -179,8 +176,8 @@ namespace DEKL.CP.UI.Controllers
                 return RedirectToAction("Index");
             }
 
-            this.AddToastMessage("Erro na Edição do Usuário", 
-                "Ocorreu um erro na edição do usuário, favor tentar novamente", ToastType.Success);
+            this.AddToastMessage("Erro na Edição do Usuário", "Ocorreu um erro na edição do usuário, favor tentar novamente", 
+                                 ToastType.Success);
             return View();
         }
 
@@ -229,8 +226,8 @@ namespace DEKL.CP.UI.Controllers
                 return RedirectToAction("Index");
             }
 
-            this.AddToastMessage("Erro na Exclusão do Usuário",
-                "Ocorreu um erro na exclusão do usuário, favor tentar novamente", ToastType.Success);
+            this.AddToastMessage("Erro na Exclusão do Usuário", "Ocorreu um erro na exclusão do usuário, favor tentar novamente", 
+                                 ToastType.Success);
             return View();
         }
 

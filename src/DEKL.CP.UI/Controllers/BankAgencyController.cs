@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace DEKL.CP.UI.Controllers
 {
+    [Authorize]
     public class BankAgencyController : Controller
     {
         private readonly IBankAgencyRepository _bankAgencyRepository;
@@ -75,7 +76,7 @@ namespace DEKL.CP.UI.Controllers
             return View(Mapper.Map<BankAgencyViewModel>(bankAgency));
         }
 
-        [HttpPost, Authorize(Roles = "Administrador"), ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Edit(BankAgencyViewModel bankAgencyViewModel)
         {
             if (ModelState.IsValid)
@@ -108,6 +109,7 @@ namespace DEKL.CP.UI.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -120,7 +122,7 @@ namespace DEKL.CP.UI.Controllers
             return bankAgency == null ? HttpNotFound() : (ActionResult)View(Mapper.Map<BankAgencyViewModel>(bankAgency));
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, Authorize(Roles = "Administrador"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id)
         {
