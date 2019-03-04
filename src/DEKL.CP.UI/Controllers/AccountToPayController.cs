@@ -11,6 +11,7 @@ using System.Net;
 using System.Web.Mvc;
 using DEKL.CP.UI.ViewModels.InternalBankAccount;
 using DEKL.CP.UI.ViewModels.Provider;
+using DEKL.CP.Domain.Entities;
 
 namespace DEKL.CP.UI.Controllers
 {
@@ -112,6 +113,44 @@ namespace DEKL.CP.UI.Controllers
 
             return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
         }
+
+        public ActionResult PaymentBoleto(int? PaymentInterna, int? PaymentBancario, int? PaymentType, int id, int valorParcela)
+        {
+            if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (PaymentInterna == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (PaymentType == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            bool isConta = valorParcela.Equals(0);
+
+            var model = _accountToPayRepository.FindActive(id);
+
+            if (DateTime.Now > model.PaymentDate)
+            {
+                if (isConta)
+                {
+                    int diasVencidos = (int)DateTime.Now.Subtract(new DateTime(model.PaymentDate.Value.Year, model.PaymentDate.Value.Month, model.PaymentDate.Value.Day)).TotalDays;
+                    model.Value += ((model.Value * model.Penalty) / 100);
+                    decimal? multaDiaria = (model.Value * (diasVencidos * model.DailyInterest) / 100);
+
+                    model.Value = (model.Value + multaDiaria).Value;
+                }
+                else
+                {
+                    var parcela = (List<Installment>)model.Installments;
+                    var parcelaSelecionada = parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"]));
+                    int diasVencidos = (int)DateTime.Now.Subtract(new DateTime(parcelaSelecionada.PaymentDate.Value.Year, parcelaSelecionada.PaymentDate.Value.Month, parcelaSelecionada.PaymentDate.Value.Day)).TotalDays;
+                    parcelaSelecionada.Value += ((parcelaSelecionada.Value * model.Penalty) / 100);
+                    decimal? multaDiaria = (parcelaSelecionada.Value * (diasVencidos * model.DailyInterest) / 100);
+                    
+                    model.Value = (parcelaSelecionada.Value + multaDiaria).Value;
+                }
+            }
+
+            _accountToPayRepository.Update(model);
+
+            return Redirect("/AccountToPay/index?salvo=1");
+        }
+
+        public ActionResult Edit(int? id)
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -130,6 +169,7 @@ namespace DEKL.CP.UI.Controllers
 
             return View(Mapper.Map<AccountToPayViewModel>(accountToPay));
         }
+
 
         [HttpPost, Authorize(Roles = "Administrador"), ValidateAntiForgeryToken]
         public ActionResult Edit(AccountToPayViewModel accountToPayViewModel)
