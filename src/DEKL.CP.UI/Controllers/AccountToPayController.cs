@@ -7,12 +7,12 @@ using DEKL.CP.UI.ViewModels.AccountsToPay;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using DEKL.CP.UI.ViewModels.InternalBankAccount;
 using DEKL.CP.UI.ViewModels.Provider;
 using DEKL.CP.Domain.Entities;
-using DEKL.CP.Domain.Enums;
 
 namespace DEKL.CP.UI.Controllers
 {
@@ -102,13 +102,15 @@ namespace DEKL.CP.UI.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
+            var accountToPay = _accountToPayRepository.Find((int)id);
+
             ViewBag.InternalBankAccounts = new SelectList(Mapper.Map<IEnumerable<InternalBankAccountRelashionshipsViewModel>>(_internalBankAccountRepository.InternalBankAccountRelashionships), 
                                                           nameof(InternalBankAccountRelashionshipsViewModel.Id),
-                                                          nameof(InternalBankAccountRelashionshipsViewModel.DescriptionBankAgency));
+                                                          nameof(InternalBankAccountRelashionshipsViewModel.DescriptionAccount));      
 
-            ViewBag.ProviderBankAccounts = new SelectList(Mapper.Map<IEnumerable<ProviderBankAccountRelashionshipsViewModel>>(_providerBankAccountRepository.ProviderBankAccountActivesRelashionships), 
+            ViewBag.ProviderBankAccounts = new SelectList(Mapper.Map<IEnumerable<ProviderBankAccountRelashionshipsViewModel>>(_providerBankAccountRepository.ProviderBankAccountRelashionships(accountToPay.ProviderId)), 
                                                           nameof(ProviderBankAccountRelashionshipsViewModel.Id), 
-                                                          nameof(ProviderBankAccountRelashionshipsViewModel.DescriptionBankAgency));
+                                                          nameof(ProviderBankAccountRelashionshipsViewModel.DescriptionAccount));
 
             return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
         }
@@ -116,6 +118,8 @@ namespace DEKL.CP.UI.Controllers
         public ActionResult PaymentBoleto(int? PaymentInterna, int? PaymentBancario, int? TypePayment, int id, int valorParcela)
         {
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (PaymentInterna == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (PaymentType == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             bool isConta = valorParcela.Equals(0);
 
             var model = _accountToPayRepository.FindActive(id);
@@ -124,7 +128,7 @@ namespace DEKL.CP.UI.Controllers
             {
                 if (isConta)
                 {
-                    int diasVencidos = (int)DateTime.Now.Subtract(new DateTime(model.PaymentDate.Value.Year, model.PaymentDate.Value.Month, model.PaymentDate.Value.Day)).TotalDays;
+                    var diasVencidos = (int)DateTime.Now.Subtract(new DateTime(model.PaymentDate.Value.Year, model.PaymentDate.Value.Month, model.PaymentDate.Value.Day)).TotalDays;
                     model.Value += ((model.Value * model.Penalty) / 100);
                     decimal? multaDiaria = (model.Value * (diasVencidos * model.DailyInterest) / 100);
 
@@ -134,7 +138,7 @@ namespace DEKL.CP.UI.Controllers
                 {
                     var parcela = (List<Installment>)model.Installments;
                     var parcelaSelecionada = parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"]));
-                    int diasVencidos = (int)DateTime.Now.Subtract(new DateTime(parcelaSelecionada.PaymentDate.Value.Year, parcelaSelecionada.PaymentDate.Value.Month, parcelaSelecionada.PaymentDate.Value.Day)).TotalDays;
+                    var diasVencidos = (int)DateTime.Now.Subtract(new DateTime(parcelaSelecionada.PaymentDate.Value.Year, parcelaSelecionada.PaymentDate.Value.Month, parcelaSelecionada.PaymentDate.Value.Day)).TotalDays;
                     parcelaSelecionada.Value += ((parcelaSelecionada.Value * model.Penalty) / 100);
                     decimal? multaDiaria = (parcelaSelecionada.Value * (diasVencidos * model.DailyInterest) / 100);
 
@@ -152,8 +156,9 @@ namespace DEKL.CP.UI.Controllers
                 }
                 else
                 {
-                    var parcela = (List<Installment>)model.Installments;
-                    var parcelaSelecionada = parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"]));
+                    var parcelaSelecionada = model.Installments
+                                                   .ToList()
+                                                   .Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"]));
                 }
 
                 
@@ -213,7 +218,7 @@ namespace DEKL.CP.UI.Controllers
                 catch
                 {
                     this.AddToastMessage("Erro na Edição", $"Erro ao editar a conta {accountToPayViewModel.Description}, " +
-                        $"favor tentar novamente", ToastType.Error);
+                        "favor tentar novamente", ToastType.Error);
                 }
             }
 
@@ -262,7 +267,7 @@ namespace DEKL.CP.UI.Controllers
                 catch
                 {
                     this.AddToastMessage("Erro na Exclusão", $"Erro ao excluir a Conta {accountToPay?.Description}, " +
-                        $"favor tentar novamente", ToastType.Error);
+                        "favor tentar novamente", ToastType.Error);
                 }
             }
 
