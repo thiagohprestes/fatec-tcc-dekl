@@ -9,7 +9,7 @@
             @Html.DisplayNameFor(m => m.Name):
         </dt>
         <dd class="text-detail">
-            @Html.DisplayFor(m => m.Name)
+            @(Model.Name ?? "Não Informado")
         </dd>
 
         <dt class="title-detail">
