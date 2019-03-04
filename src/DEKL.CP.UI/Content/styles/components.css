@@ -1,0 +1,16 @@
+﻿.title-detail {
+  margin-left: 20px;
+}
+
+.title-detail:first-child {
+  margin: 0;
+}
+
+.text-detail {
+    margin-left: 5px;
+}
+
+
+.dl-horizontal {
+   display: flex;
+}

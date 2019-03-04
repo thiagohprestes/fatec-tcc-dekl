@@ -39,7 +39,8 @@ namespace DEKL.CP.UI
                         "~/Content/site.css",
                         "~/Content/fontawesome-all.css",
                         "~/Content/toastr.min.css",
-                        "~/Content/sidebar-navbar.css"));
+                        "~/Content/sidebar-navbar.css",
+                        "~/Content/styles/components.css"));
 
             bundles.Add(new StyleBundle("~/Content/datatables").Include(
                         "~/Content/datatables/datatables.bootstrap4.css"));

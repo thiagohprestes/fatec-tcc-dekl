@@ -17,18 +17,18 @@
     <hr />
     @Html.ValidationMessage("Error", new { @class = "text-danger" })
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(m => m.Number)
+        <dt class="title-detail">
+            @Html.DisplayNameFor(m => m.Number):
         </dt>
-        <dd>
+        <dd class="text-detail">
             @Html.DisplayFor(m => m.Number)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(m => m.ManagerName)
+        <dt class="title-detail">
+            @Html.DisplayNameFor(m => m.ManagerName):
         </dt>
-        <dd>
-            @Html.DisplayFor(m => m.ManagerName)
+        <dd class="text-detail">
+            @(Model.ManagerName ?? "Não informado")
         </dd>
     </dl>
     @using (Html.BeginForm())

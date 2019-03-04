@@ -40,12 +40,22 @@ label.is-invalid {
 
 .full-content {
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .body-content {
     overflow: auto;
-    padding: 40px 20px;
-    max-height: calc(100vh - 200px);
+    padding: 40px 20px 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.table-height {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .table-hover tbody tr:hover {
