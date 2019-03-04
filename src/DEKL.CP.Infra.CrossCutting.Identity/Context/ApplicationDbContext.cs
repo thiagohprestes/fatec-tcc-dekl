@@ -12,6 +12,7 @@ namespace DEKL.CP.Infra.CrossCutting.Identity.Context
         { }
 
         public DbSet<Client> Clients { get; set; }
+        public DbSet<ApplicationUserRole> ApplicationUserRole { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
