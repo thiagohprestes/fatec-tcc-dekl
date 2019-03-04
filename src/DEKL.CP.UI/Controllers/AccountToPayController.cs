@@ -138,10 +138,26 @@ namespace DEKL.CP.UI.Controllers
                     int diasVencidos = (int)DateTime.Now.Subtract(new DateTime(parcelaSelecionada.PaymentDate.Value.Year, parcelaSelecionada.PaymentDate.Value.Month, parcelaSelecionada.PaymentDate.Value.Day)).TotalDays;
                     parcelaSelecionada.Value += ((parcelaSelecionada.Value * model.Penalty) / 100);
                     decimal? multaDiaria = (parcelaSelecionada.Value * (diasVencidos * model.DailyInterest) / 100);
-                    
+
                     model.Value = (parcelaSelecionada.Value + multaDiaria).Value;
                 }
             }
+            else
+            {
+                if (isConta)
+                {
+                    model.Value -= model.Value;
+                    
+                }
+                else
+                {
+                    var parcela = (List<Installment>)model.Installments;
+                    var parcelaSelecionada = parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"]));
+                }
+
+                
+            }
+
 
             _accountToPayRepository.Update(model);
 
