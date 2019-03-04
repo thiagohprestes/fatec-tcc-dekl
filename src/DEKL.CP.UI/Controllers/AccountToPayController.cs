@@ -12,8 +12,6 @@ using System.Net;
 using System.Web.Mvc;
 using DEKL.CP.UI.ViewModels.InternalBankAccount;
 using DEKL.CP.UI.ViewModels.Provider;
-using DEKL.CP.Domain.Entities;
-using DEKL.CP.Domain.Enums;
 
 namespace DEKL.CP.UI.Controllers
 {
@@ -121,11 +119,11 @@ namespace DEKL.CP.UI.Controllers
         public ActionResult PaymentBoleto(int? PaymentInterna, int? PaymentBancario, int? PaymentType, int id, int valorParcela)
         {
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            bool isConta = valorParcela.Equals(0);
-
+            var isConta = valorParcela.Equals(0);
             var model = _accountToPayRepository.FindActive(id);
 
-            if (!isConta && DateTime.Now > model.Installments.ToList().Find(obj => obj.Id == valorParcela).MaturityDate || DateTime.Now > model.MaturityDate)
+            if (!isConta && DateTime.Now > model.Installments.ToList().Find(obj => obj.Id == valorParcela).MaturityDate 
+                || DateTime.Now > model.MaturityDate)
             {
                 if (isConta)
                 {
@@ -138,16 +136,14 @@ namespace DEKL.CP.UI.Controllers
                     // pagamento de conta sem estar vencida
                     model.PaidValue = model.PaidValue;
                     model.PaymentDate = DateTime.Now;
-                    model.PaymentType = (PaymentType == 0 ? DEKL.CP.Domain.Enums.PaymentType.Money : (PaymentType == 1 ?
-                                            DEKL.CP.Domain.Enums.PaymentType.BankTransfer : DEKL.CP.Domain.Enums.PaymentType.BankDeposit));
+                    model.PaymentType = (PaymentType == 0 ? Domain.Enums.PaymentType.Money : (PaymentType == 1 ?
+                                            Domain.Enums.PaymentType.BankTransfer : Domain.Enums.PaymentType.BankDeposit));
 
                     //pagamento parcelas
                     var listaParcelas = new List<Installment>();
                     foreach (var item in model.Installments)
                     {
-                        var modelInstallment = new Installment();
-
-                        modelInstallment = item;
+                        var modelInstallment = item;
                         modelInstallment.PaymentDate = DateTime.Now;
                         modelInstallment.PaidValue = item.Value;
 
@@ -167,12 +163,10 @@ namespace DEKL.CP.UI.Controllers
 
                     //pagamento parcelas
                     var listaParcelas = new List<Installment>();
-                    int contador = 0;
+                    var contador = 0;
                     foreach (var item in model.Installments)
                     {
-                        var modelInstallment = new Installment();
-
-                        modelInstallment = item;
+                        var modelInstallment = item;
 
                         if (item.Id == valorParcela)
                         {
@@ -193,8 +187,8 @@ namespace DEKL.CP.UI.Controllers
                         // pagamento de conta sem estar vencida
                         model.PaidValue = listaParcelas.Sum(obj => obj.PaidValue);
                         model.PaymentDate = DateTime.Now;
-                        model.PaymentType = (PaymentType == 0 ? DEKL.CP.Domain.Enums.PaymentType.Money : (PaymentType == 1 ?
-                                                DEKL.CP.Domain.Enums.PaymentType.BankTransfer : DEKL.CP.Domain.Enums.PaymentType.BankDeposit));
+                        model.PaymentType = (PaymentType == 0 ? Domain.Enums.PaymentType.Money : (PaymentType == 1 ?
+                                                Domain.Enums.PaymentType.BankTransfer : Domain.Enums.PaymentType.BankDeposit));
                     }
                 }
             }
@@ -206,16 +200,14 @@ namespace DEKL.CP.UI.Controllers
                     // pagamento de conta sem estar vencida
                     model.PaidValue = model.Value;
                     model.PaymentDate = DateTime.Now;
-                    model.PaymentType = (PaymentType == 0 ? DEKL.CP.Domain.Enums.PaymentType.Money : (PaymentType ==  1 ? 
-                                            DEKL.CP.Domain.Enums.PaymentType.BankTransfer : DEKL.CP.Domain.Enums.PaymentType.BankDeposit));
+                    model.PaymentType = (PaymentType == 0 ? Domain.Enums.PaymentType.Money : (PaymentType ==  1 ? 
+                                            Domain.Enums.PaymentType.BankTransfer : DEKL.CP.Domain.Enums.PaymentType.BankDeposit));
 
                     //pagamento parcelas
                     var listaParcelas = new List<Installment>();
                     foreach (var item in model.Installments)
                     {
-                        var modelInstallment = new Installment();
-
-                        modelInstallment = item;
+                        var modelInstallment = item;
                         modelInstallment.PaymentDate = DateTime.Now;
                         modelInstallment.PaidValue = item.Value;
 
@@ -235,9 +227,7 @@ namespace DEKL.CP.UI.Controllers
                     var listaParcelas = new List<Installment>();
                     foreach (var item in model.Installments)
                     {
-                        var modelInstallment = new Installment();
-
-                        modelInstallment = item;
+                        var modelInstallment = item;
 
                         if (item.Id == valorParcela)
                         {
