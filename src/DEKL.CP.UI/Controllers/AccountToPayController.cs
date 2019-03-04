@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using DEKL.CP.UI.ViewModels.InternalBankAccount;
 using DEKL.CP.UI.ViewModels.Provider;
 using DEKL.CP.Domain.Entities;
+using DEKL.CP.Domain.Enums;
 
 namespace DEKL.CP.UI.Controllers
 {
@@ -112,11 +113,9 @@ namespace DEKL.CP.UI.Controllers
             return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
         }
 
-        public ActionResult PaymentBoleto(int? PaymentInterna, int? PaymentBancario, int? PaymentType, int id, int valorParcela)
+        public ActionResult PaymentBoleto(int? PaymentInterna, int? PaymentBancario, int? TypePayment, int id, int valorParcela)
         {
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            if (PaymentInterna == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            if (PaymentType == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             bool isConta = valorParcela.Equals(0);
 
             var model = _accountToPayRepository.FindActive(id);
@@ -146,8 +145,10 @@ namespace DEKL.CP.UI.Controllers
             {
                 if (isConta)
                 {
-                    model.Value -= model.Value;
-                    
+                    model.PaidValue = model.Value;
+                    model.PaymentDate = DateTime.Now;
+                    model.PaymentType = (TypePayment == 0 ? PaymentType.Money : (TypePayment ==  1 ? PaymentType.BankTransfer : PaymentType.BankDeposit));
+
                 }
                 else
                 {
