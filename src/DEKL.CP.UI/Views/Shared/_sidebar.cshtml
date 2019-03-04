@@ -52,21 +52,24 @@
             @Html.ActionLink("Fornecedor", "Index", "Provider")
         </li>
 
-        <li>
-            <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relatórios</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu3">
-                <li>
-                    @Html.ActionLink("Contas à Pagar", "AccountToPayReport", "Report")
-                </li>
+        @if (User.IsInRole("Administrador"))
+        {
+            <li>
+                <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Relatórios</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu3">
+                    <li>
+                        @Html.ActionLink("Contas à Pagar", "AccountToPayReport", "Report")
+                    </li>
 
-                <li>
-                    @Html.ActionLink("Fornecedor", "ProviderReport", "Report")
-                </li>
+                    <li>
+                        @Html.ActionLink("Fornecedor", "ProviderReport", "Report")
+                    </li>
 
-                <li>
-                    @Html.ActionLink("Contas Bancárias", "BankAccountReport", "Report")
-                </li>
-            </ul>
-        </li>
+                    <li>
+                        @Html.ActionLink("Contas Bancárias", "BankAccountReport", "Report")
+                    </li>
+                </ul>
+            </li>
+        }
     </ul>
 </nav>
