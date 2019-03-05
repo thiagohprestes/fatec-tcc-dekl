@@ -20,10 +20,12 @@ namespace DEKL.CP.UI.Controllers
     {
         private readonly IProviderRepository _providerRepository;
         private readonly IAccountToPayRepository _accountToPayRepository;
+        private readonly IAccountToPayRepository _accountToPayRepositoryAdd;
         private readonly IInternalBankAccountRepository _internalBankAccountRepository;
         private readonly IProviderBankAccountRepository _providerBankAccountRepository;
 
-        public AccountToPayController(IAccountToPayRepository accountToPayRepository, 
+        public AccountToPayController(IAccountToPayRepository accountToPayRepository,
+                                        IAccountToPayRepository accountToPayRepositoryAdd,
                                       IProviderRepository providerRepository, 
                                       IInternalBankAccountRepository internalBankAccountRepository, 
                                       IProviderBankAccountRepository providerBankAccountRepository)
@@ -32,6 +34,7 @@ namespace DEKL.CP.UI.Controllers
             _internalBankAccountRepository = internalBankAccountRepository;
             _providerBankAccountRepository = providerBankAccountRepository;
             _accountToPayRepository = accountToPayRepository;
+            _accountToPayRepositoryAdd = accountToPayRepositoryAdd;
 
         }
 
@@ -232,9 +235,6 @@ namespace DEKL.CP.UI.Controllers
 
                     model.Installments = new List<Installment>();
                     model.Installments = listaParcelas;
-                    
-                    // debitar 
-                    //var conta = Mapper.Map<InternalBankAccountRelashionshipsViewModel>(_accountToPayRepository.Find(PaymentInterna.Value));
                 }
                 else
                 {
@@ -261,6 +261,46 @@ namespace DEKL.CP.UI.Controllers
 
             _accountToPayRepository.Update(model);
 
+            if (isConta && model.MonthlyAccount)
+            {
+                var objModel = new AccountToPay();
+                objModel.MaturityDate = model.MaturityDate.AddDays(30);
+                objModel.Active = model.Active;
+                objModel.AddedDate = model.AddedDate;
+                objModel.ApplicationUser = model.ApplicationUser;
+                objModel.ApplicationUserId = model.ApplicationUserId;
+                objModel.DailyInterest = model.DailyInterest;
+                objModel.Description = model.Description;
+                objModel.DocumentNumber = model.DocumentNumber;
+                objModel.Module = model.Module;
+                objModel.ModuleId = model.ModuleId;
+                objModel.MonthlyAccount = model.MonthlyAccount;
+                objModel.NumberOfInstallments = model.NumberOfInstallments;
+                objModel.PaymentSimulators = model.PaymentSimulators;
+                objModel.Penalty = model.Penalty;
+                objModel.Priority = model.Priority;
+                objModel.Provider = model.Provider;
+                objModel.ProviderId = model.ProviderId;
+                objModel.Value = model.Value;
+
+                // criação das parcelas                   
+                var lista = new List<Installment>();
+                for (int i = 1; i <= model.NumberOfInstallments; i++)
+                {
+                    var obj = new Installment();
+                    obj.MaturityDate = i.Equals(1) ? model.MaturityDate : model.MaturityDate.AddDays(i * 30 - 30);
+                    obj.Value = model.Value;
+                    obj.AccountToPayId = 1;
+                    obj.Active = true;
+                    lista.Add(obj);
+                }
+
+                objModel.Installments = new List<Installment>();
+                objModel.Installments = lista;
+
+                _accountToPayRepositoryAdd.Add(objModel);
+            }
+            
             this.AddToastMessage("Conta Paga", $"A Conta {model.Description} foi paga com sucesso", ToastType.Success);
 
             return Redirect("/AccountToPay");
