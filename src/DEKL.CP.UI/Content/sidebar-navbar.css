@@ -69,18 +69,25 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #17a2b8;
+    background: rgba(23, 162, 184, 0.88);
     color: #fff;
     transition: all 0.3s;
+    position: absolute;
+    height: 100%;
+    z-index: 1;
 }
 
 #sidebar.active {
     margin-left: -250px;
+    transition: all 0.3s;
 }
 
 #sidebar .sidebar-header {
     padding: 20px;
     background: #17a2b8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #sidebar ul.components {
@@ -162,7 +169,6 @@ a.article:hover {
 
 #content {
     width: 100%;
-    padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
 }
