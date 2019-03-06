@@ -191,7 +191,7 @@ namespace DEKL.CP.UI.Controllers
                         {
                             modelInstallment.PaymentDate = DateTime.Now;
                             modelInstallment.PaidValue = (parcelaSelecionada.Value + diaria  +  multaDiaria).Value;
-                            modelInstallment.AccountToPayId = 1;
+                            modelInstallment.AccountToPayId = item.AccountToPayId;
                         }
 
                         if (item.PaidValue.HasValue) contador++;
@@ -248,7 +248,7 @@ namespace DEKL.CP.UI.Controllers
                         {
                             modelInstallment.PaymentDate = DateTime.Now;
                             modelInstallment.PaidValue = item.Value;
-                            modelInstallment.AccountToPayId = 1;
+                            modelInstallment.AccountToPayId = item.AccountToPayId;
                         }
 
                         listaParcelas.Add(modelInstallment);
