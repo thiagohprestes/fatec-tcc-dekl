@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using DEKL.CP.Domain.Contracts.Entities;
 using DEKL.CP.Domain.Enums;
 
@@ -25,7 +26,7 @@ namespace DEKL.CP.Domain.Entities
         public virtual ApplicationUser ApplicationUser { get; set; }
         public int ModuleId { get; set; } = (int)Enums.Module.AccountToPay;
         public virtual Module Module { get; set; }
-        public virtual ICollection<Installment> Installments { get; set; }
+        public virtual ICollection<Installment> Installments { get; set; } = new Collection<Installment>();
         public virtual ICollection<PaymentSimulator> PaymentSimulators { get; set; }
     }
 }

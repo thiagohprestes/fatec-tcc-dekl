@@ -1,11 +1,10 @@
-﻿@model  DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel
+﻿@model DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel
 @using DEKL.CP.UI.Extensions
 @using DEKL.CP.Domain.Entities
 
 @{
-    int diasVencidos = 0; decimal multaDiaria = 0;
-    bool isConta = Request.QueryString["Parcela"].Equals("0");
-    var parcela = (List<Installment>)Model.Installments;
+    var installment_id = (int?)ViewBag.Installment_Id ?? 0;
+    var hasInstallments = Model.Installments.Any();
 }
 <div class="container-content">
 
