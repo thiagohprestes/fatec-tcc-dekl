@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using DEKL.CP.Domain.Enums;
 using DEKL.CP.UI.ViewModels.InternalBankAccount;
 using DEKL.CP.UI.ViewModels.Provider;
 
@@ -26,8 +27,8 @@ namespace DEKL.CP.UI.Controllers
 
         public AccountToPayController(IAccountToPayRepository accountToPayRepository,
                                         IAccountToPayRepository accountToPayRepositoryAdd,
-                                      IProviderRepository providerRepository, 
-                                      IInternalBankAccountRepository internalBankAccountRepository, 
+                                      IProviderRepository providerRepository,
+                                      IInternalBankAccountRepository internalBankAccountRepository,
                                       IProviderBankAccountRepository providerBankAccountRepository)
         {
             _providerRepository = providerRepository;
@@ -38,7 +39,7 @@ namespace DEKL.CP.UI.Controllers
 
         }
 
-        public ActionResult Index() 
+        public ActionResult Index()
             => View(Mapper.Map<IEnumerable<AccountToPayRelashionships>>(_accountToPayRepository.AccountToPayActivesRelashionships));
 
         public ActionResult Create()
@@ -54,45 +55,45 @@ namespace DEKL.CP.UI.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {
-                    if (accountToPay.Installments?.Count > 0)
+                {   // se é conta mensal não possuí parcelas
+                    if (accountToPay.MonthlyAccount)
                     {
-                        var valueInstallment = accountToPay.Value / accountToPay.Installments.Count;
+                        accountToPay.NumberOfInstallments = 0;
+                    }
+
+                    var valueInstallment = accountToPay.NumberOfInstallments == 0 ?
+                        accountToPay.Value : accountToPay.Value / accountToPay.NumberOfInstallments;
+
+                    // criação das parcelas                   
+                    for (var i = 0; i < accountToPay.NumberOfInstallments; i++)
+                    {
+                        var installment = new Installment
+                        {
+                            MaturityDate = accountToPay.MaturityDate.AddMonths(i),
+                            Value = valueInstallment,
+                        };
+
+                        accountToPay.Installments.Add(installment);
                     }
 
                     accountToPay.ApplicationUserId = User.Identity.GetUserId<int>();
 
-                    // criação das parcelas                   
-                    var lista = new List<Installment>();
-                    for (int i = 1; i <= accountToPay.NumberOfInstallments; i++)
-                    {
-                        var obj = new Installment();
-                        obj.MaturityDate =  i.Equals(1) ? accountToPay.MaturityDate : accountToPay.MaturityDate.AddDays(i * 30 - 30);
-                        obj.Value = accountToPay.Value;
-                        obj.AccountToPayId = 1;
-                        obj.Active = true;
-                        lista.Add(obj);
-                    }
-
-                    if (accountToPay.Installments == null) accountToPay.Installments = lista;
-
                     _accountToPayRepository.Add(accountToPay);
 
-                    this.AddToastMessage("Conta salva", $"A conta {accountToPay.Description} foi salva com sucesso", ToastType.Success);
+                    this.AddToastMessage("Conta salva", $"A conta {accountToPay.Description} foi salva com sucesso", 
+                                         ToastType.Success);
+
                     return RedirectToAction("Index");
                 }
                 catch
                 {
-                    ViewBag.Providers = new SelectList(_providerRepository.AllActivesProviderPhysicalLegalPerson, nameof(Provider.Id),
-                        nameof(IProviderPhysicalLegalPerson.NameCorporateName));
-
                     this.AddToastMessage("Erro no salvamento", $"Erro ao salvar a conta {accountToPay.Description}, " +
-                        "favor tentar novamente", ToastType.Error);
+                                         "favor tentar novamente", ToastType.Error);
 
                 }
             }
 
-            return View();
+            return Create();
         }
 
         public ActionResult Details(int? id)
@@ -112,198 +113,310 @@ namespace DEKL.CP.UI.Controllers
             return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
         }
 
-        public ActionResult InstallmentPayment(int? id)
+        public ActionResult InstallmentPayment(int? id, int installment_Id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             var accountToPay = _accountToPayRepository.Find((int)id);
 
-            ViewBag.InternalBankAccounts = new SelectList(Mapper.Map<IEnumerable<InternalBankAccountRelashionshipsViewModel>>(_internalBankAccountRepository.InternalBankAccountRelashionships), 
-                                                          nameof(InternalBankAccountRelashionshipsViewModel.Id),
-                                                          nameof(InternalBankAccountRelashionshipsViewModel.DescriptionAccount));      
+            ViewBag.Installment_Id = installment_Id;
 
-            ViewBag.ProviderBankAccounts = new SelectList(Mapper.Map<IEnumerable<ProviderBankAccountRelashionshipsViewModel>>(_providerBankAccountRepository.ProviderBankAccountRelashionships(accountToPay.ProviderId)), 
-                                                          nameof(ProviderBankAccountRelashionshipsViewModel.Id), 
+            ViewBag.InternalBankAccounts = new SelectList(Mapper.Map<IEnumerable<InternalBankAccountRelashionshipsViewModel>>(_internalBankAccountRepository.InternalBankAccountRelashionships),
+                                                          nameof(InternalBankAccountRelashionshipsViewModel.Id),
+                                                          nameof(InternalBankAccountRelashionshipsViewModel.DescriptionAccount));
+
+            ViewBag.ProviderBankAccounts = new SelectList(Mapper.Map<IEnumerable<ProviderBankAccountRelashionshipsViewModel>>(_providerBankAccountRepository.ProviderBankAccountRelashionships(accountToPay.ProviderId)),
+                                                          nameof(ProviderBankAccountRelashionshipsViewModel.Id),
                                                           nameof(ProviderBankAccountRelashionshipsViewModel.DescriptionAccount));
 
             return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
         }
 
-        public ActionResult PaymentBoleto(int? PaymentInterna, int? PaymentBancario, int? PaymentType, int id, int valorParcela)
+        public ActionResult PayAccount(int id, int installment_id, PaymentType paymentType, int? internalBankAccount_id,
+            int? providerBankAccount_id)
         {
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var isConta = valorParcela.Equals(0);
-            var model = _accountToPayRepository.FindActive(id);
+            decimal amountDue;
+            var accountToPay = _accountToPayRepository.FindActive(id);
+            var hasInstallments = accountToPay.Installments.Any();
 
-            if (!isConta && DateTime.Now > model.Installments.ToList().Find(obj => obj.Id == valorParcela).MaturityDate 
-                || DateTime.Now > model.MaturityDate)
+            //não possuí parcelas
+            if (!hasInstallments)
             {
-                if (isConta)
+                //conta em atraso
+                if (accountToPay.MaturityDate < DateTime.Now && accountToPay.PaidValue < accountToPay.Value)
                 {
-                    var diasVencidos = (int)DateTime.Now.Subtract(new DateTime(model.MaturityDate.Year, 
-                                                                               model.MaturityDate.Month, 
-                                                                               model.MaturityDate.Day)).TotalDays;
+                    var daysPastDue = (int)DateTime.Now.Subtract(new DateTime(accountToPay.MaturityDate.Year,
+                        accountToPay.MaturityDate.Month,
+                        accountToPay.MaturityDate.Day)).TotalDays;
 
-                    var diaria = model.Value + ((model.Value * model.Penalty) / 100);
-                    decimal? multaDiaria = (diaria * (diasVencidos * model.DailyInterest) / 100);
+                    amountDue = accountToPay.Value - accountToPay.Installments
+                                                                 .Where(i => i.PaidValue >= i.Value)
+                                                                 .Sum(i => i.Value);
 
-                    model.PaidValue = (diaria + multaDiaria).Value;
+                    amountDue += amountDue * accountToPay.Penalty / 100;
+                    amountDue += amountDue * daysPastDue * accountToPay.DailyInterest / 100;
+                }
+                //conta em dia
+                else
+                {
+                    accountToPay.PaidValue = accountToPay.Value;
+                }
 
-                    // pagamento de conta sem estar vencida
-                    model.PaidValue = model.PaidValue;
-                    model.PaymentDate = DateTime.Now;
-                    model.PaymentType = (PaymentType == 0 ? Domain.Enums.PaymentType.Money : (PaymentType == 1 ?
-                                            Domain.Enums.PaymentType.BankTransfer : Domain.Enums.PaymentType.BankDeposit));
-
-                    //pagamento parcelas
-                    var listaParcelas = new List<Installment>();
-                    foreach (var item in model.Installments)
+                if (accountToPay.MonthlyAccount)
+                {
+                    var newAccountToPay = new AccountToPay
                     {
-                        var modelInstallment = item;
-                        modelInstallment.PaymentDate = DateTime.Now;
-                        modelInstallment.PaidValue = item.Value;
+                        MaturityDate = accountToPay.MaturityDate.AddMonths(1),
+                        ApplicationUserId = User.Identity.GetUserId<int>(),
+                        DailyInterest = accountToPay.DailyInterest,
+                        Description = accountToPay.Description,
+                        DocumentNumber = accountToPay.DocumentNumber,
+                        MonthlyAccount = accountToPay.MonthlyAccount,
+                        NumberOfInstallments = accountToPay.NumberOfInstallments,
+                        PaymentSimulators = accountToPay.PaymentSimulators,
+                        Penalty = accountToPay.Penalty,
+                        Priority = accountToPay.Priority,
+                        ProviderId = accountToPay.ProviderId,
+                        Value = accountToPay.Value
+                    };
 
-                        listaParcelas.Add(modelInstallment);
-                    }
-
-                    model.Installments = new List<Installment>();
-                    model.Installments = listaParcelas;
+                    _accountToPayRepository.Add(newAccountToPay);
 
                 }
                 else
                 {
-                    var parcelaSelecionada =  model.Installments.ToList().Find(obj => obj.Id == valorParcela);
-                    var diasVencidos = (int)DateTime.Now.Subtract(new DateTime(parcelaSelecionada.MaturityDate.Year, 
-                                                                               parcelaSelecionada.MaturityDate.Month, 
-                                                                               parcelaSelecionada.MaturityDate.Day)).TotalDays;
-
-                    var diaria = ((parcelaSelecionada.Value * model.Penalty) / 100);
-                    decimal? multaDiaria = (parcelaSelecionada.Value * (diasVencidos * model.DailyInterest) / 100);
-
-                    //pagamento parcelas
-                    var listaParcelas = new List<Installment>();
-                    var contador = 0;
-                    foreach (var item in model.Installments)
+                    //vai pagar a conta inteira
+                    if (installment_id == 0)
                     {
-                        var modelInstallment = item;
+                        //parcelas vencidas
+                        var overdueInstallments = accountToPay.Installments
+                            .Where(i => i.MaturityDate < DateTime.Now && i.PaidValue < i.Value)
+                            .ToList();
 
-                        if (item.Id == valorParcela)
+                        //parcelas em dia e ainda não pagas
+                        var installmentsOk = accountToPay.Installments
+                            .Except(overdueInstallments)
+                            .Where(i => i.PaidValue < i.Value)
+                            .ToList();
+
+
+                        //valor total pago sem juros e mora
+                        var withoutDue = amountDue = accountToPay.Value - accountToPay.Installments
+                                                         .Except(overdueInstallments)
+                                                         .Except(installmentsOk)
+                                                         .Sum(i => i.Value);
+
+                        overdueInstallments.ForEach(o =>
                         {
-                            modelInstallment.PaymentDate = DateTime.Now;
-                            modelInstallment.PaidValue = (parcelaSelecionada.Value + diaria  +  multaDiaria).Value;
-                            modelInstallment.AccountToPayId = item.AccountToPayId;
+                            var daysPastDue = (int)DateTime.Now.Subtract(new DateTime(o.MaturityDate.Year,
+                                o.MaturityDate.Month,
+                                o.MaturityDate.Day)).TotalDays;
+
+                            amountDue += amountDue * accountToPay.Penalty / 100;
+                            amountDue += amountDue * daysPastDue * accountToPay.DailyInterest / 100;
+                        });
+
+                        //parcelas em atraso
+                        overdueInstallments.ForEach(i =>
+                        {
+                            i.PaymentDate = DateTime.Now;
+                            i.PaidValue = (amountDue - withoutDue) / overdueInstallments.Count;
+                        });
+
+                        installmentsOk.ForEach(i =>
+                        {
+                            i.PaymentDate = DateTime.Now;
+                            i.PaidValue = i.Value;
+                        });
+
+                        amountDue += installmentsOk.Sum(i => i.Value);
+                    }
+
+                    else
+                    {
+                        var installment = accountToPay.Installments.FirstOrDefault(i => i.Id == installment_id) ??
+                                          new Installment();
+
+                        var daysPastDue = (int)DateTime.Now.Subtract(new DateTime(installment.MaturityDate.Year,
+                            installment.MaturityDate.Month,
+                            installment.MaturityDate.Day)).TotalDays;
+                        if (daysPastDue > 0)
+                        {
+                            installment.PaidValue += installment.Value * accountToPay.Penalty / 100;
+                            installment.PaidValue +=
+                                installment.PaidValue * daysPastDue * accountToPay.DailyInterest / 100;
                         }
 
-                        if (item.PaidValue.HasValue) contador++;
-                        listaParcelas.Add(modelInstallment);
-                    }
-
-                    model.Installments = new List<Installment>();
-                    model.Installments = listaParcelas;
-
-                    if(listaParcelas.Count == contador)
-                    {
-                        // pagamento de conta sem estar vencida
-                        model.PaidValue = listaParcelas.Sum(obj => obj.PaidValue);
-                        model.PaymentDate = DateTime.Now;
-                        model.PaymentType = (PaymentType == 0 ? Domain.Enums.PaymentType.Money : (PaymentType == 1 ?
-                                                Domain.Enums.PaymentType.BankTransfer : Domain.Enums.PaymentType.BankDeposit));
+                        amountDue = installment.PaidValue ?? 0;
                     }
                 }
+
+                //if (!hasInstallments)
+                //{
+                //    if (hasInstallments)
+                //    {
+                //        var diasVencidos = (int)DateTime.Now.Subtract(new DateTime(accountToPay.MaturityDate.Year, 
+                //                                                                   accountToPay.MaturityDate.Month, 
+                //                                                                   accountToPay.MaturityDate.Day)).TotalDays;
+
+                //        var diaria = accountToPay.Value + accountToPay.Value * accountToPay.Penalty / 100;
+                //        decimal? multaDiaria = diaria * diasVencidos * accountToPay.DailyInterest / 100;
+
+                //        accountToPay.PaidValue = (diaria + multaDiaria).Value;
+
+                //        // pagamento de conta sem estar vencida
+                //        accountToPay.PaidValue = accountToPay.PaidValue;
+                //        accountToPay.PaymentDate = DateTime.Now;
+                //        accountToPay.PaymentType = paymentType;
+
+                //        //pagamento parcelas
+                //        foreach (var installment in accountToPay.Installments)
+                //        {
+                //            installment.PaymentDate = DateTime.Now;
+                //            installment.PaidValue = installment.Value;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        var parcelaSelecionada =  accountToPay.Installments.ToList().Find(obj => obj.Id == installment_id);
+                //        var diasVencidos = (int)DateTime.Now.Subtract(new DateTime(parcelaSelecionada.MaturityDate.Year, 
+                //                                                                   parcelaSelecionada.MaturityDate.Month, 
+                //                                                                   parcelaSelecionada.MaturityDate.Day)).TotalDays;
+
+                //        var diaria = ((parcelaSelecionada.Value * accountToPay.Penalty) / 100);
+                //        decimal? multaDiaria = (parcelaSelecionada.Value * (diasVencidos * accountToPay.DailyInterest) / 100);
+
+                //        //pagamento parcelas
+                //        var listaParcelas = new List<Installment>();
+                //        var contador = 0;
+                //        foreach (var item in accountToPay.Installments)
+                //        {
+                //            var modelInstallment = item;
+
+                //            if (item.Id == valorParcela)
+                //            {
+                //                modelInstallment.PaymentDate = DateTime.Now;
+                //                modelInstallment.PaidValue = (parcelaSelecionada.Value + diaria  +  multaDiaria).Value;
+                //                modelInstallment.AccountToPayId = item.AccountToPayId;
+                //            }
+
+                //            if (item.PaidValue.HasValue) contador++;
+                //            listaParcelas.Add(modelInstallment);
+                //        }
+
+                //        accountToPay.Installments = new List<Installment>();
+                //        accountToPay.Installments = listaParcelas;
+
+                //        if(listaParcelas.Count == contador)
+                //        {
+                //            // pagamento de conta sem estar vencida
+                //            accountToPay.PaidValue = listaParcelas.Sum(obj => obj.PaidValue);
+                //            accountToPay.PaymentDate = DateTime.Now;
+                //            accountToPay.PaymentType = paymentType;
+                //        }
+                //    }
+                //}
+                //else
+                //{
+
+                //    if (isConta)
+                //    {
+                //        // pagamento de conta sem estar vencida
+                //        accountToPay.PaidValue = accountToPay.Value;
+                //        accountToPay.PaymentDate = DateTime.Now;
+                //        accountToPay.PaymentType = (PaymentType == 0 ? Domain.Enums.PaymentType.Money : PaymentType ==  1 ? 
+                //                                                Domain.Enums.PaymentType.BankTransfer : Domain.Enums.PaymentType.BankDeposit);
+
+                //        //pagamento parcelas
+                //        var listaParcelas = new List<Installment>();
+                //        foreach (var item in accountToPay.Installments)
+                //        {
+                //            var modelInstallment = item;
+                //            modelInstallment.PaymentDate = DateTime.Now;
+                //            modelInstallment.PaidValue = item.Value;
+
+                //            listaParcelas.Add(modelInstallment);
+                //        }
+
+                //        accountToPay.Installments = new List<Installment>();
+                //        accountToPay.Installments = listaParcelas;
+                //    }
+                //    else
+                //    {
+                //        //pagamento parcelas
+                //        var listaParcelas = new List<Installment>();
+                //        foreach (var item in accountToPay.Installments)
+                //        {
+                //            var modelInstallment = item;
+
+                //            if (item.Id == valorParcela)
+                //            {
+                //                modelInstallment.PaymentDate = DateTime.Now;
+                //                modelInstallment.PaidValue = item.Value;
+                //                modelInstallment.AccountToPayId = item.AccountToPayId;
+                //            }
+
+                //            listaParcelas.Add(modelInstallment);
+                //        }
+
+                //        accountToPay.Installments = new List<Installment>();
+                //        accountToPay.Installments = listaParcelas;
+                //    }
+                //}
+
+                //_accountToPayRepository.Update(accountToPay);
+
+                //if (isConta && accountToPay.MonthlyAccount)
+                //{
+                //    var objModel = new AccountToPay
+                //    {
+                //        MaturityDate = accountToPay.MaturityDate.AddDays(30),
+                //        Active = accountToPay.Active,
+                //        AddedDate = accountToPay.AddedDate,
+                //        ApplicationUser = accountToPay.ApplicationUser,
+                //        ApplicationUserId = accountToPay.ApplicationUserId,
+                //        DailyInterest = accountToPay.DailyInterest,
+                //        Description = accountToPay.Description,
+                //        DocumentNumber = accountToPay.DocumentNumber,
+                //        Module = accountToPay.Module,
+                //        ModuleId = accountToPay.ModuleId,
+                //        MonthlyAccount = accountToPay.MonthlyAccount,
+                //        NumberOfInstallments = accountToPay.NumberOfInstallments,
+                //        PaymentSimulators = accountToPay.PaymentSimulators,
+                //        Penalty = accountToPay.Penalty,
+                //        Priority = accountToPay.Priority,
+                //        Provider = accountToPay.Provider,
+                //        ProviderId = accountToPay.ProviderId,
+                //        Value = accountToPay.Value
+                //    };
+
+                //    // criação das parcelas                   
+                //    var lista = new List<Installment>();
+                //    for (var i = 1; i <= accountToPay.NumberOfInstallments; i++)
+                //    {
+                //        var obj = new Installment
+                //        {
+                //            MaturityDate = i.Equals(1) ? accountToPay.MaturityDate : accountToPay.MaturityDate.AddDays(i * 30 - 30),
+                //            Value = accountToPay.Value,
+                //            AccountToPayId = 1,
+                //            Active = true
+                //        };
+                //        lista.Add(obj);
+                //    }
+
+                //    objModel.Installments = new List<Installment>();
+                //    objModel.Installments = lista;
+
+                //    _accountToPayRepositoryAdd.Add(objModel);
+                //}
+
+                accountToPay.PaymentDate = DateTime.Now;
+
+                this.AddToastMessage("Conta Paga", $"A Conta {accountToPay.Description} foi paga com sucesso", ToastType.Success);
+
+                return RedirectToAction("Index");
             }
-            else
-            {
-                
-                if (isConta)
-                {
-                    // pagamento de conta sem estar vencida
-                    model.PaidValue = model.Value;
-                    model.PaymentDate = DateTime.Now;
-                    model.PaymentType = (PaymentType == 0 ? Domain.Enums.PaymentType.Money : PaymentType ==  1 ? 
-                                                            Domain.Enums.PaymentType.BankTransfer : Domain.Enums.PaymentType.BankDeposit);
-
-                    //pagamento parcelas
-                    var listaParcelas = new List<Installment>();
-                    foreach (var item in model.Installments)
-                    {
-                        var modelInstallment = item;
-                        modelInstallment.PaymentDate = DateTime.Now;
-                        modelInstallment.PaidValue = item.Value;
-
-                        listaParcelas.Add(modelInstallment);
-                    }
-
-                    model.Installments = new List<Installment>();
-                    model.Installments = listaParcelas;
-                }
-                else
-                {
-                    //pagamento parcelas
-                    var listaParcelas = new List<Installment>();
-                    foreach (var item in model.Installments)
-                    {
-                        var modelInstallment = item;
-
-                        if (item.Id == valorParcela)
-                        {
-                            modelInstallment.PaymentDate = DateTime.Now;
-                            modelInstallment.PaidValue = item.Value;
-                            modelInstallment.AccountToPayId = item.AccountToPayId;
-                        }
-
-                        listaParcelas.Add(modelInstallment);
-                    }
-
-                    model.Installments = new List<Installment>();
-                    model.Installments = listaParcelas;
-                }
-            }
-
-            _accountToPayRepository.Update(model);
-
-            if (isConta && model.MonthlyAccount)
-            {
-                var objModel = new AccountToPay();
-                objModel.MaturityDate = model.MaturityDate.AddDays(30);
-                objModel.Active = model.Active;
-                objModel.AddedDate = model.AddedDate;
-                objModel.ApplicationUser = model.ApplicationUser;
-                objModel.ApplicationUserId = model.ApplicationUserId;
-                objModel.DailyInterest = model.DailyInterest;
-                objModel.Description = model.Description;
-                objModel.DocumentNumber = model.DocumentNumber;
-                objModel.Module = model.Module;
-                objModel.ModuleId = model.ModuleId;
-                objModel.MonthlyAccount = model.MonthlyAccount;
-                objModel.NumberOfInstallments = model.NumberOfInstallments;
-                objModel.PaymentSimulators = model.PaymentSimulators;
-                objModel.Penalty = model.Penalty;
-                objModel.Priority = model.Priority;
-                objModel.Provider = model.Provider;
-                objModel.ProviderId = model.ProviderId;
-                objModel.Value = model.Value;
-
-                // criação das parcelas                   
-                var lista = new List<Installment>();
-                for (int i = 1; i <= model.NumberOfInstallments; i++)
-                {
-                    var obj = new Installment();
-                    obj.MaturityDate = i.Equals(1) ? model.MaturityDate : model.MaturityDate.AddDays(i * 30 - 30);
-                    obj.Value = model.Value;
-                    obj.AccountToPayId = 1;
-                    obj.Active = true;
-                    lista.Add(obj);
-                }
-
-                objModel.Installments = new List<Installment>();
-                objModel.Installments = lista;
-
-                _accountToPayRepositoryAdd.Add(objModel);
-            }
-            
-            this.AddToastMessage("Conta Paga", $"A Conta {model.Description} foi paga com sucesso", ToastType.Success);
-
-            return Redirect("/AccountToPay");
         }
 
         public ActionResult Edit(int? id)
@@ -345,7 +458,7 @@ namespace DEKL.CP.UI.Controllers
 
                     _accountToPayRepository.Update(accountToPay);
 
-                    this.AddToastMessage("Conta Editada", $"A Conta {accountToPay.Description} foi editada com sucesso", 
+                    this.AddToastMessage("Conta Editada", $"A Conta {accountToPay.Description} foi editada com sucesso",
                         ToastType.Success);
 
                     return RedirectToAction("Index");
@@ -395,7 +508,7 @@ namespace DEKL.CP.UI.Controllers
 
                     _accountToPayRepository.DeleteLogical(accountToPay);
 
-                    this.AddToastMessage("Conta excluída", $"A Conta {accountToPay.Description} foi excluída com sucesso", 
+                    this.AddToastMessage("Conta excluída", $"A Conta {accountToPay.Description} foi excluída com sucesso",
                         ToastType.Success);
 
                     return RedirectToAction("Index");
