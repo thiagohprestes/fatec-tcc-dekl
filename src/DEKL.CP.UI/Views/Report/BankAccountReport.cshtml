@@ -6,36 +6,38 @@
     @Styles.Render("~/Content/datatables")
 }
 
-<h2>Relatório de Contas Bancárias</h2>
+<div class="container-content">
+    <h2>Relatório de Contas Bancárias</h2>
 
-<p>
-    <input type="button" onclick="ExportarBankTransactionReport();" class="btn btn-info" id="ExportButton" value="Exportar" />
-</p>
+    <p>
+        <input type="button" onclick="ExportarBankTransactionReport();" class="btn btn-info" id="ExportButton" value="Exportar" />
+    </p>
 
-<div class="row">
-    <div class="col-md-12">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(e => e.Number)</th>
-                    <th>@Html.DisplayNameFor(e => e.Agency)</th>
-                    <th>@Html.DisplayNameFor(e => e.Balance)</th>
-                    <th>@Html.DisplayNameFor(e => e.TypeBankAccount)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped table-hover">
+                <thead>
                     <tr>
-                        <td>@Html.DisplayFor(e => item.Number)</td>
-                        <td>@Html.DisplayFor(e => item.Agency)</td>
-                        <td>@(item.TypeBankAccount == TypeBankAccount.Internal ? item.Balance.ToString("C2") : "Não possui")</td>
-                        <td>@item.TypeBankAccount.GetDescription()</td>
-
+                        <th>@Html.DisplayNameFor(e => e.Number)</th>
+                        <th>@Html.DisplayNameFor(e => e.Agency)</th>
+                        <th>@Html.DisplayNameFor(e => e.Balance)</th>
+                        <th>@Html.DisplayNameFor(e => e.TypeBankAccount)</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(e => item.Number)</td>
+                            <td>@Html.DisplayFor(e => item.Agency)</td>
+                            <td>@(item.TypeBankAccount == TypeBankAccount.Internal ? item.Balance.ToString("C2") : "Não possui")</td>
+                            <td>@item.TypeBankAccount.GetDescription()</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @section scripts{

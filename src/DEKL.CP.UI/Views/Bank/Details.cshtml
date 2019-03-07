@@ -1,54 +1,56 @@
 ﻿@model DEKL.CP.UI.ViewModels.Bank.BankViewModel
+<div class="container-content">
 
-<h2>Detalhes</h2>
-<div>
-    <h4>Bancos</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.Name):
-        </dt>
-        <dd class="text-detail">
-            @Html.DisplayFor(m => m.Name)
-        </dd>
+    <h2>Detalhes</h2>
+    <div>
+        <h4>Bancos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.Name):
+            </dt>
+            <dd class="text-detail">
+                @Html.DisplayFor(m => m.Name)
+            </dd>
 
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.Number):
-        </dt>   
-        <dd class="text-detail">
-            @Html.DisplayFor(m => m.Number)
-        </dd>
-    </dl>
-</div>
-<h4>Lista de Agências que pertencem a esse banco</h4>
-@if (Model.BankAgencies.Count == 0)
-{
-    <hr />
-    <p>Não há agências que pertencem a esse banco</p>
-}
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.Number):
+            </dt>   
+            <dd class="text-detail">
+                @Html.DisplayFor(m => m.Number)
+            </dd>
+        </dl>
+    </div>
+    <h4>Lista de Agências que pertencem a esse banco</h4>
+    @if (Model.BankAgencies.Count == 0)
+    {
+        <hr />
+        <p>Não há agências que pertencem a esse banco</p>
+    }
 
-else
-{
-    <table class="table col-md-6">
-        <thead>
-            <tr>
-                <th>Número</th>
-                <th>Nome do(a) Gerente</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in Model.BankAgencies)
-            {
+    else
+    {
+        <table class="table col-md-6">
+            <thead>
                 <tr>
-                    <td>@item.Number</td>
-                    <td>@item.ManagerName</td>
+                    <th>Número</th>
+                    <th>Nome do(a) Gerente</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
-    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
-</p>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.BankAgencies)
+                {
+                    <tr>
+                        <td>@item.Number</td>
+                        <td>@item.ManagerName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
+        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
+    </p>
+</div>

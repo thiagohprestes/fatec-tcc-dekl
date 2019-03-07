@@ -1,38 +1,39 @@
 ﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.ApplicationRole
+<div class="container-content">
+    <h2>Detalhes</h2>
 
-<h2>Detalhes</h2>
-
-<div>
-    <h4>Grupos</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.Name):
-        </dt>
-        <dd class="text-detail">
-            @Html.DisplayFor(m => m.Name)
-        </dd>
-    </dl>
-</div>
-<h4>Lista de usuários nesse grupo</h4>
-@if (ViewBag.UserCount == 0)
-{
-    <hr />
-    <p>Não há usuários nesse grupo</p>
-}
-
-<table class="table">
-
-    @foreach (var item in ViewBag.Users)
+    <div>
+        <h4>Grupos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.Name):
+            </dt>
+            <dd class="text-detail">
+                @Html.DisplayFor(m => m.Name)
+            </dd>
+        </dl>
+    </div>
+    <h4>Lista de usuários nesse grupo</h4>
+    @if (ViewBag.UserCount == 0)
     {
-        <tr>
-            <td>
-                @item.UserName
-            </td>
-        </tr>
+        <hr />
+        <p>Não há usuários nesse grupo</p>
     }
-</table>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
-    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
-</p>
+
+    <table class="table">
+
+        @foreach (var item in ViewBag.Users)
+        {
+            <tr>
+                <td>
+                    @item.UserName
+                </td>
+            </tr>
+        }
+    </table>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
+        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
+    </p>
+</div>

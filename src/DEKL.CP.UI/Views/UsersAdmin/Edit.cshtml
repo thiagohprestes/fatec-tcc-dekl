@@ -1,56 +1,59 @@
 ﻿@model DEKL.CP.UI.ViewModels.UsersAdmin.EditApplicationUserViewModel
 
-<h2>Edição</h2>
-<div class="row">
-    <div class="col-md-6">
-        <section id="changePasswordForm">
-            @using (Html.BeginForm(new { @class = "form-horizontal" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Grupos</h4>
-                <hr />
-                @Html.ValidationMessage("Error", new { @class = "text-danger" })
-                @Html.HiddenFor(m => m.Id)
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-                        <small>
-                            @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "text-danger" })
-                        </small>
-                    </div>
-                    <div class="form-group col-md-6">
-                        @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-                        <small>
-                            @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "text-danger" })
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = "" })
-                    <small>
-                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
-                    </small>
-                </div>
-                <div class="form-group">
-                    @Html.Label("Grupos", new { @class = "control-label" })
+<div class="container-content">
 
-                    @foreach (var item in Model.RolesList)
-                    {
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input class="checkbox-inline custom-control-input" id="@item.Text" type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" />
-                            @Html.Label(item.Value, new { @class = "custom-control-label" })
+    <h2>Edição</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <section id="changePasswordForm">
+                @using (Html.BeginForm(new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h4>Grupos</h4>
+                    <hr />
+                    @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                    @Html.HiddenFor(m => m.Id)
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                            <small>
+                                @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "text-danger" })
+                            </small>
                         </div>
-                    }
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Salvar" class="btn btn-info" />
-                    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
-                </div>
-            }
-        </section>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                            <small>
+                                @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "text-danger" })
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = "" })
+                        <small>
+                            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Grupos", new { @class = "control-label" })
+
+                        @foreach (var item in Model.RolesList)
+                        {
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input class="checkbox-inline custom-control-input" id="@item.Text" type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" />
+                                @Html.Label(item.Value, new { @class = "custom-control-label" })
+                            </div>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-info" />
+                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
+                    </div>
+                }
+            </section>
+        </div>
     </div>
 </div>
 

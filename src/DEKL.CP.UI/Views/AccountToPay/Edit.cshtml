@@ -1,128 +1,130 @@
 ﻿@using DEKL.CP.UI.Extensions
 @model DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel
+<div class="container-content">
 
-<h2>Edição</h2>
-<div class="row">
-    <div class="col-md-6">
-        <section id="editAccountToPayForm">
-            @using (Html.BeginForm(new { @class = "form-horizontal" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Contas a Pagar</h4>
-                <hr />
-                @Html.ValidationMessage("Error", new { @class = "text-danger" })
-                @Html.HiddenFor(m => m.Id)
+    <h2>Edição</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <section id="editAccountToPayForm">
+                @using (Html.BeginForm(new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h4>Contas a Pagar</h4>
+                    <hr />
+                    @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                    @Html.HiddenFor(m => m.Id)
 
-                <div class="form-row">
-                    <div class="form-group col-md-8">
-                        @Html.LabelFor(m => m.ProviderId, "Fornecedor", new { @class = "control-label" })
-                        @Html.DropDownListFor(m => m.ProviderId, ViewBag.Providers as SelectList, "Selecione o Fornecedor", new { @class = "form-control" })
-                        <small>
-                            @Html.ValidationMessageFor(m => m.ProviderId, null, new { @class = "text-danger" })
-                        </small>
-                    </div>
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.MaturityDate, new { @class = "control-label" })
-                        @Html.JQueryUI().DatepickerFor(m => m.MaturityDate, new { @class = "form-control", placeholder = "Data do vencimento" })
-                        <small>
-                            @Html.ValidationMessageFor(m => m.MaturityDate, null, new { @class = "text-danger" })
-                        </small>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        @Html.LabelFor(m => m.NumberOfInstallments, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.NumberOfInstallments, new { @class = "form-control" })
-                        <small>
-                            @Html.ValidationMessageFor(m => m.NumberOfInstallments, null, new { @class = "text-danger" })
-                        </small>
-                    </div>
-                    <div class="form-group col-md-3">
-                        @Html.LabelFor(m => m.DailyInterest, new { @class = "control-label" })
-                        <div class="input-group">
-                            @Html.TextBoxFor(m => m.DailyInterest, new { @class = "form-control" })
-                            <div class="input-group-append">
-                                <span class="input-group-text">%</span>
-                            </div>
-                        </div>
-                        <small>
-                            @Html.ValidationMessageFor(m => m.DailyInterest, null, new { @class = "text-danger" })
-                        </small>
-                    </div>
-                    <div class="form-group col-md-3">
-                        @Html.LabelFor(m => m.Penalty, new { @class = "control-label" })
-                        <div class="input-group">
-                            @Html.TextBoxFor(m => m.Penalty, new { @class = "form-control" })
-                            <div class="input-group-append">
-                                <span class="input-group-text">%</span>
-                            </div>
-                        </div>
-                        <small>
-                            @Html.ValidationMessageFor(m => m.Penalty, null, new { @class = "text-danger" })
-                        </small>
-                    </div>
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.Value, new { @class = "control-label" })
-                        <div class="input-group">
-                            @Html.TextBoxFor(m => m.Value, new { @class = "form-control" })
-                            <div class="input-group-append">
-                                <span class="input-group-text">R$</span>
-                            </div>
-                        </div>
-                        <small>
-                            @Html.ValidationMessageFor(m => m.Value, null, new { @class = "text-danger" })
-                        </small>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-7">
-                        @Html.LabelFor(m => m.DocumentNumber, new { @class = "control-label" })
-                        <div class="input-group">
-                            @Html.TextBoxFor(m => m.DocumentNumber, new { @class = "form-control" })
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-barcode" style="padding:0"></i></span>
-                            </div>
-                        </div>
-                        <small>
-                            @Html.ValidationMessageFor(m => m.DocumentNumber, null, new { @class = "text-danger" })
-                        </small>
-                    </div>
-                    <div class="form-group col-md-5">
-                        @Html.LabelFor(m => m.Priority, new { @class = "control-label" })
-                        @Html.DropDownListFor(m => m.Priority, DEKL.CP.Domain.Enums.Priority.High.ToSelectList() as SelectList, new { @class = "form-control" })
-                        <small>
-                            @Html.ValidationMessageFor(m => m.Priority, null, new { @class = "text-danger" })
-                        </small>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-8">
-                        @Html.LabelFor(m => m.Description, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.Description, new { @class = "form-control", placeholder = "Identificação da conta" })
-                        <small>
-                            @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
-                        </small>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <div class="custom-control custom-checkbox">
-                            @Html.CheckBoxFor(m => m.MonthlyAccount, new { @class = "checkbox-inline custom-control-input" })
-                            @Html.LabelFor(m => m.MonthlyAccount, "Conta Mensal", new { @class = "custom-control-label" })
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            @Html.LabelFor(m => m.ProviderId, "Fornecedor", new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.ProviderId, ViewBag.Providers as SelectList, "Selecione o Fornecedor", new { @class = "form-control" })
                             <small>
-                                @Html.ValidationMessageFor(m => m.MonthlyAccount, null, new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(m => m.ProviderId, null, new { @class = "text-danger" })
+                            </small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.MaturityDate, new { @class = "control-label" })
+                            @Html.JQueryUI().DatepickerFor(m => m.MaturityDate, new { @class = "form-control", placeholder = "Data do vencimento" })
+                            <small>
+                                @Html.ValidationMessageFor(m => m.MaturityDate, null, new { @class = "text-danger" })
                             </small>
                         </div>
                     </div>
-                </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            @Html.LabelFor(m => m.NumberOfInstallments, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.NumberOfInstallments, new { @class = "form-control" })
+                            <small>
+                                @Html.ValidationMessageFor(m => m.NumberOfInstallments, null, new { @class = "text-danger" })
+                            </small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(m => m.DailyInterest, new { @class = "control-label" })
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.DailyInterest, new { @class = "form-control" })
+                                <div class="input-group-append">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                            <small>
+                                @Html.ValidationMessageFor(m => m.DailyInterest, null, new { @class = "text-danger" })
+                            </small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(m => m.Penalty, new { @class = "control-label" })
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.Penalty, new { @class = "form-control" })
+                                <div class="input-group-append">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                            <small>
+                                @Html.ValidationMessageFor(m => m.Penalty, null, new { @class = "text-danger" })
+                            </small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.Value, new { @class = "control-label" })
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.Value, new { @class = "form-control" })
+                                <div class="input-group-append">
+                                    <span class="input-group-text">R$</span>
+                                </div>
+                            </div>
+                            <small>
+                                @Html.ValidationMessageFor(m => m.Value, null, new { @class = "text-danger" })
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-7">
+                            @Html.LabelFor(m => m.DocumentNumber, new { @class = "control-label" })
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.DocumentNumber, new { @class = "form-control" })
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-barcode" style="padding:0"></i></span>
+                                </div>
+                            </div>
+                            <small>
+                                @Html.ValidationMessageFor(m => m.DocumentNumber, null, new { @class = "text-danger" })
+                            </small>
+                        </div>
+                        <div class="form-group col-md-5">
+                            @Html.LabelFor(m => m.Priority, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.Priority, DEKL.CP.Domain.Enums.Priority.High.ToSelectList() as SelectList, new { @class = "form-control" })
+                            <small>
+                                @Html.ValidationMessageFor(m => m.Priority, null, new { @class = "text-danger" })
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Description, new { @class = "form-control", placeholder = "Identificação da conta" })
+                            <small>
+                                @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <div class="custom-control custom-checkbox">
+                                @Html.CheckBoxFor(m => m.MonthlyAccount, new { @class = "checkbox-inline custom-control-input" })
+                                @Html.LabelFor(m => m.MonthlyAccount, "Conta Mensal", new { @class = "custom-control-label" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.MonthlyAccount, null, new { @class = "text-danger" })
+                                </small>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <input type="submit" value="Salvar" class="btn btn-info" />
-                    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
-                </div>
-            }
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-info" />
+                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
+                    </div>
+                }
 
-        </section>
+            </section>
+        </div>
     </div>
 </div>
 

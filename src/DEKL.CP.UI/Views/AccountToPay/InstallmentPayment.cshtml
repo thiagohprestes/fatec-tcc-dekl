@@ -7,89 +7,91 @@
     bool isConta = Request.QueryString["Parcela"].Equals("0");
     var parcela = (List<Installment>)Model.Installments;
 }
+<div class="container-content">
 
-<h2>Pagar</h2>
-<div>
-    <h4>Bancos</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.DocumentNumber):
-        </dt>
-        <dd class="text-detail">
-            @Html.DisplayFor(m => m.DocumentNumber)
-        </dd>
-
-        @*se for vencido*@
-        @if (!isConta && DateTime.Now > parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"])).MaturityDate ||  DateTime.Now > Model.MaturityDate)
-        {
+    <h2>Pagar</h2>
+    <div>
+        <h4>Bancos</h4>
+        <hr />
+        <dl class="dl-horizontal">
             <dt class="title-detail">
-                Valor Vencido
+                @Html.DisplayNameFor(m => m.DocumentNumber):
             </dt>
             <dd class="text-detail">
-                @(isConta ? Model.Value.ToString("C2") : parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"])).Value.ToString("C2"))
+                @Html.DisplayFor(m => m.DocumentNumber)
             </dd>
-            <dt class="title-detail">
-                Valor total com juros
-            </dt>
-            <dd class="text-detail">
-                @{
-                    if (isConta)
-                    {
-                        diasVencidos = (int)DateTime.Now.Subtract(new DateTime(Model.MaturityDate.Year, Model.MaturityDate.Month, Model.MaturityDate.Day)).TotalDays;
-                        Model.Value += ((Model.Value * Model.Penalty) / 100);
-                        multaDiaria = (Model.Value * (diasVencidos * Model.DailyInterest) / 100);
 
-                        @Html.Raw((Model.Value + multaDiaria).ToString("C2"))
+            @*se for vencido*@
+            @if (!isConta && DateTime.Now > parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"])).MaturityDate ||  DateTime.Now > Model.MaturityDate)
+            {
+                <dt class="title-detail">
+                    Valor Vencido
+                </dt>
+                <dd class="text-detail">
+                    @(isConta ? Model.Value.ToString("C2") : parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"])).Value.ToString("C2"))
+                </dd>
+                <dt class="title-detail">
+                    Valor total com juros
+                </dt>
+                <dd class="text-detail">
+                    @{
+                        if (isConta)
+                        {
+                            diasVencidos = (int)DateTime.Now.Subtract(new DateTime(Model.MaturityDate.Year, Model.MaturityDate.Month, Model.MaturityDate.Day)).TotalDays;
+                            Model.Value += ((Model.Value * Model.Penalty) / 100);
+                            multaDiaria = (Model.Value * (diasVencidos * Model.DailyInterest) / 100);
+
+                            @Html.Raw((Model.Value + multaDiaria).ToString("C2"))
+                        }
+                        else
+                        {
+                            var parcelaSelecionada = parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"]));
+                            diasVencidos = (int)DateTime.Now.Subtract(new DateTime(parcelaSelecionada.MaturityDate.Year, parcelaSelecionada.MaturityDate.Month, parcelaSelecionada.MaturityDate.Day)).TotalDays;
+                            parcelaSelecionada.Value += ((parcelaSelecionada.Value * Model.Penalty) / 100);
+                            multaDiaria = (parcelaSelecionada.Value * (diasVencidos * Model.DailyInterest) / 100);
+
+                            @Html.Raw((parcelaSelecionada.Value + multaDiaria).ToString("C2"))
+                        }
                     }
-                    else
-                    {
-                        var parcelaSelecionada = parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"]));
-                        diasVencidos = (int)DateTime.Now.Subtract(new DateTime(parcelaSelecionada.MaturityDate.Year, parcelaSelecionada.MaturityDate.Month, parcelaSelecionada.MaturityDate.Day)).TotalDays;
-                        parcelaSelecionada.Value += ((parcelaSelecionada.Value * Model.Penalty) / 100);
-                        multaDiaria = (parcelaSelecionada.Value * (diasVencidos * Model.DailyInterest) / 100);
+                </dd>
+            }
+            else
+            {
+                <dt class="title-detail">
+                    @Html.DisplayNameFor(m => m.Value)
+                </dt>
+                <dd class="text-detail">
+                    @(isConta ? Model.Value.ToString("C2") : parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"])).Value.ToString("C2"))
+                </dd>
+            }
 
-                        @Html.Raw((parcelaSelecionada.Value + multaDiaria).ToString("C2"))
-                    }
-                }
-            </dd>
-        }
-        else
-        {
             <dt class="title-detail">
-                @Html.DisplayNameFor(m => m.Value)
+                @Html.DisplayNameFor(m => m.Description)
             </dt>
             <dd class="text-detail">
-                @(isConta ? Model.Value.ToString("C2") : parcela.Find(obj => obj.Id == Convert.ToInt32(Request.QueryString["Parcela"])).Value.ToString("C2"))
+                @(!string.IsNullOrEmpty(Model.Description) ? Model.Description : "Sem descrição")
             </dd>
-        }
-
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.Description)
-        </dt>
-        <dd class="text-detail">
-            @(!string.IsNullOrEmpty(Model.Description) ? Model.Description : "Sem descrição")
-        </dd>
-    </dl>
-</div>
-
-<form action="@Url.Action("PaymentBoleto", "AccountToPay")" method="post">
-    <input type="hidden" name="Id" value="@Model.Id" />
-    <input type="hidden" name="valorParcela" value="@Request.QueryString["Parcela"]" />
-    <div class="row">
-        <div class="form-group col-md-3">
-            @Html.DropDownList("PaymentInterna", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Interna", new { @class = "form-control" })
-        </div>
-        <div class="form-group col-md-3">
-            @Html.DropDownList("PaymentBancario", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta do Fornecedor", new { @class = "form-control" })
-        </div>
-        <div class="form-group col-md-3">
-            @Html.DropDownListFor(m => m.PaymentType, DEKL.CP.Domain.Enums.PaymentType.BankDeposit.ToSelectList() as SelectList, new { @class = "form-control" })
-        </div>
+        </dl>
     </div>
 
-    <p>
-        <a href="#" class="btn btn-info" onclick="history.go(-1);">Voltar</a>
-        <input type="submit" class="btn btn-info" id="PagarConta" value="Pagar" />
-    </p>
-</form>
+    <form action="@Url.Action("PaymentBoleto", "AccountToPay")" method="post">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" name="valorParcela" value="@Request.QueryString["Parcela"]" />
+        <div class="row">
+            <div class="form-group col-md-3">
+                @Html.DropDownList("PaymentInterna", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Interna", new { @class = "form-control" })
+            </div>
+            <div class="form-group col-md-3">
+                @Html.DropDownList("PaymentBancario", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta do Fornecedor", new { @class = "form-control" })
+            </div>
+            <div class="form-group col-md-3">
+                @Html.DropDownListFor(m => m.PaymentType, DEKL.CP.Domain.Enums.PaymentType.BankDeposit.ToSelectList() as SelectList, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <p>
+            <a href="#" class="btn btn-info" onclick="history.go(-1);">Voltar</a>
+            <input type="submit" class="btn btn-info" id="PagarConta" value="Pagar" />
+        </p>
+    </form>
+</div>
