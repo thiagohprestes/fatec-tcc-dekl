@@ -1,27 +1,29 @@
 ﻿@model DEKL.CP.Infra.CrossCutting.Identity.Models.ApplicationUser
 
-<h2>Excluir Usuário</h2>
+<div class="container-content">
+    <h2>Excluir Usuário</h2>
 
-<h3>Você tem certeza que deseja excluir @Model.FirstName @Model.LastName</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.UserName):
-        </dt>
+    <h3>Você tem certeza que deseja excluir @Model.FirstName @Model.LastName</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.UserName):
+            </dt>
 
-        <dd class="text-detail">
-            @Html.DisplayFor(m => m.UserName)
-        </dd>
-    </dl>
+            <dd class="text-detail">
+                @Html.DisplayFor(m => m.UserName)
+            </dd>
+        </dl>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Excluir" class="btn btn-danger" />
-            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info"})
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Excluir" class="btn btn-danger" />
+                @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info"})
+            </div>
+        }
+    </div>
 </div>

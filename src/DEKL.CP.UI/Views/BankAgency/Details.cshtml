@@ -1,84 +1,87 @@
 ﻿@model DEKL.CP.UI.ViewModels.BankAgency.BankAgencyViewModel
 
-<h2>Detalhes</h2>
-<div>
-    <h4>Agências</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.Number):
-        </dt>
-        <dd class="text-detail">
-            @Html.DisplayFor(m => m.Number)
-        </dd>
+<div class="container-content">
 
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.ManagerName):
-        </dt>
-        <dd class="text-detail">
-            @(Model.ManagerName ?? "Não informado")
-        </dd>
-    </dl>
+    <h2>Detalhes</h2>
+    <div>
+        <h4>Agências</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.Number):
+            </dt>
+            <dd class="text-detail">
+                @Html.DisplayFor(m => m.Number)
+            </dd>
+
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.ManagerName):
+            </dt>
+            <dd class="text-detail">
+                @(Model.ManagerName ?? "Não informado")
+            </dd>
+        </dl>
+    </div>
+    <h4>Lista de Contas Internas que pertencem a essa agência</h4>
+    @if (Model.InternalBankAccounts.Count == 0)
+    {
+        <hr />
+        <p>Não há contas internas que pertencem a essa agência</p>
+    }
+
+    else
+    {
+        <table class="table col-md-6">
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Nome</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.InternalBankAccounts)
+                {
+                    <tr>
+                        <td>@item.Number</td>
+                        <td>@item.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <h4>Lista de Contas de Fornecedor que pertencem a essa agência</h4>
+    @if (Model.ProviderBankAccounts.Count == 0)
+    {
+        <hr />
+        <p>Não há contas de fornecedor que pertencem a essa agência</p>
+    }
+
+    else
+    {
+        <table class="table col-md-6">
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Nome</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.ProviderBankAccounts)
+                {
+                    <tr>
+                        <td>@item.Number</td>
+                        <td>@item.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
+        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
+    </p>
 </div>
-<h4>Lista de Contas Internas que pertencem a essa agência</h4>
-@if (Model.InternalBankAccounts.Count == 0)
-{
-    <hr />
-    <p>Não há contas internas que pertencem a essa agência</p>
-}
-
-else
-{
-    <table class="table col-md-6">
-        <thead>
-            <tr>
-                <th>Número</th>
-                <th>Nome</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in Model.InternalBankAccounts)
-            {
-                <tr>
-                    <td>@item.Number</td>
-                    <td>@item.Name</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
-<h4>Lista de Contas de Fornecedor que pertencem a essa agência</h4>
-@if (Model.ProviderBankAccounts.Count == 0)
-{
-    <hr />
-    <p>Não há contas de fornecedor que pertencem a essa agência</p>
-}
-
-else
-{
-    <table class="table col-md-6">
-        <thead>
-            <tr>
-                <th>Número</th>
-                <th>Nome</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in Model.ProviderBankAccounts)
-            {
-                <tr>
-                    <td>@item.Number</td>
-                    <td>@item.Name</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
-    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
-</p>

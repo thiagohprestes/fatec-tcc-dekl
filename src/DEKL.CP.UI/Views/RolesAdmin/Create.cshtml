@@ -1,31 +1,32 @@
 ﻿@model DEKL.CP.Infra.CrossCutting.Identity.ViewModels.RoleViewModel
+<div class="container-content">
+    <h2>Cadastrar novo Grupo</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <section id="registerForm">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-<h2>Cadastrar novo Grupo</h2>
-<div class="row">
-    <div class="col-md-6">
-        <section id="registerForm">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-
-                <div class="form-horizontal">
-                    <h4>Preencha os dados</h4>
-                    <hr />
-                    @Html.ValidationMessage("Error", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-                        @Html.TextBoxFor(m=> m.Name, new { @class = "form-control" })
-                        <small>
-                            @Html.ValidationMessageFor(m => m.Name, null, new {@class = "text-danger"})
-                        </small>
+                    <div class="form-horizontal">
+                        <h4>Preencha os dados</h4>
+                        <hr />
+                        @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+                            @Html.TextBoxFor(m=> m.Name, new { @class = "form-control" })
+                            <small>
+                                @Html.ValidationMessageFor(m => m.Name, null, new {@class = "text-danger"})
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-info" value="Criar"/>
+                            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-info" value="Criar"/>
-                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
-                    </div>
-                </div>
-            }
-        </section>
+                }
+            </section>
+        </div>
     </div>
 </div>
 

@@ -1,61 +1,63 @@
 ﻿@model DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel
+<div class="container-content">
 
-<h2>Detalhes</h2>
-<div>
-    <h4>Bancos</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.DocumentNumber):
-        </dt>
-        <dd class="text-detail">
-            @Html.DisplayFor(m => m.DocumentNumber)
-        </dd>
+    <h2>Detalhes</h2>
+    <div>
+        <h4>Bancos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.DocumentNumber):
+            </dt>
+            <dd class="text-detail">
+                @Html.DisplayFor(m => m.DocumentNumber)
+            </dd>
 
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.Value):
-        </dt>
-        <dd class="text-detail">
-            @Model.Value.ToString("C2")
-        </dd>
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.Value):
+            </dt>
+            <dd class="text-detail">
+                @Model.Value.ToString("C2")
+            </dd>
 
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.Description):
-        </dt>
-        <dd class="text-detail">
-            @(!string.IsNullOrEmpty(Model.Description) ? Model.Description : "Sem descrição")
-        </dd>
-    </dl>
-</div>
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.Description):
+            </dt>
+            <dd class="text-detail">
+                @(!string.IsNullOrEmpty(Model.Description) ? Model.Description : "Sem descrição")
+            </dd>
+        </dl>
+    </div>
 
-<h4>Parcelas</h4>
-@if (Model.Installments.Count == 0)
-{
-    <hr />
-    <p>Conta não possui parcelas</p>
-}
-else
-{
-    <table class="table col-md-6">
-        <thead>
-            <tr>
-                <th>Valor</th>
-                <th>Data de Vencimento</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in Model.Installments)
-            {
+    <h4>Parcelas</h4>
+    @if (Model.Installments.Count == 0)
+    {
+        <hr />
+        <p>Conta não possui parcelas</p>
+    }
+    else
+    {
+        <table class="table col-md-6">
+            <thead>
                 <tr>
-                    <td>@item.Value.ToString("C2")</td>
-                    <td>@item.MaturityDate.ToString("dd/MM/yyyy")</td>
+                    <th>Valor</th>
+                    <th>Data de Vencimento</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
-    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
-</p>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.Installments)
+                {
+                    <tr>
+                        <td>@item.Value.ToString("C2")</td>
+                        <td>@item.MaturityDate.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
+        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
+    </p>
+</div>

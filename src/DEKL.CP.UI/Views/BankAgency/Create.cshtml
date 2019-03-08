@@ -1,71 +1,73 @@
 ﻿@model DEKL.CP.UI.ViewModels.BankAgency.BankAgencyViewModel
+<div class="container-content">
 
-<h2>Cadastrar Agência Bancária</h2>
-<div class="row">
-    <div class="col-md-6">
-        <section id="registerProviderForm">
-            @using (Html.BeginForm("Create", "Bankagency", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-                <div class="form">
-                    <h4>Preencha os dados</h4>
-                    <hr />
-                    @Html.ValidationMessage("Error", new { @class = "text-danger" })
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(m => m.Number, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Number, new { @class = "form-control", placeholder = "Ex: 6582" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.Number, null, new { @class = "text-danger" })
-                            </small>
+    <h2>Cadastrar Agência Bancária</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <section id="registerProviderForm">
+                @using (Html.BeginForm("Create", "Bankagency", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form">
+                        <h4>Preencha os dados</h4>
+                        <hr />
+                        @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(m => m.Number, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.Number, new { @class = "form-control", placeholder = "Ex: 6582" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.Number, null, new { @class = "text-danger" })
+                                </small>
+                            </div>
+
+                            <div class="form-group col-md-8">
+                                @Html.LabelFor(m => m.BankId, new { @class = "control-label" })
+                                @Html.DropDownListFor(m => m.BankId, ViewBag.Banks as SelectList, "Selecione o Banco", new { @class = "form-control" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.Address.StateId, null, new { @class = "text-danger" })
+                                </small>
+                            </div>
                         </div>
 
-                        <div class="form-group col-md-8">
-                            @Html.LabelFor(m => m.BankId, new { @class = "control-label" })
-                            @Html.DropDownListFor(m => m.BankId, ViewBag.Banks as SelectList, "Selecione o Banco", new { @class = "form-control" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.Address.StateId, null, new { @class = "text-danger" })
-                            </small>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                @Html.LabelFor(m => m.ManagerName, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.ManagerName, new { @class = "form-control", placeholder = "Ex: Carlos da Costa" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.ManagerName, null, new { @class = "text-danger" })
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "example@email.com" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                                </small>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = "(99) 99999-9999" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "text-danger" })
+                                </small>
+                            </div>
+                        </div>
+
+                        @Html.Action("AddressPartialView", "Address")
+
+                        <div class="form-group">
+                            <input type="submit" value="Salvar" class="btn btn-info" />
+                            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
                         </div>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            @Html.LabelFor(m => m.ManagerName, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.ManagerName, new { @class = "form-control", placeholder = "Ex: Carlos da Costa" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.ManagerName, null, new { @class = "text-danger" })
-                            </small>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-8">
-                            @Html.LabelFor(m => m.Email, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "example@email.com" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
-                            </small>
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = "(99) 99999-9999" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "text-danger" })
-                            </small>
-                        </div>
-                    </div>
-
-                    @Html.Action("AddressPartialView", "Address")
-
-                    <div class="form-group">
-                        <input type="submit" value="Salvar" class="btn btn-info" />
-                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
-                    </div>
-                </div>
-            }
-        </section>
+                }
+            </section>
+        </div>
     </div>
 </div>
 

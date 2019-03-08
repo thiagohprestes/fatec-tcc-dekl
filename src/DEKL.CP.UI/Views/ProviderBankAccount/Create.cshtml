@@ -1,60 +1,62 @@
 ﻿@model DEKL.CP.UI.ViewModels.Provider.ProviderBankAccountViewModel
+<div class="container-content">
 
-<h2>Cadastrar Conta Bancária de Fornecedor</h2>
-<div class="row">
-    <div class="col-md-6">
-        <section id="registerForm">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
+    <h2>Cadastrar Conta Bancária de Fornecedor</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <section id="registerForm">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
-                    <h4>Preencha os dados</h4>
-                    <hr />
-                    @Html.ValidationMessage("Error", new { @class = "text-danger" })
-                    <div class="form-row">
-                        <div class="form-group col-md-9">
-                            @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Ex: Thiago - Itaú" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
-                            </small>
+                    <div class="form-horizontal">
+                        <h4>Preencha os dados</h4>
+                        <hr />
+                        @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                        <div class="form-row">
+                            <div class="form-group col-md-9">
+                                @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Ex: Thiago - Itaú" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+                                </small>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                @Html.LabelFor(m => m.Number, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.Number, new { @class = "form-control", placeholder = "Ex: 14237-7" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.Number, null, new { @class = "text-danger" })
+                                </small>
+                            </div>
                         </div>
 
-                        <div class="form-group col-md-3">
-                            @Html.LabelFor(m => m.Number, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Number, new { @class = "form-control", placeholder = "Ex: 14237-7" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.Number, null, new { @class = "text-danger" })
-                            </small>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.BankAgencyId, new { @class = "control-label" })
+                                @Html.DropDownListFor(m => m.BankAgencyId, ViewBag.BankAgencies as SelectList, "Selecione a Agência", new { @class = "form-control" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.BankAgencyId, null, new { @class = "text-danger" })
+                                </small>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.ProviderId, new { @class = "control-label" })
+                                @Html.DropDownListFor(m => m.ProviderId, ViewBag.Providers as SelectList, "Selecione o Fornecedor", new { @class = "form-control" })
+                                <small>
+                                    @Html.ValidationMessageFor(m => m.ProviderId, null, new { @class = "text-danger" })
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-info" value="Criar" />
+                            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
                         </div>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(m => m.BankAgencyId, new { @class = "control-label" })
-                            @Html.DropDownListFor(m => m.BankAgencyId, ViewBag.BankAgencies as SelectList, "Selecione a Agência", new { @class = "form-control" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.BankAgencyId, null, new { @class = "text-danger" })
-                            </small>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(m => m.ProviderId, new { @class = "control-label" })
-                            @Html.DropDownListFor(m => m.ProviderId, ViewBag.Providers as SelectList, "Selecione o Fornecedor", new { @class = "form-control" })
-                            <small>
-                                @Html.ValidationMessageFor(m => m.ProviderId, null, new { @class = "text-danger" })
-                            </small>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-info" value="Criar" />
-                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
-                    </div>
-                </div>
-            }
-        </section>
+                }
+            </section>
+        </div>
     </div>
 </div>
 

@@ -1,87 +1,73 @@
 ﻿@model DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayViewModel
+<div class="container-content">
 
-<h2>Pagar Contas</h2>
-<div>
-    <h4>Bancos</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.DocumentNumber):
-        </dt>
-        <dd class="text-detail">
-            @Html.DisplayFor(m => m.DocumentNumber)
-        </dd>
+    <h2>Pagar Contas</h2>
+    <div>
+        <h4>Bancos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.DocumentNumber):
+            </dt>
+            <dd class="text-detail">
+                @Html.DisplayFor(m => m.DocumentNumber)
+            </dd>
 
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.Value):
-        </dt>
-        <dd class="text-detail">
-            @Model.Value.ToString("C2")
-        </dd>
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.Value):
+            </dt>
+            <dd class="text-detail">
+                @Model.Value.ToString("C2")
+            </dd>
 
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.Description):
-        </dt>
-        <dd class="text-detail">
-            @(!string.IsNullOrEmpty(Model.Description) ? Model.Description : "Sem descrição")
-        </dd>
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.MaturityDate):
-        </dt>
-        <dd class="text-detail">
-            @Html.DisplayFor(m => m.MaturityDate)
-        </dd>
-        <dt class="title-detail">
-            Status da Conta:
-        </dt>
-        <dd class="text-detail">
-            @(Model.PaidValue >= Model.Value ? "Conta paga" : "Conta em aberto")
-        </dd>
-    </dl>
-</div>
-<h4>Parcelas</h4>
-@if (!Model.Installments.Any())
-{
-    <p>Conta não possui parcelas</p>
-}
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.Description):
+            </dt>
+            <dd class="text-detail">
+                @(!string.IsNullOrEmpty(Model.Description) ? Model.Description : "Sem descrição")
+            </dd>
+        </dl>
+    </div>
+    <h4>Parcelas</h4>
+    @if (Model.Installments.Count == 0)
+    {
+        <p>Conta não possui parcelas</p>
+    }
 
-else
-{
-    <table class="table col-md-6">
-        <thead>
-            <tr>
-                <th>Valor</th>
-                <th>Data de Vencimento</th>
-                <th>Pagar Parcela</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var installment in Model.Installments)
-            {
+    else
+    {
+        <table class="table col-md-6">
+            <thead>
                 <tr>
-                    <td>@installment.Value.ToString("C2")</td>
-                    <td>@installment.MaturityDate.ToString("dd/MM/yyyy")</td>
-                    <td>
-                        @if (installment.PaymentDate.HasValue)
+                    <th>Valor</th>
+                    <th>Data de Vencimento</th>
+                    <th>Pagar Parcela</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.Installments)
+                {
+                    <tr>
+                        <td>@item.Value.ToString("C2")</td>
+                        <td>@item.MaturityDate.ToString("dd/MM/yyyy")</td>
+                        <td>@if (item.PaymentDate.HasValue)
                         {
                             <b>Parcela Paga</b>
                         }
                         else
                         {
-                            <a href="/AccountToPay/InstallmentPayment/@Model.Id?Installment_Id=@installment.Id" class="btn btn-info">Pagar Parcela</a>
+                                <a href="/AccountToPay/InstallmentPayment/@Model.Id?Parcela=@item.Id" class="btn btn-info">Pagar Parcela</a>
                         }
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
-}
-
-<p>
-    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
-    @if (!Model.PaymentDate.HasValue)
-    {
-        <a href="/AccountToPay/InstallmentPayment/@Model.Id?Installment_Id=0" class="btn btn-info">Pagar Conta</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
-</p>
+        <p>
+            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
+            @if (!Model.PaymentDate.HasValue)
+            {<a href="/AccountToPay/InstallmentPayment/@Model.Id?Parcela=0" class="btn btn-info">Pagar Conta</a>}
+        </p>
+</div>

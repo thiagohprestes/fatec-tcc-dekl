@@ -1,39 +1,41 @@
 ﻿@using DEKL.CP.Domain.Enums
 @using DEKL.CP.UI.Extensions
 
-<h2>Cadastrar Fornecedor</h2>
-<div class="row">
-    <div class="col-md-6">
-        <section id="registerProviderForm">
-            @using (Html.BeginForm("Create", "Provider"))
-            {
-                @Html.AntiForgeryToken()
-                <div class="form">
-                    <h4>Selecione o tipo de Fornecedor</h4>
-                    <hr />
-                    @Html.ValidationMessage("Error", new { @class = "text-danger" })
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Tipo de Fornecedor</label>
-                            <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="@(TypeProvider.PhysicalPerson.GetDisplayName())" name="typeprovider" value="@TypeProvider.PhysicalPerson" checked>
-                                <label class="custom-control-label" for="@(TypeProvider.PhysicalPerson.GetDisplayName())">@(TypeProvider.PhysicalPerson.GetDescription())</label>
+<div class="container-content">
+    <h2>Cadastrar Fornecedor</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <section id="registerProviderForm">
+                @using (Html.BeginForm("Create", "Provider"))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form">
+                        <h4>Selecione o tipo de Fornecedor</h4>
+                        <hr />
+                        @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Tipo de Fornecedor</label>
+                                <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" id="@(TypeProvider.PhysicalPerson.GetDisplayName())" name="typeprovider" value="@TypeProvider.PhysicalPerson" checked>
+                                    <label class="custom-control-label" for="@(TypeProvider.PhysicalPerson.GetDisplayName())">@(TypeProvider.PhysicalPerson.GetDescription())</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" id="@(TypeProvider.LegalPerson.GetDisplayName())" name="typeprovider" value="@TypeProvider.LegalPerson">
+                                    <label class="custom-control-label" for="@(TypeProvider.LegalPerson.GetDisplayName())">@(TypeProvider.LegalPerson.GetDescription())</label>
+                                </div>
                             </div>
-                            <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="@(TypeProvider.LegalPerson.GetDisplayName())" name="typeprovider" value="@TypeProvider.LegalPerson">
-                                <label class="custom-control-label" for="@(TypeProvider.LegalPerson.GetDisplayName())">@(TypeProvider.LegalPerson.GetDescription())</label>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="submit" value="Confirmar" class="btn btn-info" />
+                                @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <input type="submit" value="Confirmar" class="btn btn-info" />
-                            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
-                        </div>
-                    </div>
-                </div>
-            }
-        </section>
+                }
+            </section>
+        </div>
     </div>
 </div>
 
