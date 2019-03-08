@@ -152,3 +152,7 @@ label.is-invalid {
     color: #f8f9fa;
     font-weight: 300;
 }
+
+.row {
+    margin: 0 !important;
+}

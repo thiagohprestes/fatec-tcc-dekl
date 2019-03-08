@@ -417,6 +417,7 @@ namespace DEKL.CP.UI.Controllers
 
                 return RedirectToAction("Index");
             }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         public ActionResult Edit(int? id)
