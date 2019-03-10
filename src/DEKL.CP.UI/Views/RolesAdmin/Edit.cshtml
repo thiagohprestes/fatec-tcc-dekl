@@ -2,7 +2,7 @@
 <div class="container-content">
     <h2>Edição</h2>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <section id="editRoleForm">
                 @using (Html.BeginForm(new { @class = "form-horizontal" }))
                 {
@@ -13,7 +13,7 @@
                     @Html.HiddenFor(m => m.Id)
                     <div class="form-group">
                         @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Digite o nome do grupo" })
                         <small>
                             @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
                         </small>

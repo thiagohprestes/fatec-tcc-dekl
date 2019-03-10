@@ -6,135 +6,140 @@
     var installment_id = (int?)ViewBag.Installment_Id ?? 0;
     var hasInstallments = Model.Installments.Any();
 }
+<div class="container-content">
 
-<h2>Pagar</h2>
-<div>
-    <h4>Selecione as contas bancárias</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.DocumentNumber):
-        </dt>
-        <dd class="text-detail">
-            @Html.DisplayFor(m => m.DocumentNumber)
-        </dd>
-
-        <dt class="title-detail">
-            Valor da Conta
-        </dt>
-        <dd class="text-detail">
-            @(installment_id != 0 ?
-                  Model.Installments?.First(obj => obj.Id == installment_id)?.Value.ToString("C2") :
-                  Model.Value.ToString("C2"))
-        </dd>
-
-        @if (!hasInstallments && Model.MaturityDate < DateTime.Now && Model.PaidValue < Model.Value)
-        {
+    <h2>Pagar</h2>
+    <div>
+        <hr />
+        <h4>Selecione a forma de pagamento</h4></br>
+        <dl class="dl-horizontal">
             <dt class="title-detail">
-                Valor total com juros
+                @Html.DisplayNameFor(m => m.DocumentNumber):
             </dt>
             <dd class="text-detail">
-                @{
-                    var daysPastDue = (int)DateTime.Now.Subtract(new DateTime(Model.MaturityDate.Year,
-                                                                              Model.MaturityDate.Month,
-                                                                              Model.MaturityDate.Day)).TotalDays;
-
-                    Model.Value += Model.Value * Model.Penalty / 100;
-                    Model.Value += Model.Value * daysPastDue * Model.DailyInterest / 100;
-
-                    @Html.Raw(Model.Value.ToString("C2"))
-                }
+                @Html.DisplayFor(m => m.DocumentNumber)
             </dd>
-        }
 
-        else if (hasInstallments && installment_id == 0 && Model.Installments.Any(i => i.MaturityDate < DateTime.Now && i.PaidValue < i.Value))
-        {
             <dt class="title-detail">
-                Valor total com juros
+                Valor da Conta
             </dt>
             <dd class="text-detail">
-                @{
-                    var overdueInstallments = Model.Installments.Where(i => i.MaturityDate < DateTime.Now && i.PaidValue < i.Value).ToList();
-
-                    Model.Value -= Model.Installments.Where(i => i.PaidValue >= i.Value).Sum(i => i.Value);
-
-                    overdueInstallments.ForEach(o =>
-                    {
-                        var daysPastDue = (int)DateTime.Now.Subtract(new DateTime(o.MaturityDate.Year,
-                                                                                  o.MaturityDate.Month,
-                                                                                  o.MaturityDate.Day)).TotalDays;
-
-                        Model.Value += o.Value * Model.Penalty / 100;
-                        Model.Value += o.Value * daysPastDue * Model.DailyInterest / 100;
-                    });
-
-                    @Html.Raw(Model.Value.ToString("C2"))
-                }
+                @(installment_id != 0 ?
+                              Model.Installments?.First(obj => obj.Id == installment_id)?.Value.ToString("C2") :
+                              Model.Value.ToString("C2"))
             </dd>
-        }
 
-        else if (installment_id != 0 && Model.Installments.Any(i => i.Id == installment_id
-                                                                    && i.MaturityDate < DateTime.Now
-                                                                    && i.PaidValue < i.Value))
-        {
+            @if (!hasInstallments && Model.MaturityDate < DateTime.Now && Model.PaidValue < Model.Value)
+            {
+                <dt class="title-detail">
+                    Valor total com juros
+                </dt>
+                <dd class="text-detail">
+                    @{
+                        var daysPastDue = (int)DateTime.Now.Subtract(new DateTime(Model.MaturityDate.Year,
+                                                                                  Model.MaturityDate.Month,
+                                                                                  Model.MaturityDate.Day)).TotalDays;
+
+                        Model.Value += Model.Value * Model.Penalty / 100;
+                        Model.Value += Model.Value * daysPastDue * Model.DailyInterest / 100;
+
+                        @Html.Raw(Model.Value.ToString("C2"))
+                    }
+                </dd>
+            }
+
+            else if (hasInstallments && installment_id == 0 && Model.Installments.Any(i => i.MaturityDate < DateTime.Now && i.PaidValue < i.Value))
+            {
+                <dt class="title-detail">
+                    Valor total com juros
+                </dt>
+                <dd class="text-detail">
+                    @{
+                        var overdueInstallments = Model.Installments.Where(i => i.MaturityDate < DateTime.Now && i.PaidValue < i.Value).ToList();
+
+                        Model.Value -= Model.Installments.Where(i => i.PaidValue >= i.Value).Sum(i => i.Value);
+
+                        overdueInstallments.ForEach(o =>
+                        {
+                            var daysPastDue = (int)DateTime.Now.Subtract(new DateTime(o.MaturityDate.Year,
+                                                                                      o.MaturityDate.Month,
+                                                                                      o.MaturityDate.Day)).TotalDays;
+
+                            Model.Value += o.Value * Model.Penalty / 100;
+                            Model.Value += o.Value * daysPastDue * Model.DailyInterest / 100;
+                        });
+
+                        @Html.Raw(Model.Value.ToString("C2"))
+                    }
+                </dd>
+            }
+
+            else if (installment_id != 0 && Model.Installments.Any(i => i.Id == installment_id
+                                                                        && i.MaturityDate < DateTime.Now
+                                                                        && i.PaidValue < i.Value))
+            {
+                <dt class="title-detail">
+                    Valor total com juros
+                </dt>
+                <dd class="text-detail">
+                    @{
+                        var installment = Model.Installments.FirstOrDefault(i => i.Id == installment_id) ?? new Installment();
+                        var daysPastDue = (int)DateTime.Now.Subtract(new DateTime(installment.MaturityDate.Year,
+                                                                                  installment.MaturityDate.Month,
+                                                                                  installment.MaturityDate.Day)).TotalDays;
+
+                        installment.Value += installment.Value * Model.Penalty / 100;
+                        installment.Value += installment.Value * daysPastDue * Model.DailyInterest / 100;
+
+                        @Html.Raw(installment.Value.ToString("C2"))
+                    }
+                </dd>
+            }
+
             <dt class="title-detail">
-                Valor total com juros
+                @Html.DisplayNameFor(m => m.Description)
             </dt>
             <dd class="text-detail">
-                @{
-                    var installment = Model.Installments.FirstOrDefault(i => i.Id == installment_id) ?? new Installment();
-                    var daysPastDue = (int)DateTime.Now.Subtract(new DateTime(installment.MaturityDate.Year,
-                                                                              installment.MaturityDate.Month,
-                                                                              installment.MaturityDate.Day)).TotalDays;
-
-                    installment.Value += installment.Value * Model.Penalty / 100;
-                    installment.Value += installment.Value * daysPastDue * Model.DailyInterest / 100;
-
-                    @Html.Raw(installment.Value.ToString("C2"))
-                }
+                @(!string.IsNullOrEmpty(Model.Description) ? Model.Description : "Sem descrição")
             </dd>
-        }
 
-        <dt class="title-detail">
-            @Html.DisplayNameFor(m => m.Description)
-        </dt>
-        <dd class="text-detail">
-            @(!string.IsNullOrEmpty(Model.Description) ? Model.Description : "Sem descrição")
-        </dd>
-
-        @if (!hasInstallments)
-        {
-            <dt class="title-detail">
-                @Html.DisplayNameFor(m => m.MaturityDate):
-            </dt>
-            <dd class="text-detail">
-                @Html.DisplayFor(m => m.MaturityDate)
-            </dd>
-        }
-    </dl>
-</div>
-
-@using (Html.BeginForm("PayAccount", "AccountToPay", method: FormMethod.Post))
-{
-    <input type="hidden" name="Id" value="@Model.Id" />
-    <input type="hidden" name="Installment_Id" value="@installment_id" />
-    <div class="row">
-        <div class="form-group col-md-3">
-            @Html.DropDownListFor(m => m.PaymentType, DEKL.CP.Domain.Enums.PaymentType.BankDeposit.ToSelectList(), new { @class = "form-control" })
-        </div>
-        <div class="form-group col-md-3">
-            @Html.DropDownList("internalBankAccount_id", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Interna", new { @class = "form-control", disabled = true })
-        </div>
-        <div class="form-group col-md-3">
-            @Html.DropDownList("providerBankAccount_id", ViewBag.ProviderBankAccounts as SelectList, "Selecione a Conta do Fornecedor", new { @class = "form-control", disabled = true })
-        </div>
+            @if (!hasInstallments)
+            {
+                <dt class="title-detail">
+                    @Html.DisplayNameFor(m => m.MaturityDate):
+                </dt>
+                <dd class="text-detail">
+                    @Html.DisplayFor(m => m.MaturityDate)
+                </dd>
+            }
+        </dl>
     </div>
 
-    <p>
-        <a href="#" class="btn btn-info" onclick="history.go(-1);">Voltar</a>
-        <input type="submit" class="btn btn-info" id="PagarConta" value="Pagar" />
-    </p>
-}
+    @using (Html.BeginForm("PayAccount", "AccountToPay", method: FormMethod.Post))
+    {
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" name="Installment_Id" value="@installment_id" />
+        <div class="row">
+            <div class="form-group col-md-3">
+                @Html.LabelFor(m => m.PaymentType, "Formas de pagamento", new { @class = "control-label" })
+                @Html.DropDownListFor(m => m.PaymentType, DEKL.CP.Domain.Enums.PaymentType.BankDeposit.ToSelectList(), new { @class = "form-control" })
+            </div>
+            <div class="form-group col-md-3">
+                @Html.Label("Contas Interna", new { @class = "control-label" })
+                @Html.DropDownList("internalBankAccount_id", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Interna", new { @class = "form-control", disabled = true })
+            </div>
+            <div class="form-group col-md-3">
+                @Html.Label("Contas do Fornecedor", new { @class = "control-label" })
+                @Html.DropDownList("providerBankAccount_id", ViewBag.ProviderBankAccounts as SelectList, "Selecione a Conta do Fornecedor", new { @class = "form-control", disabled = true })
+            </div>
+        </div>
+
+        <p>
+            <a href="#" class="btn btn-info" onclick="history.go(-1);">Voltar</a>
+            <input type="submit" class="btn btn-info" id="PagarConta" value="Pagar" />
+        </p>
+    }
+</div>
 
 @section Scripts{
     <script type="text/javascript">
