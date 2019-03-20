@@ -6,12 +6,12 @@
     var installment_id = (int?)ViewBag.Installment_Id ?? 0;
     var hasInstallments = Model.Installments.Any();
 }
-
 <div class="container-content">
+
     <h2>Pagar</h2>
     <div>
-        <h4>Selecione as contas bancárias</h4>
         <hr />
+        <h4>Selecione a forma de pagamento</h4></br>
         <dl class="dl-horizontal">
             <dt class="title-detail">
                 @Html.DisplayNameFor(m => m.DocumentNumber):
@@ -25,8 +25,8 @@
             </dt>
             <dd class="text-detail">
                 @(installment_id != 0 ?
-                      Model.Installments?.First(obj => obj.Id == installment_id)?.Value.ToString("C2") :
-                      Model.Value.ToString("C2"))
+                              Model.Installments?.First(obj => obj.Id == installment_id)?.Value.ToString("C2") :
+                              Model.Value.ToString("C2"))
             </dd>
 
             @if (!hasInstallments && Model.MaturityDate < DateTime.Now && Model.PaidValue < Model.Value)
@@ -121,13 +121,16 @@
         <input type="hidden" name="Installment_Id" value="@installment_id" />
         <div class="row">
             <div class="form-group col-md-3">
-                @Html.DropDownListFor(m => m.PaymentType, DEKL.CP.Domain.Enums.PaymentType.BankDeposit.ToSelectList(), new { @class = "form-control", required="" })
+                @Html.LabelFor(m => m.PaymentType, "Formas de pagamento", new { @class = "control-label" })
+                @Html.DropDownListFor(m => m.PaymentType, DEKL.CP.Domain.Enums.PaymentType.BankDeposit.ToSelectList(), new { @class = "form-control" })
             </div>
             <div class="form-group col-md-3">
-                @Html.DropDownList("internalBankAccount_id", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Interna", new { @class = "form-control", disabled = true, required="" })
+                @Html.Label("Contas Interna", new { @class = "control-label" })
+                @Html.DropDownList("internalBankAccount_id", ViewBag.InternalBankAccounts as SelectList, "Selecione a Conta Interna", new { @class = "form-control", disabled = true })
             </div>
             <div class="form-group col-md-3">
-                @Html.DropDownList("providerBankAccount_id", ViewBag.ProviderBankAccounts as SelectList, "Selecione a Conta do Fornecedor", new { @class = "form-control", disabled = true, required="      " })
+                @Html.Label("Contas do Fornecedor", new { @class = "control-label" })
+                @Html.DropDownList("providerBankAccount_id", ViewBag.ProviderBankAccounts as SelectList, "Selecione a Conta do Fornecedor", new { @class = "form-control", disabled = true })
             </div>
         </div>
 

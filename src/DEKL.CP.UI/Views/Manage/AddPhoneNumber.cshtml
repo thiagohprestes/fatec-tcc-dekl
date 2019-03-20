@@ -3,16 +3,16 @@
 
     <h2>Adicionar Telefone</h2>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <section id="addPhoneNumberCodeForm">
                 @using (Html.BeginForm("AddPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
                     <h4>Adicione um número</h4>
                     <hr />
-                    <div class="form-group">
+                    <div class="form-group  col-md-4">
                         @Html.LabelFor(m => m.Number, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.Number, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Number, new { @class = "form-control", placeholder = "(99) 99999-9999" })
                         <small>
                             @Html.ValidationMessageFor(m => m.Number, null, new { @class = "text-danger" })
                         </small>
