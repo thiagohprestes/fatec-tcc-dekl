@@ -121,16 +121,9 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
-                    var providerPhysicalPerson = _providerRepository.FindActiveProviderPhysicalPerson(providerPhysicalPersonViewModel.Id);
+                    providerPhysicalPersonViewModel.ApplicationUserId = User.Identity.GetUserId<int>();
 
-                    providerPhysicalPerson.Name = providerPhysicalPersonViewModel.Name;
-                    providerPhysicalPerson.CPF = providerPhysicalPersonViewModel.CPF;
-                    providerPhysicalPerson.PhoneNumber = providerPhysicalPersonViewModel.PhoneNumber;
-                    providerPhysicalPerson.Email = providerPhysicalPersonViewModel.Email;
-                    providerPhysicalPerson.ApplicationUserId = User.Identity.GetUserId<int>();
-                    providerPhysicalPerson.Address = Mapper.Map<Address>(providerPhysicalPersonViewModel.Address);
-
-                    _providerRepository.Update(providerPhysicalPerson);
+                    _providerRepository.Update(Mapper.Map<ProviderPhysicalPerson>(providerPhysicalPersonViewModel));
 
                     this.AddToastMessage("Fornecedor Editado", $"O fornecedor {providerPhysicalPersonViewModel.Name} foi editado com sucesso",
                         ToastType.Success);
@@ -140,7 +133,7 @@ namespace DEKL.CP.UI.Controllers
                 catch
                 {
                     this.AddToastMessage("Erro na Edição", $"Erro ao editar o Fornecedor {providerPhysicalPersonViewModel.Name}, " +
-                        $"favor tentar novamente", ToastType.Error);
+                        "favor tentar novamente", ToastType.Error);
                 }
             }
 
@@ -154,18 +147,9 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
-                    var providerLegalPerson = _providerRepository.FindActiveProviderLegalPerson(providerLegalPersonViewModel.Id);
+                    providerLegalPersonViewModel.ApplicationUserId = User.Identity.GetUserId<int>();
 
-                    providerLegalPerson.CorporateName = providerLegalPersonViewModel.CorporateName;
-                    providerLegalPerson.CNPJ = providerLegalPersonViewModel.CNPJ;
-                    providerLegalPerson.MunicipalRegistration = providerLegalPersonViewModel.MunicipalRegistration;
-                    providerLegalPerson.StateRegistration = providerLegalPersonViewModel.StateRegistration;
-                    providerLegalPerson.PhoneNumber = providerLegalPersonViewModel.PhoneNumber;
-                    providerLegalPerson.Email = providerLegalPersonViewModel.Email;
-                    providerLegalPerson.ApplicationUserId = User.Identity.GetUserId<int>();
-                    providerLegalPerson.Address = Mapper.Map<Address>(providerLegalPersonViewModel.Address);
-
-                    _providerRepository.Update(providerLegalPerson);
+                    _providerRepository.Update(Mapper.Map<ProviderLegalPerson>(providerLegalPersonViewModel));
 
                     this.AddToastMessage("Banco Editado", $"O fornecedor {providerLegalPersonViewModel.CorporateName} foi editado com sucesso",
                         ToastType.Success);
@@ -175,7 +159,7 @@ namespace DEKL.CP.UI.Controllers
                 catch
                 {
                     this.AddToastMessage("Erro na Edição", $"Erro ao editar o Fornecedor {providerLegalPersonViewModel.CorporateName}, " +
-                        $"favor tentar novamente", ToastType.Error);
+                        "favor tentar novamente", ToastType.Error);
                 }
             }
 
@@ -213,11 +197,6 @@ namespace DEKL.CP.UI.Controllers
 
                 try
                 {
-                    if (provider == null)
-                    {
-                        return HttpNotFound();
-                    }
-
                     _providerRepository.DeleteLogical(provider);
 
                     this.AddToastMessage("Fornecedor excluído", $"O fornecedor {nameProvider} foi excluído com sucesso", ToastType.Success);

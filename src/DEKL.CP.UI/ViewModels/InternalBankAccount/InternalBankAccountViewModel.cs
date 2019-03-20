@@ -1,5 +1,4 @@
-﻿using DEKL.CP.UI.ViewModels.BankAgency;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using DEKL.CP.UI.ViewModels.BankTransaction;
 
@@ -20,7 +19,7 @@ namespace DEKL.CP.UI.ViewModels.InternalBankAccount
         [DisplayName("Agência bancária")]
         public int BankAgencyId { get; set; }
 
-        public virtual BankAgencyViewModel BankAgency { get; set; }
+        public int ApplicationUserId { get; set; }
 
         [DisplayName("Transações bancárias")]
         public virtual ICollection<BankTransactionViewModel> BankTransactions { get; set; }

@@ -253,7 +253,8 @@ namespace DEKL.CP.Infra.Data.Migrations
                     new Bank { Name = "Banco do Brasil S.A.", Number = 1},
                     new Bank { Name = "Banco Santander (Brasil) S.A.", Number = 033 },
                     new Bank { Name = "Banco Safra S.A.", Number = 422},
-                    new Bank { Name = "Caixa Econômica Federal", Number = 104 }
+                    new Bank { Name = "Caixa Econômica Federal", Number = 104 },
+                    new Bank { Name = "Caixa da Empresa", Number = 0, Active = false }
                 };
 
                 context.Banks.AddRange(banks);
@@ -325,6 +326,22 @@ namespace DEKL.CP.Infra.Data.Migrations
                             City = "Sorocaba",
                             StateId = 25
                         }
+                    },
+                    new BankAgency
+                    {
+                        Number = 00,
+                        PhoneNumber = "",
+                        BankId = 7,
+                        Email = "",
+                        Address = new Address
+                        {
+                            Street = "",
+                            Number = "",
+                            ZipCode = "	",
+                            Neighborhood = "",
+                            City = "",
+                            StateId = 25
+                        }
                     }
                 };
 
@@ -354,7 +371,8 @@ namespace DEKL.CP.Infra.Data.Migrations
                 {
                     new InternalBankAccount { Number = "11941405", BankAgencyId = 1, Balance = 12000, ModuleId = 3, ApplicationUserId = 1 },
                     new InternalBankAccount { Number = "207274", BankAgencyId = 2, Balance = 15500, ModuleId = 3, ApplicationUserId = 1 },
-                    new InternalBankAccount { Number = "457214", BankAgencyId = 3, Balance = 134000, ModuleId = 3, ApplicationUserId = 1 }
+                    new InternalBankAccount { Number = "457214", BankAgencyId = 3, Balance = 134000, ModuleId = 3, ApplicationUserId = 1 },
+                    new InternalBankAccount { Number = "0", BankAgencyId = 5, Balance = 0, ModuleId = 3, ApplicationUserId = 1 }
                 };
 
                 context.InternalBankAccounts.AddRange(internalBankAccounts);

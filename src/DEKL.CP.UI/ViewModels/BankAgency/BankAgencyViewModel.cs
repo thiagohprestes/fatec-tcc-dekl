@@ -15,6 +15,8 @@ namespace DEKL.CP.UI.ViewModels.BankAgency
         [Required, DisplayName("Número")]
         public short Number { get; set; }
 
+        public int? AddressId { get; set; }
+
         public AddressViewModel Address { get; set; }
 
         [DisplayName("Nome do(a) gerente")]

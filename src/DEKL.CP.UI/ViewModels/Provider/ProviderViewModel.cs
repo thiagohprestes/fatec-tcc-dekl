@@ -16,7 +16,11 @@ namespace DEKL.CP.UI.ViewModels.Provider
         [EmailAddress, DisplayName("E-mail")]
         public string Email { get; set; }
 
+        public int AddressId { get; set; }
+
         public AddressViewModel Address { get; set; }
+
+        public int ApplicationUserId { get; set; }
 
         [DisplayName("Tipo de Fornecedor")]
         public TypeProvider TypeProvider { get; set; }

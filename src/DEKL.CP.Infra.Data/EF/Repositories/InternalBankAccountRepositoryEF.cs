@@ -32,5 +32,7 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                     NameBank = b.Name
                 }
             ).AsEnumerable();
+
+        public InternalBankAccount InternalBankAccountCaixa =>  _ctx.InternalBankAccounts.FirstOrDefault(i => "Caixa".Equals(i.Name));
     }
 }

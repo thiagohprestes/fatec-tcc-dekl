@@ -92,17 +92,11 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
-                    var internalBankAccount = _internalBankAccountRepository.FindActive(internalBankAccountViewModel.Id);
+                    internalBankAccountViewModel.ApplicationUserId = User.Identity.GetUserId<int>();
 
-                    internalBankAccount.Number = internalBankAccountViewModel.Number;
-                    internalBankAccount.Name = internalBankAccountViewModel.Name;
-                    internalBankAccount.BankAgencyId = internalBankAccountViewModel.BankAgencyId;
-                    internalBankAccount.Balance = internalBankAccountViewModel.Balance;
-                    internalBankAccount.ApplicationUserId = User.Identity.GetUserId<int>();
+                    _internalBankAccountRepository.Update(Mapper.Map<InternalBankAccount>(internalBankAccountViewModel));
 
-                    _internalBankAccountRepository.Update(internalBankAccount);
-
-                    this.AddToastMessage("Conta Editada", $"a conta {internalBankAccount.Name} foi editada com sucesso",
+                    this.AddToastMessage("Conta Editada", $"a conta {internalBankAccountViewModel.Name} foi editada com sucesso",
                         ToastType.Success);
 
                     return RedirectToAction("Index");

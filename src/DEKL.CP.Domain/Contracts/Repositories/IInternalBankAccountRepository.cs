@@ -9,5 +9,7 @@ namespace DEKL.CP.Domain.Contracts.Repositories
         IEnumerable<BankAgency> BankAgenciesActives { get; }
 
         IEnumerable<IInternalBankAccountRelashionships> InternalBankAccountRelashionships { get; }
+
+        InternalBankAccount InternalBankAccountCaixa { get; }
     }
 }

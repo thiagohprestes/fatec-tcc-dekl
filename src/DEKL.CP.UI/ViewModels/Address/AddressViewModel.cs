@@ -7,6 +7,8 @@ namespace DEKL.CP.UI.ViewModels.Address
 {
     public class AddressViewModel : IAddress
     {
+        public int Id { get; set; }
+
         [Required, DisplayName("Logradouro")]
         public string Street { get; set; }
 

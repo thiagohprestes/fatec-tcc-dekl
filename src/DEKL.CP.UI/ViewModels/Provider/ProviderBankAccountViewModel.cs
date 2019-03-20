@@ -12,7 +12,7 @@ namespace DEKL.CP.UI.ViewModels.Provider
         [Required, DisplayName("Número da conta")]
         public string Number { get; set; }
 
-        [Required, DisplayName("Nome")]
+        [DisplayName("Nome")]
         public string Name { get; set; }
 
         [Required, DisplayName("Agência Bancária")]
@@ -22,6 +22,8 @@ namespace DEKL.CP.UI.ViewModels.Provider
 
         [Required, DisplayName("Fornecedor")]
         public int? ProviderId { get; set; }
+
+        public int ApplicationUserId { get; set; }
 
         public virtual Domain.Entities.Provider Provider { get; set; }
 

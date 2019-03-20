@@ -8,6 +8,9 @@
                 @using (Html.BeginForm("EditProviderLegalPerson", "Provider", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
+
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.AddressId)
                     <h4>Fornecedores</h4>
                     <hr />
                     @Html.ValidationMessage("Error", new { @class = "text-danger" })

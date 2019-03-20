@@ -81,27 +81,20 @@ namespace DEKL.CP.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var bankAgency = _bankAgencyRepository.FindActive(bankAgencyViewModel.Id);
-
                 try
                 {
-                    bankAgency.Number = bankAgencyViewModel.Number;
-                    bankAgency.BankId = bankAgencyViewModel.BankId;
-                    bankAgency.ManagerName = bankAgencyViewModel.ManagerName;
-                    bankAgency.Email = bankAgencyViewModel.Email;
-                    bankAgency.PhoneNumber = bankAgencyViewModel.PhoneNumber;
-                    bankAgency.Address = Mapper.Map<Address>(bankAgencyViewModel.Address);
+                    var bankAgency = Mapper.Map<BankAgency>(bankAgencyViewModel);
 
                     _bankAgencyRepository.Update(bankAgency);
 
-                    this.AddToastMessage("Banco Editado", $"A Agência de número {bankAgency.Number} foi editada com sucesso", 
+                    this.AddToastMessage("Banco Editado", $"A Agência de número {bankAgencyViewModel.Number} foi editada com sucesso", 
                         ToastType.Success);
 
                     return RedirectToAction("Index");
                 }
                 catch
                 {
-                    this.AddToastMessage("Erro na Edição", $"Erro ao editar a Agência de número {bankAgency.Number}, " +
+                    this.AddToastMessage("Erro na Edição", $"Erro ao editar a Agência de número {bankAgencyViewModel.Number}, " +
                                                            "favor tentar novamente", ToastType.Error);
                 }
             }

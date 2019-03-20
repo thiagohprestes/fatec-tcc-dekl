@@ -49,10 +49,13 @@ namespace DEKL.CP.UI.ViewModels.AccountsToPay
         [Required, DisplayName("Parcelas")]
         public short NumberOfInstallments { get; set; }
 
+
         [Required, DisplayName("Fornecedor")]
         public int ProviderId { get; set; }
 
         public virtual ProviderViewModel Provider { get; set; }
+
+        public int ApplicationUserId { get; set; }
 
         public virtual ICollection<Installment> Installments { get; set; }
     }

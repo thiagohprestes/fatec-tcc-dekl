@@ -75,14 +75,9 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
-                    var bank = _bankRepository.FindActive(bankViewModel.Id);
+                    _bankRepository.Update(Mapper.Map<Bank>(bankViewModel));
 
-                    bank.Name = bankViewModel.Name;
-                    bank.Number = bankViewModel.Number;
-
-                    _bankRepository.Update(bank);
-
-                    this.AddToastMessage("Banco Editado", $"O banco {bank.Name} foi editado com sucesso", ToastType.Success);
+                    this.AddToastMessage("Banco Editado", $"O banco {bankViewModel.Name} foi editado com sucesso", ToastType.Success);
 
                     return RedirectToAction("Index");
                 }

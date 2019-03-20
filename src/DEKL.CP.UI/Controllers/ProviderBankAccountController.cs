@@ -99,25 +99,19 @@ namespace DEKL.CP.UI.Controllers
             {
                 try
                 {
-                    var providerBankAccount = _providerBankAccountRepository.FindActive(providerBankAccountViewModel.Id);
+                    providerBankAccountViewModel.ApplicationUserId = User.Identity.GetUserId<int>();
 
-                    providerBankAccount.Number = providerBankAccountViewModel.Number;
-                    providerBankAccount.Name = providerBankAccountViewModel.Name;
-                    providerBankAccount.BankAgencyId = providerBankAccountViewModel.BankAgencyId;
-                    providerBankAccount.ProviderId = providerBankAccountViewModel.ProviderId;
-                    providerBankAccount.ApplicationUserId = User.Identity.GetUserId<int>();
+                    _providerBankAccountRepository.Update(Mapper.Map<ProviderBankAccount>(providerBankAccountViewModel));
 
-                    _providerBankAccountRepository.Update(providerBankAccount);
-
-                    this.AddToastMessage("Conta Editada", $"a conta {providerBankAccount.Name} foi editada com sucesso",
+                    this.AddToastMessage("Conta Editada", $"a conta {providerBankAccountViewModel.Name} foi editada com sucesso",
                         ToastType.Success);
 
                     return RedirectToAction("Index");
                 }
                 catch
                 {
-                    this.AddToastMessage("Erro na Edição", $"Erro ao editar a conta {providerBankAccountViewModel.Name}, favor tentar novamente",
-                        ToastType.Error);
+                    this.AddToastMessage("Erro na Edição", $"Erro ao editar a conta {providerBankAccountViewModel.Name}, " +
+                        "favor tentar novamente", ToastType.Error);
                 }
             }
 
