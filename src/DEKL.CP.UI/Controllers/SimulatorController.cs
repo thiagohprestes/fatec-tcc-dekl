@@ -41,27 +41,20 @@ namespace DEKL.CP.UI.Controllers
 
         public JsonResult Simular(int id)
         {
+            var objSimulador = Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id));
 
-            var lista = Mapper.Map<IEnumerable<AccountToPayRelashionships>>(_accountToPayRepository.AccountToPayActivesRelashionships).ToList();
-
-            var objSimulador = lista.Find(obj => obj.Id == id);
+            // soma os valores a pagar das parcelas
+            decimal totalParcelas = 0;
+            var objParcelas = objSimulador.Installments.ToList().FindAll(obj => !obj.PaymentDate.HasValue);
+            if (objParcelas.Count > 0) totalParcelas = objParcelas.Sum(objx => objx.Value);
 
             List<Object> resultado = new List<object>();
             resultado.Add(new
             {
-                Nome = "Conta x",
-                Valor = "100"
+                Parcelas = objParcelas.Count + 1, // quantidade das parcelas mais 1 da parcela atual
+                Valor = (objSimulador.Value + totalParcelas)
             });
-            resultado.Add(new
-            {
-                Nome = "Conta y",
-                Valor = "200"
-            });
-            resultado.Add(new
-            {
-                Nome = "Conta W",
-                Valor = "300"
-            });
+            
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
     }
