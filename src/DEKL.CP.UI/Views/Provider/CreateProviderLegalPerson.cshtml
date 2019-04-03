@@ -34,17 +34,17 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group col-md-9">
+                            <div class="form-group col-md-6">
                                 @Html.LabelFor(m => m.MunicipalRegistration, new { @class = "control-label" })
-                                @Html.TextBoxFor(m => m.MunicipalRegistration, new { @class = "form-control", placeholder = "Digite o nome completo" })
+                                @Html.TextBoxFor(m => m.MunicipalRegistration, new { @class = "form-control" })
                                 <small>
                                     @Html.ValidationMessageFor(m => m.MunicipalRegistration, null, new { @class = "text-danger" })
                                 </small>
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6">
                                 @Html.LabelFor(m => m.StateRegistration, new { @class = "control-label" })
-                                @Html.TextBoxFor(m => m.StateRegistration, new { @class = "form-control", placeholder = "000.000.000-00" })
+                                @Html.TextBoxFor(m => m.StateRegistration, new { @class = "form-control" })
                                 <small>
                                     @Html.ValidationMessageFor(m => m.StateRegistration, null, new { @class = "text-danger" })
                                 </small>

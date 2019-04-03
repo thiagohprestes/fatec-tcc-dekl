@@ -263,6 +263,8 @@ namespace DEKL.CP.UI.Controllers
                 accountToPay.PaymentType = paymentType;
                 accountToPay.PaymentDate = DateTime.Now;
                 accountToPay.PaidValue = amountDue;
+                accountToPay.PaymentDate = !accountToPay.Installments.Any(i => !i.PaymentDate.HasValue) ?
+                                           DateTime.Now : (DateTime?)null;
                 internalBankAccount.Balance -= amountDue;
 
                 _accountToPayRepository.Update(accountToPay);
@@ -270,7 +272,6 @@ namespace DEKL.CP.UI.Controllers
 
                 this.AddToastMessage("Conta Paga", $"A Conta {accountToPay.Description} foi paga com sucesso",
                     ToastType.Success);
-
             }
             catch
             {

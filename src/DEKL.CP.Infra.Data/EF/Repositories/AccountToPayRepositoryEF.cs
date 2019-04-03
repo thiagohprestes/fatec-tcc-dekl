@@ -28,11 +28,11 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                          Id = atp.Id,
                          DocumentNumber = atp.DocumentNumber,
                          Provider = p.TypeProvider == Domain.Enums.TypeProvider.PhysicalPerson ? lppp.Name : lplp.CorporateName,
-                         PaymentType = atp.PaymentType,
                          Value = atp.Value,
                          Penalty = atp.Penalty,
                          MonthlyAccount = atp.MonthlyAccount,
-                         MaturityDate = atp.MaturityDate
+                         MaturityDate = atp.MaturityDate,
+                         IsPaid = atp.PaymentDate.HasValue
                     }
 
                ).AsEnumerable();
