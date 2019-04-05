@@ -7,55 +7,41 @@
 
     <h2>Relatório de Contas à Pagar</h2>
 
-    <div class="row">
-        <div class="form-group col-md-3">
-            <input type="text" class="form-control datepicker"
-                   data-jqui-dpicker-dateformat="dd/mm/yy"
-                   data-jqui-type="datepicker" data-val="true"
-                   data-val-date="O campo Data Início deve ser uma data."
-                   id="MaturityDateInitial" name="MaturityDateInitial" placeholder="Data Início" value="">
-
+    <div class="col-md-12">
+        <h5>Data de Vencimento</h5>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                @Html.JQueryUI().Datepicker("MaturityDateInitial", DateTime.Now.AddMonths(-5), new { @class = "form-control", placeholder = "Data Início" })
+            </div>
+            <div class="form-group col-md-2">
+                @Html.JQueryUI().Datepicker("MaturityDateFinal", DateTime.Now, new { @class = "form-control", placeholder = "Data Fim" })
+            </div>
+            <div class="form-group" style="margin-right:15px;">
+                <input type="button" class="btn btn-info" id="SearchButton" value="Pesquisar" />
+                <input type="button" onclick="ExportarAccountToPayReport();" class="btn btn-info" id="ExportButton" value="Exportar" />
+            </div>
         </div>
-        <div class="form-group col-md-3">
-            <input type="text" class="form-control datepicker"
-                   data-jqui-dpicker-dateformat="dd/mm/yy"
-                   data-jqui-type="datepicker" data-val="true"
-                   data-val-date="O campo Data Início deve ser uma data."
-                   id="MaturityDateFinal" name="MaturityDateFinal" placeholder="Data Fim" value="">
-
-        </div>
-        <div class="form-group" style="margin-right:15px;">
-            <input type="button" class="btn btn-info" id="SearchButton" value="Pesquisar" />
-        </div>
-        <div class="form-group">
-            <input type="button" onclick="ExportarAccountToPayReport();" class="btn btn-info" id="ExportButton" value="Exportar" />
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-striped table-hover" id="AccountToPayTable">
-                <thead>
+        <table class="table table-striped table-hover" id="AccountToPayTable">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.MaturityDate)</th>
+                    <th>@Html.DisplayNameFor(m => m.Provider)</th>
+                    <th>@Html.DisplayNameFor(m => m.Value)</th>
+                    <th>@Html.DisplayNameFor(m => m.DocumentNumber)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
                     <tr>
-                        <th>@Html.DisplayNameFor(m => m.MaturityDate)</th>
-                        <th>@Html.DisplayNameFor(m => m.Provider)</th>
-                        <th>@Html.DisplayNameFor(m => m.Value)</th>
-                        <th>@Html.DisplayNameFor(m => m.DocumentNumber)</th>
+                        <td>@Html.DisplayFor(m => item.MaturityDate)</td>
+                        <td>@Html.DisplayFor(m => item.Provider)</td>
+                        <td>@Html.DisplayFor(m => item.Value)</td>
+                        <td>@Html.DisplayFor(m => item.DocumentNumber)</td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@Html.DisplayFor(m => item.MaturityDate)</td>
-                            <td>@Html.DisplayFor(m => item.Provider)</td>
-                            <td>@Html.DisplayFor(m => item.Value)</td>
-                            <td>@Html.DisplayFor(m => item.DocumentNumber)</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 @section scripts{
@@ -97,9 +83,7 @@
                     }
                 }
             });
-        });
 
-        $(() => {
             $(".datepicker").datepicker();
         });
 
