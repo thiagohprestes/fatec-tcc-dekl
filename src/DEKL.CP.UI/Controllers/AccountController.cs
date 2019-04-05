@@ -57,7 +57,6 @@ namespace DEKL.CP.UI.Controllers
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new {ReturnUrl = returnUrl});
-                case SignInStatus.Failure:
                 default:
                      ModelState.AddModelError("Error", @"Login ou Senha incorretos.");
                     return View(model);
@@ -102,7 +101,6 @@ namespace DEKL.CP.UI.Controllers
                     return RedirectToLocal(model.ReturnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
-                case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("Error", @"Código Inválido.");
                     return View(model);

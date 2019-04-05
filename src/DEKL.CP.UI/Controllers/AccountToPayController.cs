@@ -202,7 +202,6 @@ namespace DEKL.CP.UI.Controllers
                             .Where(i => i.PaidValue < i.Value)
                             .ToList();
 
-
                         //valor total pago sem juros e mora
                         var withoutDue = amountDue = accountToPay.Value - accountToPay.Installments
                                                          .Except(overdueInstallments)
@@ -256,9 +255,9 @@ namespace DEKL.CP.UI.Controllers
                     }
                 }
 
-                var internalBankAccount = paymentType != PaymentType.BankTransfer
-                    ? _internalBankAccountRepository.InternalBankAccountCaixa
-                    : _internalBankAccountRepository.FindActive(internalBankAccount_id ?? 0);
+                var internalBankAccount = paymentType != PaymentType.BankTransfer ? 
+                    _internalBankAccountRepository.InternalBankAccountCaixa :
+                    _internalBankAccountRepository.FindActive(internalBankAccount_id ?? 0);
 
                 accountToPay.PaymentType = paymentType;
                 accountToPay.PaymentDate = DateTime.Now;

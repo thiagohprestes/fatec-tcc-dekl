@@ -6,7 +6,6 @@
 <div class="container-content">
 
     <h2>Simulador </h2>
-
    
     <div class="row">
         <div class="col-md-12">
@@ -41,7 +40,9 @@
                         @foreach (var item in Model.ToList().FindAll(obj => obj.MaturityDate > DateTime.Now))
                         {
                             <tr>
-                                <td><input type="checkbox" value="@item.Id" name="simular" id="simular" /></td>
+                                <td>
+                                    <input type="checkbox" value="@item.Id" name="simular" id="simular" class="custom-checkbox"/>
+                                </td>
                                 <td>@Html.DisplayFor(m => item.DocumentNumber)</td>
                                 <td>@Html.DisplayFor(m => item.Provider)</td>
                                 <td>@Html.DisplayFor(m => item.PaymentTypeDescription)</td>
