@@ -357,7 +357,7 @@
     <Compile Include="Scripts\Toastr\Toastr.cs" />
     <Compile Include="Scripts\Toastr\ToastType.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\AccountsToPay\AccountToPayVM.cs" />
+    <Compile Include="ViewModels\AccountsToPay\AccountToPayRelashionships.cs" />
     <Compile Include="ViewModels\AccountsToPay\AccountToPayViewModel.cs" />
     <Compile Include="ViewModels\Address\AddressViewModel.cs" />
     <Compile Include="ViewModels\Address\AddressVM.cs" />

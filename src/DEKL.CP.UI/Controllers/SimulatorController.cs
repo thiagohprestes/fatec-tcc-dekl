@@ -16,10 +16,12 @@ namespace DEKL.CP.UI.Controllers
         public SimulatorController(IAccountToPayRepository accountToPayRepository) => _accountToPayRepository = accountToPayRepository;
 
         public ActionResult Index()
-            => View(Mapper.Map<IEnumerable<AccountToPayRelashionships>>(_accountToPayRepository.AccountToPayActivesRelashionships));
+            => View(Mapper.Map<IEnumerable<AccountToPayRelashionships>>(_accountToPayRepository.AccountToPayOpenedRelashionships));
 
         public JsonResult Simular(int id)
         {
+            //todo Alterar para exibir o valor total a pagar das contas selecionadas e o total de juros
+
             var objSimulador = Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id));
 
             // soma os valores a pagar das parcelas
@@ -32,7 +34,7 @@ namespace DEKL.CP.UI.Controllers
                 new
                 {
                     Parcelas = objParcelas.Count + 1, // quantidade das parcelas mais 1 da parcela atual
-                    Valor = objSimulador.Value + totalParcelas
+                    Valor = objParcelas.Count > 0 ? totalParcelas : objSimulador.Value
                 }
             };
 

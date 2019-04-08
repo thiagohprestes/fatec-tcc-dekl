@@ -256,13 +256,13 @@ namespace DEKL.CP.UI.Controllers
                 }
 
                 var internalBankAccount = paymentType != PaymentType.BankTransfer ? 
-                    _internalBankAccountRepository.InternalBankAccountCaixa :
-                    _internalBankAccountRepository.FindActive(internalBankAccount_id ?? 0);
+                                          _internalBankAccountRepository.InternalBankAccountCaixa :
+                                          _internalBankAccountRepository.FindActive(internalBankAccount_id ?? 0);
 
                 accountToPay.PaymentType = paymentType;
                 accountToPay.PaymentDate = DateTime.Now;
                 accountToPay.PaidValue = amountDue;
-                accountToPay.PaymentDate = !accountToPay.Installments.Any(i => !i.PaymentDate.HasValue) ?
+                accountToPay.PaymentDate = accountToPay.Installments.All(i => i.PaymentDate.HasValue) ?
                                            DateTime.Now : (DateTime?)null;
                 internalBankAccount.Balance -= amountDue;
 

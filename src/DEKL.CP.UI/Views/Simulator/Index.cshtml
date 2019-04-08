@@ -5,15 +5,15 @@
 }
 <div class="container-content">
 
-    <h2>Simulador </h2>
-   
+    <h2>Simulador</h2>
+
     <div class="row">
         <div class="col-md-12">
             <section id="changePasswordForm">
                 <p>
                     <a class="btn btn-info" href="javascript:history.back(-1)">Voltar</a>
                 </p>
-                <div class="simulacao">
+                <div class="simulacao" style="display:none">
                     <div class="alert alert-info" role="alert">
                         Quantidade de Parcelas selecionada(s): <strong class="parcelas"></strong> <br />
                         Valor total das parcelas: <strong class="valor"></strong>
@@ -27,25 +27,24 @@
                             <th>Simular</th>
                             <th>@Html.DisplayNameFor(m => m.DocumentNumber)</th>
                             <th>@Html.DisplayNameFor(m => m.Provider)</th>
-                            <th>@Html.DisplayNameFor(m => m.PaymentType)</th>
                             <th>@Html.DisplayNameFor(m => m.Value)</th>
                             <th>@Html.DisplayNameFor(m => m.Penalty)</th>
                             <th>@Html.DisplayNameFor(m => m.MonthlyAccount)</th>
                             <th>@Html.DisplayNameFor(m => m.MaturityDate)</th>
                         </tr>
                     </thead>
-
                     <tbody>
-
-                        @foreach (var item in Model.ToList().FindAll(obj => obj.MaturityDate > DateTime.Now))
+                        @foreach (var item in Model)
                         {
                             <tr>
                                 <td>
-                                    <input type="checkbox" value="@item.Id" name="simular" id="simular" class="custom-checkbox"/>
+                                    <div class="custom-control custom-checkbox">
+                                        @Html.CheckBox($"Simular-{item.Id}", new { @class = "checkbox-inline custom-control-input", value = item.Id})
+                                        @Html.Label($"Simular-{item.Id}", " ", new { @class = "custom-control-label hidden" })
+                                    </div>
                                 </td>
                                 <td>@Html.DisplayFor(m => item.DocumentNumber)</td>
                                 <td>@Html.DisplayFor(m => item.Provider)</td>
-                                <td>@Html.DisplayFor(m => item.PaymentTypeDescription)</td>
                                 <td>@Html.DisplayFor(m => item.Value)</td>
                                 <td>@Html.DisplayFor(m => item.Penalty)</td>
                                 <td>@(item.MonthlyAccount ? "Sim" : "Não")</td>
@@ -68,10 +67,7 @@
                 scrollCollapse: true,
                 responsive: true,
                 columnDefs: [
-                    { className: "text-left", "targets": [0, 1] },
-                    { className: "text-center", "targets": [5, 6] },
-                    { width: "15%", "targets": 7 },
-                    { orderable: false, "targets": 7 }
+                    { className: "text-center", "targets": [0, 5, 6] }
                 ],
                 language: {
                     decimal: "",
@@ -100,11 +96,7 @@
             });
         });
 
-        $(document).ready(function () {
-            $(".simulacao").hide();
-        });
-
-        $('input[type=checkbox]').click(function () {
+        $('input[type="checkbox"]').click(function () {
             var isChecked = $(this).is(":checked");
             $.ajax({
                 dataType: "json",
@@ -116,7 +108,7 @@
 
                     $(dados).each(function (i) {
                         if (isChecked == true) {
-                            $(".parcelas").text(parseInt($(".parcelas").text() == "" ? "0" : $(".parcelas").text()) + dados[i].Parcelas); 
+                            $(".parcelas").text(parseInt($(".parcelas").text() == "" ? "0" : $(".parcelas").text()) + dados[i].Parcelas);
                             $("#valueTotal").val((parseInt($("#valueTotal").val()) + dados[i].Valor));
                             $(".valor").text($("#valueTotal").val());
                             $(".valor").text(parseFloat($(".valor").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
@@ -124,7 +116,7 @@
                             $("html, body").animate({ scrollTop: 0 }, 600);
                         }
                         else {
-                            $(".parcelas").text(parseInt($(".parcelas").text() == "" ? "0" : $(".parcelas").text()) - dados[i].Parcelas); 
+                            $(".parcelas").text(parseInt($(".parcelas").text() == "" ? "0" : $(".parcelas").text()) - dados[i].Parcelas);
                             $("#valueTotal").val((parseInt($("#valueTotal").val()) - dados[i].Valor));
                             $(".valor").text($("#valueTotal").val());
                             $(".valor").text(parseFloat($(".valor").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
@@ -133,8 +125,9 @@
                                 $(".simulacao").hide();
                             }
                         }
-                        
+
                     });
+                    $(".simulacao").show();
                 },
                 error: function () {
                     $(".simulacao").hide();
