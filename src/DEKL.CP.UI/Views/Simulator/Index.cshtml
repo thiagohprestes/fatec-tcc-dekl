@@ -15,8 +15,9 @@
                 </p>
                 <div class="simulacao" style="display:none">
                     <div class="alert alert-info" role="alert">
-                        Quantidade de Parcelas selecionada(s): <strong class="parcelas"></strong> <br />
-                        Valor total das parcelas: <strong class="valor"></strong>
+                        Multa: <strong id="penalty"></strong><br />
+                        Juros de Mora diária: <strong id="dailyInterest"></strong><br />
+                        Valor Total: <strong id="amountDue"></strong>
 
                         <input type="hidden" name="valueTotal" id="valueTotal" value="0" />
                     </div>
@@ -102,26 +103,31 @@
                 dataType: "json",
                 type: "GET",
                 url: "/Simulator/Simular?id=" + $(this).val(),
-                success: function (dados) {
-
+                success: function (result) {
                     $(".simulacao").fadeIn("slide");
 
-                    $(dados).each(function (i) {
+                    $(result).each(function (i) {
                         if (isChecked == true) {
-                            $(".parcelas").text(parseInt($(".parcelas").text() == "" ? "0" : $(".parcelas").text()) + dados[i].Parcelas);
-                            $("#valueTotal").val((parseInt($("#valueTotal").val()) + dados[i].Valor));
-                            $(".valor").text($("#valueTotal").val());
-                            $(".valor").text(parseFloat($(".valor").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
+                            $("#penalty").text(parseFloat($("#penalty").text() == "" ? "0" : $("#penalty").text()) + result.penaltySum);
+                            $("#dailyInterest").text(parseFloat($("#dailyInterest").text() == "" ? "0" : $("#dailyInterest").text()) + result.dailyInterestSum);
+                            $("#amountDue").text(parseFloat($("#amountDue").text() == "" ? "0" : $("#amountDue").text()) + result.amountDue);
+
+                            $("#penalty").text(parseFloat($("#penalty").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
+                            $("#dailyInterest").text(parseFloat($("#dailyInterest").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
+                            $("#amountDue").text(parseFloat($("#amountDue").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
 
                             $("html, body").animate({ scrollTop: 0 }, 600);
                         }
                         else {
-                            $(".parcelas").text(parseInt($(".parcelas").text() == "" ? "0" : $(".parcelas").text()) - dados[i].Parcelas);
-                            $("#valueTotal").val((parseInt($("#valueTotal").val()) - dados[i].Valor));
-                            $(".valor").text($("#valueTotal").val());
-                            $(".valor").text(parseFloat($(".valor").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
+                            $("#penalty").text(parseFloat($("#penalty").text() == "" ? "0" : $("#penalty").text()) - result.penaltySum);
+                            $("#dailyInterest").text(parseFloat($("#dailyInterest").text() == "" ? "0" : $("#dailyInterest").text()) - result.dailyInterestSum);
+                            $("#amountDue").text(parseFloat($("#amountDue").text() == "" ? "0" : $("#amountDue").text()) - result.amountDue);
 
-                            if (parseInt($(".parcelas").text()) == 0) {
+                            $("#penalty").text(parseFloat($("#penalty").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
+                            $("#dailyInterest").text(parseFloat($("#dailyInterest").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
+                            $("#amountDue").text(parseFloat($("#amountDue").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
+
+                            if (parseInt($("#juros").text()) == 0) {
                                 $(".simulacao").hide();
                             }
                         }
