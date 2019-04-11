@@ -76,15 +76,13 @@ namespace DEKL.CP.UI.Controllers
 
                     _accountToPayRepository.Add(accountToPay);
 
-                    this.AddToastMessage("Conta salva", $"A conta {accountToPay.Description} foi salva com sucesso",
-                                         ToastType.Success);
+                    this.AddToastMessage("Conta salva", $"A conta {accountToPay.Description} foi salva com sucesso", ToastType.Success);
 
                     return RedirectToAction("Index");
                 }
                 catch
                 {
-                    this.AddToastMessage("Erro no salvamento", $"Erro ao salvar a conta {accountToPay.Description}, " +
-                                         "favor tentar novamente", ToastType.Error);
+                    this.AddToastMessage("Erro no salvamento", $"Erro ao salvar a conta {accountToPay.Description}, favor tentar novamente", ToastType.Error);
 
                 }
             }
@@ -146,9 +144,7 @@ namespace DEKL.CP.UI.Controllers
                     //conta em atraso
                     if (accountToPay.MaturityDate < DateTime.Now && accountToPay.PaidValue < accountToPay.Value)
                     {
-                        var daysPastDue = (int) DateTime.Now.Subtract(new DateTime(accountToPay.MaturityDate.Year,
-                            accountToPay.MaturityDate.Month,
-                            accountToPay.MaturityDate.Day)).TotalDays;
+                        var daysPastDue = (int) DateTime.Now.Subtract(accountToPay.MaturityDate).TotalDays;
 
                         amountDue = accountToPay.Value - accountToPay.Installments
                                                                      .Where(i => i.PaidValue >= i.Value)
@@ -256,26 +252,23 @@ namespace DEKL.CP.UI.Controllers
                 }
 
                 var internalBankAccount = paymentType != PaymentType.BankTransfer ? 
-                    _internalBankAccountRepository.InternalBankAccountCaixa :
-                    _internalBankAccountRepository.FindActive(internalBankAccount_id ?? 0);
+                                          _internalBankAccountRepository.InternalBankAccountCaixa :
+                                          _internalBankAccountRepository.FindActive(internalBankAccount_id ?? 0);
 
                 accountToPay.PaymentType = paymentType;
                 accountToPay.PaymentDate = DateTime.Now;
                 accountToPay.PaidValue = amountDue;
-                accountToPay.PaymentDate = !accountToPay.Installments.Any(i => !i.PaymentDate.HasValue) ?
-                                           DateTime.Now : (DateTime?)null;
+                accountToPay.PaymentDate = accountToPay.Installments.All(i => i.PaymentDate.HasValue) ? DateTime.Now : (DateTime?)null;
                 internalBankAccount.Balance -= amountDue;
 
                 _accountToPayRepository.Update(accountToPay);
                 _internalBankAccountRepository.Update(internalBankAccount);
 
-                this.AddToastMessage("Conta Paga", $"A Conta {accountToPay.Description} foi paga com sucesso",
-                    ToastType.Success);
+                this.AddToastMessage("Conta Paga", $"A Conta {accountToPay.Description} foi paga com sucesso", ToastType.Success);
             }
             catch
             {
-                this.AddToastMessage("Conta não Paga", $"Erro ao pagar a conta {accountToPay.Description}, tente novamente",
-                    ToastType.Error);
+                this.AddToastMessage("Conta não Paga", $"Erro ao pagar a conta {accountToPay.Description}, tente novamente", ToastType.Error);
             }
 
             return RedirectToAction("Index");
@@ -311,15 +304,13 @@ namespace DEKL.CP.UI.Controllers
 
                     _accountToPayRepository.Update(Mapper.Map<AccountToPay>(accountToPayViewModel));
 
-                    this.AddToastMessage("Conta Editada", $"A Conta {accountToPayViewModel.Description} foi editada com sucesso",
-                        ToastType.Success);
+                    this.AddToastMessage("Conta Editada", $"A Conta {accountToPayViewModel.Description} foi editada com sucesso", ToastType.Success);
 
                     return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
-                    this.AddToastMessage("Erro na Edição", $"Erro ao editar a conta {accountToPayViewModel.Description}, " +
-                        "favor tentar novamente", ToastType.Error);
+                    this.AddToastMessage("Erro na Edição", $"Erro ao editar a conta {accountToPayViewModel.Description}, favor tentar novamente", ToastType.Error);
                 }
             }
 
@@ -361,15 +352,13 @@ namespace DEKL.CP.UI.Controllers
 
                     _accountToPayRepository.DeleteLogical(accountToPay);
 
-                    this.AddToastMessage("Conta excluída", $"A Conta {accountToPay.Description} foi excluída com sucesso",
-                        ToastType.Success);
+                    this.AddToastMessage("Conta excluída", $"A Conta {accountToPay.Description} foi excluída com sucesso", ToastType.Success);
 
                     return RedirectToAction("Index");
                 }
                 catch
                 {
-                    this.AddToastMessage("Erro na Exclusão", $"Erro ao excluir a Conta {accountToPay?.Description}, " +
-                        "favor tentar novamente", ToastType.Error);
+                    this.AddToastMessage("Erro na Exclusão", $"Erro ao excluir a Conta {accountToPay?.Description}, favor tentar novamente", ToastType.Error);
                 }
             }
 

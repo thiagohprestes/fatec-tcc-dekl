@@ -36,5 +36,28 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                     }
 
                ).AsEnumerable();
+
+        public IEnumerable<IAccountToPayRelashionships> AccountToPayOpenedRelashionships
+            => (
+                from atp in _ctx.AccountToPays
+                join p in _ctx.Providers on atp.ProviderId equals p.Id
+                join ppp in _ctx.ProviderPhysicalPersons on p.Id equals ppp.Id into temp
+                from lppp in temp.DefaultIfEmpty()
+                join plp in _ctx.ProviderLegalPersons on p.Id equals plp.Id into temp2
+                from lplp in temp2.DefaultIfEmpty()
+                where atp.Active && p.Active && !atp.PaymentDate.HasValue
+                select new AccountToPayDTO
+                {
+                    Id = atp.Id,
+                    DocumentNumber = atp.DocumentNumber,
+                    Provider = p.TypeProvider == Domain.Enums.TypeProvider.PhysicalPerson ? lppp.Name : lplp.CorporateName,
+                    Value = atp.Value,
+                    Penalty = atp.Penalty,
+                    MonthlyAccount = atp.MonthlyAccount,
+                    MaturityDate = atp.MaturityDate,
+                    IsPaid = atp.PaymentDate.HasValue
+                }
+
+            ).AsEnumerable();
     }
 }

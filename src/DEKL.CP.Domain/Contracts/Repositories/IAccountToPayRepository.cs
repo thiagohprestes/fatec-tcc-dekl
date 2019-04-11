@@ -7,5 +7,6 @@ namespace DEKL.CP.Domain.Contracts.Repositories
     public interface IAccountToPayRepository : IRepository<AccountToPay>
     {
         IEnumerable<IAccountToPayRelashionships> AccountToPayActivesRelashionships { get; }
+        IEnumerable<IAccountToPayRelashionships> AccountToPayOpenedRelashionships { get; }
     }
 }

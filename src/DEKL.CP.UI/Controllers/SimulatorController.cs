@@ -5,6 +5,7 @@ using DEKL.CP.UI.ViewModels.AccountsToPay;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq;
+using System;
 
 namespace DEKL.CP.UI.Controllers
 {
@@ -16,27 +17,56 @@ namespace DEKL.CP.UI.Controllers
         public SimulatorController(IAccountToPayRepository accountToPayRepository) => _accountToPayRepository = accountToPayRepository;
 
         public ActionResult Index()
-            => View(Mapper.Map<IEnumerable<AccountToPayRelashionships>>(_accountToPayRepository.AccountToPayActivesRelashionships));
+            => View(Mapper.Map<IEnumerable<AccountToPayRelashionships>>(_accountToPayRepository.AccountToPayOpenedRelashionships));
 
         public JsonResult Simular(int id)
         {
-            var objSimulador = Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id));
+            //todo Alterar para exibir o valor total a pagar das contas selecionadas e o total de juros
+            var amountDue = 0M;
+            var accountToPay = _accountToPayRepository.Find(id);
+            var penaltySum = 0M;
+            var dailyInterestSum = 0M;
 
-            // soma os valores a pagar das parcelas
-            decimal totalParcelas = 0;
-            var objParcelas = objSimulador.Installments.ToList().FindAll(obj => !obj.PaymentDate.HasValue);
-            if (objParcelas.Count > 0) totalParcelas = objParcelas.Sum(objx => objx.Value);
-
-            var resultado = new List<object>
+            //não possuí parcelas
+            if (!accountToPay.Installments.Any())
             {
-                new
+                //conta em atraso
+                if (accountToPay.MaturityDate < DateTime.Now && !accountToPay.PaymentDate.HasValue)
                 {
-                    Parcelas = objParcelas.Count + 1, // quantidade das parcelas mais 1 da parcela atual
-                    Valor = objSimulador.Value + totalParcelas
-                }
-            };
+                    var daysPastDue = (int)DateTime.Now.Subtract(accountToPay.MaturityDate).TotalDays;
 
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+                    penaltySum = accountToPay.Value * accountToPay.Penalty / 100;
+                    dailyInterestSum = (accountToPay.Value + penaltySum) * daysPastDue * accountToPay.DailyInterest / 100;
+                    amountDue = accountToPay.Value + penaltySum + dailyInterestSum;
+                }
+            }
+            //possuí parcelas
+            else
+            {
+                //parcelas vencidas
+                var overdueInstallments = accountToPay.Installments
+                                                      .Where(i => i.MaturityDate < DateTime.Now && !i.PaymentDate.HasValue)
+                                                      .ToList();
+
+                //parcelas em dia e ainda não pagas
+                var installmentsOk = accountToPay.Installments
+                                                 .Except(overdueInstallments)
+                                                 .Where(i => !i.PaymentDate.HasValue)
+                                                 .ToList();
+
+                overdueInstallments.ForEach(o =>
+                {
+                    decimal penalty;
+                    var daysPastDue = (int)DateTime.Now.Subtract(o.MaturityDate).TotalDays;
+
+                    penaltySum += penalty = o.Value * accountToPay.Penalty / 100;
+                    dailyInterestSum += (o.Value + penalty) * daysPastDue * accountToPay.DailyInterest / 100;
+                });         
+
+                amountDue = penaltySum + dailyInterestSum + installmentsOk.Sum(i => i.Value) + overdueInstallments.Sum(i => i.Value);
+            }
+
+            return Json(new { penaltySum, dailyInterestSum, amountDue }, JsonRequestBehavior.AllowGet);
         }
     }
 }
