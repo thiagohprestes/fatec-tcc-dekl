@@ -128,8 +128,8 @@ namespace DEKL.CP.UI.Controllers
             return View(Mapper.Map<AccountToPayViewModel>(_accountToPayRepository.Find(id.Value)));
         }
 
-        public ActionResult PayAccount(int id, int installment_id, PaymentType paymentType, int? internalBankAccount_id, 
-            int? providerBankAccount_id)
+        public ActionResult PayAccount(int id, int installment_id, PaymentType paymentType, int? internalBankAccount_id,
+                                      int? providerBankAccount_id)
         {
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
@@ -151,8 +151,8 @@ namespace DEKL.CP.UI.Controllers
                             accountToPay.MaturityDate.Day)).TotalDays;
 
                         amountDue = accountToPay.Value - accountToPay.Installments
-                                        .Where(i => i.PaidValue >= i.Value)
-                                        .Sum(i => i.Value);
+                                                                     .Where(i => i.PaidValue >= i.Value)
+                                                                     .Sum(i => i.Value);
 
                         amountDue += amountDue * accountToPay.Penalty / 100;
                         amountDue += amountDue * daysPastDue * accountToPay.DailyInterest / 100;
@@ -193,20 +193,20 @@ namespace DEKL.CP.UI.Controllers
                     {
                         //parcelas vencidas
                         var overdueInstallments = accountToPay.Installments
-                            .Where(i => i.MaturityDate < DateTime.Now && i.PaidValue < i.Value)
-                            .ToList();
+                                                              .Where(i => i.MaturityDate < DateTime.Now && i.PaidValue < i.Value)
+                                                              .ToList();
 
                         //parcelas em dia e ainda não pagas
                         var installmentsOk = accountToPay.Installments
-                            .Except(overdueInstallments)
-                            .Where(i => i.PaidValue < i.Value)
-                            .ToList();
+                                                         .Except(overdueInstallments)
+                                                         .Where(i => i.PaidValue < i.Value)
+                                                         .ToList();
 
                         //valor total pago sem juros e mora
                         var withoutDue = amountDue = accountToPay.Value - accountToPay.Installments
-                                                         .Except(overdueInstallments)
-                                                         .Except(installmentsOk)
-                                                         .Sum(i => i.Value);
+                                                                                      .Except(overdueInstallments)
+                                                                                      .Except(installmentsOk)
+                                                                                      .Sum(i => i.Value);
 
                         overdueInstallments.ForEach(o =>
                         {
@@ -316,7 +316,7 @@ namespace DEKL.CP.UI.Controllers
 
                     return RedirectToAction("Index");
                 }
-                catch
+                catch (Exception ex)
                 {
                     this.AddToastMessage("Erro na Edição", $"Erro ao editar a conta {accountToPayViewModel.Description}, " +
                         "favor tentar novamente", ToastType.Error);

@@ -6,7 +6,7 @@
 <div class="container-content">
 
     <h2>Simulador </h2>
-   
+
     <div class="row">
         <div class="col-md-12">
             <section id="changePasswordForm">
@@ -34,14 +34,12 @@
                             <th>@Html.DisplayNameFor(m => m.MaturityDate)</th>
                         </tr>
                     </thead>
-
                     <tbody>
-
                         @foreach (var item in Model.ToList().FindAll(obj => obj.MaturityDate > DateTime.Now))
                         {
                             <tr>
                                 <td>
-                                    <input type="checkbox" value="@item.Id" name="simular" id="simular" class="custom-checkbox"/>
+                                    <input type="checkbox" value="@item.Id" name="simular" id="simular" class="custom-checkbox" />
                                 </td>
                                 <td>@Html.DisplayFor(m => item.DocumentNumber)</td>
                                 <td>@Html.DisplayFor(m => item.Provider)</td>
@@ -116,7 +114,7 @@
 
                     $(dados).each(function (i) {
                         if (isChecked == true) {
-                            $(".parcelas").text(parseInt($(".parcelas").text() == "" ? "0" : $(".parcelas").text()) + dados[i].Parcelas); 
+                            $(".parcelas").text(parseInt($(".parcelas").text() == "" ? "0" : $(".parcelas").text()) + dados[i].Parcelas);
                             $("#valueTotal").val((parseInt($("#valueTotal").val()) + dados[i].Valor));
                             $(".valor").text($("#valueTotal").val());
                             $(".valor").text(parseFloat($(".valor").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
@@ -124,7 +122,7 @@
                             $("html, body").animate({ scrollTop: 0 }, 600);
                         }
                         else {
-                            $(".parcelas").text(parseInt($(".parcelas").text() == "" ? "0" : $(".parcelas").text()) - dados[i].Parcelas); 
+                            $(".parcelas").text(parseInt($(".parcelas").text() == "" ? "0" : $(".parcelas").text()) - dados[i].Parcelas);
                             $("#valueTotal").val((parseInt($("#valueTotal").val()) - dados[i].Valor));
                             $(".valor").text($("#valueTotal").val());
                             $(".valor").text(parseFloat($(".valor").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
@@ -133,7 +131,7 @@
                                 $(".simulacao").hide();
                             }
                         }
-                        
+
                     });
                 },
                 error: function () {

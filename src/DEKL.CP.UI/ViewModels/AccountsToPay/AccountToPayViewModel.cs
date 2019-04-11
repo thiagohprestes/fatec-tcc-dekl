@@ -39,7 +39,7 @@ namespace DEKL.CP.UI.ViewModels.AccountsToPay
 
         [Required, DisplayName("Prioridade")]
         public Priority Priority { get; set; }
-
+         
         [Required, DisplayName("Tipo de pagamento")]
         public PaymentType PaymentType { get; set; }
 

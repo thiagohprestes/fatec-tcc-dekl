@@ -34,6 +34,7 @@ namespace DEKL.CP.Infra.CrossCutting.IoC
             container.Register<IProviderRepository, ProviderRepositoryEF>(Lifestyle.Scoped);
             container.Register<IAccountToPayRepository, AccountToPayRepositoryEF>(Lifestyle.Scoped);
             container.Register<IReportRepository, ReportRepositoryEF>(Lifestyle.Scoped);            
+            container.Register<IAuditRepository, AuditRepositoryEF>(Lifestyle.Scoped);
         }
     }
 }
