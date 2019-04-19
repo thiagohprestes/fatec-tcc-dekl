@@ -143,7 +143,7 @@ namespace DEKL.CP.UI.Controllers
                     //conta em atraso
                     if (accountToPay.MaturityDate < DateTime.Now && accountToPay.PaidValue < accountToPay.Value)
                     {
-                        var daysPastDue = (int) DateTime.Now.Subtract(accountToPay.MaturityDate).TotalDays;
+                        var daysPastDue = (int)DateTime.Now.Subtract(accountToPay.MaturityDate).TotalDays;
 
                         amountDue = accountToPay.Value - accountToPay.Installments
                                                                      .Where(i => i.PaidValue >= i.Value)
@@ -245,7 +245,7 @@ namespace DEKL.CP.UI.Controllers
                     }
                 }
 
-                var internalBankAccount = paymentType != PaymentType.BankTransfer ? 
+                var internalBankAccount = paymentType != PaymentType.BankTransfer ?
                                           _internalBankAccountRepository.InternalBankAccountCaixa :
                                           _internalBankAccountRepository.FindActive(internalBankAccount_id ?? 0);
 
@@ -256,7 +256,7 @@ namespace DEKL.CP.UI.Controllers
                 internalBankAccount.Balance -= amountDue;
 
                 _accountToPayRepository.Update(accountToPay);
-                _internalBankAccountRepository.Update(internalBankAccount);                
+                _internalBankAccountRepository.Update(internalBankAccount);
 
                 this.AddToastMessage("Conta Paga", $"A Conta {accountToPay.Description} foi paga com sucesso", ToastType.Success);
             }
@@ -290,22 +290,32 @@ namespace DEKL.CP.UI.Controllers
         [HttpPost, Authorize(Roles = "Administrador"), ValidateAntiForgeryToken]
         public ActionResult Edit(AccountToPayViewModel accountToPayViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    accountToPayViewModel.ApplicationUserId = User.Identity.GetUserId<int>();
+                var accountToPay = _accountToPayRepository.FindActive(accountToPayViewModel.Id);
 
-                    _accountToPayRepository.Update(Mapper.Map<AccountToPay>(accountToPayViewModel));
+                accountToPay.Value = accountToPayViewModel.Value;
+                accountToPay.PaidValue = accountToPayViewModel.PaidValue;
+                accountToPay.PaymentDate = accountToPayViewModel.PaymentDate;
+                accountToPay.Description = accountToPayViewModel.Description;
+                accountToPay.MaturityDate = accountToPayViewModel.MaturityDate;
+                accountToPay.Penalty = accountToPayViewModel.Penalty;
+                accountToPay.DailyInterest = accountToPayViewModel.DailyInterest;
+                accountToPay.MonthlyAccount = accountToPayViewModel.MonthlyAccount;
+                accountToPay.Priority = accountToPayViewModel.Priority;
+                accountToPay.ProviderId = accountToPayViewModel.ProviderId;
 
-                    this.AddToastMessage("Conta Editada", $"A Conta {accountToPayViewModel.Description} foi editada com sucesso", ToastType.Success);
+                accountToPayViewModel.ApplicationUserId = User.Identity.GetUserId<int>();
 
-                    return RedirectToAction("Index");
-                }
-                catch (Exception ex)
-                {
-                    this.AddToastMessage("Erro na Edição", $"Erro ao editar a conta {accountToPayViewModel.Description}, favor tentar novamente", ToastType.Error);
-                }
+                _accountToPayRepository.Update(accountToPay);
+
+                this.AddToastMessage("Conta Editada", $"A Conta {accountToPayViewModel.Description} foi editada com sucesso", ToastType.Success);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                this.AddToastMessage("Erro na Edição", $"Erro ao editar a conta {accountToPayViewModel.Description}, favor tentar novamente", ToastType.Error);
             }
 
             return View();
