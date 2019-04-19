@@ -136,10 +136,9 @@ namespace DEKL.CP.UI.Controllers
             try
             {
                 var amountDue = 0M;
-                var hasInstallments = accountToPay.Installments.Any();
 
                 //não possuí parcelas
-                if (!hasInstallments)
+                if (!accountToPay.Installments.Any())
                 {
                     //conta em atraso
                     if (accountToPay.MaturityDate < DateTime.Now && accountToPay.PaidValue < accountToPay.Value)
@@ -189,13 +188,13 @@ namespace DEKL.CP.UI.Controllers
                     {
                         //parcelas vencidas
                         var overdueInstallments = accountToPay.Installments
-                                                              .Where(i => i.MaturityDate < DateTime.Now && i.PaidValue < i.Value)
+                                                              .Where(i => i.MaturityDate < DateTime.Now && !i.PaymentDate.HasValue)
                                                               .ToList();
 
                         //parcelas em dia e ainda não pagas
                         var installmentsOk = accountToPay.Installments
                                                          .Except(overdueInstallments)
-                                                         .Where(i => i.PaidValue < i.Value)
+                                                         .Where(i => !i.PaymentDate.HasValue)
                                                          .ToList();
 
                         //valor total pago sem juros e mora
@@ -206,9 +205,7 @@ namespace DEKL.CP.UI.Controllers
 
                         overdueInstallments.ForEach(o =>
                         {
-                            var daysPastDue = (int) DateTime.Now.Subtract(new DateTime(o.MaturityDate.Year,
-                                o.MaturityDate.Month,
-                                o.MaturityDate.Day)).TotalDays;
+                            var daysPastDue = (int)DateTime.Now.Subtract(o.MaturityDate).TotalDays;
 
                             amountDue += amountDue * accountToPay.Penalty / 100;
                             amountDue += amountDue * daysPastDue * accountToPay.DailyInterest / 100;
@@ -232,12 +229,9 @@ namespace DEKL.CP.UI.Controllers
 
                     else
                     {
-                        var installment = accountToPay.Installments.FirstOrDefault(i => i.Id == installment_id) ??
-                                          new Installment();
+                        var installment = accountToPay.Installments.FirstOrDefault(i => i.Id == installment_id) ?? new Installment();
 
-                        var daysPastDue = (int) DateTime.Now.Subtract(new DateTime(installment.MaturityDate.Year,
-                            installment.MaturityDate.Month,
-                            installment.MaturityDate.Day)).TotalDays;
+                        var daysPastDue = (int)DateTime.Now.Subtract(installment.MaturityDate).TotalDays;
 
                         if (daysPastDue > 0)
                         {
@@ -262,7 +256,7 @@ namespace DEKL.CP.UI.Controllers
                 internalBankAccount.Balance -= amountDue;
 
                 _accountToPayRepository.Update(accountToPay);
-                _internalBankAccountRepository.Update(internalBankAccount);
+                _internalBankAccountRepository.Update(internalBankAccount);                
 
                 this.AddToastMessage("Conta Paga", $"A Conta {accountToPay.Description} foi paga com sucesso", ToastType.Success);
             }

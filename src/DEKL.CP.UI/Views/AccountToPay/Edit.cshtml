@@ -20,7 +20,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-8">
                             @Html.LabelFor(m => m.ProviderId, "Fornecedor", new { @class = "control-label" })
-                            @Html.DropDownListFor(m => m.ProviderId, ViewBag.Providers as SelectList, "Selecione o Fornecedor", new { @class = "form-control" })
+                             @Html.DropDownListFor(m => m.ProviderId, ViewBag.Providers as SelectList, "Selecione o Fornecedor", new { @class = "form-control" })
                             <small>
                                 @Html.ValidationMessageFor(m => m.ProviderId, null, new { @class = "text-danger" })
                             </small>
