@@ -296,7 +296,6 @@ namespace DEKL.CP.UI.Controllers
 
                 accountToPay.Value = accountToPayViewModel.Value;
                 accountToPay.PaidValue = accountToPayViewModel.PaidValue;
-                accountToPay.PaymentDate = accountToPayViewModel.PaymentDate;
                 accountToPay.Description = accountToPayViewModel.Description;
                 accountToPay.MaturityDate = accountToPayViewModel.MaturityDate;
                 accountToPay.Penalty = accountToPayViewModel.Penalty;

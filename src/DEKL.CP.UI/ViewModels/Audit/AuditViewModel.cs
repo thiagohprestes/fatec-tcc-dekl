@@ -10,10 +10,12 @@ namespace DEKL.CP.UI.ViewModels.Audit
         public ApplicationUser ApplicationUser { get; set; }
 
         [DisplayName("Nome usuário")]
-        public string ApplicationUserFirstName => $"{ApplicationUser.FirstName} {ApplicationUser.LastName}";
+        public string ApplicationUserName => ApplicationUser?.FirstName + " " + ApplicationUser?.LastName;
+
+        public Module Module { get; set; }
 
         [DisplayName("Modulo")]
-        public string Module { get; set; }
+        public string ModuleName => Module?.Name;
 
         [ DisplayName("Evento")]
         public string Event { get; set; }
