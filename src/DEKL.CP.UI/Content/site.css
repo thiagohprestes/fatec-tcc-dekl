@@ -73,7 +73,7 @@ label.is-invalid {
     margin: 0;
     background: none;
     border-radius: 0;
-    min-height: 12rem;
+    min-height: 18rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
