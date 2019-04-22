@@ -36,7 +36,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             @Html.LabelFor(m => m.NumberOfInstallments, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.NumberOfInstallments, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.NumberOfInstallments, new { @class = "form-control", disabled = "" })
                             <small>
                                 @Html.ValidationMessageFor(m => m.NumberOfInstallments, null, new { @class = "text-danger" })
                             </small>
@@ -82,7 +82,7 @@
                         <div class="form-group col-md-7">
                             @Html.LabelFor(m => m.DocumentNumber, new { @class = "control-label" })
                             <div class="input-group">
-                                @Html.TextBoxFor(m => m.DocumentNumber, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.DocumentNumber, new { @class = "form-control", disabled = "" })
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-barcode" style="padding:0"></i></span>
                                 </div>
@@ -111,7 +111,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <div class="custom-control custom-checkbox">
-                                @Html.CheckBoxFor(m => m.MonthlyAccount, new { @class = "checkbox-inline custom-control-input" })
+                                @Html.CheckBoxFor(m => m.MonthlyAccount, new { @class = "checkbox-inline custom-control-input", disabled = "" })
                                 @Html.LabelFor(m => m.MonthlyAccount, "Conta Mensal", new { @class = "custom-control-label" })
                                 <small>
                                     @Html.ValidationMessageFor(m => m.MonthlyAccount, null, new { @class = "text-danger" })
@@ -133,4 +133,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.validate.custom.pt-br.js"></script>
 }

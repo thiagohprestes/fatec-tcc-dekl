@@ -1,14 +1,14 @@
 ﻿using DEKL.CP.Infra.CrossCutting.Identity.Configuration;
 using DEKL.CP.Infra.CrossCutting.Identity.Models;
+using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
+using DEKL.CP.UI.Scripts.Toastr;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
-using DEKL.CP.UI.Scripts.Toastr;
-using Microsoft.AspNet.Identity;
 
 namespace DEKL.CP.UI.Controllers
 {
@@ -56,9 +56,9 @@ namespace DEKL.CP.UI.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new {ReturnUrl = returnUrl});
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
                 default:
-                     ModelState.AddModelError("Error", @"Login ou Senha incorretos.");
+                    ModelState.AddModelError("Error", @"Login ou Senha incorretos.");
                     return View(model);
             }
         }
@@ -78,7 +78,7 @@ namespace DEKL.CP.UI.Controllers
                 await _userManager.GenerateTwoFactorTokenAsync(user.Id, provider);
             }
 
-            return View(new VerifyCodeViewModel {Provider = provider, ReturnUrl = returnUrl, UserId = userId});
+            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, UserId = userId });
         }
 
         [HttpPost]
@@ -148,7 +148,7 @@ namespace DEKL.CP.UI.Controllers
 
             var code = await _userManager.GeneratePasswordResetTokenAsync(user.Id);
             var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code }, Request.Url?.Scheme);
-            await _userManager.SendEmailAsync(user.Id, 
+            await _userManager.SendEmailAsync(user.Id,
                 "Esqueci minha senha", $"Por favor altere sua senha clicando aqui: {callbackUrl}");
 
             return View("ForgotPasswordConfirmation");
@@ -199,10 +199,10 @@ namespace DEKL.CP.UI.Controllers
 
             var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(userId);
             var factorOptions = userFactors
-                .Select(purpose => new SelectListItem {Text = purpose, Value = purpose})
+                .Select(purpose => new SelectListItem { Text = purpose, Value = purpose })
                 .ToList();
 
-            return View(new SendCodeViewModel {Providers = factorOptions, ReturnUrl = returnUrl, UserId = userId});
+            return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, UserId = userId });
         }
 
         [HttpPost]
@@ -221,7 +221,7 @@ namespace DEKL.CP.UI.Controllers
                 return View("Error");
             }
 
-            return RedirectToAction("VerifyCode",  new {Provider = model.SelectedProvider, model.ReturnUrl, userId = model.UserId});
+            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, model.ReturnUrl, userId = model.UserId });
         }
 
         [HttpPost]

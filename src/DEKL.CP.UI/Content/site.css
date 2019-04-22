@@ -9,6 +9,7 @@ body {
     margin-bottom: 60px; /* Margin bottom by footer height */
     overflow: hidden;
     font-family: sans-serif;
+    font-size: 0.8rem;
 }
 
 .footer {
@@ -90,19 +91,50 @@ label.is-invalid {
 .jumbotron-title {
     text-shadow: 1px 1px 11px #000;
     color: #f8f9fa;
-    font-size: 7rem;
+    font-size: 4rem;
+}
+.form-control {
+    font-size: 0.8rem;
+    height: calc(2.01rem + 2px);
+}
+
+.input-group-append {
+    height: calc(2.01rem + 2px);
+    font-size: 0.8rem;
+}
+
+
+.input-group-text {
+    font-size: 0.8rem;
+}
+h2 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+}
+
+h5 {
+    font-size: 1.1rem;
+}
+h6 {
+    font-size: 1rem;
+}
+.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-sm-12 {
+    padding: 0;
 }
 
 .jumbotron-title2 {
     text-shadow: 1px 1px 11px #000;
     color: #f8f9fa;
-    font-size: 5rem;
+    font-size: 2rem;
 }
 
 .lead {
     text-shadow: 0px 4px 14px #000;
     color: #f8f9fa;
-    font-size: 2rem;
+    font-size: 1.2rem;
 }
 
 .presentation address {
@@ -126,6 +158,18 @@ label.is-invalid {
     width: 100%;
 }
 
+.btn-info {
+  font-size: 0.8rem;
+}
+
+#sidebarCollapse {
+    font-size: 1rem;
+}
+
+.table th, .table td {
+    padding: 0.5rem 0.3rem;
+}
+
 .about-image {
     position: absolute;
     top: 0;
@@ -140,11 +184,11 @@ label.is-invalid {
 .about-title {
     text-shadow: 1px 1px 11px #000;
     color: #f8f9fa;
-    font-size: 5rem;
+    font-size: 3rem;
 }
 
 .about-text-container {
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding: 20px;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 1rem;

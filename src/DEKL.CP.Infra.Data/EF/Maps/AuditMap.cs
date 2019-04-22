@@ -12,6 +12,7 @@ namespace DEKL.CP.Infra.Data.EF.Maps
 
             //Columns
             Property(e => e.Event)
+                .IsMaxLength()
                 .IsRequired();
 
             Property(e => e.DateTime);

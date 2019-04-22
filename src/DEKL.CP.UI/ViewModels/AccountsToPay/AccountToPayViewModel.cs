@@ -29,17 +29,17 @@ namespace DEKL.CP.UI.ViewModels.AccountsToPay
         public DateTime MaturityDate { get; set; }
 
         [Required, DisplayName("Mora diária")]
-        public decimal DailyInterest { get; set; } = 0;
+        public decimal DailyInterest { get; set; }
 
         [Required, DisplayName("Juros")]
-        public decimal Penalty { get; set; } = 0;
+        public decimal Penalty { get; set; }
 
         [DisplayName("Conta mensal")]
         public bool MonthlyAccount { get; set; } = false;
 
         [Required, DisplayName("Prioridade")]
         public Priority Priority { get; set; }
-
+         
         [Required, DisplayName("Tipo de pagamento")]
         public PaymentType PaymentType { get; set; }
 

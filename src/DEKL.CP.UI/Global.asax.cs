@@ -1,4 +1,5 @@
-﻿using DEKL.CP.UI.Mappers;
+﻿using DEKL.CP.UI.App_Start;
+using DEKL.CP.UI.Mappers;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -15,6 +16,9 @@ namespace DEKL.CP.UI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutoMapperConfig.RegisterMappings();
+
+            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
+            ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
         }
     }
 }

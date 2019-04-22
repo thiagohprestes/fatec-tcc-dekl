@@ -14,13 +14,21 @@
                 <p>
                     <a class="btn btn-info" href="javascript:history.back(-1)">Voltar</a>
                 </p>
-                <div class="simulacao" style="display:none">
+                <h5>Data de Pagamento</h5>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        @Html.JQueryUI().Datepicker("PaymentDate", DateTime.Now, new { @class = "form-control", placeholder = "Data de pagamento" })
+                    </div>
+                </div>
+                <div id="simulation" style="display:none">
                     <div class="alert alert-info" role="alert">
                         Juros: <strong id="penalty"></strong><br />
                         Juros de Mora diária: <strong id="dailyInterest"></strong><br />
                         Valor Total: <strong id="amountDue"></strong>
 
-                        <input type="hidden" name="valueTotal" id="valueTotal" value="0" />
+                        <input type="hidden" id="penaltyHidden" value="0" />
+                        <input type="hidden" id="dailyInterestHidden" value="0" />
+                        <input type="hidden" id="amountDueHidden" value="0" />
                     </div>
                 </div>
                 <table class="table table-striped table-hover">
@@ -107,33 +115,33 @@
             $.ajax({
                 dataType: "json",
                 type: "GET",
-                url: "/Simulator/Simular?id=" + $(this).val(),
+                url: "/Simulator/Simular?id=" + $(this).val() + "&paymentDate=" + $.datepicker.formatDate('mm-dd-yy', new Date()).val(),
                 success: function (result) {
-                    $(".simulacao").fadeIn("slide");
+                    $("#simulation").fadeIn("slide");
 
                     $(result).each(function (i) {
                         if (isChecked == true) {
-                            $("#penalty").text(parseFloat($("#penalty").text() == "" ? "0" : $("#penalty").text()) + result.penaltySum);
-                            $("#dailyInterest").text(parseFloat($("#dailyInterest").text() == "" ? "0" : $("#dailyInterest").text()) + result.dailyInterestSum);
-                            $("#amountDue").text(parseFloat($("#amountDue").text() == "" ? "0" : $("#amountDue").text()) + result.amountDue);
+                            $("#penaltyHidden").text(parseFloat($("#penaltyHidden").text() == "" ? "0" : $("#penaltyHidden").text()) + result.penaltySum);
+                            $("#dailyInterestHidden").text(parseFloat($("#dailyInterestHidden").text() == "" ? "0" : $("#dailyInterestHidden").text()) + result.dailyInterestSum);
+                            $("#amountDueHidden").text(parseFloat($("#amountDueHidden").text() == "" ? "0" : $("#amountDueHidden").text()) + result.amountDue);
 
-                            $("#penalty").text(parseFloat($("#penalty").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
-                            $("#dailyInterest").text(parseFloat($("#dailyInterest").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
-                            $("#amountDue").text(parseFloat($("#amountDue").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
+                            $("#penalty").text(parseFloat($("#penaltyHidden").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
+                            $("#dailyInterest").text(parseFloat($("#dailyInterestHidden").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
+                            $("#amountDue").text(parseFloat($("#amountDueHidden").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
 
                             $("html, body").animate({ scrollTop: 0 }, 600);
                         }
                         else {
-                            $("#penalty").text(parseFloat($("#penalty").text() == "" ? "0" : $("#penalty").text()) - result.penaltySum);
-                            $("#dailyInterest").text(parseFloat($("#dailyInterest").text() == "" ? "0" : $("#dailyInterest").text()) - result.dailyInterestSum);
-                            $("#amountDue").text(parseFloat($("#amountDue").text() == "" ? "0" : $("#amountDue").text()) - result.amountDue);
+                            $("#penaltyHidden").text(parseFloat($("#penaltyHidden").text() == "" ? "0" : $("#penaltyHidden").text()) - result.penaltySum);
+                            $("#dailyInterestHidden").text(parseFloat($("#dailyInterestHidden").text() == "" ? "0" : $("#dailyInterestHidden").text()) - result.dailyInterestSum);
+                            $("#amountDueHidden").text(parseFloat($("#amountDueHidden").text() == "" ? "0" : $("#amountDueHidden").text()) - result.amountDue);
 
-                            $("#penalty").text(parseFloat($("#penalty").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
-                            $("#dailyInterest").text(parseFloat($("#dailyInterest").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
-                            $("#amountDue").text(parseFloat($("#amountDue").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
+                            $("#penalty").text(parseFloat($("#penaltyHidden").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
+                            $("#dailyInterest").text(parseFloat($("#dailyInterestHidden").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
+                            $("#amountDue").text(parseFloat($("#amountDueHidden").text()).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }));
 
-                            if (parseInt($("#juros").text()) == 0) {
-                                $(".simulacao").hide();
+                            if (parseInt($("#penaltyHiddenHidden").text()) == 0) {
+                                $("#simulation").hide();
                             }
                         }
 

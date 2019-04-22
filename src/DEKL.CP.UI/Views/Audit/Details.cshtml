@@ -1,1 +1,39 @@
-﻿
+﻿@model DEKL.CP.UI.ViewModels.Audit.AuditViewModel
+<div class="container-content">
+
+    <h2>Detalhes</h2>
+    <div>
+        <h4>Auditoria</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.ModuleName):
+            </dt>
+            <dd class="text-detail">
+                @Html.DisplayFor(m => m.ModuleName)
+            </dd>
+
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.ApplicationUserName):
+            </dt>
+            <dd class="text-detail">
+                @($"{Model.ApplicationUser.FirstName} {Model.ApplicationUser.LastName}")
+            </dd>
+
+            <dt class="title-detail">
+                @Html.DisplayNameFor(m => m.DateTime):
+            </dt>
+            <dd class="text-detail">
+                @Html.DisplayFor(m => m.DateTime)
+            </dd>
+
+        </dl>
+            @foreach(var event_ in Model.Event.Split('|'))
+            {
+                <p>@Html.Raw(event_)</p>
+            }
+    </div>
+    <p>
+        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-info" })
+    </p>
+</div>

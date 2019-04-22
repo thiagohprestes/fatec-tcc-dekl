@@ -59,6 +59,7 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                     throw new ArgumentNullException(nameof(entity));
                 }
 
+                _ctx.Set<T>().Attach(entity);
                 _ctx.Entry(entity).State = EntityState.Modified;
                 entity.ModifiedDate = DateTime.Now;
                 _ctx.SaveChanges();

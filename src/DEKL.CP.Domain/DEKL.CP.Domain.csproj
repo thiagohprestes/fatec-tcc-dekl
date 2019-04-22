@@ -51,9 +51,11 @@
     <Compile Include="Contracts\Entities\IProviderPhysicalPerson.cs" />
     <Compile Include="Contracts\Entities\IState.cs" />
     <Compile Include="Contracts\Repositories\IAccountToPayRepository.cs" />
+    <Compile Include="Contracts\Repositories\IAuditRepository.cs" />
     <Compile Include="Contracts\Repositories\IBankAgencyRepository.cs" />
     <Compile Include="Contracts\Repositories\IBankRepository.cs" />
     <Compile Include="Contracts\Repositories\IBankTransactionRepository.cs" />
+    <Compile Include="Contracts\Repositories\IENumerable.cs" />
     <Compile Include="Contracts\Repositories\IInternalBankAccountRepository.cs" />
     <Compile Include="Contracts\Repositories\IProviderBankAccountRepository.cs" />
     <Compile Include="Contracts\Repositories\IProviderRepository.cs" />

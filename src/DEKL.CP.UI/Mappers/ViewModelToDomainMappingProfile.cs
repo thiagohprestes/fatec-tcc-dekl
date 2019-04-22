@@ -4,6 +4,7 @@ using DEKL.CP.Domain.Entities;
 using DEKL.CP.Infra.CrossCutting.Identity.ViewModels;
 using DEKL.CP.UI.ViewModels.AccountsToPay;
 using DEKL.CP.UI.ViewModels.Address;
+using DEKL.CP.UI.ViewModels.Audit;
 using DEKL.CP.UI.ViewModels.Bank;
 using DEKL.CP.UI.ViewModels.BankAgency;
 using DEKL.CP.UI.ViewModels.InternalBankAccount;
@@ -33,6 +34,7 @@ namespace DEKL.CP.UI.Mappers
             CreateMap<AccountToPayViewModel, AccountToPay>();
             CreateMap<AccountToPayRelashionships, IAccountToPayRelashionships>();
             CreateMap<BankAccountViewModel, IBankAccountReport>();
+            CreateMap<AuditViewModel, Audit>();
         }
     }
 }

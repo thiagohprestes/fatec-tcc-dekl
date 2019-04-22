@@ -19,7 +19,7 @@ namespace DEKL.CP.UI.Controllers
         public ActionResult Index()
             => View(Mapper.Map<IEnumerable<AccountToPayRelashionships>>(_accountToPayRepository.AccountToPayOpenedRelashionships));
 
-        public JsonResult Simular(int id)
+        public JsonResult Simular(int id, DateTime paymentDate)
         {
             //todo Alterar para exibir o valor total a pagar das contas selecionadas e o total de juros
             var amountDue = 0M;
@@ -33,7 +33,7 @@ namespace DEKL.CP.UI.Controllers
                 //conta em atraso
                 if (accountToPay.MaturityDate < DateTime.Now && !accountToPay.PaymentDate.HasValue)
                 {
-                    var daysPastDue = (int)DateTime.Now.Subtract(accountToPay.MaturityDate).TotalDays;
+                    var daysPastDue = (int)paymentDate.Subtract(accountToPay.MaturityDate).TotalDays;
 
                     penaltySum = accountToPay.Value * accountToPay.Penalty / 100;
                     dailyInterestSum = (accountToPay.Value + penaltySum) * daysPastDue * accountToPay.DailyInterest / 100;
@@ -57,7 +57,7 @@ namespace DEKL.CP.UI.Controllers
                 overdueInstallments.ForEach(o =>
                 {
                     decimal penalty;
-                    var daysPastDue = (int)DateTime.Now.Subtract(o.MaturityDate).TotalDays;
+                    var daysPastDue = (int)paymentDate.Subtract(o.MaturityDate).TotalDays;
 
                     penaltySum += penalty = o.Value * accountToPay.Penalty / 100;
                     dailyInterestSum += (o.Value + penalty) * daysPastDue * accountToPay.DailyInterest / 100;
