@@ -23,17 +23,21 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                     join plp in _ctx.ProviderLegalPersons on p.Id equals plp.Id into temp2
                     from lplp in temp2.DefaultIfEmpty()
                     where atp.Active && p.Active
+                    orderby atp.PaymentDate, atp.Priority descending, atp.MaturityDate descending
                     select new AccountToPayDTO
                     {
                          Id = atp.Id,
                          DocumentNumber = atp.DocumentNumber,
                          Provider = p.TypeProvider == Domain.Enums.TypeProvider.PhysicalPerson ? lppp.Name : lplp.CorporateName,
+                         PaymentType = atp.PaymentType,
+                         Priority = atp.Priority,
                          Value = atp.Value,
                          Penalty = atp.Penalty,
+                         DailyInterest = atp.DailyInterest,
                          MonthlyAccount = atp.MonthlyAccount,
                          MaturityDate = atp.MaturityDate,
                          IsPaid = atp.PaymentDate.HasValue
-                    }
+                    }                  
 
                ).AsEnumerable();
 
@@ -46,13 +50,17 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                 join plp in _ctx.ProviderLegalPersons on p.Id equals plp.Id into temp2
                 from lplp in temp2.DefaultIfEmpty()
                 where atp.Active && p.Active && !atp.PaymentDate.HasValue
+                orderby atp.Priority descending, atp.MaturityDate descending
                 select new AccountToPayDTO
                 {
                     Id = atp.Id,
                     DocumentNumber = atp.DocumentNumber,
                     Provider = p.TypeProvider == Domain.Enums.TypeProvider.PhysicalPerson ? lppp.Name : lplp.CorporateName,
+                    PaymentType = atp.PaymentType,
+                    Priority = atp.Priority,
                     Value = atp.Value,
                     Penalty = atp.Penalty,
+                    DailyInterest = atp.DailyInterest,
                     MonthlyAccount = atp.MonthlyAccount,
                     MaturityDate = atp.MaturityDate,
                     IsPaid = atp.PaymentDate.HasValue

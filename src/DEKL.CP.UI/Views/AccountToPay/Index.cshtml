@@ -20,7 +20,8 @@
                             <th>@Html.DisplayNameFor(m => m.DocumentNumber)</th>
                             <th>@Html.DisplayNameFor(m => m.Provider)</th>
                             <th>@Html.DisplayNameFor(m => m.Value)</th>
-                            <th>@Html.DisplayNameFor(m => m.Penalty)</th>
+                            <th>@Html.DisplayNameFor(m => m.Penalty) (%)</th>
+                            <th>@Html.DisplayNameFor(m => m.DailyInterest) (%)</th>
                             <th>@Html.DisplayNameFor(m => m.IsPaid)</th>
                             <th>@Html.DisplayNameFor(m => m.MonthlyAccount)</th>
                             <th>@Html.DisplayNameFor(m => m.MaturityDate)</th>
@@ -35,6 +36,7 @@
                                 <td>@Html.DisplayFor(m => item.Provider)</td>
                                 <td>@Html.DisplayFor(m => item.Value)</td>
                                 <td>@Html.DisplayFor(m => item.Penalty)</td>
+                                <td>@Html.DisplayFor(m => item.DailyInterest)</td>
                                 <td>@(item.MonthlyAccount ? "Não se aplica" : (item.IsPaid ? "Sim" : "Não"))</td>
                                 <td>@(item.MonthlyAccount ? "Sim" : "Não")</td>
                                 <td>@Html.DisplayFor(m => item.MaturityDate)</td>
