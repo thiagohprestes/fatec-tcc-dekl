@@ -547,28 +547,28 @@ namespace DEKL.CP.Infra.Data.Migrations
                 context.AccountToPays.AddRange(accountToPays);
             }
 
-            if (!context.BankTransactions.Any())
-            {
-                var bankTransactions = new Collection<BankTransaction>
-                {
-                    new BankTransaction { AccountToPayId = 1, InternalBankAccountId = 1, ProviderBankAccountId = 1, NewBalance = 1100 },
-                    new BankTransaction { AccountToPayId = 2, InternalBankAccountId = 2, ProviderBankAccountId = 2, NewBalance = 15100 },
-                    new BankTransaction { AccountToPayId = 2, InternalBankAccountId = 2, ProviderBankAccountId = 2, NewBalance = 14700 },
-                    new BankTransaction { AccountToPayId = 2, InternalBankAccountId = 2, ProviderBankAccountId = 2, NewBalance = 14300 },
-                    new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 13800 },
-                    new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 13300 },
-                    new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 12800 },
-                    new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 12300 },
-                    new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 11800 },
-                    new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 11300 },
-                    new BankTransaction { AccountToPayId = 4, InternalBankAccountId = 3, ProviderBankAccountId = 5, NewBalance = 133.945M },
-                    new BankTransaction { AccountToPayId = 4, InternalBankAccountId = 3, ProviderBankAccountId = 5, NewBalance = 133.890M },
-                    new BankTransaction { AccountToPayId = 4, InternalBankAccountId = 3, ProviderBankAccountId = 5, NewBalance = 133.835M },
-                    new BankTransaction { AccountToPayId = 4, InternalBankAccountId = 3, ProviderBankAccountId = 5, NewBalance = 133.780M }
-                };
+            //if (!context.BankTransactions.Any())
+            //{
+            //    var bankTransactions = new Collection<BankTransaction>
+            //    {
+            //        new BankTransaction { AccountToPayId = 1, InternalBankAccountId = 1, ProviderBankAccountId = 1, NewBalance = 1100 },
+            //        new BankTransaction { AccountToPayId = 2, InternalBankAccountId = 2, ProviderBankAccountId = 2, NewBalance = 15100 },
+            //        new BankTransaction { AccountToPayId = 2, InternalBankAccountId = 2, ProviderBankAccountId = 2, NewBalance = 14700 },
+            //        new BankTransaction { AccountToPayId = 2, InternalBankAccountId = 2, ProviderBankAccountId = 2, NewBalance = 14300 },
+            //        new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 13800 },
+            //        new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 13300 },
+            //        new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 12800 },
+            //        new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 12300 },
+            //        new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 11800 },
+            //        new BankTransaction { AccountToPayId = 3, InternalBankAccountId = 2, ProviderBankAccountId = 3, NewBalance = 11300 },
+            //        new BankTransaction { AccountToPayId = 4, InternalBankAccountId = 3, ProviderBankAccountId = 5, NewBalance = 133.945M },
+            //        new BankTransaction { AccountToPayId = 4, InternalBankAccountId = 3, ProviderBankAccountId = 5, NewBalance = 133.890M },
+            //        new BankTransaction { AccountToPayId = 4, InternalBankAccountId = 3, ProviderBankAccountId = 5, NewBalance = 133.835M },
+            //        new BankTransaction { AccountToPayId = 4, InternalBankAccountId = 3, ProviderBankAccountId = 5, NewBalance = 133.780M }
+            //    };
 
-                context.BankTransactions.AddRange(bankTransactions);
-            }
+            //    context.BankTransactions.AddRange(bankTransactions);
+            //}
         }
     }
 }

@@ -13,13 +13,13 @@ namespace DEKL.CP.UI.ViewModels.AccountsToPay
     {
         public int Id { get; set; }
 
-        [DisplayName("Valor")]
+        [DisplayName("Valor"), DisplayFormat(DataFormatString = "{0:0,0.00}", ApplyFormatInEditMode = true)]
         public decimal Value { get; set; }
 
         [DisplayName("Valor pago")]
         public decimal? PaidValue { get; set; }
 
-        [DisplayName("Data de pagamento"), DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayName("Data de pagamento"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? PaymentDate { get; set; }
 
         [DisplayName("Descrição")]
@@ -48,7 +48,6 @@ namespace DEKL.CP.UI.ViewModels.AccountsToPay
 
         [Required, DisplayName("Parcelas")]
         public short NumberOfInstallments { get; set; }
-
 
         [Required, DisplayName("Fornecedor")]
         public int ProviderId { get; set; }

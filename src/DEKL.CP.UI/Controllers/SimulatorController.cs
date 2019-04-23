@@ -35,9 +35,9 @@ namespace DEKL.CP.UI.Controllers
                 {
                     var daysPastDue = (int)paymentDate.Subtract(accountToPay.MaturityDate).TotalDays;
 
-                    penaltySum = accountToPay.Value * accountToPay.Penalty / 100;
-                    dailyInterestSum = (accountToPay.Value + penaltySum) * daysPastDue * accountToPay.DailyInterest / 100;
-                    amountDue = accountToPay.Value + penaltySum + dailyInterestSum;
+                    penaltySum = Math.Round(accountToPay.Value * accountToPay.Penalty / 100, 2);
+                    dailyInterestSum = Math.Round((accountToPay.Value + penaltySum) * daysPastDue * accountToPay.DailyInterest / 100, 2);
+                    amountDue = Math.Round(accountToPay.Value + penaltySum + dailyInterestSum, 2);
                 }
             }
             //possuí parcelas
@@ -59,11 +59,11 @@ namespace DEKL.CP.UI.Controllers
                     decimal penalty;
                     var daysPastDue = (int)paymentDate.Subtract(o.MaturityDate).TotalDays;
 
-                    penaltySum += penalty = o.Value * accountToPay.Penalty / 100;
-                    dailyInterestSum += (o.Value + penalty) * daysPastDue * accountToPay.DailyInterest / 100;
+                    penaltySum += Math.Round(penalty = o.Value * accountToPay.Penalty / 100, 2);
+                    dailyInterestSum += Math.Round((o.Value + penalty) * daysPastDue * accountToPay.DailyInterest / 100, 2);
                 });         
 
-                amountDue = penaltySum + dailyInterestSum + installmentsOk.Sum(i => i.Value) + overdueInstallments.Sum(i => i.Value);
+                amountDue = Math.Round(penaltySum + dailyInterestSum + installmentsOk.Sum(i => i.Value) + overdueInstallments.Sum(i => i.Value), 2);
             }
 
             return Json(new { penaltySum, dailyInterestSum, amountDue }, JsonRequestBehavior.AllowGet);

@@ -11,15 +11,17 @@
     <div class="row">
         <div class="col-md-12">
             <section id="changePasswordForm">
-                <p>
-                    <a class="btn btn-info" href="javascript:history.back(-1)">Voltar</a>
-                </p>
                 <h5>Data de Pagamento</h5>
                 <div class="form-row">
                     <div class="form-group col-md-2">
                         @Html.JQueryUI().Datepicker("PaymentDate", DateTime.Now, new { @class = "form-control", placeholder = "Data de pagamento" })
                     </div>
+
+                    <div class="form-group">
+                        <a class="btn btn-info" href="javascript:history.back(-1)">Voltar</a>
+                    </div>
                 </div>
+
                 <div id="simulation" style="display:none">
                     <div class="alert alert-info" role="alert">
                         Juros: <strong id="penalty"></strong><br />
@@ -48,22 +50,22 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>
-                                <div class="custom-control custom-checkbox">
-                                    @Html.CheckBox($"Simular-{item.Id}", new { @class = "checkbox-inline custom-control-input", value = item.Id })
-                                    @Html.Label($"Simular-{item.Id}", " ", new { @class = "custom-control-label hidden" })
-                                </div>
-                            </td>
-                            <td>@Html.DisplayFor(m => item.DocumentNumber)</td>
-                            <td>@Html.DisplayFor(m => item.Provider)</td>
-                            <td>@Html.DisplayFor(m => item.Value)</td>
-                            <td>@Html.DisplayFor(m => item.Penalty)</td>
-                            <td>@Html.DisplayFor(m => item.DailyInterest)</td>
-                            <td>@item.Priority.GetDescription()</td>
-                            <td>@(item.MonthlyAccount ? "Sim" : "Não")</td>
-                            <td>@Html.DisplayFor(m => item.MaturityDate)</td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        @Html.CheckBox($"Simular-{item.Id}", new { @class = "checkbox-inline custom-control-input", value = item.Id })
+                                        @Html.Label($"Simular-{item.Id}", " ", new { @class = "custom-control-label hidden" })
+                                    </div>
+                                </td>
+                                <td>@Html.DisplayFor(m => item.DocumentNumber)</td>
+                                <td>@Html.DisplayFor(m => item.Provider)</td>
+                                <td>@Html.DisplayFor(m => item.Value)</td>
+                                <td>@Html.DisplayFor(m => item.Penalty)</td>
+                                <td>@Html.DisplayFor(m => item.DailyInterest)</td>
+                                <td>@item.Priority.GetDescription()</td>
+                                <td>@(item.MonthlyAccount ? "Sim" : "Não")</td>
+                                <td>@Html.DisplayFor(m => item.MaturityDate)</td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -73,6 +75,7 @@
 </div>
 @section scripts{
     @Scripts.Render("~/bundles/datatables")
+    <script src="~/Scripts/datepicker-pt-BR.js"></script>
     <script type="text/javascript">
         $(() => {
             $('.table').DataTable({
@@ -81,7 +84,7 @@
                 scrollCollapse: true,
                 responsive: true,
                 columnDefs: [
-                    { className: "text-center", "targets": [0, 5, 6] }
+                    { className: "text-center", "targets": [0, 4, 5, 6, 7, 8] }
                 ],
                 language: {
                     decimal: "",
@@ -111,11 +114,13 @@
         });
 
         $('input[type="checkbox"]').click(function () {
+            $('#PaymentDate').prop('disabled', $('input[type="checkbox"]:checked').length != 0);
+
             var isChecked = $(this).is(":checked");
             $.ajax({
                 dataType: "json",
                 type: "GET",
-                url: "/Simulator/Simular?id=" + $(this).val() + "&paymentDate=" + $.datepicker.formatDate('mm-dd-yy', new Date()).val(),
+                url: "/Simulator/Simular?id=" + $(this).val() + "&paymentDate=" + $.datepicker.formatDate('mm-dd-yy', $('#PaymentDate').datepicker('getDate')),
                 success: function (result) {
                     $("#simulation").fadeIn("slide");
 

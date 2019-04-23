@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayRelashionships>
+﻿@using DEKL.CP.UI.Extensions;
+@model IEnumerable<DEKL.CP.UI.ViewModels.AccountsToPay.AccountToPayRelashionships>
 
 @section styles{
     @Styles.Render("~/Content/datatables")
@@ -22,8 +23,8 @@
                             <th>@Html.DisplayNameFor(m => m.Value)</th>
                             <th>@Html.DisplayNameFor(m => m.Penalty) (%)</th>
                             <th>@Html.DisplayNameFor(m => m.DailyInterest) (%)</th>
+                            <th>@Html.DisplayNameFor(m => m.Priority)</th>
                             <th>@Html.DisplayNameFor(m => m.IsPaid)</th>
-                            <th>@Html.DisplayNameFor(m => m.MonthlyAccount)</th>
                             <th>@Html.DisplayNameFor(m => m.MaturityDate)</th>
                             <th>Ações</th>
                         </tr>
@@ -37,8 +38,8 @@
                                 <td>@Html.DisplayFor(m => item.Value)</td>
                                 <td>@Html.DisplayFor(m => item.Penalty)</td>
                                 <td>@Html.DisplayFor(m => item.DailyInterest)</td>
-                                <td>@(item.MonthlyAccount ? "Não se aplica" : (item.IsPaid ? "Sim" : "Não"))</td>
-                                <td>@(item.MonthlyAccount ? "Sim" : "Não")</td>
+                                <td>@item.Priority.GetDescription()</td>
+                                <td>@(item.IsPaid ? "Sim" : "Não")</td>
                                 <td>@Html.DisplayFor(m => item.MaturityDate)</td>
 
                                 <td>
@@ -68,11 +69,11 @@
                 scrollY: "380px",
                 scrollCollapse: true,
                 responsive: true,
-                columnDefs: [
-                    { className: "text-left", "targets": [0, 1] },
-                    { className: "text-center", "targets": [5, 6] },
-                    { width: "10%", "targets": 7 },
-                    { orderable: false, "targets": 7 }
+                columnDefs: [ 
+                    { className: "text-left", targets: [0,1,2] },
+                    { className: "text-center", targets: [3,4,5,6,7,8] },
+                    { width: "10%", targets: 8 },
+                    { orderable: false, targets: 8 }
                 ],
                 language: {
                     decimal: "",

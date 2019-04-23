@@ -40,8 +40,10 @@ namespace DEKL.CP.UI.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.Providers = new SelectList(_providerRepository.AllActivesProviderPhysicalLegalPerson, nameof(Provider.Id),
-                nameof(IProviderPhysicalLegalPerson.NameCorporateName));
+            ViewBag.Providers = new SelectList(_providerRepository.AllActivesProviderPhysicalLegalPerson, 
+                                               nameof(Provider.Id),
+                                               nameof(IProviderPhysicalLegalPerson.NameCorporateName)
+                                );
             return View();
         }
 
@@ -145,12 +147,12 @@ namespace DEKL.CP.UI.Controllers
                     {
                         var daysPastDue = (int)DateTime.Now.Subtract(accountToPay.MaturityDate).TotalDays;
 
-                        amountDue = accountToPay.Value - accountToPay.Installments
+                        amountDue = Math.Round(accountToPay.Value - accountToPay.Installments
                                                                      .Where(i => i.PaidValue >= i.Value)
-                                                                     .Sum(i => i.Value);
+                                                                     .Sum(i => i.Value), 2);
 
-                        amountDue += amountDue * accountToPay.Penalty / 100;
-                        amountDue += amountDue * daysPastDue * accountToPay.DailyInterest / 100;
+                        amountDue += Math.Round(amountDue * accountToPay.Penalty / 100, 2);
+                        amountDue += Math.Round(amountDue * daysPastDue * accountToPay.DailyInterest / 100, 2);
                     }
                     //conta em dia
                     else
@@ -177,7 +179,6 @@ namespace DEKL.CP.UI.Controllers
                         };
 
                         _accountToPayRepository.Add(newAccountToPay);
-
                     }
                 }
                 //possuí parcelas
@@ -198,33 +199,33 @@ namespace DEKL.CP.UI.Controllers
                                                          .ToList();
 
                         //valor total pago sem juros e mora
-                        var withoutDue = amountDue = accountToPay.Value - accountToPay.Installments
+                        var withoutDue = Math.Round(amountDue = accountToPay.Value - accountToPay.Installments
                                                                                       .Except(overdueInstallments)
                                                                                       .Except(installmentsOk)
-                                                                                      .Sum(i => i.Value);
+                                                                                      .Sum(i => i.Value), 2);
 
                         overdueInstallments.ForEach(o =>
                         {
                             var daysPastDue = (int)DateTime.Now.Subtract(o.MaturityDate).TotalDays;
 
-                            amountDue += amountDue * accountToPay.Penalty / 100;
-                            amountDue += amountDue * daysPastDue * accountToPay.DailyInterest / 100;
+                            amountDue += Math.Round(amountDue * accountToPay.Penalty / 100, 2);
+                            amountDue += Math.Round(amountDue * daysPastDue * accountToPay.DailyInterest / 100, 2);
                         });
 
                         //parcelas em atraso
                         overdueInstallments.ForEach(i =>
                         {
                             i.PaymentDate = DateTime.Now;
-                            i.PaidValue = (amountDue - withoutDue) / overdueInstallments.Count;
+                            i.PaidValue = Math.Round((amountDue - withoutDue) / overdueInstallments.Count, 2);
                         });
 
                         installmentsOk.ForEach(i =>
                         {
                             i.PaymentDate = DateTime.Now;
-                            i.PaidValue = i.Value;
+                            i.PaidValue = Math.Round(i.Value, 2);
                         });
 
-                        amountDue += installmentsOk.Sum(i => i.Value);
+                        amountDue += Math.Round(installmentsOk.Sum(i => i.Value), 2);
                     }
 
                     else
@@ -294,15 +295,14 @@ namespace DEKL.CP.UI.Controllers
             {
                 var accountToPay = _accountToPayRepository.FindActive(accountToPayViewModel.Id);
 
-                accountToPay.Value = accountToPayViewModel.Value;
-                accountToPay.PaidValue = accountToPayViewModel.PaidValue;
-                accountToPay.Description = accountToPayViewModel.Description;
+                accountToPay.ProviderId = accountToPayViewModel.ProviderId != 0 ? accountToPayViewModel.ProviderId : accountToPay.ProviderId;
                 accountToPay.MaturityDate = accountToPayViewModel.MaturityDate;
-                accountToPay.Penalty = accountToPayViewModel.Penalty;
                 accountToPay.DailyInterest = accountToPayViewModel.DailyInterest;
-                accountToPay.MonthlyAccount = accountToPayViewModel.MonthlyAccount;
+                accountToPay.Penalty = accountToPayViewModel.Penalty;
                 accountToPay.Priority = accountToPayViewModel.Priority;
-                accountToPay.ProviderId = accountToPayViewModel.ProviderId;
+                accountToPay.Description = accountToPayViewModel.Description;
+                accountToPay.Value = accountToPayViewModel.Value != 0 ? accountToPayViewModel.Value : accountToPay.Value;
+                accountToPay.MonthlyAccount = accountToPayViewModel.MonthlyAccount;
 
                 accountToPayViewModel.ApplicationUserId = User.Identity.GetUserId<int>();
 
@@ -312,8 +312,13 @@ namespace DEKL.CP.UI.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch
             {
+                ViewBag.Providers = new SelectList(_providerRepository.AllActivesProviderPhysicalLegalPerson, 
+                                                   nameof(Provider.Id),
+                                                   nameof(IProviderPhysicalLegalPerson.NameCorporateName)
+                                   );
+
                 this.AddToastMessage("Erro na Edição", $"Erro ao editar a conta {accountToPayViewModel.Description}, favor tentar novamente", ToastType.Error);
             }
 
