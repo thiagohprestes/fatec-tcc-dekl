@@ -14,8 +14,8 @@ BEGIN
 
 	IF UPDATE(Number)
 	BEGIN
-		SELECT @Event = @Event + 'Número da Conta de: ' + D.Number + 
-		                                      ' Para: ' + I.Number + '\n' 
+		SELECT @Event = @Event + '<b>Número da Conta de:</b> ' + D.Number + 
+		                                      ' <b>Para:</b> ' + I.Number + '\n' 
 		FROM DELETED D
 		JOIN INSERTED I ON D.Id = I.Id
 		WHERE 
@@ -24,8 +24,8 @@ BEGIN
 
 	IF UPDATE(Name)
 	BEGIN
-		SELECT @Event = @Event + 'Nome de: ' + ISNULL(D.Name, '') + 
-		                           ' Para: ' + ISNULL(I.Name, '') + '\n' 
+		SELECT @Event = @Event + '<b>Nome de:</b> ' + ISNULL(D.Name, '') + 
+		                           ' <b>Para:</b> ' + ISNULL(I.Name, '') + '\n' 
 		FROM DELETED D
 		JOIN INSERTED I ON D.Id = I.Id
 		WHERE 
@@ -34,8 +34,8 @@ BEGIN
 
 	IF UPDATE(Balance)
 	BEGIN
-		SELECT @Event = @Event + 'Saldo de: ' + FORMAT(D.Balance, 'C2', 'pt-br') + 
-		                            ' Para: ' + FORMAT(D.Balance, 'C2', 'pt-br') + '\n' 
+		SELECT @Event = @Event + '<b>Saldo de:</b> ' + FORMAT(D.Balance, 'C2', 'pt-br') + 
+		                            ' <b>Para:</b> ' + FORMAT(D.Balance, 'C2', 'pt-br') + '\n' 
 		FROM DELETED D
 		JOIN INSERTED I ON D.Id = I.Id
 		WHERE 
@@ -44,13 +44,13 @@ BEGIN
 
 	IF UPDATE(BankAgencyId)
 	BEGIN
-		SELECT @Event = @Event + 'Agência Bancária de: ' + (
+		SELECT @Event = @Event + '<b>Agência Bancária de:</b> ' + (
 																SELECT FORMAT(BA.Number, 'D') + ' - ' + B.Name 
 																FROM BankAgency BA
 																JOIN Bank B ON BA.BankId = B.Id
 																WHERE BA.Id = D.BankAgencyId
 														    ) + 
-		                                        ' Para: ' + (
+		                                        ' <b>Para:</b> ' + (
 																SELECT FORMAT(BA.Number, 'D') + ' - ' + B.Name 
 																FROM BankAgency BA
 																JOIN Bank B ON BA.BankId = B.Id

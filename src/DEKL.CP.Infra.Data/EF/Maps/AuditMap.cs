@@ -11,6 +11,8 @@ namespace DEKL.CP.Infra.Data.EF.Maps
             ToTable(nameof(Audit));
 
             //Columns
+            Property(e => e.UpdatedRecordId);
+
             Property(e => e.Event)
                 .IsMaxLength()
                 .IsRequired();
