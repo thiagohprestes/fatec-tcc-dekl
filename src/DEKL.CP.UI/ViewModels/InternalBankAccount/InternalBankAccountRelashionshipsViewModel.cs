@@ -21,8 +21,8 @@ namespace DEKL.CP.UI.ViewModels.InternalBankAccount
         public string NameBank { get; set; }
 
         [DisplayName("Agência")]
-        public string DescriptionBankAgency => $"{NumberBankAgency} - {NameBank}";
+        public string DescriptionBankAgency => $"Agência: {NumberBankAgency} - Banco: {NameBank}";
 
-        public string DescriptionAccount => $"{Number} - {NumberBankAgency} - {NameBank}";
+        public string DescriptionAccount => $"Conta: {Number} - Agência: {NumberBankAgency} - Banco: {NameBank}";
     }
 }

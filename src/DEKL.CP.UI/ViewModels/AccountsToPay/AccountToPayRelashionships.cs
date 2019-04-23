@@ -19,11 +19,17 @@ namespace DEKL.CP.UI.ViewModels.AccountsToPay
         [DisplayName("Tipo de pagamento")]
         public PaymentType PaymentType { get; set; }
 
+        [DisplayName("Prioridade")]
+        public Priority Priority { get; set; }
+
         [DisplayName("Valor"), DisplayFormat(DataFormatString = "{0:C2}")]
         public decimal Value { get; set; }
 
         [DisplayName("Juros")]
         public decimal Penalty { get; set; }
+
+        [DisplayName("Mora diária")]
+        public decimal DailyInterest { get; set; }
 
         [DisplayName("Conta mensal")]
         public bool MonthlyAccount { get; set; }
