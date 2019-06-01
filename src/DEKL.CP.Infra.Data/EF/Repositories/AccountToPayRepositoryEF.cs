@@ -23,7 +23,7 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                     join plp in _ctx.ProviderLegalPersons on p.Id equals plp.Id into temp2
                     from lplp in temp2.DefaultIfEmpty()
                     where atp.Active && p.Active
-                    orderby atp.PaymentDate
+                    orderby atp.PaymentDate.HasValue, atp.Priority
                     select new AccountToPayDTO
                     {
                          Id = atp.Id,
