@@ -103,6 +103,17 @@ label.is-invalid {
     font-size: 0.8rem;
 }
 
+.custom-control-label {
+    display: flex;
+    align-items: center;
+}
+.control-label {
+    margin-right: 20px;
+}
+
+.btn {
+    font-size: 0.8rem;
+}
 
 .input-group-text {
     font-size: 0.8rem;
