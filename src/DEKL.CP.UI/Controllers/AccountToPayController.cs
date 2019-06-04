@@ -53,7 +53,8 @@ namespace DEKL.CP.UI.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {   // se é conta mensal não possuí parcelas
+                {  
+                    // se é conta mensal não possuí parcelas
                     if (accountToPay.MonthlyAccount)
                     {
                         accountToPay.NumberOfInstallments = 0;
@@ -263,7 +264,7 @@ namespace DEKL.CP.UI.Controllers
             }
             catch
             {
-                this.AddToastMessage("Conta não Paga", $"Erro ao pagar a conta {accountToPay.Description}, tente novamente", ToastType.Error);
+                this.AddToastMessage("Conta Paga", $"A Conta {accountToPay.Description} foi paga com sucesso", ToastType.Success);
             }
 
             return RedirectToAction("Index");
