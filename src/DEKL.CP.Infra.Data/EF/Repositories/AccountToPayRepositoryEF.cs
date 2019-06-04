@@ -5,6 +5,7 @@ using DEKL.CP.Infra.Data.DTO;
 using DEKL.CP.Infra.Data.EF.Context;
 using System.Collections.Generic;
 using System.Linq;
+using DEKL.CP.Domain.Enums;
 
 namespace DEKL.CP.Infra.Data.EF.Repositories
 {
@@ -22,8 +23,9 @@ namespace DEKL.CP.Infra.Data.EF.Repositories
                     from lppp in temp.DefaultIfEmpty()
                     join plp in _ctx.ProviderLegalPersons on p.Id equals plp.Id into temp2
                     from lplp in temp2.DefaultIfEmpty()
+                    let accountToPayPaied = atp.PaymentDate.HasValue ? 1 : 0
                     where atp.Active && p.Active
-                    orderby atp.PaymentDate
+                    orderby accountToPayPaied, atp.Priority, atp.MaturityDate
                     select new AccountToPayDTO
                     {
                          Id = atp.Id,

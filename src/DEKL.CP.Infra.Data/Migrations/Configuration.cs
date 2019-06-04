@@ -384,7 +384,7 @@ namespace DEKL.CP.Infra.Data.Migrations
                 {
                     new AccountToPay
                     {
-                        Value = 100, 
+                        Value = 100,
                         PaidValue = 100,
                         PaymentDate = new DateTime(2019, 01, 19),
                         MaturityDate = new DateTime(2019, 02, 21),
@@ -475,7 +475,7 @@ namespace DEKL.CP.Infra.Data.Migrations
                             {
                                 Value = 500,
                                 PaidValue = 500,
-                                MaturityDate = new DateTime(2018, 05, 24), 
+                                MaturityDate = new DateTime(2018, 05, 24),
                                 PaymentDate = new DateTime(2018, 05, 24)
                             },
                             new Installment
