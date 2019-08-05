@@ -372,7 +372,7 @@ namespace DEKL.CP.Infra.Data.Migrations
                     new InternalBankAccount { Number = "11941405", BankAgencyId = 1, Balance = 12000, ModuleId = 3, ApplicationUserId = 1 },
                     new InternalBankAccount { Number = "207274", BankAgencyId = 2, Balance = 15500, ModuleId = 3, ApplicationUserId = 1 },
                     new InternalBankAccount { Number = "457214", BankAgencyId = 3, Balance = 134000, ModuleId = 3, ApplicationUserId = 1 },
-                    new InternalBankAccount { Number = "0", BankAgencyId = 5, Balance = 0, ModuleId = 3, ApplicationUserId = 1 }
+                    new InternalBankAccount { Number = "0", Name = "Caixa", BankAgencyId = 5, Balance = 0, ModuleId = 3, ApplicationUserId = 1 }
                 };
 
                 context.InternalBankAccounts.AddRange(internalBankAccounts);

@@ -37,7 +37,7 @@
                 Status da Conta:
             </dt>
             <dd class="text-detail">
-                @(Model.PaidValue >= Model.Value ? "Conta paga" : "Conta em aberto")
+                @(Model.PaymentDate.HasValue ? "Conta paga" : "Conta em aberto")
             </dd>
         </dl>
     </div>

@@ -140,7 +140,7 @@ namespace DEKL.CP.UI.Controllers
             }
 
             var user = await _userManager.FindByNameAsync(model.Email);
-            if (user == null || !(await _userManager.IsEmailConfirmedAsync(user.Id)))
+            if (user == null || !await _userManager.IsEmailConfirmedAsync(user.Id))
             {
                 // Não revelar se o usuario nao existe ou nao esta confirmado
                 return View("ForgotPasswordConfirmation");
